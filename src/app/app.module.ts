@@ -9,14 +9,14 @@ import { LoginComponent } from './componentes/login/login.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent
   ],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
     MaterialModule,
     AppRoutingModule,
-    LoginComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
