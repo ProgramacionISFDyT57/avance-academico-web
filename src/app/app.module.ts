@@ -4,7 +4,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MaterialModule } from './material.module';
+import { MaterialModule } from './modulos/material.module';
 import { LoginComponent } from './componentes/login/login.component';
 
 @NgModule({
