@@ -7,12 +7,18 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './modulos/material.module';
 import { LoginComponent } from './componentes/login/login.component';
 import { InicioComponent } from './componentes/inicio/inicio.component';
+import { CarrerasComponent } from './componentes/carreras/carreras.component';
+import { MateriasComponent } from './componentes/materias/materias.component';
+import { UsuariosComponent } from './componentes/usuarios/usuarios.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    InicioComponent
+    InicioComponent,
+    CarrerasComponent,
+    MateriasComponent,
+    UsuariosComponent
   ],
   imports: [
     BrowserAnimationsModule,
