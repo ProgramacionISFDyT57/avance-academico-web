@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './modulos/material.module';
 import { LoginComponent } from './componentes/login/login.component';
 import { InicioComponent } from './componentes/inicio/inicio.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { InicioComponent } from './componentes/inicio/inicio.component';
     BrowserAnimationsModule,
     BrowserModule,
     MaterialModule,
+    FormsModule,
     AppRoutingModule,
   ],
   providers: [],
