@@ -1,18 +1,18 @@
 
- 
+
 <div class="posicion">
 
   <mat-card>
     <mat-card-content>
         <form>
             <mat-form-field class="example-form-field">
-              <input matInput placeholder="Email">
+              <input matInput placeholder="Email" name="email" [(ngModel)]="email">
             </mat-form-field>
             <br>
             <mat-form-field class="example-form-field">
-              <input matInput placeholder="Clave">
+               <input matInput placeholder="Clave" name="clave" [(ngModel)]="clave">
             </mat-form-field>
-            <button mat-buttom>Enviar</button>
+            <button mat-button (click)="login()">Enviar</button>
           </form>
     </mat-card-content>
   </mat-card>
