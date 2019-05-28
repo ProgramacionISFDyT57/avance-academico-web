@@ -11,6 +11,7 @@ import { InicioComponent } from './componentes/inicio/inicio.component';
 import { CarrerasComponent } from './componentes/carreras/carreras.component';
 import { MateriasComponent } from './componentes/materias/materias.component';
 import { UsuariosComponent } from './componentes/usuarios/usuarios.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { UsuariosComponent } from './componentes/usuarios/usuarios.component';
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
+    HttpClientModule,
     MaterialModule,
     FormsModule,
     AppRoutingModule,
