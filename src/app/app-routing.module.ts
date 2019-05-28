@@ -5,14 +5,15 @@ import { LoginComponent } from './componentes/login/login.component';
 import { CarrerasComponent } from './componentes/carreras/carreras.component';
 import { MateriasComponent } from './componentes/materias/materias.component';
 import { UsuariosComponent } from './componentes/usuarios/usuarios.component';
+import { LoginGuard } from './guards/login.guard';
 
 
 const routes: Routes = [
-  { path: '', component: InicioComponent},
+  { path: '', component: InicioComponent, canActivate:[LoginGuard]},
   { path:'login', component: LoginComponent},
-  { path:'carreras', component: CarrerasComponent},
-  { path:'materias', component: MateriasComponent},
-  { path:'usuarios', component: UsuariosComponent}
+  { path:'carreras', component: CarrerasComponent, canActivate:[LoginGuard]},
+  { path:'materias', component: MateriasComponent, canActivate:[LoginGuard]},
+  { path:'usuarios', component: UsuariosComponent, canActivate:[LoginGuard]}
 
 ];
 
