@@ -16,10 +16,10 @@ export class CarrerasComponent implements OnInit {
     private carrerasService: CarrerasService,
   ) { }
 
-  public ListarCarreras(){
+  public ListarCarreras() {
     this.carrerasService.traerCarreras().subscribe(
       (res) => {
-        this.carreras= res;
+        this.carreras = res;
         console.log(res);
       },
       (error) => {
