@@ -11,21 +11,19 @@ export class MateriasComponent implements OnInit {
 
   materias: Materia[] = [];
 
+  constructor(private materiasService: MateriasService,
+  ) { }
 
-  constructor(    private materiasService: MateriasService,
-    ) { }
-
-  public ListarMaterias(){
+  public ListarMaterias() {
     this.materiasService.traerMaterias().subscribe(
       (res) => {
-        this.materias= res;
+        this.materias = res;
         console.log(res);
       },
       (error) => {
         console.log(error);
       });
   }
-
 
   ngOnInit() {
     this.ListarMaterias();

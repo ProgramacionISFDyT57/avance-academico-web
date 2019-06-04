@@ -1,18 +1,15 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>
-        <h1>Materias</h1>
+      <h1>Materias</h1>
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-      <mat-list>
-          <mat-list-item *ngFor="let materia of materias">
-              <mat-icon mat-list-icon>bookmark</mat-icon>
-            <h4 mat-line>{{materia.nombre}}</h4>
-          </mat-list-item>
-        </mat-list>
+    <mat-list>
+      <mat-list-item *ngFor="let materia of materias">
+        <mat-icon mat-list-icon>bookmark</mat-icon>
+        <h4 mat-line>{{materia.nombre}}</h4>
+      </mat-list-item>
+    </mat-list>
   </mat-card-content>
 </mat-card>
-
-
-
