@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Materia } from '../../modelos/materia';
+import { MateriasService } from '../../servicios/materias.service';
 
 @Component({
   selector: 'app-materias',
@@ -7,9 +9,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MateriasComponent implements OnInit {
 
-  constructor() { }
+  materias: Materia[] = [];
+
+
+  constructor(    private materiasService: MateriasService,
+    ) { }
+
+  public ListarMaterias(){
+    this.materiasService.traerMaterias().subscribe(
+      (res) => {
+        this.materias= res.datos;
+        console.log(res);
+      },
+      (error) => {
+        console.log(error);
+      });
+  }
+
 
   ngOnInit() {
+    this.ListarMaterias();
+
   }
 
 }
