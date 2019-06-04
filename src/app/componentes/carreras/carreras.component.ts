@@ -19,7 +19,7 @@ export class CarrerasComponent implements OnInit {
   public ListarCarreras(){
     this.carrerasService.traerCarreras().subscribe(
       (res) => {
-        this.carreras= res.datos;
+        this.carreras= res;
         console.log(res);
       },
       (error) => {

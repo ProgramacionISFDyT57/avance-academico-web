@@ -18,7 +18,7 @@ export class MateriasComponent implements OnInit {
   public ListarMaterias(){
     this.materiasService.traerMaterias().subscribe(
       (res) => {
-        this.materias= res.datos;
+        this.materias= res;
         console.log(res);
       },
       (error) => {

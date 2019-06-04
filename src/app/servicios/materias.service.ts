@@ -6,13 +6,13 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 
-export class MateriasService 
+export class MateriasService
   {
     backend= 'https://avance-academico-backend.herokuapp.com'
     constructor(
       private http:HttpClient
     ) { };
-  
+
     public traerMaterias(): Observable<any>{
       return this.http.get(this.backend +'/materias');
     }
