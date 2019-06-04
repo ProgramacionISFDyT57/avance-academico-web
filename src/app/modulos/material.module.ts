@@ -1,4 +1,4 @@
-import {MatButtonModule, MatCheckboxModule, MatInputModule, MatCardModule, MatFormFieldModule, MatIconModule} from '@angular/material';
+import {MatButtonModule, MatCheckboxModule, MatInputModule, MatCardModule, MatFormFieldModule, MatIconModule, MatToolbarModule, MatButtonToggleModule} from '@angular/material';
 import { NgModule } from '@angular/core';
 import {MatListModule} from '@angular/material/list';
 
@@ -11,7 +11,9 @@ import {MatListModule} from '@angular/material/list';
     MatInputModule,
     MatFormFieldModule,
     MatListModule,
-    MatIconModule
+    MatIconModule,
+    MatToolbarModule,
+    MatButtonToggleModule
   ],exports: [
     MatButtonModule,
     MatCheckboxModule,
@@ -19,7 +21,9 @@ import {MatListModule} from '@angular/material/list';
     MatInputModule,
     MatFormFieldModule,
     MatListModule,
-    MatIconModule
+    MatIconModule,
+    MatToolbarModule,
+    MatButtonToggleModule,
   ]
 })
 export class MaterialModule { }
