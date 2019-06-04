@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CarrerasService } from 'src/app/servicios/carreras.service';
 import { Router } from '@angular/router';
+import { Carrera } from 'src/app/modelos/carrera';
 
 @Component({
   selector: 'app-carreras',
@@ -8,14 +9,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./carreras.component.scss']
 })
 export class CarrerasComponent implements OnInit {
-  carreras=[];
+
+  carreras: Carrera[] = [];
+
   constructor(
     private carrerasService: CarrerasService,
   ) { }
+
   public ListarCarreras(){
     this.carrerasService.traerCarreras().subscribe(
       (res) => {
-        this.carreras=res.datos;
+        this.carreras= res.datos;
         console.log(res);
       },
       (error) => {
