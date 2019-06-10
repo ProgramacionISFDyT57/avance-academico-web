@@ -1,0 +1,18 @@
+<h2>Crear Nueva Carrera</h2>
+<div class="container">
+  <form id="form" [formGroup]="formulario" (ngSubmit)="enviar()">
+    <mat-form-field>
+      <input matInput placeholder="Nombre de la carrera" formControlName="nombre">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="number" min="1" max="5" matInput placeholder="Duración" formControlName="duracion">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="number" min="1" matInput placeholder="Cantidad de materias" formControlName="materias">
+    </mat-form-field>
+  </form>
+</div>
+<button mat-raised-button color="primary" type="submit" form="form" [disabled]="!formulario.valid">Crear</button>
+<button mat-raised-button routerLink="../">Volver </button>
