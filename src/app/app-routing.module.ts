@@ -15,6 +15,7 @@ const routes: Routes = [
   { path:'materias', component: MateriasComponent, canActivate:[LoginGuard]},
   { path:'usuarios', component: UsuariosComponent, canActivate:[LoginGuard]}
 
+
 ];
 
 @NgModule({
