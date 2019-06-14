@@ -13,6 +13,7 @@ import { MateriasComponent } from './componentes/materias/materias.component';
 import { UsuariosComponent } from './componentes/usuarios/usuarios.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CrearCarreraComponent } from './componentes/carreras/crear-carrera/crear-carrera.component';
+import { CrearMateriaComponent } from './componentes/materias/crear-materia/crear-materia.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { CrearCarreraComponent } from './componentes/carreras/crear-carrera/crea
     CarrerasComponent,
     MateriasComponent,
     UsuariosComponent,
-    CrearCarreraComponent
+    CrearCarreraComponent,
+    CrearMateriaComponent
   ],
   imports: [
     BrowserAnimationsModule,
