@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'avance-academico-web';
+  notif_options = {
+    timeOut: 3000,
+    showProgressBar: true,
+    pauseOnHover: true,
+    clickToClose: true
+  };
 }
