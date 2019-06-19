@@ -1,10 +1,11 @@
-
-.example-full-width {
-    width: 100%;
-  }
-
-.posicion {
-    width: 20%;
-    margin:auto;
+.form-container {
+  display: flex;
+  width: 400px;
+  flex-direction: column;
+  margin: auto;
+  margin-top: 2em;
 }
 
+.form-container * {
+  width: 100%;
+}
