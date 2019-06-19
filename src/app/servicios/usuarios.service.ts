@@ -18,15 +18,14 @@ export class UsuariosService {
 
     public crearUsuarios(usuario1): Observable<any> {
       const usuario = {
-        //nombre: carrera1.nombre,
-        //duracion: carrera1.duracion,
-        //cantidad_materias: carrera1.materias,
-        email: usuario1.email,
+        dni: usuario1.documento,
         nombre: usuario1.nombre,
         apellido: usuario1.apellido,
+        telefono: usuario1.telefono,
+        email: usuario1.email,
         fecha_nacimiento: usuario1.fecha_nacimiento,
-        id_rol: usuario1.id_rol,
+        id_rol: usuario1.rol,
       }
-      return this.http.post(this.backend + "/usuarios/crear", { usuario })
+      return this.http.post(this.backend + "/usuarios", { usuario })
     }
 }

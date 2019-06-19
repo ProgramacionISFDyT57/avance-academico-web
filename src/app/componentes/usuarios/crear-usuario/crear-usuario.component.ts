@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 
+
 @Component({
   selector: 'app-crear-usuario',
   templateUrl: './crear-usuario.component.html',
@@ -9,7 +10,19 @@ import { UsuariosService } from 'src/app/servicios/usuarios.service';
 })
 export class CrearUsuarioComponent implements OnInit {
 
+
   formulario: FormGroup;
+
+  foods = [
+    {value: '1', viewValue: 'Admin'},
+    {value: '2', viewValue: 'Directivo'},
+    {value: '3', viewValue: 'Preceptor'},
+    {value: '4', viewValue: 'Profesor'},
+    {value: '5', viewValue: 'Alumno'}
+
+  ];
+
+
 
   constructor(
     private fb: FormBuilder,
@@ -19,11 +32,15 @@ export class CrearUsuarioComponent implements OnInit {
 
   private crearFormulario(){
     this.formulario= this.fb.group({
+
+      documento: ['', Validators.required], 
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
+      telefono: ['', Validators.required],
       email: ['', Validators.required],
-      Id_Rol: [1, [Validators.required, Validators.max(5), Validators.min(1)]],
       fecha_nacimiento: ['', Validators.required],
+      rol: ['', Validators.required]
+
     })
   }
 
