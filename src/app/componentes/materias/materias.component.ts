@@ -25,6 +25,7 @@ export class MateriasComponent implements OnInit {
       });
   }
 
+
   ngOnInit() {
     this.ListarMaterias();
 

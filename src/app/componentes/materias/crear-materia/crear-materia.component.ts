@@ -32,7 +32,7 @@ export class CrearMateriaComponent implements OnInit {
   materias=[]
   constructor(
     private fb: FormBuilder,
-    private MateriasService: MateriasService,
+    private materiasService: MateriasService,
     private route: ActivatedRoute
   ) { }
 
@@ -40,7 +40,7 @@ export class CrearMateriaComponent implements OnInit {
   private crearFormulario(){
     this.formulario= this.fb.group({
       nombre: ['', Validators.required],
-      año: [1, [Validators.required, Validators.max(5), Validators.min(1)]],
+      anio: [1, [Validators.required, Validators.max(5), Validators.min(1)]],
       tipoMateria: [null, Validators.required],
       correlativas: [[]]
     })
@@ -48,18 +48,27 @@ export class CrearMateriaComponent implements OnInit {
 
   ngOnInit() {
     this.crearFormulario();
+    const id_carrera= this.route.snapshot.params["id"]
+    this.materiasService.materias_por_carrera(id_carrera).subscribe(
+      (res)=>{
+        console.log(res);
+
+        this.materias= res
+      }
+    )
   }
   enviar() {
-    const id_carrera= this.route.snapshot.params["id"]
+    const id_carrera= this.route.snapshot.params["id"];
     const materia= {
       nombre: this.formulario.value.nombre,
-      año: this.formulario.value.año,
+      año: this.formulario.value.anio,
       id_carrera: id_carrera,
       id_tipo: this.formulario.value.tipoMateria,
+      correlativas: this.formulario.value.correlativas
     }
 
 
-    this.MateriasService.crearMateria(materia).subscribe(
+    this.materiasService.crearMateria(materia).subscribe(
       (resp) => {
         console.log(resp)
       },
