@@ -24,6 +24,19 @@ export class MateriasComponent implements OnInit {
         console.log(error);
       });
   }
+  public eliminarMateria(id_materia){
+    const res=confirm("¿desea eliminar la materia?");
+    if (res) {
+      this.materiasService.eliminarMateria(id_materia).subscribe(
+        (res) => {
+          this.ListarMaterias()
+          console.log(res);
+        },
+        (error) => {
+          console.log(error);
+        });
+    }
+  }
 
 
   ngOnInit() {

@@ -9,6 +9,9 @@
       <mat-list-item *ngFor="let materia of materias">
         <mat-icon mat-list-icon>bookmark</mat-icon>
         <h4 mat-line>{{materia.nombre}}</h4>
+        <button mat-mini-fab color="warn" (click)="eliminarMateria(materia.id)">
+          <mat-icon>delete_forever</mat-icon>
+        </button>
       </mat-list-item>
     </mat-list>
   </mat-card-content>
