@@ -23,6 +23,9 @@ export class MateriasService
     public materias_por_carrera(id_carrera: number): Observable<any>{
       return this.http.get(this.backend +'/materias_por_carrera/' + id_carrera);
     }
+    public eliminarMateria(id_materia: number): Observable<any>{
+      return this.http.delete(this.backend +'/materias/' + id_materia);
+    }
 
 
 
