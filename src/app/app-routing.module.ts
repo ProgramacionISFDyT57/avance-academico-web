@@ -7,6 +7,7 @@ import { MateriasComponent } from './componentes/materias/materias.component';
 import { UsuariosComponent } from './componentes/usuarios/usuarios.component';
 import { LoginGuard } from './guards/login.guard';
 import { CrearCarreraComponent } from './componentes/carreras/crear-carrera/crear-carrera.component';
+import { CrearUsuarioComponent } from './componentes/usuarios/crear-usuario/crear-usuario.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'materias', component: MateriasComponent, canActivate: [LoginGuard] },
   { path: 'usuarios', component: UsuariosComponent, canActivate: [LoginGuard] },
   { path: 'carreras/crear', component: CrearCarreraComponent, canActivate: [LoginGuard] },
+  { path: 'usuarios/crear', component: CrearUsuarioComponent, canActivate: [LoginGuard] },
 
 
 ];

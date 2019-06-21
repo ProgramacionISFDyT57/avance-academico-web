@@ -16,6 +16,7 @@ import { MateriasComponent } from './componentes/materias/materias.component';
 import { UsuariosComponent } from './componentes/usuarios/usuarios.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CrearCarreraComponent } from './componentes/carreras/crear-carrera/crear-carrera.component';
+import { CrearUsuarioComponent } from './componentes/usuarios/crear-usuario/crear-usuario.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { CrearCarreraComponent } from './componentes/carreras/crear-carrera/crea
     CarrerasComponent,
     MateriasComponent,
     UsuariosComponent,
-    CrearCarreraComponent
+    CrearCarreraComponent,
+    CrearUsuarioComponent
   ],
   imports: [
     BrowserAnimationsModule,
