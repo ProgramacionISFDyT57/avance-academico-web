@@ -7,25 +7,26 @@ import { Observable } from 'rxjs';
 })
 export class UsuariosService {
 
-  backend= 'https://avance-academico-backend.herokuapp.com'
-    constructor(
-      private http:HttpClient
-    ) { };
+  backend = 'https://avance-academico-backend.herokuapp.com';
 
-    public traerUsuarios(): Observable<any>{
-      return this.http.get(this.backend +'/usuarios');
-    }
+  constructor(
+    private http: HttpClient
+  ) { }
 
-    public crearUsuarios(usuario1): Observable<any> {
-      const usuario = {
-        dni: usuario1.documento,
-        nombre: usuario1.nombre,
-        apellido: usuario1.apellido,
-        telefono: usuario1.telefono,
-        email: usuario1.email,
-        fecha_nacimiento: usuario1.fecha_nacimiento,
-        id_rol: usuario1.rol,
-      }
-      return this.http.post(this.backend + "/usuarios", { usuario })
-    }
+  public traerUsuarios(): Observable<any> {
+    return this.http.get(this.backend + '/usuarios');
+  }
+
+  public crearUsuarios(usuario1): Observable<any> {
+    const usuario = {
+      dni: usuario1.documento,
+      nombre: usuario1.nombre,
+      apellido: usuario1.apellido,
+      telefono: usuario1.telefono,
+      email: usuario1.email,
+      fecha_nacimiento: usuario1.fecha_nacimiento,
+      id_rol: usuario1.rol,
+    };
+    return this.http.post(this.backend + '/usuarios', { usuario });
+  }
 }

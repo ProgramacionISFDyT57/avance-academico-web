@@ -14,11 +14,11 @@ export class CrearUsuarioComponent implements OnInit {
   formulario: FormGroup;
 
   foods = [
-    {value: '1', viewValue: 'Admin'},
-    {value: '2', viewValue: 'Directivo'},
-    {value: '3', viewValue: 'Preceptor'},
-    {value: '4', viewValue: 'Profesor'},
-    {value: '5', viewValue: 'Alumno'}
+    { value: 1, viewValue: 'Admin' },
+    { value: 2, viewValue: 'Directivo' },
+    { value: 3, viewValue: 'Preceptor' },
+    { value: 4, viewValue: 'Profesor' },
+    { value: 5, viewValue: 'Alumno' }
 
   ];
 
@@ -30,18 +30,17 @@ export class CrearUsuarioComponent implements OnInit {
   ) { }
 
 
-  private crearFormulario(){
-    this.formulario= this.fb.group({
+  private crearFormulario() {
+    this.formulario = this.fb.group({
 
-      documento: ['', Validators.required], 
+      documento: ['', Validators.required],
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
       telefono: ['', Validators.required],
-      email: ['', Validators.required],
-      fecha_nacimiento: ['', Validators.required],
-      rol: ['', Validators.required]
-
-    })
+      email: ['', [Validators.required, Validators.email]],
+      fecha_nacimiento: [null, Validators.required],
+      rol: [null, Validators.required]
+    });
   }
 
   ngOnInit() {
@@ -50,12 +49,12 @@ export class CrearUsuarioComponent implements OnInit {
   enviar() {
     this.usuariosService.crearUsuarios(this.formulario.value).subscribe(
       (resp) => {
-        console.log(resp)
+        console.log(resp);
       },
-      (error)=> {
-        console.error(error)
+      (error) => {
+        console.error(error);
       }
-    )
+    );
   }
 
 }
