@@ -7,8 +7,8 @@ import { MateriasComponent } from './componentes/materias/materias.component';
 import { UsuariosComponent } from './componentes/usuarios/usuarios.component';
 import { LoginGuard } from './guards/login.guard';
 import { CrearCarreraComponent } from './componentes/carreras/crear-carrera/crear-carrera.component';
+import { CrearMateriaComponent } from './componentes/materias/crear-materia/crear-materia.component';
 import { CrearUsuarioComponent } from './componentes/usuarios/crear-usuario/crear-usuario.component';
-
 
 const routes: Routes = [
   { path: '', component: InicioComponent, canActivate: [LoginGuard] },
@@ -17,9 +17,8 @@ const routes: Routes = [
   { path: 'materias', component: MateriasComponent, canActivate: [LoginGuard] },
   { path: 'usuarios', component: UsuariosComponent, canActivate: [LoginGuard] },
   { path: 'carreras/crear', component: CrearCarreraComponent, canActivate: [LoginGuard] },
+  { path: 'materias/crear/:id', component: CrearMateriaComponent, canActivate: [LoginGuard] },
   { path: 'usuarios/crear', component: CrearUsuarioComponent, canActivate: [LoginGuard] },
-
-
 ];
 
 @NgModule({

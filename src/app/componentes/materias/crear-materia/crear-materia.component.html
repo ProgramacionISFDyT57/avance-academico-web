@@ -1,0 +1,33 @@
+<h2>Crear Nueva Materia</h2>
+<div class="container">
+  <form id="form" [formGroup]="formulario" (ngSubmit)="enviar()">
+    <mat-form-field>
+      <input matInput placeholder="Nombre de la materia" formControlName="nombre">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="number" min="1" max="5" matInput placeholder="Año" formControlName="anio">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Tipo de materia</mat-label>
+      <mat-select formControlName="tipoMateria">
+        <mat-option *ngFor="let tipoMateria of tiposMaterias" [value]="tipoMateria.id">
+          {{tipoMateria.nombre}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Correlativas</mat-label>
+      <mat-select formControlName="correlativas" multiple>
+        <ng-container *ngFor="let materia of materias">
+          <mat-option *ngIf="formulario.value.anio > materia.anio" [value]="materia.id">
+            {{materia.nombre}}
+          </mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>
+<button mat-raised-button color="primary" type="submit" form="form" [disabled]="!formulario.valid">Crear</button>
+<button mat-raised-button routerLink="../../../carreras">Volver </button>

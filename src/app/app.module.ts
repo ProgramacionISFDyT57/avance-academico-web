@@ -16,6 +16,8 @@ import { MateriasComponent } from './componentes/materias/materias.component';
 import { UsuariosComponent } from './componentes/usuarios/usuarios.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CrearCarreraComponent } from './componentes/carreras/crear-carrera/crear-carrera.component';
+import { CrearMateriaComponent } from './componentes/materias/crear-materia/crear-materia.component';
+import { BorrarMateriaComponent } from './componentes/materias/borrar-materia/borrar-materia.component';
 import { CrearUsuarioComponent } from './componentes/usuarios/crear-usuario/crear-usuario.component';
 
 @NgModule({
@@ -27,7 +29,9 @@ import { CrearUsuarioComponent } from './componentes/usuarios/crear-usuario/crea
     MateriasComponent,
     UsuariosComponent,
     CrearCarreraComponent,
-    CrearUsuarioComponent
+    CrearMateriaComponent,
+    BorrarMateriaComponent,
+    CrearUsuarioComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -37,7 +41,7 @@ import { CrearUsuarioComponent } from './componentes/usuarios/crear-usuario/crea
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    SimpleNotificationsModule.forRoot()
+    SimpleNotificationsModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

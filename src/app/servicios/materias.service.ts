@@ -16,4 +16,14 @@ export class MateriasService
     public traerMaterias(): Observable<any>{
       return this.http.get(this.backend +'/materias');
     }
+
+    public crearMateria(materia: any): Observable<any>{
+      return this.http.post(this.backend +'/materias', {materia});
+    }
+    public materias_por_carrera(id_carrera: number): Observable<any>{
+      return this.http.get(this.backend +'/materias_por_carrera/' + id_carrera);
+    }
+
+
+
 }
