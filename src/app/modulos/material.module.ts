@@ -1,7 +1,12 @@
-import {MatButtonModule, MatCheckboxModule, MatInputModule, MatCardModule, MatFormFieldModule, MatIconModule, MatToolbarModule, MatButtonToggleModule} from '@angular/material';
+import {
+  MatButtonModule, MatCheckboxModule, MatInputModule,
+  MatCardModule, MatFormFieldModule, MatIconModule,
+  MatToolbarModule, MatButtonToggleModule
+} from '@angular/material';
 import { NgModule } from '@angular/core';
-import {MatListModule} from '@angular/material/list';
-import {MatSelectModule} from '@angular/material/select';
+import { MatListModule } from '@angular/material/list';
+import { MatSelectModule } from '@angular/material/select';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   imports: [
@@ -15,7 +20,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatToolbarModule,
     MatButtonToggleModule,
     MatSelectModule
-  ],exports: [
+    MatProgressBarModule
+  ], exports: [
     MatButtonModule,
     MatCheckboxModule,
     MatCardModule,
@@ -26,6 +32,7 @@ import {MatSelectModule} from '@angular/material/select';
     MatToolbarModule,
     MatButtonToggleModule,
     MatSelectModule
+    MatProgressBarModule
   ]
 })
 export class MaterialModule { }

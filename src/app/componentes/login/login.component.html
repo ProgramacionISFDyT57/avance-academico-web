@@ -1,19 +1,25 @@
 
 
-<div class="posicion">
-
+<div class="form-container">
+  <mat-toolbar color="primary">
+    <h2 class="md-toolbar-tools"><span>Login</span></h2>
+  </mat-toolbar>
   <mat-card>
     <mat-card-content>
-        <form>
-            <mat-form-field class="example-form-field">
-              <input matInput placeholder="Email" name="email" [(ngModel)]="email">
-            </mat-form-field>
-            <br>
-            <mat-form-field class="example-form-field">
-               <input matInput placeholder="Clave" name="clave" [(ngModel)]="clave">
-            </mat-form-field>
-            <button mat-button (click)="login()">Enviar</button>
-          </form>
+      <form id="ngForm" [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+        <mat-form-field>
+          <input matInput type="text" placeholder="Usuario" formControlName="usuario">
+        </mat-form-field>
+        <!-- <mat-icon>lock</mat-icon> -->
+        <mat-form-field>
+          <input matInput type="password" placeholder="Clave" formControlName="clave">
+        </mat-form-field>
+        <!-- <mat-icon>remove_red_eye</mat-icon> -->
+      </form>
+      <button mat-raised-button type="submit" form="ngForm" [disabled]="!reactiveForm.valid || showSpinner"
+        color="primary">Ingresar</button>
+      <mat-progress-bar mode="indeterminate" color="warn" [style.display]="showSpinner ? 'block' : 'none'">
+      </mat-progress-bar>
     </mat-card-content>
   </mat-card>
 </div>
