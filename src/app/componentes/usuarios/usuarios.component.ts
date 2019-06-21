@@ -27,6 +27,10 @@ export class UsuariosComponent implements OnInit {
       });
   }
 
+  
+  
+
+
   ngOnInit() {
     this.ListarUsuarios();
 
