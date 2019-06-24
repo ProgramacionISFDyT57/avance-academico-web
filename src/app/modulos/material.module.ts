@@ -1,14 +1,15 @@
 import {
   MatButtonModule, MatCheckboxModule, MatInputModule,
   MatCardModule, MatFormFieldModule, MatIconModule,
-  MatToolbarModule, MatButtonToggleModule, MatNativeDateModule
+  MatToolbarModule, MatButtonToggleModule, MatTableModule, 
+  MatNativeDateModule
 } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatButtonToggleModule,
     MatSelectModule,
     MatProgressBarModule,
+    MatTableModule,
     MatTooltipModule,
     MatDatepickerModule,
     MatNativeDateModule
@@ -38,6 +40,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatButtonToggleModule,
     MatSelectModule,
     MatProgressBarModule,
+    MatTableModule,
     MatTooltipModule,
     MatDatepickerModule,
     MatNativeDateModule

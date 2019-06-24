@@ -11,6 +11,8 @@ import { Carrera } from 'src/app/modelos/carrera';
 export class CarrerasComponent implements OnInit {
 
   carreras: Carrera[] = [];
+  displayedColumns = ['id', 'nombre', 'duracion', 'cantidad_materias'];
+
 
   constructor(
     private carrerasService: CarrerasService,
@@ -20,7 +22,7 @@ export class CarrerasComponent implements OnInit {
     this.carrerasService.traerCarreras().subscribe(
       (res) => {
         this.carreras = res;
-        console.log(res);
+        console.log(this.carreras);
       },
       (error) => {
         console.log(error);
