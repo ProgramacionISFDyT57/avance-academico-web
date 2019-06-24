@@ -1,7 +1,7 @@
 import {
   MatButtonModule, MatCheckboxModule, MatInputModule,
   MatCardModule, MatFormFieldModule, MatIconModule,
-  MatToolbarModule, MatButtonToggleModule
+  MatToolbarModule, MatButtonToggleModule,MatTableModule
 } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
@@ -20,7 +20,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatToolbarModule,
     MatButtonToggleModule,
     MatSelectModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatTableModule
   ], exports: [
     MatButtonModule,
     MatCheckboxModule,
@@ -32,7 +33,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatToolbarModule,
     MatButtonToggleModule,
     MatSelectModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatTableModule
   ]
 })
 export class MaterialModule { }

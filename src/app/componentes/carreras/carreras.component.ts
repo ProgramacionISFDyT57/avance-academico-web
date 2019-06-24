@@ -8,10 +8,16 @@ import { Carrera } from 'src/app/modelos/carrera';
   templateUrl: './carreras.component.html',
   styleUrls: ['./carreras.component.scss']
 })
+export class TableStickyHeaderExample {
+  displayedColumns = ['id', 'nombre', 'duracion', 'cantidad_materias'];
+}
+
 export class CarrerasComponent implements OnInit {
 
   carreras: Carrera[] = [];
 
+
+  
   constructor(
     private carrerasService: CarrerasService,
   ) { }
