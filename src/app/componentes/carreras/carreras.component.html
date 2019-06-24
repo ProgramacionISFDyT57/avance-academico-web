@@ -13,7 +13,10 @@
         <mat-icon mat-list-icon>bookmark</mat-icon>
         <h4 mat-line>{{carrera.nombre}}</h4>
         <p mat-line> duracion {{carrera.duracion}} </p>
-        <button mat-mini-fab color="warn" routerLink="../materias/crear/{{carrera.id}}">
+        <button mat-mini-fab color="warn" routerLink="../materias/crear/{{carrera.id}}" matTooltip="Añadir Materia">
+            <mat-icon>add</mat-icon>
+          </button>
+          <button mat-mini-fab color="link" routerLink="./abrir_inscripcion/{{carrera.id}}" matTooltip="Abrir Inscripción">
             <mat-icon>add</mat-icon>
           </button>
       </mat-list-item>
