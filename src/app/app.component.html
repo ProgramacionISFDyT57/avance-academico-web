@@ -1,9 +1,10 @@
-<mat-toolbar color="primary">
+<mat-toolbar *ngIf="mostrar_barra()" color="primary">
         <button mat-flat-button color="primary" routerLink="/">Inicio</button>
         <button mat-flat-button color="primary" routerLink="/carreras">Carreras</button>
         <button mat-flat-button color="primary" routerLink="/materias">Materias</button>
         <button mat-flat-button color="primary" routerLink="/usuarios">Usuarios</button>
+        <span class="example-spacer"></span>
+        <mat-icon class="example-icon" (click)="salir()">exit_to_app</mat-icon>
 </mat-toolbar>
 <router-outlet></router-outlet>
-
 <simple-notifications [options]="notif_options"></simple-notifications>

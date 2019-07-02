@@ -15,7 +15,9 @@ export class CarrerasService {
   public traerCarreras(): Observable<any> {
     return this.http.get(this.backend + '/carreras');
   }
-
+  public abrirInscripcionCarrera(carreras_abiertas): Observable<any> {
+    return this.http.post(this.backend + '/carreras_abiertas', {carreras_abiertas});
+  }
   public crearCarrera(carrera1): Observable<any> {
     const carrera = {
       nombre: carrera1.nombre,
