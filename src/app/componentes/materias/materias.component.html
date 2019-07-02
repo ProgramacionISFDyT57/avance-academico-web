@@ -1,18 +1,41 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>
-      <h1>Materias</h1>
-    </mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <mat-list>
-      <mat-list-item *ngFor="let materia of materias">
-        <mat-icon mat-list-icon>bookmark</mat-icon>
-        <h4 mat-line>{{materia.nombre}}</h4>
-        <button mat-mini-fab color="warn" (click)="eliminarMateria(materia.id)">
-          <mat-icon>delete_forever</mat-icon>
-        </button>
-      </mat-list-item>
-    </mat-list>
-  </mat-card-content>
-</mat-card>
+
+<div class="example-container mat-elevation-z8">
+  <table mat-table [dataSource]="materias">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> Nro. </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef> Nombre </th>
+      <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="carrera">
+      <th mat-header-cell *matHeaderCellDef> Carrera </th>
+      <td mat-cell *matCellDef="let element"> {{element.carrera}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="anio">
+      <th mat-header-cell *matHeaderCellDef> Año </th>
+      <td mat-cell *matCellDef="let element"> {{element.anio}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="tipo_materia">
+      <th mat-header-cell *matHeaderCellDef> Tipo de Materia</th>
+      <td mat-cell *matCellDef="let element"> {{element.tipo_materia}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+
+
+
