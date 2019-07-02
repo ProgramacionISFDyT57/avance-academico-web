@@ -7,6 +7,10 @@
     </mat-form-field>
 
     <mat-form-field>
+      <input matInput placeholder="Profesor" formControlName="nombre">
+    </mat-form-field>
+
+    <mat-form-field>
       <input matInput [matDatepicker]="picker1" placeholder="Inicio de Inscripción" formControlName="fecha_inicio">
       <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
       <mat-datepicker #picker1></mat-datepicker>
