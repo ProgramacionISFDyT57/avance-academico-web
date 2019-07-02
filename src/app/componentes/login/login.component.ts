@@ -30,7 +30,8 @@ export class LoginComponent implements OnInit {
         this.showSpinner = false;
         sessionStorage.setItem('token', resp.token);
         sessionStorage.setItem('rol', resp.rol);
-        sessionStorage.setItem('usuario', resp.usuario);
+        sessionStorage.setItem('apellido', resp.apellido);
+        sessionStorage.setItem('nombre', resp.nombre);
         this.router.navigate(['/']);
         this.notificationsService.success('Sesión Iniciada');
       },
