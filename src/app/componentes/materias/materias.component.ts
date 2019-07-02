@@ -10,6 +10,8 @@ import { MateriasService } from '../../servicios/materias.service';
 export class MateriasComponent implements OnInit {
 
   materias: Materia[] = [];
+  displayedColumns = ['id', 'nombre', 'carrera', 'anio', 'tipo_materia'];
+
 
   constructor(private materiasService: MateriasService,
   ) { }
