@@ -26,6 +26,9 @@ export class MateriasService
     public eliminarMateria(id_materia: number): Observable<any>{
       return this.http.delete(this.backend +'/materias/' + id_materia);
     }
+    public abrirInscripcionCursada(crear_cursada): Observable<any> {
+      return this.http.post(this.backend + '/crear_cursada', {crear_cursada});
+    }
 
 
 

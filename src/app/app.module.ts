@@ -20,6 +20,7 @@ import { CrearMateriaComponent } from './componentes/materias/crear-materia/crea
 import { BorrarMateriaComponent } from './componentes/materias/borrar-materia/borrar-materia.component';
 import { CrearUsuarioComponent } from './componentes/usuarios/crear-usuario/crear-usuario.component';
 import { AbrirInscripcionCarreraComponent } from './componentes/carreras/abrir-inscripcion-carrera/abrir-inscripcion-carrera.component';
+import { AbrirInscripcionCursadaComponent } from './componentes/materias/abrir-inscripcion-cursada/abrir-inscripcion-cursada.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { AbrirInscripcionCarreraComponent } from './componentes/carreras/abrir-i
     BorrarMateriaComponent,
     CrearUsuarioComponent,
     AbrirInscripcionCarreraComponent,
+    AbrirInscripcionCursadaComponent,
   ],
   imports: [
     BrowserAnimationsModule,

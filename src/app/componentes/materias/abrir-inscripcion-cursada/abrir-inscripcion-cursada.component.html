@@ -1,0 +1,25 @@
+<h2>Abrir Inscripcion a Cursada</h2>
+<div class="container">
+  <form id="form" [formGroup]="formulario" (ngSubmit)="enviar()">
+
+    <mat-form-field>
+      <input type="number" min="2019" maxlength="4" matInput placeholder="Año" formControlName="año">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker1" placeholder="Inicio de Inscripción" formControlName="fecha_inicio">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker2" placeholder="Fin de Inscripción" formControlName="fecha_limite">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+
+  </form>
+</div>
+<button mat-basic-button color="primary" type="submit" form="form" [disabled]="!formulario.valid">Crear</button>
+<button mat-basic-button routerLink="../">Volver </button>
+
