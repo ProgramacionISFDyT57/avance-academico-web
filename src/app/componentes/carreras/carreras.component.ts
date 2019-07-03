@@ -11,7 +11,7 @@ import { Carrera } from 'src/app/modelos/carrera';
 export class CarrerasComponent implements OnInit {
 
   carreras: Carrera[] = [];
-  displayedColumns = ['id', 'nombre', 'duracion', 'cantidad_materias'];
+  displayedColumns = ['nombre', 'duracion', 'cantidad_materias', 'acciones'];
 
 
   constructor(
