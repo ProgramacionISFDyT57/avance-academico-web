@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InicioComponent implements OnInit {
 
+  usuario: string;
+
   constructor() { }
 
   ngOnInit() {
+    this.usuario = sessionStorage.getItem('apellido') + ', ' + sessionStorage.getItem('nombre');
   }
 
 }
