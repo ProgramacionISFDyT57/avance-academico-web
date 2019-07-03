@@ -6,6 +6,6 @@
   margin-top: 2em;
 }
 
-.form-container * {
+.form-container mat-form-field, .form-container button {
   width: 100%;
 }
