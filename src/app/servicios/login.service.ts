@@ -1,22 +1,23 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { HttpService } from './http.service';
+import { Login } from '../modelos/login';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  backend= 'https://avance-academico-backend.herokuapp.com'
-  constructor(
-    private http:HttpClient
-  ) { };
 
-  public ini_sesion(email: string, clave:string): Observable<any>{
-    const body={
+  constructor(
+    private http: HttpService
+  ) { }
+
+  public ini_sesion(email: string, clave: string): Observable<Login> {
+    const body = {
       mail: email,
-      clave: clave,
-    }
-    return this.http.post(this.backend +'/login',body)
+      clave,
+    };
+    return this.http.post('/login', body);
   }
 
 

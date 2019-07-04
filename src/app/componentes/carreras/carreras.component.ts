@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CarrerasService } from 'src/app/servicios/carreras.service';
-import { Router } from '@angular/router';
 import { Carrera } from 'src/app/modelos/carrera';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-carreras',
@@ -10,23 +11,56 @@ import { Carrera } from 'src/app/modelos/carrera';
 })
 export class CarrerasComponent implements OnInit {
 
-  carreras: Carrera[] = [];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  dataSource: MatTableDataSource<Carrera>;
   displayedColumns = ['nombre', 'duracion', 'cantidad_materias', 'acciones'];
-
+  showSpinner = true;
 
   constructor(
     private carrerasService: CarrerasService,
+    private notif: NotificationsService
   ) { }
 
   public ListarCarreras() {
     this.carrerasService.traerCarreras().subscribe(
       (res) => {
-        this.carreras = res;
-        console.log(this.carreras);
+        this.dataSource = new MatTableDataSource(res);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.showSpinner = false;
+        console.log(res);
       },
       (error) => {
+        // this.showSpinner = false;
+        this.notif.error('Error', error.mensaje);
         console.log(error);
       });
+  }
+
+  public eliminar(id: number) {
+    const eliminar = confirm('¿Desea eliminar la carrera?');
+    if (eliminar) {
+      this.carrerasService.eliminarCarrera(id).subscribe(
+        (res) => {
+          this.ListarCarreras();
+          this.notif.success('Carrera eliminada');
+          console.log(res);
+        },
+        (error) => {
+          this.showSpinner = false;
+          this.notif.error('Error', error.mensaje);
+          console.log(error);
+        });
+    }
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   ngOnInit() {

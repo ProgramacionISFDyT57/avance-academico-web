@@ -12,8 +12,8 @@ export class MateriasComponent implements OnInit {
   materias: Materia[] = [];
   displayedColumns = ['id', 'nombre', 'carrera', 'anio', 'tipo_materia'];
 
-
-  constructor(private materiasService: MateriasService,
+  constructor(
+    private materiasService: MateriasService,
   ) { }
 
   public ListarMaterias() {
@@ -26,12 +26,13 @@ export class MateriasComponent implements OnInit {
         console.log(error);
       });
   }
-  public eliminarMateria(id_materia){
-    const res=confirm("¿desea eliminar la materia?");
-    if (res) {
-      this.materiasService.eliminarMateria(id_materia).subscribe(
+
+  public eliminarMateria(id: number) {
+    const eliminar = confirm('¿Desea eliminar la materia?');
+    if (eliminar) {
+      this.materiasService.eliminarMateria(id).subscribe(
         (res) => {
-          this.ListarMaterias()
+          this.ListarMaterias();
           console.log(res);
         },
         (error) => {
@@ -39,7 +40,6 @@ export class MateriasComponent implements OnInit {
         });
     }
   }
-
 
   ngOnInit() {
     this.ListarMaterias();

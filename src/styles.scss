@@ -3,15 +3,41 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 body {
-    background-color: #cfcfcf;
+  background-color: #cfcfcf;
 }
 
+// Helpers
+
 .mx-1 {
-    margin-left: 0.25em !important;
-    margin-right: 0.25em !important;
+  margin-left: 0.25em !important;
+  margin-right: 0.25em !important;
 }
 
 .mx-2 {
-    margin-left: 0.5em !important;
-    margin-right: 0.5em !important;
+  margin-left: 0.5em !important;
+  margin-right: 0.5em !important;
+}
+
+//
+
+.table-container {
+  background: white;
+  margin-top: 40px;
+}
+
+.btn-crear {
+  position: absolute !important;
+  z-index: 1000;
+  right: 20px;
+  top: 83px;
+}
+
+table {
+  width: 100%;
+}
+
+.filtro {
+  margin-top: 1em;
+  margin-left: 1em;
+  width: calc(100% - 2em);
 }
