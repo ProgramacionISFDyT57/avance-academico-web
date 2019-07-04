@@ -1,32 +1,32 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { HttpService } from './http.service';
+import { Materia } from '../modelos/materia';
+import { Mensaje } from '../modelos/respuesta-mensaje';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class MateriasService
-  {
-    backend= 'https://avance-academico-backend.herokuapp.com'
-    constructor(
-      private http:HttpClient
-    ) { };
+export class MateriasService {
+  constructor(
+    private http: HttpService
+  ) { }
 
-    public traerMaterias(): Observable<any>{
-      return this.http.get(this.backend +'/materias');
-    }
+  public traerMaterias(): Observable<Materia[]> {
+    return this.http.get('/materias');
+  }
 
-    public crearMateria(materia: any): Observable<any>{
-      return this.http.post(this.backend +'/materias', {materia});
-    }
-    public materias_por_carrera(id_carrera: number): Observable<any>{
-      return this.http.get(this.backend +'/materias_por_carrera/' + id_carrera);
-    }
-    public eliminarMateria(id_materia: number): Observable<any>{
-      return this.http.delete(this.backend +'/materias/' + id_materia);
-    }
+  public crearMateria(materia: any): Observable<Mensaje> {
+    return this.http.post('/materias', { materia });
+  }
 
+  public materias_por_carrera(idCarrera: number): Observable<Materia[]> {
+    return this.http.get('/materias_por_carrera/' + idCarrera);
+  }
 
+  public eliminarMateria(idMateria: number): Observable<Mensaje> {
+    return this.http.delete('/materias/' + idMateria);
+  }
 
 }
