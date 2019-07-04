@@ -41,6 +41,7 @@ export class CarrerasComponent implements OnInit {
   public eliminar(id: number) {
     const eliminar = confirm('¿Desea eliminar la carrera?');
     if (eliminar) {
+      this.showSpinner = true;
       this.carrerasService.eliminarCarrera(id).subscribe(
         (res) => {
           this.ListarCarreras();
