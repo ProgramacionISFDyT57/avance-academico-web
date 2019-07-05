@@ -31,7 +31,7 @@ export class UsuariosService {
   }
 
   public traerProfesores(): Observable<any> {
-    return this.http.get(this.backend + '/profesores');
+    return this.http.get('/profesores');
   }
 
 }

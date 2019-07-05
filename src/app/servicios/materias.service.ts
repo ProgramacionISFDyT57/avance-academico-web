@@ -29,4 +29,8 @@ export class MateriasService {
     return this.http.delete('/materias/' + idMateria);
   }
 
+  public abrirInscripcionCursada(crear_cursada): Observable<any> {
+    return this.http.post('/crear_cursada', {crear_cursada});
+  }
+
 }
