@@ -17,7 +17,6 @@ import { UsuariosComponent } from './componentes/usuarios/usuarios.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CrearCarreraComponent } from './componentes/carreras/crear-carrera/crear-carrera.component';
 import { CrearMateriaComponent } from './componentes/materias/crear-materia/crear-materia.component';
-import { BorrarMateriaComponent } from './componentes/materias/borrar-materia/borrar-materia.component';
 import { CrearUsuarioComponent } from './componentes/usuarios/crear-usuario/crear-usuario.component';
 import { AbrirInscripcionCarreraComponent } from './componentes/carreras/abrir-inscripcion-carrera/abrir-inscripcion-carrera.component';
 import { AbrirInscripcionCursadaComponent } from './componentes/materias/abrir-inscripcion-cursada/abrir-inscripcion-cursada.component';
@@ -32,7 +31,6 @@ import { AbrirInscripcionCursadaComponent } from './componentes/materias/abrir-i
     UsuariosComponent,
     CrearCarreraComponent,
     CrearMateriaComponent,
-    BorrarMateriaComponent,
     CrearUsuarioComponent,
     AbrirInscripcionCarreraComponent,
     AbrirInscripcionCursadaComponent,

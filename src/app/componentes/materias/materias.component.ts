@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Materia } from '../../modelos/materia';
 import { MateriasService } from '../../servicios/materias.service';
+import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-materias',
@@ -9,35 +11,57 @@ import { MateriasService } from '../../servicios/materias.service';
 })
 export class MateriasComponent implements OnInit {
 
-  materias: Materia[] = [];
 
-  constructor(private materiasService: MateriasService,
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  dataSource: MatTableDataSource<Materia>;
+  displayedColumns = ['nombre', 'carrera', 'anio', 'tipo_materia', 'correlativas', 'acciones'];
+  showSpinner = true;
+
+  constructor(
+    private materiasService: MateriasService,
+    private notif: NotificationsService
   ) { }
 
   public ListarMaterias() {
     this.materiasService.traerMaterias().subscribe(
       (res) => {
-        this.materias = res;
+        this.dataSource = new MatTableDataSource(res);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.showSpinner = false;
         console.log(res);
       },
       (error) => {
+        this.notif.error('Error', error.mensaje);
         console.log(error);
       });
   }
-  public eliminarMateria(id_materia){
-    const res=confirm("¿desea eliminar la materia?");
-    if (res) {
-      this.materiasService.eliminarMateria(id_materia).subscribe(
+
+  public eliminar(id: number) {
+    const eliminar = confirm('¿Desea eliminar la materia?');
+    if (eliminar) {
+      this.showSpinner = true;
+      this.materiasService.eliminarMateria(id).subscribe(
         (res) => {
-          this.ListarMaterias()
+          this.ListarMaterias();
           console.log(res);
         },
         (error) => {
-          console.log(error);
+          this.showSpinner = false;
+          this.notif.error('Error', error.mensaje);
+          console.error(error);
         });
     }
   }
 
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 
   ngOnInit() {
     this.ListarMaterias();

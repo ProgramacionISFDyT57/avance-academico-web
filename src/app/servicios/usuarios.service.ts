@@ -1,23 +1,23 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { HttpService } from './http.service';
+import { Usuario } from '../modelos/usuario';
+import { Mensaje } from '../modelos/respuesta-mensaje';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuariosService {
 
-  backend = 'https://avance-academico-backend.herokuapp.com';
-
   constructor(
-    private http: HttpClient
+    private http: HttpService
   ) { }
 
-  public traerUsuarios(): Observable<any> {
-    return this.http.get(this.backend + '/usuarios');
+  public traerUsuarios(): Observable<Usuario[]> {
+    return this.http.get('/usuarios');
   }
 
-  public crearUsuarios(usuario1): Observable<any> {
+  public crearUsuarios(usuario1): Observable<Mensaje> {
     const usuario = {
       dni: usuario1.documento,
       nombre: usuario1.nombre,
@@ -27,11 +27,11 @@ export class UsuariosService {
       fecha_nacimiento: usuario1.fecha_nacimiento,
       id_rol: usuario1.rol,
     };
-    return this.http.post(this.backend + '/usuarios', { usuario });
+    return this.http.post('/usuarios', { usuario });
   }
 
   public traerProfesores(): Observable<any> {
     return this.http.get(this.backend + '/profesores');
-}
+  }
 
 }
