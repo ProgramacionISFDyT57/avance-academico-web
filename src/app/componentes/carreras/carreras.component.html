@@ -40,11 +40,12 @@
           matTooltip="Crear Materia" routerLink="/materias/crear/{{ element.id }}">
           <mat-icon>add</mat-icon>
         </button>
-        <button class="mx-1" mat-mini-fab color="primary" matTooltip="Abrir Inscripción"
-          routerLink="abrir_inscripcion/{{ element.id }}">
+        <button *ngIf="element.cantidad_materias == element.materias_cargadas" class="mx-1" mat-mini-fab color="primary"
+          matTooltip="Abrir Inscripción" routerLink="abrir_inscripcion/{{ element.id }}">
           <mat-icon>add</mat-icon>
         </button>
-        <button class="mx-1" mat-mini-fab color="warn" matTooltip="Eliminar Carrera" (click)="eliminar(element.id)">
+        <button *ngIf="element.materias_cargadas == 0" class="mx-1" mat-mini-fab color="warn"
+          matTooltip="Eliminar Carrera" (click)="eliminar(element.id)">
           <mat-icon>delete_forever</mat-icon>
         </button>
       </td>
