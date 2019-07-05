@@ -30,4 +30,8 @@ export class UsuariosService {
     return this.http.post('/usuarios', { usuario });
   }
 
+  public traerProfesores(): Observable<any> {
+    return this.http.get(this.backend + '/profesores');
+  }
+
 }
