@@ -17,6 +17,10 @@ export class MateriasService {
     return this.http.get('/materias');
   }
 
+  public traerMateria(id: number): Observable<Materia> {
+    return this.http.get('/materia/' + id);
+  }
+
   public crearMateria(materia: any): Observable<Mensaje> {
     return this.http.post('/materias', { materia });
   }
@@ -29,8 +33,8 @@ export class MateriasService {
     return this.http.delete('/materias/' + idMateria);
   }
 
-  public abrirInscripcionCursada(crear_cursada): Observable<any> {
-    return this.http.post('/crear_cursada', {crear_cursada});
+  public abrirInscripcionCursada(cursada): Observable<any> {
+    return this.http.post('/cursadas', { cursada });
   }
 
 }
