@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
+import { NotificationsService } from 'angular2-notifications';
 
 
 @Component({
@@ -10,10 +11,10 @@ import { UsuariosService } from 'src/app/servicios/usuarios.service';
 })
 export class CrearUsuarioComponent implements OnInit {
 
-
   formulario: FormGroup;
+  showSpinner = false;
 
-  foods = [
+  roles = [
     { value: 1, viewValue: 'Admin' },
     { value: 2, viewValue: 'Directivo' },
     { value: 3, viewValue: 'Preceptor' },
@@ -22,17 +23,14 @@ export class CrearUsuarioComponent implements OnInit {
 
   ];
 
-
-
   constructor(
     private fb: FormBuilder,
     private usuariosService: UsuariosService,
+    private notif: NotificationsService
   ) { }
-
 
   private crearFormulario() {
     this.formulario = this.fb.group({
-
       documento: ['', Validators.required],
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
@@ -43,18 +41,25 @@ export class CrearUsuarioComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.crearFormulario();
-  }
   enviar() {
+    this.showSpinner = true;
     this.usuariosService.crearUsuarios(this.formulario.value).subscribe(
       (resp) => {
+        this.crearFormulario();
+        this.showSpinner = false;
+        this.notif.success('Se ha creado el usuario');
         console.log(resp);
       },
       (error) => {
+        this.showSpinner = false;
+        this.notif.error('Error al crear el usuario');
         console.error(error);
       }
     );
+  }
+
+  ngOnInit() {
+    this.crearFormulario();
   }
 
 }

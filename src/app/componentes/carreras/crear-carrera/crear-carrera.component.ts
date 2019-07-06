@@ -19,7 +19,6 @@ export class CrearCarreraComponent implements OnInit {
     private notif: NotificationsService
   ) { }
 
-
   private crearFormulario() {
     this.formulario = this.fb.group({
       nombre: ['', Validators.required],
@@ -28,9 +27,6 @@ export class CrearCarreraComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.crearFormulario();
-  }
   enviar() {
     this.showSpinner = true;
     this.carreraService.crearCarrera(this.formulario.value).subscribe(
@@ -46,6 +42,10 @@ export class CrearCarreraComponent implements OnInit {
         console.error(error);
       }
     );
+  }
+
+  ngOnInit() {
+    this.crearFormulario();
   }
 
 }
