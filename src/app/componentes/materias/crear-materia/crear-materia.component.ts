@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MateriasService } from 'src/app/servicios/materias.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NotificationsService } from 'angular2-notifications';
+import { CarrerasService } from 'src/app/servicios/carreras.service';
+import { promise } from 'protractor';
 
 @Component({
   selector: 'app-crear-materia',
@@ -11,72 +14,110 @@ import { ActivatedRoute } from '@angular/router';
 export class CrearMateriaComponent implements OnInit {
 
   formulario: FormGroup;
-  tiposMaterias= [
+  showSpinner = true;
+  carrera: string;
+  duracion: number;
+  tiposMaterias = [
     {
       id: 1,
-      nombre: "Curricular"
+      nombre: 'Curricular'
     },
     {
       id: 2,
-      nombre: "Práctica"
+      nombre: 'Práctica'
     },
     {
       id: 3,
-      nombre: "Taller"
+      nombre: 'Taller'
     },
     {
       id: 4,
-      nombre: "Seminario"
+      nombre: 'Seminario'
     },
-  ]
-  materias=[]
+  ];
+  materias = [];
   constructor(
     private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private notif: NotificationsService,
     private materiasService: MateriasService,
-    private route: ActivatedRoute
+    private carrerasService: CarrerasService,
   ) { }
 
 
-  private crearFormulario(){
-    this.formulario= this.fb.group({
+  private crearFormulario() {
+    this.formulario = this.fb.group({
       nombre: ['', Validators.required],
-      anio: [1, [Validators.required, Validators.max(5), Validators.min(1)]],
+      anio: [1, [Validators.required, Validators.max(this.duracion || 5), Validators.min(1)]],
       tipoMateria: [null, Validators.required],
       correlativas: [[]]
-    })
+    });
+  }
+
+  private cargar_materias_por_carrera(idCarrera: number) {
+    this.materiasService.materias_por_carrera(idCarrera).subscribe(
+      (res) => {
+        console.log(res);
+        this.materias = res;
+      },
+      (error) => {
+        this.notif.error('Error al cargar las materias de la carrera');
+        console.error(error);
+      }
+    );
+  }
+
+  private cargar_carrera(id): Promise<void> {
+    return new Promise( (resolve, reject) => {
+      this.carrerasService.traerCarrera(id).subscribe(
+        (resp) => {
+          console.log(resp);
+          this.carrera = resp.nombre;
+          this.duracion = resp.duracion;
+          resolve();
+        },
+        (error) => {
+          reject();
+          console.error(error);
+          this.notif.error('Ocurrió un error al cargar los datos de la carrera');
+        }
+      );
+    });
+  }
+
+  enviar() {
+    const idCarrera = this.route.snapshot.params.id;
+    const materia = {
+      nombre: this.formulario.value.nombre,
+      año: this.formulario.value.anio,
+      id_carrera: idCarrera,
+      id_tipo: this.formulario.value.tipoMateria,
+      correlativas: this.formulario.value.correlativas
+    };
+    this.materiasService.crearMateria(materia).subscribe(
+      (resp) => {
+        console.log(resp);
+        this.notif.success('Se creó la materia correctamente');
+        this.router.navigate(['/carreras']);
+      },
+      (error) => {
+        console.error(error);
+        this.notif.error('Error al crear la materia');
+      }
+    );
   }
 
   ngOnInit() {
+    const idCarrera = this.route.snapshot.params.id;
     this.crearFormulario();
-    const id_carrera= this.route.snapshot.params["id"]
-    this.materiasService.materias_por_carrera(id_carrera).subscribe(
-      (res)=>{
-        console.log(res);
-
-        this.materias= res
+    this.cargar_materias_por_carrera(idCarrera);
+    this.cargar_carrera(idCarrera).then(
+      () => {
+        this.showSpinner = false;
+        this.crearFormulario();
       }
-    )
-  }
-  enviar() {
-    const id_carrera= this.route.snapshot.params["id"];
-    const materia= {
-      nombre: this.formulario.value.nombre,
-      año: this.formulario.value.anio,
-      id_carrera: id_carrera,
-      id_tipo: this.formulario.value.tipoMateria,
-      correlativas: this.formulario.value.correlativas
-    }
-
-
-    this.materiasService.crearMateria(materia).subscribe(
-      (resp) => {
-        console.log(resp)
-      },
-      (error)=> {
-        console.error(error)
-      }
-    )
+    );
   }
 
 }
-
