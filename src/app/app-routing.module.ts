@@ -15,14 +15,17 @@ import { AbrirInscripcionCursadaComponent } from './componentes/materias/abrir-i
 const routes: Routes = [
   { path: '', component: InicioComponent, canActivate: [LoginGuard] },
   { path: 'login', component: LoginComponent },
+
   { path: 'carreras', component: CarrerasComponent, canActivate: [LoginGuard] },
-  { path: 'materias', component: MateriasComponent, canActivate: [LoginGuard] },
-  { path: 'usuarios', component: UsuariosComponent, canActivate: [LoginGuard] },
   { path: 'carreras/crear', component: CrearCarreraComponent, canActivate: [LoginGuard] },
-  { path: 'materias/crear/:id', component: CrearMateriaComponent, canActivate: [LoginGuard] },
-  { path: 'usuarios/crear', component: CrearUsuarioComponent, canActivate: [LoginGuard] },
   { path: 'carreras/abrir_inscripcion/:id', component: AbrirInscripcionCarreraComponent, canActivate: [LoginGuard] },
-  { path: 'materias/crear_cursada/:id', component: AbrirInscripcionCursadaComponent, canActivate: [LoginGuard] },
+
+  { path: 'materias', component: MateriasComponent, canActivate: [LoginGuard] },
+  { path: 'materias/crear/:id', component: CrearMateriaComponent, canActivate: [LoginGuard] },
+  { path: 'materias/abrir_inscripcion/:id', component: AbrirInscripcionCursadaComponent, canActivate: [LoginGuard] },
+
+  { path: 'usuarios', component: UsuariosComponent, canActivate: [LoginGuard] },
+  { path: 'usuarios/crear', component: CrearUsuarioComponent, canActivate: [LoginGuard] },
 ];
 
 @NgModule({

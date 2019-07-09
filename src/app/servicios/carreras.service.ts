@@ -17,6 +17,9 @@ export class CarrerasService {
     return this.http.get('/carreras');
   }
 
+  public traerCarrera(id: number): Observable<Carrera> {
+    return this.http.get('/carrera/' + id);
+  }
   public abrirInscripcionCarrera(carrerasAbiertas): Observable<Mensaje> {
     return this.http.post('/carreras_abiertas', { carrerasAbiertas });
   }
