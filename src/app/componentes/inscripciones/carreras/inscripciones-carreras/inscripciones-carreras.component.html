@@ -6,9 +6,9 @@
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
   </mat-form-field>
 
-  <button matTooltip="Crear Carrera" class="btn-crear" mat-fab color="primary" routerLink="crear">
+  <!-- <button matTooltip="Crear Carrera" class="btn-crear" mat-fab color="primary" routerLink="crear">
     <mat-icon>add</mat-icon>
-  </button>
+  </button> -->
 
   <table mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="nombre">
