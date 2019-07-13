@@ -16,7 +16,6 @@ export class InscripcionesCarrerasComponent {
   dataSource: MatTableDataSource<Carrera>;
   //displayedColumns = ['nombre', 'duracion', 'cantidad_materias', 'acciones'];
   displayedColumns = ['nombre'];
-
   showSpinner = true;
 
 
