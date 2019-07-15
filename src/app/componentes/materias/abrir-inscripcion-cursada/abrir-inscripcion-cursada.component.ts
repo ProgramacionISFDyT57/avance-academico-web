@@ -87,7 +87,7 @@ export class AbrirInscripcionCursadaComponent implements OnInit {
         this.showSpinner = false;
         this.notif.success('Se abrió la inscripción a la cursada');
         console.log(resp);
-        this.router.navigate(['materias']);
+        this.dialogRef.close(true);
       },
       (error) => {
         this.showSpinner = false;
