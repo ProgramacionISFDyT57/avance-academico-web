@@ -6,7 +6,6 @@ import { MaterialModule } from './modulos/material.module';
 
 // Notifications
 import { SimpleNotificationsModule } from 'angular2-notifications';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './componentes/login/login.component';
@@ -37,6 +36,7 @@ import { InscripcionesCarrerasComponent } from './componentes/inscripciones/carr
     AbrirInscripcionCursadaComponent,
     InscripcionesCarrerasComponent,
   ],
+  entryComponents: [AbrirInscripcionCursadaComponent],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,

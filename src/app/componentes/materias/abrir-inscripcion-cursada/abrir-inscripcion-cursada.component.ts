@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MateriasService } from 'src/app/servicios/materias.service';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 import { NotificationsService } from 'angular2-notifications';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-abrir-inscripcion-cursada',
@@ -24,6 +25,8 @@ export class AbrirInscripcionCursadaComponent implements OnInit {
     private notif: NotificationsService,
     private materiasService: MateriasService,
     private usuariosService: UsuariosService,
+    public dialogRef: MatDialogRef < AbrirInscripcionCursadaComponent >,
+    @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 
   private crearFormulario() {
@@ -33,6 +36,10 @@ export class AbrirInscripcionCursadaComponent implements OnInit {
       fecha_limite: [null, Validators.required],
       id_profesor: [null],
     });
+  }
+
+  public cerrar(){
+    this.dialogRef.close();
   }
 
   private cargarProfesores() {
@@ -63,6 +70,8 @@ export class AbrirInscripcionCursadaComponent implements OnInit {
     );
   }
 
+  public idMateria: number
+
   enviar() {
     this.showSpinner = true;
     const idMateria = this.route.snapshot.params.id;
@@ -89,10 +98,10 @@ export class AbrirInscripcionCursadaComponent implements OnInit {
   }
 
   ngOnInit() {
-    const idMateria = this.route.snapshot.params.id;
+    this.idMateria= this.data.idMateria;
     this.crearFormulario();
     this.cargarProfesores();
-    this.cargarMateria(idMateria);
+    this.cargarMateria(this.idMateria);
   }
 }
 

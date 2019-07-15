@@ -14,7 +14,7 @@
             <mat-form-field>
               <input type="number" min="2019" maxlength="4" matInput placeholder="Año" formControlName="año">
             </mat-form-field>
-        
+
             <mat-form-field>
               <mat-label>Profesor</mat-label>
               <mat-select formControlName="id_profesor">
@@ -23,27 +23,28 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
-        
+
             <mat-form-field>
               <input matInput [matDatepicker]="picker1" placeholder="Inicio de Inscripción" formControlName="fecha_inicio">
               <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
               <mat-datepicker #picker1></mat-datepicker>
             </mat-form-field>
-        
+
             <mat-form-field>
               <input matInput [matDatepicker]="picker2" placeholder="Fin de Inscripción" formControlName="fecha_limite">
               <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
               <mat-datepicker #picker2></mat-datepicker>
             </mat-form-field>
             <!-- Agregar las restriccions de las fechas. Cierre de inscripcion no puede ser anterior a inicio -->
-        
+
           </form>
     </mat-card-content>
 
     <mat-card-actions>
       <button mat-raised-button color="primary" type="submit" form="form" [disabled]="!formulario.valid || showSpinner">Crear</button>
-      <button mat-raised-button routerLink="../../">Volver </button>
+      <button mat-raised-button (click)="cerrar()">Volver </button>
     </mat-card-actions>
   </mat-card>
+
 
 </div>
