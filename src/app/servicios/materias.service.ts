@@ -38,6 +38,10 @@ export class MateriasService {
     return this.http.post('/cursadas', { cursada });
   }
 
+  public listarFinales(): Observable<any> {
+    return this.http.get('/lista_mesas');
+  }
+  
   public listarCursadas(): Observable<Cursada[]> {
     return this.http.get('/cursadas_abiertas');
   }

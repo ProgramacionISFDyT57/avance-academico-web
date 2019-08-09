@@ -1,0 +1,45 @@
+<mat-progress-bar mode="indeterminate" color="warn" [style.display]="showSpinner ? 'block' : 'none'"></mat-progress-bar>
+
+<div class="table-container mat-elevation-z8">
+
+  <mat-form-field class="filtro">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
+  </mat-form-field>
+
+  <button matTooltip="Crear Inscripcion a Final" class="btn-crear" mat-fab color="primary" routerLink="crear">
+    <mat-icon>add</mat-icon>
+  </button>
+
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="materia">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Materia </th>
+      <td mat-cell *matCellDef="let element"> {{element.materia}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="profesor">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Profesor </th>
+      <td mat-cell *matCellDef="let element"> {{element.profesor}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fecha_inicio">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Inicio de Inscripcion </th>
+        <td mat-cell *matCellDef="let element"> {{element.fecha_inicio | date: 'dd/MM/yyyy'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fecha_limite">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fin de Inscripcion </th>
+        <td mat-cell *matCellDef="let element"> {{element.fecha_limite | date: 'dd/MM/yyyy'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fecha_examen">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Exámen </th>
+        <td mat-cell *matCellDef="let element"> {{element.fecha_examen | date: 'dd/MM/yyyy'}} </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
