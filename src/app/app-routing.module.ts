@@ -11,6 +11,7 @@ import { CrearMateriaComponent } from './componentes/materias/crear-materia/crea
 import { CrearUsuarioComponent } from './componentes/usuarios/crear-usuario/crear-usuario.component';
 import { AbrirInscripcionCarreraComponent } from './componentes/carreras/abrir-inscripcion-carrera/abrir-inscripcion-carrera.component';
 import { InscripcionesCarrerasComponent } from './componentes/inscripciones/carreras/inscripciones-carreras/inscripciones-carreras.component';
+import { InscripcionesCursadasComponent } from './componentes/inscripciones/cursadas/inscripciones-cursadas/inscripciones-cursadas.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent, canActivate: [LoginGuard] },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'carreras/crear', component: CrearCarreraComponent, canActivate: [LoginGuard] },
   { path: 'carreras/abrir_inscripcion/:id', component: AbrirInscripcionCarreraComponent, canActivate: [LoginGuard] },
   { path: 'inscripcion/carrera', component: InscripcionesCarrerasComponent, canActivate: [LoginGuard] },
+  { path: 'inscripcion/cursadas', component: InscripcionesCursadasComponent, canActivate: [LoginGuard] },
   { path: 'materias', component: MateriasComponent, canActivate: [LoginGuard] },
   { path: 'materias/crear/:id', component: CrearMateriaComponent, canActivate: [LoginGuard] },
   { path: 'usuarios', component: UsuariosComponent, canActivate: [LoginGuard] },
