@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpService } from './http.service';
 import { Materia } from '../modelos/materia';
 import { Mensaje } from '../modelos/respuesta-mensaje';
+import { Cursada } from '../modelos/cursadas';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,10 @@ export class MateriasService {
 
   public listarFinales(): Observable<any> {
     return this.http.get('/lista_mesas');
+  }
+  
+  public listarCursadas(): Observable<Cursada[]> {
+    return this.http.get('/cursadas_abiertas');
   }
 
 }
