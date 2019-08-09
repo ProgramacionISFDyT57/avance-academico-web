@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Materia } from '../../modelos/materia';
 import { MateriasService } from '../../servicios/materias.service';
-import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatSort, MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
 import { NotificationsService } from 'angular2-notifications';
+import { AbrirInscripcionCursadaComponent } from './abrir-inscripcion-cursada/abrir-inscripcion-cursada.component';
 
 @Component({
   selector: 'app-materias',
@@ -20,8 +21,18 @@ export class MateriasComponent implements OnInit {
 
   constructor(
     private materiasService: MateriasService,
-    private notif: NotificationsService
+    private notif: NotificationsService,
+    public dialog: MatDialog,
   ) { }
+
+  abrirDialogoInscripcion(idMateria: number){
+    this.dialog.open(AbrirInscripcionCursadaComponent, {
+      data: {
+        idMateria: idMateria
+      }
+    })
+
+  }
 
   public ListarMaterias() {
     this.materiasService.traerMaterias().subscribe(
