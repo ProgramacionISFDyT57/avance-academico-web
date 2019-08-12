@@ -15,7 +15,8 @@ export class InscripcionesCarrerasComponent {
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<Carrera>;
   //displayedColumns = ['nombre', 'duracion', 'cantidad_materias', 'acciones'];
-  displayedColumns = ['nombre'];
+  //displayedColumns = ['nombre'];
+  displayedColumns = ['nombre', 'duracion'];
   showSpinner = true;
 
 
@@ -25,7 +26,7 @@ export class InscripcionesCarrerasComponent {
   ) { }
 
   public ListarCarreras() {
-    this.carrerasService.traerCarreras().subscribe(
+    this.carrerasService.traerCarrerasAbiertas().subscribe(
       (res) => {
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;

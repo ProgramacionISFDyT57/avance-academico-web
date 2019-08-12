@@ -16,6 +16,9 @@ export class CarrerasService {
   public traerCarreras(): Observable<Carrera[]> {
     return this.http.get('/carreras');
   }
+  public traerCarrerasAbiertas(): Observable<Carrera[]> {
+    return this.http.get('/carreras_abiertas');
+  }
 
   public traerCarrera(id: number): Observable<Carrera> {
     return this.http.get('/carrera/' + id);
