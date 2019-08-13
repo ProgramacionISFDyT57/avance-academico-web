@@ -4,6 +4,7 @@ import { MateriasService } from '../../servicios/materias.service';
 import { MatSort, MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
 import { NotificationsService } from 'angular2-notifications';
 import { AbrirInscripcionCursadaComponent } from './abrir-inscripcion-cursada/abrir-inscripcion-cursada.component';
+import { AbrirInscripcionFinalComponent } from './abrir-inscripcion-final/abrir-inscripcion-final.component';
 
 @Component({
   selector: 'app-materias',
@@ -25,13 +26,20 @@ export class MateriasComponent implements OnInit {
     public dialog: MatDialog,
   ) { }
 
-  abrirDialogoInscripcion(idMateria: number){
+  abrirDialogoInscripcion(idMateria: number) {
     this.dialog.open(AbrirInscripcionCursadaComponent, {
       data: {
-        idMateria: idMateria
+        idMateria
       }
-    })
+    });
+  }
 
+  abrirDialogoInscripcionFinal(idMateria: number) {
+    this.dialog.open(AbrirInscripcionFinalComponent, {
+      data: {
+        idMateria
+      }
+    });
   }
 
   public ListarMaterias() {

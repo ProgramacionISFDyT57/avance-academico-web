@@ -7,11 +7,11 @@ import { NotificationsService } from 'angular2-notifications';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
-  selector: 'app-abrir-inscripcion-cursada',
-  templateUrl: './abrir-inscripcion-cursada.component.html',
-  styleUrls: ['./abrir-inscripcion-cursada.component.scss']
+  selector: 'app-abrir-inscripcion-final',
+  templateUrl: './abrir-inscripcion-final.component.html',
+  styleUrls: ['./abrir-inscripcion-final.component.scss']
 })
-export class AbrirInscripcionCursadaComponent implements OnInit {
+export class AbrirInscripcionFinalComponent implements OnInit {
 
   formulario: FormGroup;
   showSpinner = true;
@@ -26,16 +26,18 @@ export class AbrirInscripcionCursadaComponent implements OnInit {
     private notif: NotificationsService,
     private materiasService: MateriasService,
     private usuariosService: UsuariosService,
-    public dialogRef: MatDialogRef<AbrirInscripcionCursadaComponent>,
+    public dialogRef: MatDialogRef<AbrirInscripcionFinalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 
   private crearFormulario() {
     this.formulario = this.fb.group({
-      año: [2019, [Validators.required, Validators.min(2019)]],
       fecha_inicio: [null, Validators.required],
       fecha_limite: [null, Validators.required],
+      fecha_examen: [null, Validators.required],
       id_profesor: [null],
+      id_vocal1: [null],
+      id_vocal2: [null],
     });
   }
 
@@ -71,27 +73,28 @@ export class AbrirInscripcionCursadaComponent implements OnInit {
     );
   }
 
-
   enviar() {
     this.showSpinner = true;
     const idMateria = this.idMateria;
-    const cursada = {
-      id_profesor: this.formulario.value.id_profesor,
-      año: this.formulario.value.año,
+    const mesa = {
       id_materia: idMateria,
       fecha_inicio: this.formulario.value.fecha_inicio,
       fecha_limite: this.formulario.value.fecha_limite,
+      fecha_examen: this.formulario.value.fecha_examen,
+      id_profesor: this.formulario.value.id_profesor,
+      id_vocal1: this.formulario.value.id_vocal1,
+      id_vocal2: this.formulario.value.id_vocal2,
     };
-    this.materiasService.abrirInscripcionCursada(cursada).subscribe(
+    this.materiasService.abrirInscripcionFinal(mesa).subscribe(
       (resp) => {
         this.showSpinner = false;
-        this.notif.success('Se abrió la inscripción a la cursada');
+        this.notif.success('Se abrió la inscripción al final');
         console.log(resp);
         this.dialogRef.close(true);
       },
       (error) => {
         this.showSpinner = false;
-        this.notif.error('Ocurrió un error al abrir la inscripción a la cursada');
+        this.notif.error('Ocurrió un error al abrir la inscripción al final');
         console.error(error);
       }
     );
@@ -103,5 +106,5 @@ export class AbrirInscripcionCursadaComponent implements OnInit {
     this.cargarProfesores();
     this.cargarMateria(this.idMateria);
   }
-}
 
+}
