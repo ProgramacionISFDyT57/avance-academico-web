@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpService } from './http.service';
 import { Carrera } from '../modelos/carrera';
 import { Mensaje } from '../modelos/respuesta-mensaje';
+import { CarreraAbierta } from '../modelos/carreraabierta';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class CarrerasService {
   public traerCarreras(): Observable<Carrera[]> {
     return this.http.get('/carreras');
   }
-  public traerCarrerasAbiertas(): Observable<Carrera[]> {
+  public traerCarrerasAbiertas(): Observable<CarreraAbierta[]> {
     return this.http.get('/carreras_abiertas');
   }
 

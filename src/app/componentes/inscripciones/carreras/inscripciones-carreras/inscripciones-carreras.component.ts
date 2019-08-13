@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { CarrerasService } from 'src/app/servicios/carreras.service';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { NotificationsService } from 'angular2-notifications';
-import { Carrera } from 'src/app/modelos/carrera';
+import { CarreraAbierta } from 'src/app/modelos/carreraabierta';
 
 
 @Component({
@@ -13,10 +13,11 @@ import { Carrera } from 'src/app/modelos/carrera';
 export class InscripcionesCarrerasComponent {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  dataSource: MatTableDataSource<Carrera>;
+  dataSource: MatTableDataSource<CarreraAbierta>;
   //displayedColumns = ['nombre', 'duracion', 'cantidad_materias', 'acciones'];
   //displayedColumns = ['nombre'];
-  displayedColumns = ['nombre', 'duracion'];
+  displayedColumns = ['nombre', 'duracion', 'cohorte', 'fecha_inicio', 'fecha_limite'];
+
   showSpinner = true;
 
 
