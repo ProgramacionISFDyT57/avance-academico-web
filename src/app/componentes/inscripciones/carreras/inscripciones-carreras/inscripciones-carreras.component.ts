@@ -14,9 +14,7 @@ export class InscripcionesCarrerasComponent {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<CarreraAbierta>;
-  //displayedColumns = ['nombre', 'duracion', 'cantidad_materias', 'acciones'];
-  //displayedColumns = ['nombre'];
-  displayedColumns = ['nombre', 'duracion', 'cohorte', 'fecha_inicio', 'fecha_limite'];
+  displayedColumns = ['nombre', 'duracion', 'cohorte', 'fecha_inicio', 'fecha_limite', 'cant_inscriptos'];
 
   showSpinner = true;
 

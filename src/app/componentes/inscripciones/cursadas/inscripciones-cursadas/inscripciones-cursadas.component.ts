@@ -14,8 +14,8 @@ export class InscripcionesCursadasComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<Cursada>;
-  // displayedColumns = ['año_cursada', 'materia', 'año_materia' , 'fecha_inicio', 'fecha_limite', 'profesor'];
-  displayedColumns = ['materia', 'fecha_inicio', 'fecha_limite', 'profesor'];
+  displayedColumns = ['anio_cursada', 'carrera', 'materia', 'anio_materia',
+    'fecha_inicio', 'fecha_limite', 'profesor', 'cant_inscriptos', 'acciones'];
   showSpinner = true;
 
 
@@ -46,6 +46,18 @@ export class InscripcionesCursadasComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  inscribirse(id) {
+    alert('Por hacer');
+  }
+
+  detalles(id) {
+    alert('Por hacer');
+  }
+
+  eliminar(id) {
+    alert('Por hacer');
   }
 
   ngOnInit() {

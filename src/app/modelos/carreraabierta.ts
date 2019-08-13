@@ -1,8 +1,8 @@
 export interface CarreraAbierta {
-    nombre: string;
-    duracion: number;
-    cohete: number;
-    fecha_ini: string;
-    fecha_lim: string;
-  }
-  
+  cant_inscriptos: number;
+  cohete: number;
+  duracion: number;
+  nombre: string;
+  fecha_inicio: string;
+  fecha_limite: string;
+}
