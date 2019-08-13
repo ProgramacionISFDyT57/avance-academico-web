@@ -19,18 +19,23 @@
     </ng-container>
 
     <ng-container matColumnDef="cohorte">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Duración </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Cohorte </th>
       <td mat-cell *matCellDef="let element"> {{element.cohorte}} </td>
     </ng-container>
 
     <ng-container matColumnDef="fecha_inicio">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Duración </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Inicio de Inscripción </th>
       <td mat-cell *matCellDef="let element"> {{element.fecha_inicio | date: 'dd/MM/yyyy' }} </td>
     </ng-container>
 
     <ng-container matColumnDef="fecha_limite">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Duración </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Fin de Inscripción </th>
       <td mat-cell *matCellDef="let element"> {{element.fecha_limite | date: 'dd/MM/yyyy' }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="cant_inscriptos">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Inscriptos </th>
+      <td mat-cell *matCellDef="let element"> {{element.cant_inscriptos}} </td>
     </ng-container>
 
 
