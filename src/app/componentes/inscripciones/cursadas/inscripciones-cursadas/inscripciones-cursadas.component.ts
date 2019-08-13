@@ -56,6 +56,10 @@ export class InscripcionesCursadasComponent implements OnInit {
     alert('Por hacer');
   }
 
+  eliminar(id) {
+    alert('Por hacer');
+  }
+
   ngOnInit() {
     this.ListarCursadas();
   }
