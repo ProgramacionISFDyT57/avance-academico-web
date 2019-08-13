@@ -46,7 +46,7 @@ export class AbrirInscripcionCarreraComponent implements OnInit {
       (resp) => {
         this.showSpinner = false;
         this.notif.success('Se abrió la inscripción a la carrera');
-        this.router.navigate(['carreras']);
+        this.router.navigate(['inscripcion/carrera']);
         console.log(resp);
       },
       (error) => {
