@@ -1,0 +1,72 @@
+<mat-progress-bar mode="indeterminate" color="warn" [style.display]="showSpinner ? 'block' : 'none'"></mat-progress-bar>
+
+<div class="container mt-2">
+
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>Abrir Inscripción a {{ materia }}</mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <br>
+    <mat-card-content>
+        <form id="form" [formGroup]="formulario" (ngSubmit)="enviar()">
+
+            
+
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker1" placeholder="Inicio de Inscripción" formControlName="fecha_inicio">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker2" placeholder="Fin de Inscripción" formControlName="fecha_limite">
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker3" placeholder="Fecha de Examen" formControlName="fecha_examen">
+              <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+              <mat-datepicker #picker3></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Profesor</mat-label>
+              <mat-select formControlName="id_profesor">
+                <mat-option *ngFor="let profesor of profesores" [value]="profesor.id">
+                  {{profesor.apellido}}, {{profesor.nombre}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Vocal 1</mat-label>
+              <mat-select formControlName="id_vocal1">
+                <mat-option *ngFor="let profesor of profesores" [value]="profesor.id">
+                  {{profesor.apellido}}, {{profesor.nombre}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Vocal 2</mat-label>
+              <mat-select formControlName="id_vocal2">
+                <mat-option *ngFor="let profesor of profesores" [value]="profesor.id">
+                  {{profesor.apellido}}, {{profesor.nombre}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <!-- Agregar las restriccions de las fechas. Cierre de inscripcion no puede ser anterior a inicio -->
+
+          </form>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit" form="form" [disabled]="!formulario.valid || showSpinner">Crear</button>
+      <button mat-raised-button (click)="cerrar()">Volver </button>
+    </mat-card-actions>
+  </mat-card>
+
+
+</div>

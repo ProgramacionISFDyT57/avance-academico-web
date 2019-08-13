@@ -22,6 +22,7 @@ import { AbrirInscripcionCursadaComponent } from './componentes/materias/abrir-i
 import { InscripcionesCarrerasComponent } from './componentes/inscripciones/carreras/inscripciones-carreras/inscripciones-carreras.component';
 import { InscripcionesFinalesComponent } from './componentes/inscripciones/finales/inscripciones-finales/inscripciones-finales.component';
 import { InscripcionesCursadasComponent } from './componentes/inscripciones/cursadas/inscripciones-cursadas/inscripciones-cursadas.component';
+import { AbrirInscripcionFinalComponent } from './componentes/materias/abrir-inscripcion-final/abrir-inscripcion-final.component';
 
 @NgModule({
   declarations: [
@@ -39,8 +40,12 @@ import { InscripcionesCursadasComponent } from './componentes/inscripciones/curs
     InscripcionesCarrerasComponent,
     InscripcionesFinalesComponent,
     InscripcionesCursadasComponent,
+    AbrirInscripcionFinalComponent,
   ],
-  entryComponents: [AbrirInscripcionCursadaComponent],
+  entryComponents: [
+    AbrirInscripcionCursadaComponent,
+    AbrirInscripcionFinalComponent
+  ],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
