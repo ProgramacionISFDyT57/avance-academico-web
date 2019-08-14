@@ -10,14 +10,13 @@ import { Carrera } from 'src/app/modelos/carrera';
   styleUrls: ['./inscripciones-finales.component.scss']
 })
 
-export class InscripcionesFinalesComponent {
+export class InscripcionesFinalesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<Carrera>;
-  //displayedColumns = ['nombre', 'duracion', 'cantidad_materias', 'acciones'];
-displayedColumns = ['materia', 'profesor', 'fecha_examen', 'fecha_inicio', 'fecha_limite'];
+  displayedColumns = ['carrera', 'materia', 'anio_materia', 'profesor',
+   'fecha_inicio', 'fecha_limite', 'fecha_examen', 'cant_inscriptos', 'acciones'];
   showSpinner = true;
-
 
   constructor(
     private materiasService: MateriasService,
@@ -42,15 +41,27 @@ displayedColumns = ['materia', 'profesor', 'fecha_examen', 'fecha_inicio', 'fech
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
   }
 
+  inscribirse(id) {
+    alert('Por hacer');
+  }
+
+  detalles(id) {
+    alert('Por hacer');
+  }
+
+  eliminar(id) {
+    alert('Por hacer');
+  }
+
   ngOnInit() {
     this.ListarFinales();
   }
+
 
 
 }
