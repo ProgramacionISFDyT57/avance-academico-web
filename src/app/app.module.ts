@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './modulos/material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 // Notifications
 import { SimpleNotificationsModule } from 'angular2-notifications';
@@ -23,6 +24,8 @@ import { InscripcionesCarrerasComponent } from './componentes/inscripciones/carr
 import { InscripcionesFinalesComponent } from './componentes/inscripciones/finales/inscripciones-finales/inscripciones-finales.component';
 import { InscripcionesCursadasComponent } from './componentes/inscripciones/cursadas/inscripciones-cursadas/inscripciones-cursadas.component';
 import { AbrirInscripcionFinalComponent } from './componentes/materias/abrir-inscripcion-final/abrir-inscripcion-final.component';
+import { ConfirmationDialogComponent } from './servicios/confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogService } from './servicios/confirmation-dialog/confirmation-dialog.service';
 
 @NgModule({
   declarations: [
@@ -41,8 +44,10 @@ import { AbrirInscripcionFinalComponent } from './componentes/materias/abrir-ins
     InscripcionesFinalesComponent,
     InscripcionesCursadasComponent,
     AbrirInscripcionFinalComponent,
+    ConfirmationDialogComponent,
   ],
   entryComponents: [
+    ConfirmationDialogComponent,
     AbrirInscripcionCursadaComponent,
     AbrirInscripcionFinalComponent
   ],
@@ -55,8 +60,11 @@ import { AbrirInscripcionFinalComponent } from './componentes/materias/abrir-ins
     AppRoutingModule,
     ReactiveFormsModule,
     SimpleNotificationsModule.forRoot(),
+    FlexLayoutModule
   ],
-  providers: [],
+  providers: [
+    ConfirmationDialogService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

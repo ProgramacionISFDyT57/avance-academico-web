@@ -3,6 +3,8 @@ import { CarrerasService } from 'src/app/servicios/carreras.service';
 import { Carrera } from 'src/app/modelos/carrera';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { NotificationsService } from 'angular2-notifications';
+import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
+
 
 @Component({
   selector: 'app-carreras',
@@ -19,7 +21,8 @@ export class CarrerasComponent implements OnInit {
 
   constructor(
     private carrerasService: CarrerasService,
-    private notif: NotificationsService
+    private notif: NotificationsService,
+    private confirmation: ConfirmationDialogService
   ) { }
 
   public ListarCarreras() {
@@ -38,8 +41,9 @@ export class CarrerasComponent implements OnInit {
       });
   }
 
-  public eliminar(id: number) {
-    const eliminar = confirm('¿Desea eliminar la carrera?');
+  public async eliminar(id: number) {
+    const eliminar = await this.confirmation.confirm('Confirme la acción', '¿Desea eliminar la carrera?');
+    // const eliminar = confirm('¿Desea eliminar la carrera?');
     if (eliminar) {
       this.showSpinner = true;
       this.carrerasService.eliminarCarrera(id).subscribe(
