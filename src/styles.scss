@@ -6,7 +6,17 @@ body {
   background-color: #cfcfcf;
 }
 
+.confirm-dialog .mat-dialog-container {
+  padding: 0;
+  width: 500px;
+  max-width: 95vw;
+}
+
 // Helpers
+
+.m-0 {
+  margin: 0 !important;
+}
 
 .mx-1 {
   margin-left: 0.25em !important;
@@ -18,12 +28,37 @@ body {
   margin-right: 0.5em !important;
 }
 
+.mx-3 {
+    margin-left: 1em !important;
+    margin-right: 1em !important;
+  }
+
 .mt-2 {
   margin-top: 0.5em !important;
 }
 
 .mb-2 {
   margin-bottom: 0.5em !important;
+}
+
+.p-0 {
+  padding: 0 !important;
+}
+
+.p-1 {
+  padding: 0.25em !important;
+}
+
+.p-2 {
+  padding: 0.5em !important;
+}
+
+.p-3 {
+  padding: 1em !important;
+}
+
+.p-4 {
+  padding: 1.5em !important;
 }
 
 //
