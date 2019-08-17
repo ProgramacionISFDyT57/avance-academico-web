@@ -12,7 +12,8 @@
         </mat-menu>
 
         <span class="example-spacer"></span>
+        <span>{{ rol }}</span>
         <mat-icon class="example-icon" (click)="salir()" matTooltip="Salir">exit_to_app</mat-icon>
 </mat-toolbar>
 <router-outlet></router-outlet>
-<simple-notifications [options]="notif_options"></simple-notifications>
+<simple-notifications [options]="notifOptions"></simple-notifications>

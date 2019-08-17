@@ -34,20 +34,23 @@ export class MateriasService {
     return this.http.delete('/materias/' + idMateria);
   }
 
-  public abrirInscripcionCursada(cursada): Observable<any> {
-    return this.http.post('/cursadas', { cursada });
-  }
-
+  // Finales
   public abrirInscripcionFinal(mesa): Observable<any> {
     return this.http.post('/crear_mesa', { mesa });
   }
-
+  public inscripcionFinal(idMesa: number): Observable<any> {
+    return this.http.post('/inscripciones_mesas', { id_mesa: idMesa });
+  }
   public listarFinales(): Observable<any> {
     return this.http.get('/lista_mesas');
   }
 
+  // Cursadas
   public listarCursadas(): Observable<Cursada[]> {
     return this.http.get('/cursadas_abiertas');
+  }
+  public abrirInscripcionCursada(cursada): Observable<any> {
+    return this.http.post('/cursadas', { cursada });
   }
 
 }
