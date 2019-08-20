@@ -7,20 +7,24 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  
-  notif_options = {
+
+  notifOptions = {
     timeOut: 3000,
     showProgressBar: true,
     pauseOnHover: true,
     clickToClose: true
-  }
+  };
+
+  rol: string;
 
   constructor(private router: Router) {}
 
   public mostrar_barra() {
     if (this.router.url === '/login') {
+      this.rol = undefined;
       return false;
     } else {
+      this.rol = sessionStorage.getItem('rol');
       return true;
     }
   }

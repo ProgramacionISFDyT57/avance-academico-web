@@ -3,6 +3,7 @@ import { MateriasService } from 'src/app/servicios/materias.service';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { NotificationsService } from 'angular2-notifications';
 import { Carrera } from 'src/app/modelos/carrera';
+import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
 
 @Component({
   selector: 'app-inscripciones-finales',
@@ -20,7 +21,8 @@ export class InscripcionesFinalesComponent implements OnInit {
 
   constructor(
     private materiasService: MateriasService,
-    private notif: NotificationsService
+    private notif: NotificationsService,
+    private confirm: ConfirmationDialogService
   ) { }
 
   public ListarFinales() {
@@ -46,8 +48,24 @@ export class InscripcionesFinalesComponent implements OnInit {
     }
   }
 
-  inscribirse(id) {
-    alert('Por hacer');
+  async inscribirse(materia: string, fecha: string, id: number) {
+    const confirm = await this.confirm.confirm('Confirme su inscripción a la mesa de final',
+      'Inscripción a ' + materia + ' // Fecha de examen ' + new Date(fecha).toLocaleDateString());
+    if (confirm) {
+      this.showSpinner = true;
+      this.materiasService.inscripcionFinal(id).subscribe(
+        (resp) => {
+          this.showSpinner = false;
+          console.log(resp);
+          this.notif.success('Inscripción realizada correctamente');
+        },
+        (error) => {
+          this.showSpinner = false;
+          console.error(error);
+          this.notif.error(error.error.mensaje);
+        }
+      );
+    }
   }
 
   detalles(id) {

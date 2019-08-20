@@ -6,9 +6,9 @@
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
   </mat-form-field>
 
-  <button matTooltip="Crear Inscripcion a Final" class="btn-crear" mat-fab color="primary" routerLink="crear">
+  <!-- <button matTooltip="Crear Inscripcion a Final" class="btn-crear" mat-fab color="primary" routerLink="crear">
     <mat-icon>add</mat-icon>
-  </button>
+  </button> -->
 
   <table mat-table [dataSource]="dataSource" matSort>
 
@@ -55,7 +55,7 @@
     <ng-container matColumnDef="acciones">
       <th mat-header-cell *matHeaderCellDef> Acciones </th>
       <td class="nowrap" mat-cell *matCellDef="let element">
-        <button class="mx-1" mat-mini-fab color="primary" matTooltip="Inscribirse" (click)="inscribirse(element.id)">
+        <button class="mx-1" mat-mini-fab color="primary" matTooltip="Inscribirse" (click)="inscribirse(element.materia, element.fecha_examen, element.id)">
           <mat-icon>queue</mat-icon>
         </button>
         <button class="mx-1" mat-mini-fab color="primary" matTooltip="Detalles" (click)="detalles(element.id)">
