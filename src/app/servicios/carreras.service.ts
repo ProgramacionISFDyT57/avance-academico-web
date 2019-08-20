@@ -4,6 +4,7 @@ import { HttpService } from './http.service';
 import { Carrera } from '../modelos/carrera';
 import { Mensaje } from '../modelos/respuesta-mensaje';
 import { CarreraAbierta } from '../modelos/carreraabierta';
+import { InscriptosCarrera } from '../modelos/inscriptos-carrera';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,10 @@ export class CarrerasService {
 
   public eliminarCarrera(id: number): Observable<Mensaje> {
     return this.http.delete('/carreras/' + id);
+  }
+
+  public listarInscriptosCarrera(idCarreraAbierta: number): Observable<InscriptosCarrera[]> {
+    return this.http.get('/inscriptos_carrera/' + idCarreraAbierta);
   }
 
 
