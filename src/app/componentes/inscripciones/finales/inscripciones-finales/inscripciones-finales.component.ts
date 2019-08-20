@@ -4,6 +4,7 @@ import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { NotificationsService } from 'angular2-notifications';
 import { Carrera } from 'src/app/modelos/carrera';
 import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-inscripciones-finales',
@@ -22,7 +23,8 @@ export class InscripcionesFinalesComponent implements OnInit {
   constructor(
     private materiasService: MateriasService,
     private notif: NotificationsService,
-    private confirm: ConfirmationDialogService
+    private confirm: ConfirmationDialogService,
+    private router: Router
   ) { }
 
   public ListarFinales() {
@@ -69,7 +71,7 @@ export class InscripcionesFinalesComponent implements OnInit {
   }
 
   detalles(id) {
-    alert('Por hacer');
+    this.router.navigateByUrl('inscripcion/mesas/' + id);
   }
 
   eliminar(id) {

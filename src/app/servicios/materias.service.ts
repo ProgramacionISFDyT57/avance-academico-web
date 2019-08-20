@@ -5,6 +5,7 @@ import { Materia } from '../modelos/materia';
 import { Mensaje } from '../modelos/respuesta-mensaje';
 import { Cursada } from '../modelos/cursadas';
 import { InscriptosCursada } from '../modelos/inscriptos-cursada';
+import { InscriptosFinal } from '../modelos/inscriptos-final';
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +45,9 @@ export class MateriasService {
   }
   public listarFinales(): Observable<any> {
     return this.http.get('/lista_mesas');
+  }
+  public listarInscriptosFinal(idFinal: number): Observable<InscriptosFinal[]> {
+    return this.http.get('/inscriptos_mesa/' + idFinal);
   }
 
   // Cursadas
