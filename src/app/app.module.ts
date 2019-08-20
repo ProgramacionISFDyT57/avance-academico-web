@@ -28,6 +28,7 @@ import { ConfirmationDialogComponent } from './servicios/confirmation-dialog/con
 import { ConfirmationDialogService } from './servicios/confirmation-dialog/confirmation-dialog.service';
 import { DetallesCursadaComponent } from './componentes/inscripciones/cursadas/detalles-cursada/detalles-cursada.component';
 import { DetallesFinalComponent } from './componentes/inscripciones/finales/detalles-final/detalles-final.component';
+import { DetallesCarreraComponent } from './componentes/inscripciones/carreras/detalles-carrera/detalles-carrera.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { DetallesFinalComponent } from './componentes/inscripciones/finales/deta
     ConfirmationDialogComponent,
     DetallesCursadaComponent,
     DetallesFinalComponent,
+    DetallesCarreraComponent,
   ],
   entryComponents: [
     ConfirmationDialogComponent,
