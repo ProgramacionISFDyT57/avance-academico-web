@@ -4,6 +4,7 @@ import { HttpService } from './http.service';
 import { Materia } from '../modelos/materia';
 import { Mensaje } from '../modelos/respuesta-mensaje';
 import { Cursada } from '../modelos/cursadas';
+import { InscriptosCursada } from '../modelos/inscriptos-cursada';
 
 @Injectable({
   providedIn: 'root'
@@ -52,5 +53,9 @@ export class MateriasService {
   public abrirInscripcionCursada(cursada): Observable<any> {
     return this.http.post('/cursadas', { cursada });
   }
+  public listarInscriptosCursadas(idCursada: number): Observable<InscriptosCursada[]> {
+    return this.http.get('/inscriptos_cursada/' + idCursada);
+  }
+
 
 }
