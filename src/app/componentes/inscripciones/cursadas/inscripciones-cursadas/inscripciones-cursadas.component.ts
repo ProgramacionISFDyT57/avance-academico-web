@@ -3,6 +3,7 @@ import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { NotificationsService } from 'angular2-notifications';
 import { MateriasService } from 'src/app/servicios/materias.service';
 import { Cursada } from 'src/app/modelos/cursadas';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-inscripciones-cursadas',
@@ -21,7 +22,8 @@ export class InscripcionesCursadasComponent implements OnInit {
 
   constructor(
     private materiasService: MateriasService,
-    private notif: NotificationsService
+    private notif: NotificationsService,
+    private router: Router
   ) { }
 
   public ListarCursadas() {
@@ -53,7 +55,7 @@ export class InscripcionesCursadasComponent implements OnInit {
   }
 
   detalles(id) {
-    alert('Por hacer');
+    this.router.navigateByUrl('inscripcion/cursadas/' + id);
   }
 
   eliminar(id) {
