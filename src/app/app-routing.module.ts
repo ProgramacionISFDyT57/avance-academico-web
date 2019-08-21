@@ -13,6 +13,7 @@ import { AbrirInscripcionCarreraComponent } from './componentes/carreras/abrir-i
 import { InscripcionesCarrerasComponent } from './componentes/inscripciones/carreras/inscripciones-carreras/inscripciones-carreras.component';
 import { InscripcionesFinalesComponent } from './componentes/inscripciones/finales/inscripciones-finales/inscripciones-finales.component';
 import { InscripcionesCursadasComponent } from './componentes/inscripciones/cursadas/inscripciones-cursadas/inscripciones-cursadas.component';
+import { AlumnosComponent } from './componentes/alumnos/alumnos.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent, canActivate: [LoginGuard] },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'usuarios', component: UsuariosComponent, canActivate: [LoginGuard] },
   { path: 'usuarios/crear', component: CrearUsuarioComponent, canActivate: [LoginGuard] },
   { path: 'inscripcion/lista_mesas', component: InscripcionesFinalesComponent, canActivate: [LoginGuard] },
+  { path: 'alumnos', component: AlumnosComponent, canActivate: [LoginGuard] },
 
 ];
 

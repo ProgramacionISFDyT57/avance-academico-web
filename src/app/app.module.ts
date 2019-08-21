@@ -26,6 +26,7 @@ import { InscripcionesCursadasComponent } from './componentes/inscripciones/curs
 import { AbrirInscripcionFinalComponent } from './componentes/materias/abrir-inscripcion-final/abrir-inscripcion-final.component';
 import { ConfirmationDialogComponent } from './servicios/confirmation-dialog/confirmation-dialog.component';
 import { ConfirmationDialogService } from './servicios/confirmation-dialog/confirmation-dialog.service';
+import { AlumnosComponent } from './componentes/alumnos/alumnos.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { ConfirmationDialogService } from './servicios/confirmation-dialog/confi
     InscripcionesCursadasComponent,
     AbrirInscripcionFinalComponent,
     ConfirmationDialogComponent,
+    AlumnosComponent,
   ],
   entryComponents: [
     ConfirmationDialogComponent,
