@@ -19,8 +19,6 @@ export class CrearUsuarioComponent implements OnInit {
     { value: 2, viewValue: 'Directivo' },
     { value: 3, viewValue: 'Preceptor' },
     { value: 4, viewValue: 'Profesor' },
-    { value: 5, viewValue: 'Alumno' }
-
   ];
 
   constructor(

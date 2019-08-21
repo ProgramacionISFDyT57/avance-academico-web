@@ -34,4 +34,8 @@ export class UsuariosService {
     return this.http.get('/profesores');
   }
 
+  public eliminarUsuario(id: number): Observable<any> {
+    return this.http.delete('/usuarios/' + id);
+  }
+
 }

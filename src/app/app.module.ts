@@ -31,6 +31,7 @@ import { DetallesCursadaComponent } from './componentes/inscripciones/cursadas/d
 import { DetallesFinalComponent } from './componentes/inscripciones/finales/detalles-final/detalles-final.component';
 import { DetallesCarreraComponent } from './componentes/inscripciones/carreras/detalles-carrera/detalles-carrera.component';
 import { CargarNotasCursadaComponent } from './componentes/inscripciones/cursadas/cargar-notas-cursada/cargar-notas-cursada.component';
+import { CrearAlumnoComponent } from './componentes/alumnos/crear-alumno/crear-alumno.component';
 
 @NgModule({
   declarations: [
@@ -55,12 +56,14 @@ import { CargarNotasCursadaComponent } from './componentes/inscripciones/cursada
     DetallesFinalComponent,
     DetallesCarreraComponent,
     CargarNotasCursadaComponent,
+    CrearAlumnoComponent,
   ],
   entryComponents: [
     ConfirmationDialogComponent,
     AbrirInscripcionCursadaComponent,
     AbrirInscripcionFinalComponent,
-    CargarNotasCursadaComponent
+    CargarNotasCursadaComponent,
+    CrearAlumnoComponent
   ],
   imports: [
     BrowserAnimationsModule,

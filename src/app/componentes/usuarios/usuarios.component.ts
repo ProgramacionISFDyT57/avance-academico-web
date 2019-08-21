@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 import { Usuario } from '../../modelos/usuario';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-usuarios',
@@ -18,6 +20,8 @@ export class UsuariosComponent implements OnInit {
 
   constructor(
     private usuariosService: UsuariosService,
+    private confirmation: ConfirmationDialogService,
+    private notifications: NotificationsService
   ) { }
 
   public ListarUsuarios() {
@@ -42,8 +46,21 @@ export class UsuariosComponent implements OnInit {
     }
   }
 
-  eliminar(id: number) {
-    alert('por hacer');
+  async eliminar(id: number) {
+    const confirm = await this.confirmation.confirm('Confirme la acción', '¿Desea eliminar el usuario?');
+    if (confirm) {
+      this.showSpinner = true;
+      this.usuariosService.eliminarUsuario(id).subscribe(
+        (res) => {
+          this.notifications.success(res.mensaje);
+          console.log(res);
+        },
+        (error) => {
+          console.log(error);
+          this.notifications.error(error.error.mensaje);
+        }
+      );
+    }
   }
 
   deshabilitar(id: number) {
