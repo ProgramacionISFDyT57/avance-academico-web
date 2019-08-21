@@ -29,6 +29,7 @@ import { ConfirmationDialogService } from './servicios/confirmation-dialog/confi
 import { DetallesCursadaComponent } from './componentes/inscripciones/cursadas/detalles-cursada/detalles-cursada.component';
 import { DetallesFinalComponent } from './componentes/inscripciones/finales/detalles-final/detalles-final.component';
 import { DetallesCarreraComponent } from './componentes/inscripciones/carreras/detalles-carrera/detalles-carrera.component';
+import { CargarNotasCursadaComponent } from './componentes/inscripciones/cursadas/cargar-notas-cursada/cargar-notas-cursada.component';
 
 @NgModule({
   declarations: [
@@ -51,11 +52,13 @@ import { DetallesCarreraComponent } from './componentes/inscripciones/carreras/d
     DetallesCursadaComponent,
     DetallesFinalComponent,
     DetallesCarreraComponent,
+    CargarNotasCursadaComponent,
   ],
   entryComponents: [
     ConfirmationDialogComponent,
     AbrirInscripcionCursadaComponent,
-    AbrirInscripcionFinalComponent
+    AbrirInscripcionFinalComponent,
+    CargarNotasCursadaComponent
   ],
   imports: [
     BrowserAnimationsModule,

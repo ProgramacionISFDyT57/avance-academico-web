@@ -12,4 +12,5 @@ export interface InscriptosCursada {
   id_inscripcion_cursada: number;
   cursa: boolean;
   equivalencia: boolean;
+  carrera: string;
 }
