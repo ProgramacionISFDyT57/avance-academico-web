@@ -5,6 +5,8 @@ import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/m
 import { InscriptosCursada } from 'src/app/modelos/inscriptos-cursada';
 import { NotificationsService } from 'angular2-notifications';
 import { CargarNotasCursadaComponent } from '../cargar-notas-cursada/cargar-notas-cursada.component';
+import { AvanceAcademico } from 'src/app/modelos/avance-academico';
+import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
 
 @Component({
   selector: 'app-detalles-cursada',
@@ -19,12 +21,16 @@ export class DetallesCursadaComponent implements OnInit {
   displayedColumns = ['alumno', 'dni', 'nota_cuat_1', 'nota_cuat_2',
     'nota_recuperatorio', 'asistencia', 'cursa', 'equivalencia', 'acciones'];
   showSpinner = false;
+  materia: string;
+  anioCursada: number;
+  carrera: string;
 
   constructor(
     private route: ActivatedRoute,
     private materiasService: MateriasService,
     private notificacions: NotificationsService,
     public dialog: MatDialog,
+    public confirmation: ConfirmationDialogService
   ) { }
 
   listar_inscriptos() {
@@ -35,8 +41,12 @@ export class DetallesCursadaComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         this.showSpinner = false;
+        if (res.length) {
+          this.materia = res[0].materia;
+          this.carrera = res[0].carrera;
+          this.anioCursada = res[0].anio_cursada;
+        }
         console.log(res);
-        this.showSpinner = false;
       },
       (error) => {
         this.showSpinner = false;
@@ -54,16 +64,36 @@ export class DetallesCursadaComponent implements OnInit {
     }
   }
 
-  cargarNotas(idInscripcionCursada: number) {
+  cargarNotas(alumno: InscriptosCursada) {
+    const avance: AvanceAcademico = {
+      asistencia: alumno.asistencia,
+      id_inscripcion_cursada: alumno.id_inscripcion_cursada,
+      nota_cuat_1: alumno.nota_cuat_1,
+      nota_cuat_2: alumno.nota_cuat_2,
+      nota_recuperatorio: alumno.nota_recuperatorio
+    };
     this.dialog.open(CargarNotasCursadaComponent, {
-      data: {
-        idInscripcionCursada
-      }
+      data: avance
     });
   }
 
-  eliminarNotas(idInscripcionCursada: number) {
-    alert('Por hacer');
+  async eliminarNotas(idInscripcionCursada: number) {
+    const confirm = await this.confirmation.confirm('Confirme la acción', '¿Desea eliminar las notas cargadas?');
+    if (confirm) {
+      this.showSpinner = true;
+      this.materiasService.eliminarNotasCursada(idInscripcionCursada).subscribe(
+        (res) => {
+          this.notificacions.success(res.mensaje);
+          this.listar_inscriptos();
+          console.log(res);
+        },
+        (error) => {
+          this.showSpinner = false;
+          console.error(error);
+          this.notificacions.error(error.error.mensaje);
+        }
+      );
+    }
   }
 
   ngOnInit() {

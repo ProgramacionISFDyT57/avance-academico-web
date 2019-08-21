@@ -62,7 +62,10 @@ export class MateriasService {
     return this.http.get('/inscriptos_cursada/' + idCursada);
   }
   public cargarNotasCursada(avanceAcademico: AvanceAcademico): Observable<any> {
-    return this.http.post('/notas_cursada', { avanceAcademico });
+    return this.http.post('/notas_cursada', { avance_academico: avanceAcademico });
+  }
+  public eliminarNotasCursada(id: number): Observable<any> {
+    return this.http.delete('/notas_cursada/' + id);
   }
 
 

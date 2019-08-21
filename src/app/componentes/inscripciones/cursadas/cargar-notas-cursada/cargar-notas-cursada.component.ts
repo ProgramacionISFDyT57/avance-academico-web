@@ -5,6 +5,7 @@ import { NotificationsService } from 'angular2-notifications';
 import { MateriasService } from 'src/app/servicios/materias.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AvanceAcademico } from 'src/app/modelos/avance-academico';
+import { log } from 'util';
 
 @Component({
   selector: 'app-cargar-notas-cursada',
@@ -14,8 +15,7 @@ import { AvanceAcademico } from 'src/app/modelos/avance-academico';
 export class CargarNotasCursadaComponent implements OnInit {
 
   formulario: FormGroup;
-  showSpinner = true;
-  idInscripcionCursada: number;
+  showSpinner = false;
 
   constructor(
     private fb: FormBuilder,
@@ -24,16 +24,16 @@ export class CargarNotasCursadaComponent implements OnInit {
     private notif: NotificationsService,
     private materiasService: MateriasService,
     public dialogRef: MatDialogRef<CargarNotasCursadaComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public data: AvanceAcademico,
   ) { }
 
   private crearFormulario() {
     this.formulario = this.fb.group({
-      id_inscripcion_cursada: [this.idInscripcionCursada],
-      nota_cuat_1: [null, [Validators.required, Validators.min(1), Validators.max(10)]],
-      nota_cuat_2: [null, [Validators.min(1), Validators.max(10)]],
-      nota_recuperatorio: [null, [Validators.min(1), Validators.max(10)]],
-      asistencia: [null, [Validators.min(0), Validators.max(100)]],
+      id_inscripcion_cursada: [this.data.id_inscripcion_cursada],
+      nota_cuat_1: [this.data.nota_cuat_1, [Validators.required, Validators.min(1), Validators.max(10)]],
+      nota_cuat_2: [this.data.nota_cuat_2, [Validators.min(1), Validators.max(10)]],
+      nota_recuperatorio: [this.data.nota_recuperatorio, [Validators.min(1), Validators.max(10)]],
+      asistencia: [this.data.asistencia, [Validators.min(0), Validators.max(100)]],
     });
   }
 
@@ -66,7 +66,6 @@ export class CargarNotasCursadaComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.idInscripcionCursada = this.data.idInscripcionCursada;
     this.crearFormulario();
   }
 
