@@ -6,6 +6,7 @@ import { Mensaje } from '../modelos/respuesta-mensaje';
 import { Cursada } from '../modelos/cursadas';
 import { InscriptosCursada } from '../modelos/inscriptos-cursada';
 import { InscriptosFinal } from '../modelos/inscriptos-final';
+import { AvanceAcademico } from '../modelos/avance-academico';
 
 @Injectable({
   providedIn: 'root'
@@ -59,6 +60,9 @@ export class MateriasService {
   }
   public listarInscriptosCursadas(idCursada: number): Observable<InscriptosCursada[]> {
     return this.http.get('/inscriptos_cursada/' + idCursada);
+  }
+  public cargarNotasCursada(avanceAcademico: AvanceAcademico): Observable<any> {
+    return this.http.post('/notas_cursada', { avanceAcademico });
   }
 
 

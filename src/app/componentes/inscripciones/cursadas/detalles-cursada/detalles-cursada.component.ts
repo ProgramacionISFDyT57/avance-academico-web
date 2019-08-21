@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MateriasService } from 'src/app/servicios/materias.service';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { InscriptosCursada } from 'src/app/modelos/inscriptos-cursada';
 import { NotificationsService } from 'angular2-notifications';
+import { CargarNotasCursadaComponent } from '../cargar-notas-cursada/cargar-notas-cursada.component';
 
 @Component({
   selector: 'app-detalles-cursada',
@@ -17,12 +18,13 @@ export class DetallesCursadaComponent implements OnInit {
   dataSource: MatTableDataSource<InscriptosCursada>;
   displayedColumns = ['alumno', 'dni', 'nota_cuat_1', 'nota_cuat_2',
     'nota_recuperatorio', 'asistencia', 'cursa', 'equivalencia', 'acciones'];
-  showSpinner = true;
+  showSpinner = false;
 
   constructor(
     private route: ActivatedRoute,
     private materiasService: MateriasService,
-    private notificacions: NotificationsService
+    private notificacions: NotificationsService,
+    public dialog: MatDialog,
   ) { }
 
   listar_inscriptos() {
@@ -53,7 +55,11 @@ export class DetallesCursadaComponent implements OnInit {
   }
 
   cargarNotas(idInscripcionCursada: number) {
-    alert('Por hacer');
+    this.dialog.open(CargarNotasCursadaComponent, {
+      data: {
+        idInscripcionCursada
+      }
+    });
   }
 
   eliminarNotas(idInscripcionCursada: number) {
