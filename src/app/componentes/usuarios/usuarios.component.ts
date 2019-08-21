@@ -13,7 +13,7 @@ export class UsuariosComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<Usuario>;
-  displayedColumns = ['apellido', 'nombre', 'email', 'rol', 'acciones'];
+  displayedColumns = ['apellido', 'nombre', 'dni', 'email', 'telefono', 'rol', 'acciones'];
   showSpinner = true;
 
   constructor(
@@ -40,6 +40,18 @@ export class UsuariosComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  eliminar(id: number) {
+    alert('por hacer');
+  }
+
+  deshabilitar(id: number) {
+    alert('por hacer');
+  }
+
+  habilitar(id: number) {
+    alert('por hacer');
   }
 
   ngOnInit() {

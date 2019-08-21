@@ -3,6 +3,7 @@ import { CarrerasService } from 'src/app/servicios/carreras.service';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { NotificationsService } from 'angular2-notifications';
 import { CarreraAbierta } from 'src/app/modelos/carreraabierta';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,18 +11,18 @@ import { CarreraAbierta } from 'src/app/modelos/carreraabierta';
   templateUrl: './inscripciones-carreras.component.html',
   styleUrls: ['./inscripciones-carreras.component.scss']
 })
-export class InscripcionesCarrerasComponent {
+export class InscripcionesCarrerasComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<CarreraAbierta>;
-  displayedColumns = ['nombre', 'duracion', 'cohorte', 'fecha_inicio', 'fecha_limite', 'cant_inscriptos'];
+  displayedColumns = ['nombre', 'duracion', 'cohorte', 'fecha_inicio', 'fecha_limite', 'cant_inscriptos', 'acciones'];
 
   showSpinner = true;
 
-
   constructor(
     private carrerasService: CarrerasService,
-    private notif: NotificationsService
+    private notif: NotificationsService,
+    private router: Router
   ) { }
 
   public ListarCarreras() {
@@ -46,6 +47,14 @@ export class InscripcionesCarrerasComponent {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  detalles(id) {
+    this.router.navigateByUrl('inscripcion/carreras/' + id);
+  }
+
+  eliminar(id) {
+    alert('Por hacer');
   }
 
   ngOnInit() {

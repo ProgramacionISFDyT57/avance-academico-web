@@ -1,0 +1,70 @@
+<mat-progress-bar mode="indeterminate" color="warn" [style.display]="showSpinner ? 'block' : 'none'"></mat-progress-bar>
+
+<h1 *ngIf="!materia && !showSpinner" class="mt-3 mb-0 mx-3">Aun no hay alumnos inscriptos</h1>
+<h1 *ngIf="materia && !showSpinner" class="mt-3 mb-0 mx-3">Inscriptos a <strong><i> {{ materia }} ({{ anioCursada }}) </i></strong>  - {{ carrera }}</h1>
+
+<div class="table-container mat-elevation-z8">
+
+  <mat-form-field class="filtro">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
+  </mat-form-field>
+
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="alumno">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Alumno </th>
+      <td mat-cell *matCellDef="let element"> {{ element.apellido }}, {{ element.nombre }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="dni">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> DNI </th>
+      <td mat-cell *matCellDef="let element"> {{ element.dni }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nota_cuat_1">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nota 1er Cuat. </th>
+      <td mat-cell *matCellDef="let element"> {{ element.nota_cuat_1 }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nota_cuat_2">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nota 2do Cuat. </th>
+      <td mat-cell *matCellDef="let element"> {{ element.nota_cuat_2 }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nota_recuperatorio">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nota Recuperatorio </th>
+      <td mat-cell *matCellDef="let element"> {{ element.nota_recuperatorio }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="asistencia">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> % Asistencia </th>
+      <td mat-cell *matCellDef="let element"> {{ element.asistencia }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="cursa">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Cursa </th>
+      <td mat-cell *matCellDef="let element"> {{ element.cursa }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="equivalencia">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Equivalencia </th>
+      <td mat-cell *matCellDef="let element"> {{ element.equivalencia }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef> Acciones </th>
+      <td class="nowrap" mat-cell *matCellDef="let element">
+        <button class="mx-1" mat-mini-fab color="primary" matTooltip="Cargar Notas" (click)="cargarNotas(element)">
+          <mat-icon>add</mat-icon>
+        </button>
+        <button class="mx-1" mat-mini-fab color="warn" matTooltip="Eliminar Notas" (click)="eliminarNotas(element.id_inscripcion_cursada)">
+          <mat-icon>remove</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[25, 50, 100]"></mat-paginator>
+</div>
