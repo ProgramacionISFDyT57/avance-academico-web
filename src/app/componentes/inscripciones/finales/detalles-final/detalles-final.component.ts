@@ -4,6 +4,7 @@ import { InscriptosFinal } from 'src/app/modelos/inscriptos-final';
 import { MateriasService } from 'src/app/servicios/materias.service';
 import { NotificationsService } from 'angular2-notifications';
 import { ActivatedRoute } from '@angular/router';
+import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
 
 @Component({
   selector: 'app-detalles-final',
@@ -21,7 +22,8 @@ export class DetallesFinalComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private materiasService: MateriasService,
-    private notif: NotificationsService
+    private notif: NotificationsService,
+    public confirmation: ConfirmationDialogService
   ) { }
 
   listar_inscriptos() {
@@ -54,8 +56,23 @@ export class DetallesFinalComponent implements OnInit {
     alert('Por hacer');
   }
 
-  eliminarNotas(idInscripcionFinal: number) {
-    alert('Por hacer');
+  async eliminarNotas(idInscripcionMesa: number) {
+    const confirm = await this.confirmation.confirm('Confirme la acción', '¿Desea eliminar las notas cargadas?');
+    if (confirm) {
+      this.showSpinner = true;
+      this.materiasService.eliminarNotasFinal(idInscripcionMesa).subscribe(
+        (res) => {
+          this.notif.success(res.mensaje);
+          this.listar_inscriptos();
+          console.log(res);
+        },
+        (error) => {
+          this.showSpinner = false;
+          console.error(error);
+          this.notif.error(error.error.mensaje);
+        }
+      );
+    }
   }
 
   ngOnInit() {

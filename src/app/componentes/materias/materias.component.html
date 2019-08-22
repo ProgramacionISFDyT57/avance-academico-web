@@ -41,11 +41,11 @@
       <th mat-header-cell *matHeaderCellDef> Acciones </th>
       <td class="nowrap" mat-cell *matCellDef="let element">
         <button class="mx-1" mat-mini-fab color="primary" matTooltip="Abrir Inscripción a Cursada"
-          (click)="abrirDialogoInscripcion(element.id )">
+          (click)="abrirDialogoInscripcion(element.id, element.nombre)">
           <mat-icon>add</mat-icon>
         </button>
         <button class="mx-1" mat-mini-fab color="accent" matTooltip="Abrir Inscripción a Final"
-          (click)="abrirDialogoInscripcionFinal(element.id )">
+          (click)="abrirDialogoInscripcionFinal(element.id, element.nombre)">
           <mat-icon>add</mat-icon>
         </button>
         <button class="mx-1" mat-mini-fab color="warn" matTooltip="Eliminar Materia" (click)="eliminar(element.id)">

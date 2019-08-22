@@ -60,18 +60,6 @@ export class AbrirInscripcionFinalComponent implements OnInit {
     );
   }
 
-  private cargarMateria(id: number) {
-    this.materiasService.traerMateria(id).subscribe(
-      (res) => {
-        console.log(res);
-        this.materia = res.nombre;
-      },
-      (error) => {
-        this.notif.error(error.error.mensaje);
-        console.error(error);
-      }
-    );
-  }
 
   enviar() {
     this.showSpinner = true;
@@ -102,9 +90,9 @@ export class AbrirInscripcionFinalComponent implements OnInit {
 
   ngOnInit() {
     this.idMateria = this.data.idMateria;
+    this.materia = this.data.materia;
     this.crearFormulario();
     this.cargarProfesores();
-    this.cargarMateria(this.idMateria);
   }
 
 }

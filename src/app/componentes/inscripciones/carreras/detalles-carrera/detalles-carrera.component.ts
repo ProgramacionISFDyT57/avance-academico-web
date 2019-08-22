@@ -4,6 +4,7 @@ import { InscriptosCarrera } from 'src/app/modelos/inscriptos-carrera';
 import { ActivatedRoute } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
 import { CarrerasService } from 'src/app/servicios/carreras.service';
+import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
 
 @Component({
   selector: 'app-detalles-carrera',
@@ -15,13 +16,14 @@ export class DetallesCarreraComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<InscriptosCarrera>;
-  displayedColumns = ['alumno', 'dni'];
+  displayedColumns = ['alumno', 'dni', 'acciones'];
   showSpinner = true;
 
   constructor(
     private route: ActivatedRoute,
     private carrerasService: CarrerasService,
-    private notif: NotificationsService
+    private notif: NotificationsService,
+    public confirmation: ConfirmationDialogService
   ) { }
 
   listar_inscriptos() {
@@ -48,6 +50,25 @@ export class DetallesCarreraComponent implements OnInit {
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
+    }
+  }
+
+  async eliminarInscripcion(idInscripcionCarrera: number) {
+    const confirm = await this.confirmation.confirm('Confirme la acción', '¿Desea eliminar el alumno de la carrera?');
+    if (confirm) {
+      this.showSpinner = true;
+      this.carrerasService.eliminarInscripcionCarrera(idInscripcionCarrera).subscribe(
+        (res) => {
+          this.notif.success(res.mensaje);
+          this.listar_inscriptos();
+          console.log(res);
+        },
+        (error) => {
+          this.showSpinner = false;
+          console.error(error);
+          this.notif.error(error.error.mensaje);
+        }
+      );
     }
   }
 

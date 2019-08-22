@@ -16,8 +16,8 @@ export class InscripcionesFinalesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<Carrera>;
-  displayedColumns = ['carrera', 'materia', 'anio_materia', 'profesor',
-   'fecha_inicio', 'fecha_limite', 'fecha_examen', 'cant_inscriptos', 'acciones'];
+  displayedColumns = ['fecha_examen', 'carrera', 'materia', 'anio_materia', 'profesor',
+   'fecha_inicio', 'fecha_limite', 'cant_inscriptos', 'acciones'];
   showSpinner = true;
 
   constructor(
@@ -67,6 +67,23 @@ export class InscripcionesFinalesComponent implements OnInit {
           this.notif.error(error.error.mensaje);
         }
       );
+    }
+  }
+
+  async desinscribirse(idInscripcionCursada: number) {
+    const confirm = await this.confirmation.confirm('Confirme la acción', '¿Desea eliminar su inscripción de la mesa de final?');
+    if (confirm) {
+      this.showSpinner = true;
+      this.materiasService.eliminarInscripcionFinal(idInscripcionCursada).subscribe(
+        (res) => {
+          this.ListarFinales();
+          console.log(res);
+        },
+        (error) => {
+          this.showSpinner = false;
+          this.notif.error(error.error.mensaje);
+          console.log(error);
+        });
     }
   }
 

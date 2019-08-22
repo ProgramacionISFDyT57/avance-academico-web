@@ -18,17 +18,17 @@
       <td mat-cell *matCellDef="let element"> {{ element.dni }} </td>
     </ng-container>
 
-    <!-- <ng-container matColumnDef="acciones">
+    <ng-container matColumnDef="acciones">
       <th mat-header-cell *matHeaderCellDef> Acciones </th>
       <td class="nowrap" mat-cell *matCellDef="let element">
-        <button class="mx-1" mat-mini-fab color="primary" matTooltip="Cargar Notas" (click)="cargarNotas(element.id_inscripcion_cursada)">
-          <mat-icon>add</mat-icon>
-        </button>
-        <button class="mx-1" mat-mini-fab color="warn" matTooltip="Eliminar Notas" (click)="eliminarNotas(element.id_inscripcion_cursada)">
-          <mat-icon>remove</mat-icon>
+        <!-- <button class="mx-1" mat-mini-fab color="primary" matTooltip="Detalles" (click)="detalles(element.id)">
+          <mat-icon>list_alt</mat-icon>
+        </button> -->
+        <button class="mx-1" mat-mini-fab color="warn" matTooltip="Eliminar Alumno" (click)="eliminarInscripcion(element.id_inscripcion_carrera)">
+          <mat-icon>delete_forever</mat-icon>
         </button>
       </td>
-    </ng-container> -->
+    </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

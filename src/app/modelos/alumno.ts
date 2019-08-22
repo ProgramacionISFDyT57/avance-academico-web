@@ -3,7 +3,10 @@ export interface Alumno {
     email: string;
     fecha_alta: string;
     fecha_nacimiento: string;
-    id: number;
+    id_alumno: number;
     nombre: string;
+    carrera: string;
+    cohorte: string;
+    dni: string;
+    telefono: string;
   }
-  
