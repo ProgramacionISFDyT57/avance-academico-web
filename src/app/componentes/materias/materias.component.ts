@@ -5,6 +5,7 @@ import { MatSort, MatPaginator, MatTableDataSource, MatDialog } from '@angular/m
 import { NotificationsService } from 'angular2-notifications';
 import { AbrirInscripcionCursadaComponent } from './abrir-inscripcion-cursada/abrir-inscripcion-cursada.component';
 import { AbrirInscripcionFinalComponent } from './abrir-inscripcion-final/abrir-inscripcion-final.component';
+import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
 
 @Component({
   selector: 'app-materias',
@@ -24,6 +25,7 @@ export class MateriasComponent implements OnInit {
     private materiasService: MateriasService,
     private notif: NotificationsService,
     public dialog: MatDialog,
+    private confirmation: ConfirmationDialogService,
   ) { }
 
   abrirDialogoInscripcion(idMateria: number) {
@@ -52,13 +54,13 @@ export class MateriasComponent implements OnInit {
         console.log(res);
       },
       (error) => {
-        this.notif.error('Error', error.mensaje);
+        this.notif.error(error.error.mensaje);
         console.log(error);
       });
   }
 
-  public eliminar(id: number) {
-    const eliminar = confirm('¿Desea eliminar la materia?');
+  public async eliminar(id: number) {
+    const eliminar = await this.confirmation.confirm('Confirme la acción', '¿Desea eliminar la materia?');
     if (eliminar) {
       this.showSpinner = true;
       this.materiasService.eliminarMateria(id).subscribe(
@@ -68,7 +70,7 @@ export class MateriasComponent implements OnInit {
         },
         (error) => {
           this.showSpinner = false;
-          this.notif.error('Error', error.mensaje);
+          this.notif.error(error.error.mensaje);
           console.error(error);
         });
     }

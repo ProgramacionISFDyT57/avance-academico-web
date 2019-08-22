@@ -21,7 +21,7 @@ export class DetallesFinalComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private materiasService: MateriasService,
-    private notificacions: NotificationsService
+    private notif: NotificationsService
   ) { }
 
   listar_inscriptos() {
@@ -37,7 +37,7 @@ export class DetallesFinalComponent implements OnInit {
       (error) => {
         this.showSpinner = false;
         console.error(error);
-        this.notificacions.error('Error al listar los inscriptos');
+        this.notif.error(error.error.mensaje);
       }
     );
   }

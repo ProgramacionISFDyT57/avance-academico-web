@@ -33,12 +33,12 @@ export class CrearCarreraComponent implements OnInit {
       (resp) => {
         this.showSpinner = false;
         this.crearFormulario();
-        this.notif.success('Se ha creado la carrera');
+        this.notif.success(resp.mensaje);
         console.log(resp);
       },
       (error) => {
         this.showSpinner = false;
-        this.notif.error('Error al crear la carrera');
+        this.notif.error(error.error.mensaje);
         console.error(error);
       }
     );

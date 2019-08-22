@@ -53,7 +53,7 @@ export class CargarNotasCursadaComponent implements OnInit {
     this.materiasService.cargarNotasCursada(avanceAcademico).subscribe(
       (resp) => {
         this.showSpinner = false;
-        this.notif.success('Se cargaron las notas correctamente');
+        this.notif.success(resp.mensaje);
         console.log(resp);
         this.dialogRef.close(true);
       },

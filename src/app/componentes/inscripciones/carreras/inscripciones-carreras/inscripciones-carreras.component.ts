@@ -4,6 +4,7 @@ import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { NotificationsService } from 'angular2-notifications';
 import { CarreraAbierta } from 'src/app/modelos/carreraabierta';
 import { Router } from '@angular/router';
+import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
 
 
 @Component({
@@ -22,7 +23,8 @@ export class InscripcionesCarrerasComponent implements OnInit {
   constructor(
     private carrerasService: CarrerasService,
     private notif: NotificationsService,
-    private router: Router
+    private router: Router,
+    private confirmation: ConfirmationDialogService,
   ) { }
 
   public ListarCarreras() {
@@ -36,7 +38,7 @@ export class InscripcionesCarrerasComponent implements OnInit {
       },
       (error) => {
         // this.showSpinner = false;
-        this.notif.error('Error', error.mensaje);
+        this.notif.error(error.error.mensaje);
         console.log(error);
       });
   }
@@ -53,8 +55,21 @@ export class InscripcionesCarrerasComponent implements OnInit {
     this.router.navigateByUrl('inscripcion/carreras/' + id);
   }
 
-  eliminar(id) {
-    alert('Por hacer');
+  public async eliminar(id: number) {
+    const eliminar = await this.confirmation.confirm('Confirme la acción', '¿Desea eliminar la carrera para la cohorte?');
+    if (eliminar) {
+      this.showSpinner = true;
+      this.carrerasService.eliminarCarreraAbierta(id).subscribe(
+        (res) => {
+          this.ListarCarreras();
+          console.log(res);
+        },
+        (error) => {
+          this.showSpinner = false;
+          this.notif.error(error.error.mensaje);
+          console.error(error);
+        });
+    }
   }
 
   ngOnInit() {

@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private loginService: LoginService,
     private router: Router,
-    private notificationsService: NotificationsService,
+    private notif: NotificationsService,
   ) { }
 
   onSubmit() {
@@ -33,12 +33,12 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem('apellido', resp.apellido);
         sessionStorage.setItem('nombre', resp.nombre);
         this.router.navigate(['/']);
-        this.notificationsService.success('Sesión Iniciada');
+        this.notif.success('Sesión Iniciada');
       },
       (error) => {
         console.error(error);
         this.showSpinner = false;
-        this.notificationsService.error(error.error.mensaje);
+        this.notif.error(error.error.mensaje);
       }
     );
   }

@@ -36,7 +36,7 @@ export class CarrerasComponent implements OnInit {
       },
       (error) => {
         // this.showSpinner = false;
-        this.notif.error('Error', error.mensaje);
+        this.notif.error(error.error.mensaje);
         console.log(error);
       });
   }
@@ -47,14 +47,14 @@ export class CarrerasComponent implements OnInit {
     if (eliminar) {
       this.showSpinner = true;
       this.carrerasService.eliminarCarrera(id).subscribe(
-        (res) => {
+        (resp) => {
           this.ListarCarreras();
-          this.notif.success('Carrera eliminada');
-          console.log(res);
+          this.notif.success(resp.mensaje);
+          console.log(resp);
         },
         (error) => {
           this.showSpinner = false;
-          this.notif.error('Error', error.mensaje);
+          this.notif.error(error.error.mensaje);
           console.log(error);
         });
     }

@@ -45,13 +45,13 @@ export class AbrirInscripcionCarreraComponent implements OnInit {
     this.carreraService.abrirInscripcionCarrera(carrerasAbiertas).subscribe(
       (resp) => {
         this.showSpinner = false;
-        this.notif.success('Se abrió la inscripción a la carrera');
+        this.notif.success(resp.mensaje);
         this.router.navigate(['inscripcion/carrera']);
         console.log(resp);
       },
       (error) => {
         this.showSpinner = false;
-        this.notif.error('Error al abrir la inscripción a la carrera');
+        this.notif.error(error.error.mensaje);
         console.error(error);
       }
     );
