@@ -41,6 +41,9 @@ export class MateriasService {
   public abrirInscripcionFinal(mesa): Observable<any> {
     return this.http.post('/crear_mesa', { mesa });
   }
+  public eliminarMesaFinal(id: number): Observable<Mensaje> {
+    return this.http.delete('/mesas/' + id);
+  }
   public inscripcionFinal(idMesa: number): Observable<any> {
     return this.http.post('/inscripciones_mesas', { id_mesa: idMesa });
   }
@@ -57,6 +60,9 @@ export class MateriasService {
   }
   public abrirInscripcionCursada(cursada): Observable<any> {
     return this.http.post('/cursadas', { cursada });
+  }
+  public eliminarCursada(id: number): Observable<Mensaje> {
+    return this.http.delete('/cursadas/' + id);
   }
   public listarInscriptosCursadas(idCursada: number): Observable<InscriptosCursada[]> {
     return this.http.get('/inscriptos_cursada/' + idCursada);

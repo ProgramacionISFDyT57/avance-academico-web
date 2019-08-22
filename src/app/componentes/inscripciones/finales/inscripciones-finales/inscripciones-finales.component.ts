@@ -23,8 +23,8 @@ export class InscripcionesFinalesComponent implements OnInit {
   constructor(
     private materiasService: MateriasService,
     private notif: NotificationsService,
-    private confirm: ConfirmationDialogService,
-    private router: Router
+    private router: Router,
+    private confirmation: ConfirmationDialogService,
   ) { }
 
   public ListarFinales() {
@@ -38,7 +38,7 @@ export class InscripcionesFinalesComponent implements OnInit {
       },
       (error) => {
         // this.showSpinner = false;
-        this.notif.error('Error', error.mensaje);
+        this.notif.error(error.error.mensaje);
         console.log(error);
       });
   }
@@ -51,7 +51,7 @@ export class InscripcionesFinalesComponent implements OnInit {
   }
 
   async inscribirse(materia: string, fecha: string, id: number) {
-    const confirm = await this.confirm.confirm('Confirme su inscripción a la mesa de final',
+    const confirm = await this.confirmation.confirm('Confirme su inscripción a la mesa de final',
       'Inscripción a ' + materia + ' // Fecha de examen ' + new Date(fecha).toLocaleDateString());
     if (confirm) {
       this.showSpinner = true;
@@ -59,7 +59,7 @@ export class InscripcionesFinalesComponent implements OnInit {
         (resp) => {
           this.showSpinner = false;
           console.log(resp);
-          this.notif.success('Inscripción realizada correctamente');
+          this.notif.success(resp.mensaje);
         },
         (error) => {
           this.showSpinner = false;
@@ -74,8 +74,21 @@ export class InscripcionesFinalesComponent implements OnInit {
     this.router.navigateByUrl('inscripcion/mesas/' + id);
   }
 
-  eliminar(id) {
-    alert('Por hacer');
+  public async eliminar(id: number) {
+    const eliminar = await this.confirmation.confirm('Confirme la acción', '¿Desea eliminar la materia?');
+    if (eliminar) {
+      this.showSpinner = true;
+      this.materiasService.eliminarMesaFinal(id).subscribe(
+        (res) => {
+          this.ListarFinales();
+          console.log(res);
+        },
+        (error) => {
+          this.showSpinner = false;
+          this.notif.error(error.error.mensaje);
+          console.error(error);
+        });
+    }
   }
 
   ngOnInit() {

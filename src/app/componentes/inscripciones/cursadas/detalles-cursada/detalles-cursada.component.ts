@@ -28,7 +28,7 @@ export class DetallesCursadaComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private materiasService: MateriasService,
-    private notificacions: NotificationsService,
+    private notif: NotificationsService,
     public dialog: MatDialog,
     public confirmation: ConfirmationDialogService
   ) { }
@@ -51,7 +51,7 @@ export class DetallesCursadaComponent implements OnInit {
       (error) => {
         this.showSpinner = false;
         console.error(error);
-        this.notificacions.error('Error al listar los inscriptos');
+        this.notif.error(error.error.mensaje);
       }
     );
   }
@@ -83,14 +83,14 @@ export class DetallesCursadaComponent implements OnInit {
       this.showSpinner = true;
       this.materiasService.eliminarNotasCursada(idInscripcionCursada).subscribe(
         (res) => {
-          this.notificacions.success(res.mensaje);
+          this.notif.success(res.mensaje);
           this.listar_inscriptos();
           console.log(res);
         },
         (error) => {
           this.showSpinner = false;
           console.error(error);
-          this.notificacions.error(error.error.mensaje);
+          this.notif.error(error.error.mensaje);
         }
       );
     }

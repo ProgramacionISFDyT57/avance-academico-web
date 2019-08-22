@@ -62,7 +62,7 @@ export class CrearMateriaComponent implements OnInit {
         this.materias = res;
       },
       (error) => {
-        this.notif.error('Error al cargar las materias de la carrera');
+        this.notif.error(error.error.mensaje);
         console.error(error);
       }
     );
@@ -80,7 +80,7 @@ export class CrearMateriaComponent implements OnInit {
         (error) => {
           reject();
           console.error(error);
-          this.notif.error('Ocurrió un error al cargar los datos de la carrera');
+          this.notif.error(error.error.mensaje);
         }
       );
     });
@@ -98,12 +98,12 @@ export class CrearMateriaComponent implements OnInit {
     this.materiasService.crearMateria(materia).subscribe(
       (resp) => {
         console.log(resp);
-        this.notif.success('Se creó la materia correctamente');
+        this.notif.success(resp.mensaje);
         this.router.navigate(['/carreras']);
       },
       (error) => {
         console.error(error);
-        this.notif.error('Error al crear la materia');
+        this.notif.error(error.error.mensaje);
       }
     );
   }

@@ -54,7 +54,7 @@ export class AbrirInscripcionFinalComponent implements OnInit {
       },
       (error) => {
         this.showSpinner = false;
-        this.notif.error('Error al cargar los profesores');
+        this.notif.error(error.error.mensaje);
         console.error(error);
       }
     );
@@ -67,7 +67,7 @@ export class AbrirInscripcionFinalComponent implements OnInit {
         this.materia = res.nombre;
       },
       (error) => {
-        this.notif.error('Error al cargar la materia');
+        this.notif.error(error.error.mensaje);
         console.error(error);
       }
     );
@@ -88,13 +88,13 @@ export class AbrirInscripcionFinalComponent implements OnInit {
     this.materiasService.abrirInscripcionFinal(mesa).subscribe(
       (resp) => {
         this.showSpinner = false;
-        this.notif.success('Se abrió la inscripción al final');
+        this.notif.success(resp.mensaje);
         console.log(resp);
         this.dialogRef.close(true);
       },
       (error) => {
         this.showSpinner = false;
-        this.notif.error('Ocurrió un error al abrir la inscripción al final');
+        this.notif.error(error.error.mensaje);
         console.error(error);
       }
     );

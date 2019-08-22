@@ -52,7 +52,7 @@ export class AbrirInscripcionCursadaComponent implements OnInit {
       },
       (error) => {
         this.showSpinner = false;
-        this.notif.error('Error al cargar los profesores');
+        this.notif.error(error.error.mensaje);
         console.error(error);
       }
     );
@@ -65,7 +65,7 @@ export class AbrirInscripcionCursadaComponent implements OnInit {
         this.materia = res.nombre;
       },
       (error) => {
-        this.notif.error('Error al cargar la materia');
+        this.notif.error(error.error.mensaje);
         console.error(error);
       }
     );
@@ -85,13 +85,13 @@ export class AbrirInscripcionCursadaComponent implements OnInit {
     this.materiasService.abrirInscripcionCursada(cursada).subscribe(
       (resp) => {
         this.showSpinner = false;
-        this.notif.success('Se abrió la inscripción a la cursada');
+        this.notif.success(resp.mensaje);
         console.log(resp);
         this.dialogRef.close(true);
       },
       (error) => {
         this.showSpinner = false;
-        this.notif.error('Ocurrió un error al abrir la inscripción a la cursada');
+        this.notif.error(error.error.mensaje);
         console.error(error);
       }
     );

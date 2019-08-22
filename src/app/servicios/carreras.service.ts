@@ -32,6 +32,10 @@ export class CarrerasService {
     return this.http.post('/carreras_abiertas', { carrerasAbiertas });
   }
 
+  public eliminarCarreraAbierta(id: number): Observable<Mensaje> {
+    return this.http.delete('/carreras_abiertas/' + id);
+  }
+
   public crearCarrera(carrera1): Observable<Mensaje> {
     const carrera = {
       nombre: carrera1.nombre,

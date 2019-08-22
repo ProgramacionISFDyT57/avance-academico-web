@@ -4,6 +4,7 @@ import { NotificationsService } from 'angular2-notifications';
 import { MateriasService } from 'src/app/servicios/materias.service';
 import { Cursada } from 'src/app/modelos/cursadas';
 import { Router } from '@angular/router';
+import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
 
 @Component({
   selector: 'app-inscripciones-cursadas',
@@ -23,7 +24,8 @@ export class InscripcionesCursadasComponent implements OnInit {
   constructor(
     private materiasService: MateriasService,
     private notif: NotificationsService,
-    private router: Router
+    private router: Router,
+    private confirmation: ConfirmationDialogService,
   ) { }
 
   public ListarCursadas() {
@@ -37,7 +39,7 @@ export class InscripcionesCursadasComponent implements OnInit {
       },
       (error) => {
         // this.showSpinner = false;
-        this.notif.error('Error', error.mensaje);
+        this.notif.error(error.error.mensaje);
         console.log(error);
       });
   }
@@ -58,8 +60,21 @@ export class InscripcionesCursadasComponent implements OnInit {
     this.router.navigateByUrl('inscripcion/cursadas/' + id);
   }
 
-  eliminar(id) {
-    alert('Por hacer');
+  public async eliminar(id: number) {
+    const eliminar = await this.confirmation.confirm('Confirme la acción', '¿Desea eliminar la cursada?');
+    if (eliminar) {
+      this.showSpinner = true;
+      this.materiasService.eliminarCursada(id).subscribe(
+        (res) => {
+          this.ListarCursadas();
+          console.log(res);
+        },
+        (error) => {
+          this.showSpinner = false;
+          this.notif.error(error.error.mensaje);
+          console.error(error);
+        });
+    }
   }
 
   ngOnInit() {

@@ -45,12 +45,12 @@ export class CrearUsuarioComponent implements OnInit {
       (resp) => {
         this.crearFormulario();
         this.showSpinner = false;
-        this.notif.success('Se ha creado el usuario');
+        this.notif.success(resp.mensaje);
         console.log(resp);
       },
       (error) => {
         this.showSpinner = false;
-        this.notif.error('Error al crear el usuario');
+        this.notif.error(error.error.mensaje);
         console.error(error);
       }
     );
