@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CarrerasService } from 'src/app/servicios/carreras.service';
 import { Carrera } from 'src/app/modelos/carrera';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { NotificationsService } from 'angular2-notifications';
 import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
+import { CrearMateriaComponent } from '../materias/crear-materia/crear-materia.component';
+import { AbrirInscripcionCarreraComponent } from './abrir-inscripcion-carrera/abrir-inscripcion-carrera.component';
 
 
 @Component({
@@ -22,7 +24,8 @@ export class CarrerasComponent implements OnInit {
   constructor(
     private carrerasService: CarrerasService,
     private notif: NotificationsService,
-    private confirmation: ConfirmationDialogService
+    private confirmation: ConfirmationDialogService,
+    public dialog: MatDialog,
   ) { }
 
   public ListarCarreras() {
@@ -60,9 +63,27 @@ export class CarrerasComponent implements OnInit {
     }
   }
 
+  public crearMateria(idCarrera: number, carrera: string, duracion: number) {
+    this.dialog.open(CrearMateriaComponent, {
+      data: {
+        idCarrera,
+        carrera,
+        duracion
+      }
+    });
+  }
+
+  public abrirInscripcionCarrera(idCarrera: number, carrera: string, duracion: number) {
+    this.dialog.open(AbrirInscripcionCarreraComponent, {
+      data: {
+        idCarrera,
+        carrera
+      }
+    });
+  }
+
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }

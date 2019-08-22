@@ -9,4 +9,5 @@ export interface InscriptosFinal {
   nota: number;
   libro: number;
   folio: number;
+  carrera: string;
 }

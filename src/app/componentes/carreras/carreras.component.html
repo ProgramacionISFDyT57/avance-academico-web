@@ -37,11 +37,11 @@
       <th mat-header-cell *matHeaderCellDef> Acciones </th>
       <td class="nowrap" mat-cell *matCellDef="let element">
         <button *ngIf="element.cantidad_materias > element.materias_cargadas" class="mx-1" mat-mini-fab
-          matTooltip="Crear Materia" routerLink="/materias/crear/{{ element.id }}">
+          matTooltip="Crear Materia" (click)="crearMateria(element.id, element.nombre, element.duracion)">
           <mat-icon>add</mat-icon>
         </button>
         <button *ngIf="element.cantidad_materias == element.materias_cargadas" class="mx-1" mat-mini-fab color="primary"
-          matTooltip="Abrir Inscripción" routerLink="abrir_inscripcion/{{ element.id }}">
+          matTooltip="Abrir Inscripción" (click)="abrirInscripcionCarrera(element.id, element.nombre)">
           <mat-icon>add</mat-icon>
         </button>
         <button *ngIf="element.materias_cargadas == 0" class="mx-1" mat-mini-fab color="warn"

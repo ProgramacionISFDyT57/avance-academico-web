@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem('rol', resp.rol);
         sessionStorage.setItem('apellido', resp.apellido);
         sessionStorage.setItem('nombre', resp.nombre);
-        this.router.navigate(['/']);
+        this.router.navigate(['/inicio']);
         this.notif.success('Sesión Iniciada');
       },
       (error) => {

@@ -18,6 +18,8 @@ export class DetallesCarreraComponent implements OnInit {
   dataSource: MatTableDataSource<InscriptosCarrera>;
   displayedColumns = ['alumno', 'dni', 'acciones'];
   showSpinner = true;
+  carrera: string;
+  cohorte: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,8 +35,11 @@ export class DetallesCarreraComponent implements OnInit {
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        this.showSpinner = false;
         console.log(res);
+        if (res.length) {
+          this.carrera = res[0].carrera;
+          this.cohorte = res[0].cohorte;
+        }
         this.showSpinner = false;
       },
       (error) => {
@@ -47,7 +52,6 @@ export class DetallesCarreraComponent implements OnInit {
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }

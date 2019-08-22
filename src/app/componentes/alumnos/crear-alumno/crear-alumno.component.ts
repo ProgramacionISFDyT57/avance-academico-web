@@ -55,10 +55,12 @@ export class CrearAlumnoComponent implements OnInit {
   enviar() {
     this.showSpinner = true;
     const usuario: Usuario = {
+      dni: this.formulario.value.dni,
+      nombre: this.formulario.value.nombre,
       apellido: this.formulario.value.apellido,
+      telefono: this.formulario.value.telefono,
       email: this.formulario.value.email,
       fecha_nacimiento: this.formulario.value.fecha_nacimiento,
-      nombre: this.formulario.value.nombre
     };
     const id_carrera_abierta = this.formulario.value.id_carrera_abierta;
     this.alumnosService.crearAlumno(usuario, id_carrera_abierta).subscribe(

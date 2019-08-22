@@ -7,6 +7,7 @@ import { Cursada } from '../modelos/cursadas';
 import { InscriptosCursada } from '../modelos/inscriptos-cursada';
 import { InscriptosFinal } from '../modelos/inscriptos-final';
 import { AvanceAcademico } from '../modelos/avance-academico';
+import { Final } from '../modelos/final';
 
 @Injectable({
   providedIn: 'root'
@@ -56,6 +57,9 @@ export class MateriasService {
   public listarInscriptosFinal(idFinal: number): Observable<InscriptosFinal[]> {
     return this.http.get('/inscriptos_mesa/' + idFinal);
   }
+  public cargarNotasFinal(final: Final): Observable<any> {
+    return this.http.post('/notas_final', { final });
+  }
   public eliminarNotasFinal(idInscripcionMesa: number): Observable<any> {
     return this.http.delete('/notas_final/' + idInscripcionMesa);
   }
@@ -79,9 +83,11 @@ export class MateriasService {
   public eliminarNotasCursada(id: number): Observable<any> {
     return this.http.delete('/notas_cursada/' + id);
   }
+  public realizarInscripcionCursada(idCursada: number, cursa: boolean, equivalencia: boolean): Observable<any> {
+    return this.http.post('/inscripcion_cursada/', { id_cursada: idCursada, cursa, equivalencia});
+  }
   public eliminarInscripcionCursada(idInscripcionCursada: number): Observable<any> {
     return this.http.delete('/inscripcion_cursada/' + idInscripcionCursada);
   }
-
 
 }

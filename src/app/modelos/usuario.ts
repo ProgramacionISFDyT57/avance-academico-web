@@ -5,4 +5,6 @@ export interface Usuario {
   fecha_nacimiento: string;
   id?: number;
   nombre: string;
+  dni: string;
+  telefono: string;
 }
