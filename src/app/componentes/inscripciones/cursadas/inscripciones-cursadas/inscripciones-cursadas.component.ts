@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { NotificationsService } from 'angular2-notifications';
 import { MateriasService } from 'src/app/servicios/materias.service';
 import { Cursada } from 'src/app/modelos/cursadas';
 import { Router } from '@angular/router';
 import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
+import { RealizarInscripcionCursadaComponent } from '../realizar-inscripcion-cursada/realizar-inscripcion-cursada.component';
 
 @Component({
   selector: 'app-inscripciones-cursadas',
@@ -25,7 +26,8 @@ export class InscripcionesCursadasComponent implements OnInit {
     private materiasService: MateriasService,
     private notif: NotificationsService,
     private router: Router,
-    private confirmation: ConfirmationDialogService,
+    private confirm: ConfirmationDialogService,
+    public dialog: MatDialog,
   ) { }
 
   public ListarCursadas() {
@@ -51,12 +53,17 @@ export class InscripcionesCursadasComponent implements OnInit {
     }
   }
 
-  inscribirse(id) {
-    alert('Por hacer');
+  inscribirse(idCursada: number, materia: string) {
+    this.dialog.open(RealizarInscripcionCursadaComponent, {
+      data: {
+        idCursada,
+        materia
+      }
+    });
   }
 
   async desinscribirse(idInscripcionCursada: number) {
-    const confirm = await this.confirmation.confirm('Confirme la acción', '¿Desea eliminar su inscripción de la cursada?');
+    const confirm = await this.confirm.confirm('Confirme la acción', '¿Desea eliminar su inscripción de la cursada?');
     if (confirm) {
       this.showSpinner = true;
       this.materiasService.eliminarInscripcionCursada(idInscripcionCursada).subscribe(
@@ -78,7 +85,7 @@ export class InscripcionesCursadasComponent implements OnInit {
   }
 
   public async eliminar(id: number) {
-    const eliminar = await this.confirmation.confirm('Confirme la acción', '¿Desea eliminar la cursada?');
+    const eliminar = await this.confirm.confirm('Confirme la acción', '¿Desea eliminar la cursada?');
     if (eliminar) {
       this.showSpinner = true;
       this.materiasService.eliminarCursada(id).subscribe(

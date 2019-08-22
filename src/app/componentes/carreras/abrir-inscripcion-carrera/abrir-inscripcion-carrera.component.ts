@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CarrerasService } from 'src/app/servicios/carreras.service';
 import { NotificationsService } from 'angular2-notifications';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-abrir-inscripcion-carrera',
@@ -12,15 +13,16 @@ import { NotificationsService } from 'angular2-notifications';
 export class AbrirInscripcionCarreraComponent implements OnInit {
 
   formulario: FormGroup;
+  idCarrera: number;
   carrera: string;
-  showSpinner = true;
+  showSpinner = false;
 
   constructor(
     private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
     private notif: NotificationsService,
     private carreraService: CarrerasService,
+    public dialogRef: MatDialogRef<AbrirInscripcionCarreraComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 
   private crearFormulario() {
@@ -34,10 +36,9 @@ export class AbrirInscripcionCarreraComponent implements OnInit {
 
   enviar() {
     this.showSpinner = true;
-    const idCarrera = this.route.snapshot.params.id;
     const carrerasAbiertas = {
       cohorte: this.formulario.value.cohorte,
-      id_carrera: idCarrera,
+      id_carrera: this.idCarrera,
       fecha_inicio: this.formulario.value.fecha_inicio,
       fecha_limite: this.formulario.value.fecha_limite
     };
@@ -46,7 +47,7 @@ export class AbrirInscripcionCarreraComponent implements OnInit {
       (resp) => {
         this.showSpinner = false;
         this.notif.success(resp.mensaje);
-        this.router.navigate(['inscripcion/carrera']);
+        this.dialogRef.close(true);
         console.log(resp);
       },
       (error) => {
@@ -57,15 +58,14 @@ export class AbrirInscripcionCarreraComponent implements OnInit {
     );
   }
 
+  public cerrar() {
+    this.dialogRef.close();
+  }
+
   ngOnInit() {
-    const idCarrera = this.route.snapshot.params.id;
+    this.idCarrera = this.data.idCarrera;
+    this.carrera = this.data.carrera;
     this.crearFormulario();
-    this.carreraService.traerCarrera(idCarrera).subscribe(
-      (resp) => {
-        this.carrera = resp.nombre;
-        this.showSpinner = false;
-      }
-    );
   }
 
 }

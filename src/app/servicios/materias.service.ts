@@ -79,9 +79,11 @@ export class MateriasService {
   public eliminarNotasCursada(id: number): Observable<any> {
     return this.http.delete('/notas_cursada/' + id);
   }
+  public realizarInscripcionCursada(idCursada: number, cursa: boolean, equivalencia: boolean): Observable<any> {
+    return this.http.post('/inscripcion_cursada/', { id_cursada: idCursada, cursa, equivalencia});
+  }
   public eliminarInscripcionCursada(idInscripcionCursada: number): Observable<any> {
     return this.http.delete('/inscripcion_cursada/' + idInscripcionCursada);
   }
-
 
 }

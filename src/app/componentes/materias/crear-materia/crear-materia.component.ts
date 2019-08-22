@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MateriasService } from 'src/app/servicios/materias.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
-import { CarrerasService } from 'src/app/servicios/carreras.service';
-import { promise } from 'protractor';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-crear-materia',
@@ -15,6 +13,7 @@ export class CrearMateriaComponent implements OnInit {
 
   formulario: FormGroup;
   showSpinner = true;
+  idCarrera: number;
   carrera: string;
   duracion: number;
   tiposMaterias = [
@@ -36,15 +35,14 @@ export class CrearMateriaComponent implements OnInit {
     },
   ];
   materias = [];
+
   constructor(
     private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
     private notif: NotificationsService,
     private materiasService: MateriasService,
-    private carrerasService: CarrerasService,
+    public dialogRef: MatDialogRef<CrearMateriaComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
-
 
   private crearFormulario() {
     this.formulario = this.fb.group({
@@ -60,38 +58,25 @@ export class CrearMateriaComponent implements OnInit {
       (res) => {
         console.log(res);
         this.materias = res;
+        this.showSpinner = false;
       },
       (error) => {
         this.notif.error(error.error.mensaje);
         console.error(error);
+        this.showSpinner = false;
       }
     );
   }
 
-  private cargar_carrera(id): Promise<void> {
-    return new Promise( (resolve, reject) => {
-      this.carrerasService.traerCarrera(id).subscribe(
-        (resp) => {
-          console.log(resp);
-          this.carrera = resp.nombre;
-          this.duracion = resp.duracion;
-          resolve();
-        },
-        (error) => {
-          reject();
-          console.error(error);
-          this.notif.error(error.error.mensaje);
-        }
-      );
-    });
+  public cerrar() {
+    this.dialogRef.close();
   }
 
   enviar() {
-    const idCarrera = this.route.snapshot.params.id;
     const materia = {
       nombre: this.formulario.value.nombre,
       año: this.formulario.value.anio,
-      id_carrera: idCarrera,
+      id_carrera: this.idCarrera,
       id_tipo: this.formulario.value.tipoMateria,
       correlativas: this.formulario.value.correlativas
     };
@@ -99,7 +84,7 @@ export class CrearMateriaComponent implements OnInit {
       (resp) => {
         console.log(resp);
         this.notif.success(resp.mensaje);
-        this.router.navigate(['/carreras']);
+        this.dialogRef.close(true);
       },
       (error) => {
         console.error(error);
@@ -109,15 +94,11 @@ export class CrearMateriaComponent implements OnInit {
   }
 
   ngOnInit() {
-    const idCarrera = this.route.snapshot.params.id;
+    this.idCarrera = this.data.idCarrera;
+    this.carrera = this.data.carrera;
+    this.duracion = this.data.duracion;
+    this.cargar_materias_por_carrera(this.idCarrera);
     this.crearFormulario();
-    this.cargar_materias_por_carrera(idCarrera);
-    this.cargar_carrera(idCarrera).then(
-      () => {
-        this.showSpinner = false;
-        this.crearFormulario();
-      }
-    );
   }
 
 }

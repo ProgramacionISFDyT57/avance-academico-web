@@ -29,7 +29,7 @@ export class CarrerasService {
     return this.http.get('/carrera/' + id);
   }
   public abrirInscripcionCarrera(carrerasAbiertas): Observable<Mensaje> {
-    return this.http.post('/carreras_abiertas', { carrerasAbiertas });
+    return this.http.post('/carreras_abiertas', { carreras_abiertas: carrerasAbiertas });
   }
 
   public eliminarCarreraAbierta(id: number): Observable<Mensaje> {

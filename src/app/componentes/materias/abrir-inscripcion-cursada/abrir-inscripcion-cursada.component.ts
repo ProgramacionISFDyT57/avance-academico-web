@@ -21,8 +21,6 @@ export class AbrirInscripcionCursadaComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
     private notif: NotificationsService,
     private materiasService: MateriasService,
     private usuariosService: UsuariosService,
