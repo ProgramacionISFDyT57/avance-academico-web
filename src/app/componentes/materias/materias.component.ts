@@ -28,18 +28,20 @@ export class MateriasComponent implements OnInit {
     private confirmation: ConfirmationDialogService,
   ) { }
 
-  abrirDialogoInscripcion(idMateria: number) {
+  abrirDialogoInscripcion(idMateria: number, materia: string) {
     this.dialog.open(AbrirInscripcionCursadaComponent, {
       data: {
-        idMateria
+        idMateria,
+        materia
       }
     });
   }
 
-  abrirDialogoInscripcionFinal(idMateria: number) {
+  abrirDialogoInscripcionFinal(idMateria: number, materia: string) {
     this.dialog.open(AbrirInscripcionFinalComponent, {
       data: {
-        idMateria
+        idMateria,
+        materia
       }
     });
   }

@@ -21,7 +21,7 @@ export class UsuariosComponent implements OnInit {
   constructor(
     private usuariosService: UsuariosService,
     private confirmation: ConfirmationDialogService,
-    private notifications: NotificationsService
+    private notif: NotificationsService
   ) { }
 
   public ListarUsuarios() {
@@ -34,13 +34,14 @@ export class UsuariosComponent implements OnInit {
         console.log(res);
       },
       (error) => {
+        this.showSpinner = false;
         console.log(error);
+        this.notif.error(error.error.mensaje);
       });
   }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
@@ -52,12 +53,14 @@ export class UsuariosComponent implements OnInit {
       this.showSpinner = true;
       this.usuariosService.eliminarUsuario(id).subscribe(
         (res) => {
-          this.notifications.success(res.mensaje);
+          this.ListarUsuarios();
+          this.notif.success(res.mensaje);
           console.log(res);
         },
         (error) => {
           console.log(error);
-          this.notifications.error(error.error.mensaje);
+          this.showSpinner = false;
+          this.notif.error(error.error.mensaje);
         }
       );
     }

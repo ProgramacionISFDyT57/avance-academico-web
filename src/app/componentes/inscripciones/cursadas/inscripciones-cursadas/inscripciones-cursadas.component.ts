@@ -38,7 +38,7 @@ export class InscripcionesCursadasComponent implements OnInit {
         console.log(res);
       },
       (error) => {
-        // this.showSpinner = false;
+        this.showSpinner = false;
         this.notif.error(error.error.mensaje);
         console.log(error);
       });
@@ -46,7 +46,6 @@ export class InscripcionesCursadasComponent implements OnInit {
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
@@ -55,6 +54,24 @@ export class InscripcionesCursadasComponent implements OnInit {
   inscribirse(id) {
     alert('Por hacer');
   }
+
+  async desinscribirse(idInscripcionCursada: number) {
+    const confirm = await this.confirmation.confirm('Confirme la acción', '¿Desea eliminar su inscripción de la cursada?');
+    if (confirm) {
+      this.showSpinner = true;
+      this.materiasService.eliminarInscripcionCursada(idInscripcionCursada).subscribe(
+        (res) => {
+          this.ListarCursadas();
+          console.log(res);
+        },
+        (error) => {
+          this.showSpinner = false;
+          this.notif.error(error.error.mensaje);
+          console.log(error);
+        });
+    }
+  }
+
 
   detalles(id) {
     this.router.navigateByUrl('inscripcion/cursadas/' + id);

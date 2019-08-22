@@ -22,4 +22,8 @@ export class AlumnosService {
     return this.http.post('/alumnos', {usuario, id_carrera_abierta: idCarreraAbierta});
   }
 
+  public eliminarAlumno(id: number): Observable<any> {
+    return this.http.delete('/alumnos/' + id);
+  }
+
 }

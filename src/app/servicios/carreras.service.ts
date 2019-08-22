@@ -53,5 +53,8 @@ export class CarrerasService {
     return this.http.get('/inscriptos_carrera/' + idCarreraAbierta);
   }
 
+  public eliminarInscripcionCarrera(idInscripcionCarrera: number): Observable<any> {
+    return this.http.delete('/inscripciones_carreras/' + idInscripcionCarrera);
+  }
 
 }

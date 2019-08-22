@@ -47,11 +47,17 @@ export class MateriasService {
   public inscripcionFinal(idMesa: number): Observable<any> {
     return this.http.post('/inscripciones_mesas', { id_mesa: idMesa });
   }
+  public eliminarInscripcionFinal(idInscripcionMesa: number): Observable<any> {
+    return this.http.delete('/inscripciones_mesas/' + idInscripcionMesa);
+  }
   public listarFinales(): Observable<any> {
     return this.http.get('/lista_mesas');
   }
   public listarInscriptosFinal(idFinal: number): Observable<InscriptosFinal[]> {
     return this.http.get('/inscriptos_mesa/' + idFinal);
+  }
+  public eliminarNotasFinal(idInscripcionMesa: number): Observable<any> {
+    return this.http.delete('/notas_final/' + idInscripcionMesa);
   }
 
   // Cursadas
@@ -72,6 +78,9 @@ export class MateriasService {
   }
   public eliminarNotasCursada(id: number): Observable<any> {
     return this.http.delete('/notas_cursada/' + id);
+  }
+  public eliminarInscripcionCursada(idInscripcionCursada: number): Observable<any> {
+    return this.http.delete('/inscripcion_cursada/' + idInscripcionCursada);
   }
 
 
