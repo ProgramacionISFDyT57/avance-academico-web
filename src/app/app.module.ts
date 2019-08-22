@@ -69,6 +69,7 @@ import { CargaNotasFinalComponent } from './componentes/inscripciones/finales/ca
     AbrirInscripcionCursadaComponent,
     AbrirInscripcionFinalComponent,
     CargarNotasCursadaComponent,
+    CargaNotasFinalComponent,
     CrearAlumnoComponent,
     RealizarInscripcionCursadaComponent
   ],
