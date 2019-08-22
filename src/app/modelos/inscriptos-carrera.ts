@@ -4,4 +4,5 @@ export interface InscriptosCarrera {
   dni: string;
   fecha_inscripcion: string;
   carrera: string;
+  cohorte: number;
 }

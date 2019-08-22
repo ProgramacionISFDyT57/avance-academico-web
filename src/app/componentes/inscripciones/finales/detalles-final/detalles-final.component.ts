@@ -20,6 +20,9 @@ export class DetallesFinalComponent implements OnInit {
   dataSource: MatTableDataSource<InscriptosFinal>;
   displayedColumns = ['alumno', 'dni', 'nota', 'libro', 'folio', 'acciones'];
   showSpinner = true;
+  carrera: string;
+  materia: string;
+  fechaExamen: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -37,6 +40,11 @@ export class DetallesFinalComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         console.log(res);
+        if (res.length) {
+          this.carrera = res[0].carrera;
+          this.materia = res[0].materia;
+          this.fechaExamen = res[0].fecha_examen;
+        }
         this.showSpinner = false;
       },
       (error) => {

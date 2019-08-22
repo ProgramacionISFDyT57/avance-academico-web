@@ -12,6 +12,9 @@ import { InscripcionesCarrerasComponent } from './componentes/inscripciones/carr
 import { InscripcionesFinalesComponent } from './componentes/inscripciones/finales/inscripciones-finales/inscripciones-finales.component';
 import { InscripcionesCursadasComponent } from './componentes/inscripciones/cursadas/inscripciones-cursadas/inscripciones-cursadas.component';
 import { AlumnosComponent } from './componentes/alumnos/alumnos.component';
+import { DetallesCarreraComponent } from './componentes/inscripciones/carreras/detalles-carrera/detalles-carrera.component';
+import { DetallesCursadaComponent } from './componentes/inscripciones/cursadas/detalles-cursada/detalles-cursada.component';
+import { DetallesFinalComponent } from './componentes/inscripciones/finales/detalles-final/detalles-final.component';
 
 const routes: Routes = [
   { path: 'inicio', component: InicioComponent, canActivate: [LoginGuard] },
@@ -24,8 +27,11 @@ const routes: Routes = [
   { path: 'alumnos', component: AlumnosComponent, canActivate: [LoginGuard] },
 
   { path: 'inscripcion/carreras', component: InscripcionesCarrerasComponent, canActivate: [LoginGuard] },
+  { path: 'inscripcion/carreras/:id', component: DetallesCarreraComponent, canActivate: [LoginGuard] },
   { path: 'inscripcion/cursadas', component: InscripcionesCursadasComponent, canActivate: [LoginGuard] },
+  { path: 'inscripcion/cursadas/:id', component: DetallesCursadaComponent, canActivate: [LoginGuard] },
   { path: 'inscripcion/mesas', component: InscripcionesFinalesComponent, canActivate: [LoginGuard] },
+  { path: 'inscripcion/mesas/:id', component: DetallesFinalComponent, canActivate: [LoginGuard] },
 ];
 
 @NgModule({
