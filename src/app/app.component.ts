@@ -19,6 +19,13 @@ export class AppComponent {
 
   constructor(private router: Router) {}
 
+  public rutaActualInscripcion() {
+    if (this.router.url.includes('inscripcion')) {
+      return true;
+    }
+    return false;
+  }
+
   public mostrar_barra() {
     if (this.router.url === '/login') {
       this.rol = undefined;

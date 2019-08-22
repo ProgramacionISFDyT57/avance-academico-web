@@ -3,7 +3,7 @@
         <button mat-flat-button color="primary" routerLink="/carreras" routerLinkActive="mat-accent">Carreras</button>
         <button mat-flat-button color="primary" routerLink="/materias" routerLinkActive="mat-accent">Materias</button>
         <button mat-flat-button color="primary" routerLink="/usuarios" routerLinkActive="mat-accent">Usuarios</button>
-        <button mat-flat-button color="primary" routerLink="/inscripcion" routerLinkActive="mat-accent" [matMenuTriggerFor]="menu" >Inscripciones</button>
+        <button mat-flat-button color="primary" [class.mat-accent]="this.rutaActualInscripcion()" [matMenuTriggerFor]="menu" >Inscripciones</button>
         <button mat-flat-button color="primary" routerLink="/alumnos" routerLinkActive="mat-accent">Alumnos</button>
 
         <mat-menu #menu="matMenu">
