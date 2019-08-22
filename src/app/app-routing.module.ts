@@ -14,7 +14,7 @@ import { InscripcionesCursadasComponent } from './componentes/inscripciones/curs
 import { AlumnosComponent } from './componentes/alumnos/alumnos.component';
 
 const routes: Routes = [
-  { path: '', component: InicioComponent, canActivate: [LoginGuard] },
+  { path: 'inicio', component: InicioComponent, canActivate: [LoginGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'carreras', component: CarrerasComponent, canActivate: [LoginGuard] },
   { path: 'carreras/crear', component: CrearCarreraComponent, canActivate: [LoginGuard] }, // pasar a modal y eliminar
