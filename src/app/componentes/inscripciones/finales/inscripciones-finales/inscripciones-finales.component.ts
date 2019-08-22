@@ -75,7 +75,7 @@ export class InscripcionesFinalesComponent implements OnInit {
   }
 
   public async eliminar(id: number) {
-    const eliminar = await this.confirmation.confirm('Confirme la acción', '¿Desea eliminar la materia?');
+    const eliminar = await this.confirmation.confirm('Confirme la acción', '¿Desea eliminar la mesa de final?');
     if (eliminar) {
       this.showSpinner = true;
       this.materiasService.eliminarMesaFinal(id).subscribe(
