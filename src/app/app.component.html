@@ -2,12 +2,12 @@
         <button mat-flat-button color="primary" routerLink="/inicio" routerLinkActive="mat-accent">Inicio</button>
         <button mat-flat-button color="primary" routerLink="/carreras" routerLinkActive="mat-accent">Carreras</button>
         <button mat-flat-button color="primary" routerLink="/materias" routerLinkActive="mat-accent">Materias</button>
-        <button mat-flat-button color="primary" routerLink="/usuarios" routerLinkActive="mat-accent">Usuarios</button>
         <button mat-flat-button color="primary" [class.mat-accent]="this.rutaActualInscripcion()" [matMenuTriggerFor]="menu" >Inscripciones</button>
-        <button mat-flat-button color="primary" routerLink="/alumnos" routerLinkActive="mat-accent">Alumnos</button>
+        <button *ngIf="this.helper.rolesAdmitidos(['directivo', 'preceptor'])" mat-flat-button color="primary" routerLink="/alumnos" routerLinkActive="mat-accent">Alumnos</button>
+        <button *ngIf="this.helper.rolesAdmitidos(['directivo'])" mat-flat-button color="primary" routerLink="/usuarios" routerLinkActive="mat-accent">Usuarios</button>
 
         <mat-menu #menu="matMenu">
-                <button mat-menu-item routerLink="inscripcion/carreras">Carreras</button>
+                <button *ngIf="this.helper.rolesAdmitidos(['directivo', 'preceptor'])" mat-menu-item routerLink="inscripcion/carreras">Carreras</button>
                 <button mat-menu-item routerLink="inscripcion/cursadas">Cursadas</button>
                 <button mat-menu-item routerLink="inscripcion/mesas">Finales</button>
         </mat-menu>

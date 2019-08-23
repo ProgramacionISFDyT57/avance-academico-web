@@ -57,18 +57,26 @@
     <ng-container matColumnDef="acciones">
       <th mat-header-cell *matHeaderCellDef> Acciones </th>
       <td class="nowrap" mat-cell *matCellDef="let element">
-        <button class="mx-1" mat-mini-fab color="primary" matTooltip="Inscribirse" (click)="inscribirse(element.id, element.materia)">
-          <mat-icon>queue</mat-icon>
-        </button>
-        <button class="mx-1" mat-mini-fab color="warn" matTooltip="Eliminar Inscripción" (click)="desinscribirse(element.id_inscripcion_cursada)">
-          <mat-icon>remove_from_queue</mat-icon>
-        </button>
-        <button class="mx-1" mat-mini-fab color="primary" matTooltip="Detalles" (click)="detalles(element.id)">
-          <mat-icon>list_alt</mat-icon>
-        </button>
-        <button class="mx-1" mat-mini-fab color="warn" matTooltip="Eliminar" (click)="eliminar(element.id)">
-          <mat-icon>delete_forever</mat-icon>
-        </button>
+
+        <ng-container *ngIf="this.helper.rolesAdmitidos(['alumno'])">
+          <button *ngIf="!element.id_inscripcion_cursada" class="mx-1" mat-mini-fab color="primary" matTooltip="Inscribirse"
+            (click)="inscribirse(element.id, element.materia)">
+            <mat-icon>queue</mat-icon>
+          </button>
+          <button *ngIf="element.id_inscripcion_cursada" class="mx-1" mat-mini-fab color="warn" matTooltip="Eliminar Inscripción"
+            (click)="desinscribirse(element.id_inscripcion_cursada)">
+            <mat-icon>remove_from_queue</mat-icon>
+          </button>
+        </ng-container>
+
+        <ng-container *ngIf="this.helper.rolesAdmitidos(['directivo', 'preceptor'])">
+          <button class="mx-1" mat-mini-fab color="primary" matTooltip="Detalles" (click)="detalles(element.id)">
+            <mat-icon>list_alt</mat-icon>
+          </button>
+          <button *ngIf="!+element.cant_inscriptos" class="mx-1" mat-mini-fab color="warn" matTooltip="Eliminar" (click)="eliminar(element.id)">
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+        </ng-container>
       </td>
     </ng-container>
 

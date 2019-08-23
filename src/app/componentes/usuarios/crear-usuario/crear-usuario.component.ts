@@ -32,9 +32,9 @@ export class CrearUsuarioComponent implements OnInit {
       documento: ['', Validators.required],
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
-      telefono: ['', Validators.required],
+      telefono: [''],
       email: ['', [Validators.required, Validators.email]],
-      fecha_nacimiento: [null, Validators.required],
+      fecha_nacimiento: [null],
       rol: [null, Validators.required]
     });
   }

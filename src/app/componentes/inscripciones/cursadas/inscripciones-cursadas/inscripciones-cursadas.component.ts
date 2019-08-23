@@ -6,6 +6,7 @@ import { Cursada } from 'src/app/modelos/cursadas';
 import { Router } from '@angular/router';
 import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
 import { RealizarInscripcionCursadaComponent } from '../realizar-inscripcion-cursada/realizar-inscripcion-cursada.component';
+import { HelperService } from 'src/app/servicios/helper.service';
 
 @Component({
   selector: 'app-inscripciones-cursadas',
@@ -23,6 +24,7 @@ export class InscripcionesCursadasComponent implements OnInit {
 
 
   constructor(
+    public helper: HelperService,
     private materiasService: MateriasService,
     private notif: NotificationsService,
     private router: Router,

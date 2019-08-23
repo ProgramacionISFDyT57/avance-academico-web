@@ -6,6 +6,7 @@ import { NotificationsService } from 'angular2-notifications';
 import { AbrirInscripcionCursadaComponent } from './abrir-inscripcion-cursada/abrir-inscripcion-cursada.component';
 import { AbrirInscripcionFinalComponent } from './abrir-inscripcion-final/abrir-inscripcion-final.component';
 import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
+import { HelperService } from 'src/app/servicios/helper.service';
 
 @Component({
   selector: 'app-materias',
@@ -22,6 +23,7 @@ export class MateriasComponent implements OnInit {
   showSpinner = true;
 
   constructor(
+    public helper: HelperService,
     private materiasService: MateriasService,
     private notif: NotificationsService,
     public dialog: MatDialog,

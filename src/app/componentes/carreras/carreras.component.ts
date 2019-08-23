@@ -6,6 +6,7 @@ import { NotificationsService } from 'angular2-notifications';
 import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
 import { CrearMateriaComponent } from '../materias/crear-materia/crear-materia.component';
 import { AbrirInscripcionCarreraComponent } from './abrir-inscripcion-carrera/abrir-inscripcion-carrera.component';
+import { HelperService } from 'src/app/servicios/helper.service';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class CarrerasComponent implements OnInit {
   showSpinner = true;
 
   constructor(
+    public helper: HelperService,
     private carrerasService: CarrerasService,
     private notif: NotificationsService,
     private confirmation: ConfirmationDialogService,

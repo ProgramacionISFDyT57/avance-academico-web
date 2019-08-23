@@ -5,6 +5,7 @@ import { NotificationsService } from 'angular2-notifications';
 import { Carrera } from 'src/app/modelos/carrera';
 import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
 import { Router } from '@angular/router';
+import { HelperService } from 'src/app/servicios/helper.service';
 
 @Component({
   selector: 'app-inscripciones-finales',
@@ -21,6 +22,7 @@ export class InscripcionesFinalesComponent implements OnInit {
   showSpinner = true;
 
   constructor(
+    public helper: HelperService,
     private materiasService: MateriasService,
     private notif: NotificationsService,
     private router: Router,
