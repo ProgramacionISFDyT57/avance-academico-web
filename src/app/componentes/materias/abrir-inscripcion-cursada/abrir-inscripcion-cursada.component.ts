@@ -44,19 +44,17 @@ export class AbrirInscripcionCursadaComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  private cargarProfesores() {
-    this.usuariosService.traerProfesores().subscribe(
-      (res) => {
-        this.showSpinner = false;
-        console.log(res);
-        this.profesores = res;
-      },
-      (error) => {
-        this.showSpinner = false;
-        this.notif.error(error.error.mensaje);
-        console.error(error);
-      }
-    );
+  private async cargarProfesores() {
+    try {
+      const profesores = await this.usuariosService.traerProfesores();
+      console.log(profesores);
+      this.profesores = profesores;
+      this.showSpinner = false;
+    } catch (error) {
+      console.error(error);
+      this.notif.error(error.error.mensaje);
+      this.showSpinner = false;
+    }
   }
 
   enviar() {
