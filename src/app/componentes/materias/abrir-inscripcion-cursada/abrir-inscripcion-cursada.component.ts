@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MateriasService } from 'src/app/servicios/materias.service';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 import { NotificationsService } from 'angular2-notifications';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MAT_DATE_LOCALE } from '@angular/material';
 import { Profesor } from 'src/app/modelos/profesor';
 
 @Component({
@@ -29,10 +29,13 @@ export class AbrirInscripcionCursadaComponent implements OnInit {
   ) { }
 
   private crearFormulario() {
+    const fechaActual = new Date();
+    const fechaLimite = new Date();
+    fechaLimite.setMonth(fechaLimite.getMonth() + 1);
     this.formulario = this.fb.group({
       año: [2019, [Validators.required, Validators.min(2019)]],
-      fecha_inicio: [null, Validators.required],
-      fecha_limite: [null, Validators.required],
+      fecha_inicio: [fechaActual, Validators.required],
+      fecha_limite: [fechaLimite, Validators.required],
       id_profesor: [null],
     });
   }

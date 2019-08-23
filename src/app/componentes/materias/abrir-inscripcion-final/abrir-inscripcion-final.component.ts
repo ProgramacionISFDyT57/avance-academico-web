@@ -32,9 +32,12 @@ export class AbrirInscripcionFinalComponent implements OnInit {
   ) { }
 
   private crearFormulario() {
+    const fechaActual = new Date();
+    const fechaLimite = new Date();
+    fechaLimite.setMonth(fechaLimite.getMonth() + 1);
     this.formulario = this.fb.group({
-      fecha_inicio: [null, Validators.required],
-      fecha_limite: [null, Validators.required],
+      fecha_inicio: [fechaActual, Validators.required],
+      fecha_limite: [fechaLimite, Validators.required],
       fecha_examen: [null, Validators.required],
       id_profesor: [null],
       id_vocal1: [null],

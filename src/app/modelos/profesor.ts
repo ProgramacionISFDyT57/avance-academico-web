@@ -6,5 +6,6 @@ export interface Profesor {
   fecha_nacimiento: string;
   id?: number;
   nombre: string;
+  nombre_completo: string;
   telefono: string;
 }

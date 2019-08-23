@@ -4,7 +4,7 @@
 
   <mat-card class="example-card">
     <mat-card-header>
-      <mat-card-title>Abrir Inscripción a {{ materia }}</mat-card-title>
+      <mat-card-title>Abrir inscripción a {{ materia }}</mat-card-title>
     </mat-card-header>
     <mat-divider></mat-divider>
     <br>
@@ -15,14 +15,8 @@
               <input type="number" min="2019" maxlength="4" matInput placeholder="Año" formControlName="año">
             </mat-form-field>
 
-            <mat-form-field>
-              <mat-label>Profesor</mat-label>
-              <mat-select formControlName="id_profesor">
-                <mat-option *ngFor="let profesor of profesores" [value]="profesor.id">
-                  {{profesor.apellido}}, {{profesor.nombre}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
+            <ng-select [items]="profesores" [placeholder]="'Profesor'" bindLabel="nombre_completo" bindValue="id" formControlName="id_profesor">
+            </ng-select>
 
             <mat-form-field>
               <input matInput [matDatepicker]="picker1" placeholder="Inicio de Inscripción" formControlName="fecha_inicio">
