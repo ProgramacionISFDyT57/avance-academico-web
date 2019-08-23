@@ -19,6 +19,10 @@ body {
   max-width: 95vw;
 }
 
+.mat-dialog-container {
+  overflow: visible !important;
+}
+
 .nowrap {
   white-space: nowrap;
 }

@@ -12,30 +12,6 @@
       <form id="form" [formGroup]="formulario" (ngSubmit)="enviar()">
 
         <mat-form-field>
-          <input matInput placeholder="DNI" formControlName="documento">
-        </mat-form-field>
-       
-        <mat-form-field>
-          <input matInput placeholder="Nombre" formControlName="nombre">
-        </mat-form-field>
-    
-        <mat-form-field>
-          <input matInput placeholder="Apellido" formControlName="apellido">
-        </mat-form-field>
-    
-        <mat-form-field>
-          <input matInput placeholder="Teléfono" formControlName="telefono">
-        </mat-form-field>
-    
-        <mat-form-field>
-          <input matInput placeholder="Email" formControlName="email" type="email">
-        </mat-form-field>
-    
-        <mat-form-field>
-          <input matInput placeholder="Fecha de Nacimeiento" formControlName="fecha_nacimiento" type="date">
-        </mat-form-field>
-    
-        <mat-form-field>
           <mat-label>Rol</mat-label>
           <mat-select formControlName="rol">
             <mat-option *ngFor="let rol of roles" [value]="rol.value">
@@ -44,11 +20,36 @@
           </mat-select>
         </mat-form-field>
 
+        <mat-form-field>
+          <input matInput placeholder="Nombre" formControlName="nombre">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Apellido" formControlName="apellido">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="DNI" formControlName="documento">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Email" formControlName="email" type="email">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Teléfono" formControlName="telefono">
+        </mat-form-field>
+        
+        <mat-form-field>
+          <input matInput placeholder="Fecha de Nacimeiento" formControlName="fecha_nacimiento" type="date">
+        </mat-form-field>
+
       </form>
     </mat-card-content>
 
     <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit" form="form" [disabled]="!formulario.valid || showSpinner">Crear</button>
+      <button mat-raised-button color="primary" type="submit" form="form"
+        [disabled]="!formulario.valid || showSpinner">Crear</button>
       <button mat-raised-button routerLink="../">Volver </button>
     </mat-card-actions>
   </mat-card>

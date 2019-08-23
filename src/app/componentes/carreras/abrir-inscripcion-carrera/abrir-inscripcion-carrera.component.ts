@@ -27,10 +27,13 @@ export class AbrirInscripcionCarreraComponent implements OnInit {
 
   private crearFormulario() {
     const añoActual = new Date().getFullYear();
+    const fechaActual = new Date();
+    const fechaLimite = new Date();
+    fechaLimite.setMonth(fechaLimite.getMonth() + 1);
     this.formulario = this.fb.group({
       cohorte: [añoActual, [Validators.required, Validators.min(añoActual)]],
-      fecha_inicio: [null, Validators.required],
-      fecha_limite: [null, Validators.required]
+      fecha_inicio: [fechaActual, Validators.required],
+      fecha_limite: [fechaLimite, Validators.required]
     });
   }
 
