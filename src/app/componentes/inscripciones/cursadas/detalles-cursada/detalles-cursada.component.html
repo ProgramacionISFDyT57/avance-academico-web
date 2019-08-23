@@ -57,7 +57,7 @@
         <button class="mx-1" mat-mini-fab color="primary" matTooltip="Cargar Notas" (click)="cargarNotas(element)">
           <mat-icon>add</mat-icon>
         </button>
-        <button class="mx-1" mat-mini-fab color="warn" matTooltip="Eliminar Notas" (click)="eliminarNotas(element.id_inscripcion_cursada)">
+        <button *ngIf="element.nota_cuat_1" class="mx-1" mat-mini-fab color="warn" matTooltip="Eliminar Notas" (click)="eliminarNotas(element.id_inscripcion_cursada)">
           <mat-icon>remove</mat-icon>
         </button>
       </td>

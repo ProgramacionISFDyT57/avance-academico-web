@@ -75,6 +75,10 @@ export class AlumnosComponent implements OnInit {
     }
   }
 
+  detalles(idAlumno: number) {
+    alert('por hacer');
+  }
+
   ngOnInit() {
     this.listarAlumnos();
   }

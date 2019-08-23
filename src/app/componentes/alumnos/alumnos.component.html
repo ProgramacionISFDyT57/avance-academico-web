@@ -50,7 +50,11 @@
     <ng-container matColumnDef="acciones">
       <th mat-header-cell *matHeaderCellDef> Acciones </th>
       <td class="nowrap" mat-cell *matCellDef="let element">
-        <button class="mx-1" mat-mini-fab color="warn" matTooltip="Eliminar" (click)="eliminar(element.id_alumno)">
+        <button class="mx-1" mat-mini-fab color="primary" matTooltip="Detalles" (click)="detalles(element.id_alumno)">
+          <mat-icon>info</mat-icon>
+        </button>
+        <button *ngIf="!element.carrera" class="mx-1" mat-mini-fab color="warn" matTooltip="Eliminar"
+          (click)="eliminar(element.id_alumno)">
           <mat-icon>delete_forever</mat-icon>
         </button>
       </td>
