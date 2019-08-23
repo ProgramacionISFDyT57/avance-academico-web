@@ -27,25 +27,23 @@ export class InscripcionesCarrerasComponent implements OnInit {
     private confirmation: ConfirmationDialogService,
   ) { }
 
-  public ListarCarreras() {
-    this.carrerasService.traerCarrerasAbiertas().subscribe(
-      (res) => {
-        this.dataSource = new MatTableDataSource(res);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-        this.showSpinner = false;
-        console.log(res);
-      },
-      (error) => {
-        // this.showSpinner = false;
-        this.notif.error(error.error.mensaje);
-        console.log(error);
-      });
+  private async listarCateriasAbiertas() {
+    try {
+      const res = await this.carrerasService.listarCarrerasAbiertas();
+      this.dataSource = new MatTableDataSource(res);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      this.showSpinner = false;
+      console.log(res);
+    } catch (error) {
+      console.error(error);
+      this.notif.error(error.error.mensaje);
+      this.showSpinner = false;
+    }
   }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
@@ -61,7 +59,7 @@ export class InscripcionesCarrerasComponent implements OnInit {
       this.showSpinner = true;
       this.carrerasService.eliminarCarreraAbierta(id).subscribe(
         (res) => {
-          this.ListarCarreras();
+          this.listarCateriasAbiertas();
           console.log(res);
         },
         (error) => {
@@ -73,8 +71,7 @@ export class InscripcionesCarrerasComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.ListarCarreras();
+    this.listarCateriasAbiertas();
   }
-
 
 }
