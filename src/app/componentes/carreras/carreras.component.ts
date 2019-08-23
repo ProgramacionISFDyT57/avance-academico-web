@@ -30,20 +30,19 @@ export class CarrerasComponent implements OnInit {
     public dialog: MatDialog,
   ) { }
 
-  public ListarCarreras() {
-    this.carrerasService.traerCarreras().subscribe(
-      (res) => {
-        this.dataSource = new MatTableDataSource(res);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-        this.showSpinner = false;
-        console.log(res);
-      },
-      (error) => {
-        // this.showSpinner = false;
-        this.notif.error(error.error.mensaje);
-        console.log(error);
-      });
+  private async listarCarreras() {
+    try {
+      const res = await this.carrerasService.traerCarreras();
+      this.dataSource = new MatTableDataSource(res);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      this.showSpinner = false;
+      console.log(res);
+    } catch (error) {
+      console.error(error);
+      this.notif.error(error.error.mensaje);
+      this.showSpinner = false;
+    }
   }
 
   public async eliminar(id: number) {
@@ -53,7 +52,7 @@ export class CarrerasComponent implements OnInit {
       this.showSpinner = true;
       this.carrerasService.eliminarCarrera(id).subscribe(
         (resp) => {
-          this.ListarCarreras();
+          this.listarCarreras();
           this.notif.success(resp.mensaje);
           console.log(resp);
         },
@@ -92,7 +91,7 @@ export class CarrerasComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.ListarCarreras();
+    this.listarCarreras();
   }
 
 }

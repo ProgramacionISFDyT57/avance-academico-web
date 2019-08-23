@@ -9,33 +9,60 @@ import { InscriptosFinal } from '../modelos/inscriptos-final';
 import { AvanceAcademico } from '../modelos/avance-academico';
 import { Final } from '../modelos/final';
 import { FinalAbierto } from '../modelos/final-abierto';
+import { CarrerasService } from './carreras.service';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class MateriasService {
+
+materias: Materia[];
+
   constructor(
-    private http: HttpService
+    private http: HttpService,
+    private carrerasService: CarrerasService
   ) { }
 
-  public traerMaterias(): Observable<Materia[]> {
-    return this.http.get('/materias');
+  private eliminarCacheMaterias() {
+    this.materias = null;
+  }
+
+  public traerMaterias(): Promise<Materia[]> {
+    return new Promise( (resolve, reject) => {
+      if (this.materias) {
+        resolve(this.materias);
+      } else {
+        this.http.get('/materias').subscribe(
+          (res) => {
+            this.materias = res;
+            resolve(this.materias);
+          },
+          (error) => {
+            reject(error);
+          }
+        );
+      }
+    });
   }
 
   public traerMateria(id: number): Observable<Materia> {
     return this.http.get('/materia/' + id);
   }
 
-  public crearMateria(materia: Materia): Observable<Mensaje> {
-    return this.http.post('/materias', { materia });
-  }
-
   public materias_por_carrera(idCarrera: number): Observable<Materia[]> {
     return this.http.get('/materias_por_carrera/' + idCarrera);
   }
 
+  public crearMateria(materia: Materia): Observable<Mensaje> {
+    this.eliminarCacheMaterias();
+    this.carrerasService.eliminarCacheCarreras();
+    return this.http.post('/materias', { materia });
+  }
+
   public eliminarMateria(idMateria: number): Observable<Mensaje> {
+    this.eliminarCacheMaterias();
+    this.carrerasService.eliminarCacheCarreras();
     return this.http.delete('/materias/' + idMateria);
   }
 

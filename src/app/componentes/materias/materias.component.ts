@@ -48,19 +48,19 @@ export class MateriasComponent implements OnInit {
     });
   }
 
-  public ListarMaterias() {
-    this.materiasService.traerMaterias().subscribe(
-      (res) => {
-        this.dataSource = new MatTableDataSource(res);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-        this.showSpinner = false;
-        console.log(res);
-      },
-      (error) => {
-        this.notif.error(error.error.mensaje);
-        console.log(error);
-      });
+  private async listarMaterias() {
+    try {
+      const res = await this.materiasService.traerMaterias();
+      this.dataSource = new MatTableDataSource(res);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      this.showSpinner = false;
+      console.log(res);
+    } catch (error) {
+      console.error(error);
+      this.notif.error(error.error.mensaje);
+      this.showSpinner = false;
+    }
   }
 
   public async eliminar(id: number) {
@@ -69,7 +69,7 @@ export class MateriasComponent implements OnInit {
       this.showSpinner = true;
       this.materiasService.eliminarMateria(id).subscribe(
         (res) => {
-          this.ListarMaterias();
+          this.listarMaterias();
           console.log(res);
         },
         (error) => {
@@ -89,8 +89,7 @@ export class MateriasComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.ListarMaterias();
-
+    this.listarMaterias();
   }
 
 }
