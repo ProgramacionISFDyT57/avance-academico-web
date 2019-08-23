@@ -13,7 +13,7 @@
 
         <mat-form-field>
           <mat-label>Rol</mat-label>
-          <mat-select formControlName="rol">
+          <mat-select formControlName="id_rol">
             <mat-option *ngFor="let rol of roles" [value]="rol.value">
               {{rol.viewValue}}
             </mat-option>
@@ -29,7 +29,7 @@
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput placeholder="DNI" formControlName="documento">
+          <input matInput placeholder="DNI" formControlName="dni">
         </mat-form-field>
 
         <mat-form-field>

@@ -11,6 +11,7 @@ import { Profesor } from '../modelos/profesor';
 export class UsuariosService {
 
   profesores: Profesor[];
+  usuarios: Usuario[];
 
   constructor(
     private http: HttpService
@@ -20,27 +21,38 @@ export class UsuariosService {
     this.profesores = null;
   }
 
-  public traerUsuarios(): Observable<Usuario[]> {
-    return this.http.get('/usuarios');
+  private eliminarCacheUsuarios() {
+    this.usuarios = null;
   }
 
-  public crearUsuarios(usuario1): Observable<Mensaje> {
+  public crearUsuario(usuario: Usuario): Observable<Mensaje> {
     this.eliminarCacheProfesores();
-    const usuario = {
-      dni: usuario1.documento,
-      nombre: usuario1.nombre,
-      apellido: usuario1.apellido,
-      telefono: usuario1.telefono,
-      email: usuario1.email,
-      fecha_nacimiento: usuario1.fecha_nacimiento,
-      id_rol: usuario1.rol,
-    };
+    this.eliminarCacheUsuarios();
     return this.http.post('/usuarios', { usuario });
   }
 
   public eliminarUsuario(id: number): Observable<Mensaje> {
     this.eliminarCacheProfesores();
+    this.eliminarCacheUsuarios();
     return this.http.delete('/usuarios/' + id);
+  }
+
+  public traerUsuarios(): Promise<Usuario[]> {
+    return new Promise( (resolve, reject) => {
+      if (this.usuarios) {
+        resolve(this.usuarios);
+      } else {
+        this.http.get('/usuarios').subscribe(
+          (res) => {
+            this.usuarios = res;
+            resolve(this.usuarios);
+          },
+          (error) => {
+            reject(error);
+          }
+        );
+      }
+    });
   }
 
   public traerProfesores(): Promise<Profesor[]> {

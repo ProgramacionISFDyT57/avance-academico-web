@@ -10,19 +10,41 @@ import { Usuario } from '../modelos/usuario';
 })
 export class AlumnosService {
 
+  alumnos: Alumno[];
+
   constructor(
     private http: HttpService
   ) { }
 
-  public traerAlumnos(): Observable<Alumno[]> {
-    return this.http.get('/alumnos');
+  private eliminarCacheAlumnos() {
+    this.alumnos = null;
+  }
+
+  public traerAlumnos(): Promise<Alumno[]> {
+    return new Promise( (resolve, reject) => {
+      if (this.alumnos) {
+        resolve(this.alumnos);
+      } else {
+        this.http.get('/alumnos').subscribe(
+          (res) => {
+            this.alumnos = res;
+            resolve(this.alumnos);
+          },
+          (error) => {
+            reject(error);
+          }
+        );
+      }
+    });
   }
 
   public crearAlumno(usuario: Usuario, idCarreraAbierta: number): Observable<Mensaje> {
+    this.eliminarCacheAlumnos();
     return this.http.post('/alumnos', {usuario, id_carrera_abierta: idCarreraAbierta});
   }
 
   public eliminarAlumno(id: number): Observable<Mensaje> {
+    this.eliminarCacheAlumnos();
     return this.http.delete('/alumnos/' + id);
   }
 

@@ -24,20 +24,19 @@ export class UsuariosComponent implements OnInit {
     private notif: NotificationsService
   ) { }
 
-  public ListarUsuarios() {
-    this.usuariosService.traerUsuarios().subscribe(
-      (res) => {
-        this.dataSource = new MatTableDataSource(res);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-        this.showSpinner = false;
-        console.log(res);
-      },
-      (error) => {
-        this.showSpinner = false;
-        console.log(error);
-        this.notif.error(error.error.mensaje);
-      });
+  private async listarUsuarios() {
+    try {
+      const res = await this.usuariosService.traerUsuarios();
+      this.dataSource = new MatTableDataSource(res);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      this.showSpinner = false;
+      console.log(res);
+    } catch (error) {
+      console.error(error);
+      this.notif.error(error.error.mensaje);
+      this.showSpinner = false;
+    }
   }
 
   applyFilter(filterValue: string) {
@@ -53,7 +52,7 @@ export class UsuariosComponent implements OnInit {
       this.showSpinner = true;
       this.usuariosService.eliminarUsuario(id).subscribe(
         (res) => {
-          this.ListarUsuarios();
+          this.listarUsuarios();
           this.notif.success(res.mensaje);
           console.log(res);
         },
@@ -75,7 +74,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.ListarUsuarios();
+    this.listarUsuarios();
   }
 
 }
