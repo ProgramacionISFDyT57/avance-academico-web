@@ -5,6 +5,7 @@ import { MateriasService } from 'src/app/servicios/materias.service';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 import { NotificationsService } from 'angular2-notifications';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Profesor } from 'src/app/modelos/profesor';
 
 @Component({
   selector: 'app-abrir-inscripcion-final',
@@ -16,7 +17,7 @@ export class AbrirInscripcionFinalComponent implements OnInit {
   formulario: FormGroup;
   showSpinner = true;
   materia: string;
-  profesores = [];
+  profesores: Profesor[] = [];
   public idMateria: number;
 
   constructor(
@@ -31,9 +32,12 @@ export class AbrirInscripcionFinalComponent implements OnInit {
   ) { }
 
   private crearFormulario() {
+    const fechaActual = new Date();
+    const fechaLimite = new Date();
+    fechaLimite.setMonth(fechaLimite.getMonth() + 1);
     this.formulario = this.fb.group({
-      fecha_inicio: [null, Validators.required],
-      fecha_limite: [null, Validators.required],
+      fecha_inicio: [fechaActual, Validators.required],
+      fecha_limite: [fechaLimite, Validators.required],
       fecha_examen: [null, Validators.required],
       id_profesor: [null],
       id_vocal1: [null],
@@ -45,19 +49,17 @@ export class AbrirInscripcionFinalComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  private cargarProfesores() {
-    this.usuariosService.traerProfesores().subscribe(
-      (res) => {
-        this.showSpinner = false;
-        console.log(res);
-        this.profesores = res;
-      },
-      (error) => {
-        this.showSpinner = false;
-        this.notif.error(error.error.mensaje);
-        console.error(error);
-      }
-    );
+  private async cargarProfesores() {
+    try {
+      const profesores = await this.usuariosService.traerProfesores();
+      console.log(profesores);
+      this.profesores = profesores;
+      this.showSpinner = false;
+    } catch (error) {
+      console.error(error);
+      this.notif.error(error.error.mensaje);
+      this.showSpinner = false;
+    }
   }
 
 

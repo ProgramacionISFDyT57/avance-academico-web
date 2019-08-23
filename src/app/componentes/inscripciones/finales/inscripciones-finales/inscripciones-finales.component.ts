@@ -5,6 +5,8 @@ import { NotificationsService } from 'angular2-notifications';
 import { Carrera } from 'src/app/modelos/carrera';
 import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
 import { Router } from '@angular/router';
+import { HelperService } from 'src/app/servicios/helper.service';
+import { FinalAbierto } from 'src/app/modelos/final-abierto';
 
 @Component({
   selector: 'app-inscripciones-finales',
@@ -15,12 +17,13 @@ import { Router } from '@angular/router';
 export class InscripcionesFinalesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  dataSource: MatTableDataSource<Carrera>;
+  dataSource: MatTableDataSource<FinalAbierto>;
   displayedColumns = ['fecha_examen', 'carrera', 'materia', 'anio_materia', 'profesor',
    'fecha_inicio', 'fecha_limite', 'cant_inscriptos', 'acciones'];
   showSpinner = true;
 
   constructor(
+    public helper: HelperService,
     private materiasService: MateriasService,
     private notif: NotificationsService,
     private router: Router,

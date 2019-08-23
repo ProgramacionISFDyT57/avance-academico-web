@@ -8,59 +8,87 @@ import { InscriptosCursada } from '../modelos/inscriptos-cursada';
 import { InscriptosFinal } from '../modelos/inscriptos-final';
 import { AvanceAcademico } from '../modelos/avance-academico';
 import { Final } from '../modelos/final';
+import { FinalAbierto } from '../modelos/final-abierto';
+import { CarrerasService } from './carreras.service';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class MateriasService {
+
+materias: Materia[];
+
   constructor(
-    private http: HttpService
+    private http: HttpService,
+    private carrerasService: CarrerasService
   ) { }
 
-  public traerMaterias(): Observable<Materia[]> {
-    return this.http.get('/materias');
+  private eliminarCacheMaterias() {
+    this.materias = null;
+  }
+
+  public traerMaterias(): Promise<Materia[]> {
+    return new Promise( (resolve, reject) => {
+      if (this.materias) {
+        resolve(this.materias);
+      } else {
+        this.http.get('/materias').subscribe(
+          (res) => {
+            this.materias = res;
+            resolve(this.materias);
+          },
+          (error) => {
+            reject(error);
+          }
+        );
+      }
+    });
   }
 
   public traerMateria(id: number): Observable<Materia> {
     return this.http.get('/materia/' + id);
   }
 
-  public crearMateria(materia: any): Observable<Mensaje> {
-    return this.http.post('/materias', { materia });
-  }
-
   public materias_por_carrera(idCarrera: number): Observable<Materia[]> {
     return this.http.get('/materias_por_carrera/' + idCarrera);
   }
 
+  public crearMateria(materia: Materia): Observable<Mensaje> {
+    this.eliminarCacheMaterias();
+    this.carrerasService.eliminarCacheCarreras();
+    return this.http.post('/materias', { materia });
+  }
+
   public eliminarMateria(idMateria: number): Observable<Mensaje> {
+    this.eliminarCacheMaterias();
+    this.carrerasService.eliminarCacheCarreras();
     return this.http.delete('/materias/' + idMateria);
   }
 
   // Finales
-  public abrirInscripcionFinal(mesa): Observable<any> {
+  public abrirInscripcionFinal(mesa): Observable<Mensaje> {
     return this.http.post('/crear_mesa', { mesa });
   }
   public eliminarMesaFinal(id: number): Observable<Mensaje> {
     return this.http.delete('/mesas/' + id);
   }
-  public inscripcionFinal(idMesa: number): Observable<any> {
+  public inscripcionFinal(idMesa: number): Observable<Mensaje> {
     return this.http.post('/inscripciones_mesas', { id_mesa: idMesa });
   }
-  public eliminarInscripcionFinal(idInscripcionMesa: number): Observable<any> {
+  public eliminarInscripcionFinal(idInscripcionMesa: number): Observable<Mensaje> {
     return this.http.delete('/inscripciones_mesas/' + idInscripcionMesa);
   }
-  public listarFinales(): Observable<any> {
+  public listarFinales(): Observable<FinalAbierto[]> {
     return this.http.get('/lista_mesas');
   }
   public listarInscriptosFinal(idFinal: number): Observable<InscriptosFinal[]> {
     return this.http.get('/inscriptos_mesa/' + idFinal);
   }
-  public cargarNotasFinal(final: Final): Observable<any> {
+  public cargarNotasFinal(final: Final): Observable<Mensaje> {
     return this.http.post('/notas_final', { final });
   }
-  public eliminarNotasFinal(idInscripcionMesa: number): Observable<any> {
+  public eliminarNotasFinal(idInscripcionMesa: number): Observable<Mensaje> {
     return this.http.delete('/notas_final/' + idInscripcionMesa);
   }
 
@@ -68,7 +96,7 @@ export class MateriasService {
   public listarCursadas(): Observable<Cursada[]> {
     return this.http.get('/cursadas_abiertas');
   }
-  public abrirInscripcionCursada(cursada): Observable<any> {
+  public abrirInscripcionCursada(cursada): Observable<Mensaje> {
     return this.http.post('/cursadas', { cursada });
   }
   public eliminarCursada(id: number): Observable<Mensaje> {
@@ -77,16 +105,16 @@ export class MateriasService {
   public listarInscriptosCursadas(idCursada: number): Observable<InscriptosCursada[]> {
     return this.http.get('/inscriptos_cursada/' + idCursada);
   }
-  public cargarNotasCursada(avanceAcademico: AvanceAcademico): Observable<any> {
+  public cargarNotasCursada(avanceAcademico: AvanceAcademico): Observable<Mensaje> {
     return this.http.post('/notas_cursada', { avance_academico: avanceAcademico });
   }
-  public eliminarNotasCursada(id: number): Observable<any> {
+  public eliminarNotasCursada(id: number): Observable<Mensaje> {
     return this.http.delete('/notas_cursada/' + id);
   }
-  public realizarInscripcionCursada(idCursada: number, cursa: boolean, equivalencia: boolean): Observable<any> {
+  public realizarInscripcionCursada(idCursada: number, cursa: boolean, equivalencia: boolean): Observable<Mensaje> {
     return this.http.post('/inscripcion_cursada/', { id_cursada: idCursada, cursa, equivalencia});
   }
-  public eliminarInscripcionCursada(idInscripcionCursada: number): Observable<any> {
+  public eliminarInscripcionCursada(idInscripcionCursada: number): Observable<Mensaje> {
     return this.http.delete('/inscripcion_cursada/' + idInscripcionCursada);
   }
 

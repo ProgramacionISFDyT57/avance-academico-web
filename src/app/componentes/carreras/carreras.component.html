@@ -6,7 +6,7 @@
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
   </mat-form-field>
 
-  <button matTooltip="Crear Carrera" class="btn-crear" mat-fab color="primary" routerLink="crear">
+  <button *ngIf="this.helper.rolesAdmitidos(['directivo'])" matTooltip="Crear Carrera" class="btn-crear" mat-fab color="primary" routerLink="crear">
     <mat-icon>add</mat-icon>
   </button>
 
@@ -36,18 +36,21 @@
     <ng-container matColumnDef="acciones">
       <th mat-header-cell *matHeaderCellDef> Acciones </th>
       <td class="nowrap" mat-cell *matCellDef="let element">
-        <button *ngIf="element.cantidad_materias > element.materias_cargadas" class="mx-1" mat-mini-fab
-          matTooltip="Crear Materia" (click)="crearMateria(element.id, element.nombre, element.duracion)">
-          <mat-icon>add</mat-icon>
-        </button>
-        <button *ngIf="element.cantidad_materias == element.materias_cargadas" class="mx-1" mat-mini-fab color="primary"
-          matTooltip="Abrir Inscripción" (click)="abrirInscripcionCarrera(element.id, element.nombre)">
-          <mat-icon>add</mat-icon>
-        </button>
-        <button *ngIf="element.materias_cargadas == 0" class="mx-1" mat-mini-fab color="warn"
-          matTooltip="Eliminar Carrera" (click)="eliminar(element.id)">
-          <mat-icon>delete_forever</mat-icon>
-        </button>
+        <ng-container *ngIf="this.helper.rolesAdmitidos(['directivo'])">
+          <button *ngIf="element.cantidad_materias > element.materias_cargadas" class="mx-1" mat-mini-fab
+            matTooltip="Crear Materia" (click)="crearMateria(element.id, element.nombre, element.duracion)">
+            <mat-icon>add</mat-icon>
+          </button>
+          <button *ngIf="element.cantidad_materias == element.materias_cargadas" class="mx-1" mat-mini-fab
+            color="primary" matTooltip="Abrir Inscripción"
+            (click)="abrirInscripcionCarrera(element.id, element.nombre)">
+            <mat-icon>add</mat-icon>
+          </button>
+          <button *ngIf="element.materias_cargadas == 0" class="mx-1" mat-mini-fab color="warn"
+            matTooltip="Eliminar Carrera" (click)="eliminar(element.id)">
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+        </ng-container>
       </td>
     </ng-container>
 

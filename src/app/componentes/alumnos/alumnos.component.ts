@@ -37,20 +37,19 @@ export class AlumnosComponent implements OnInit {
     }
   }
 
-  public listarAlumnos() {
-    this.alumnosService.traerAlumnos().subscribe(
-      (res) => {
-        this.dataSource = new MatTableDataSource(res);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-        this.showSpinner = false;
-        console.log(res);
-      },
-      (error) => {
-        this.showSpinner = false;
-        console.log(error);
-        this.notif.error(error.error.mensaje);
-      });
+  private async listarAlumnos() {
+    try {
+      const res = await this.alumnosService.traerAlumnos();
+      this.dataSource = new MatTableDataSource(res);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      this.showSpinner = false;
+      console.log(res);
+    } catch (error) {
+      console.error(error);
+      this.notif.error(error.error.mensaje);
+      this.showSpinner = false;
+    }
   }
 
   crearAlumno() {
@@ -74,6 +73,10 @@ export class AlumnosComponent implements OnInit {
         }
       );
     }
+  }
+
+  detalles(idAlumno: number) {
+    alert('por hacer');
   }
 
   ngOnInit() {

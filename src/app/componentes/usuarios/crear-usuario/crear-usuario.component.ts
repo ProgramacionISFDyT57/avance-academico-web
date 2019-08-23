@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 import { NotificationsService } from 'angular2-notifications';
+import { Usuario } from 'src/app/modelos/usuario';
 
 
 @Component({
@@ -29,19 +30,28 @@ export class CrearUsuarioComponent implements OnInit {
 
   private crearFormulario() {
     this.formulario = this.fb.group({
-      documento: ['', Validators.required],
+      dni: ['', Validators.required],
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
-      telefono: ['', Validators.required],
+      telefono: [''],
       email: ['', [Validators.required, Validators.email]],
-      fecha_nacimiento: [null, Validators.required],
-      rol: [null, Validators.required]
+      fecha_nacimiento: [null],
+      id_rol: [null, Validators.required]
     });
   }
 
   enviar() {
     this.showSpinner = true;
-    this.usuariosService.crearUsuarios(this.formulario.value).subscribe(
+    const usuario: Usuario = {
+      apellido: this.formulario.value.apellido,
+      dni: this.formulario.value.documento,
+      email: this.formulario.value.email,
+      fecha_nacimiento: this.formulario.value.fecha_nacimiento,
+      nombre: this.formulario.value.nombre,
+      id_rol: this.formulario.value.id_rol,
+      telefono: this.formulario.value.telefono
+    };
+    this.usuariosService.crearUsuario(usuario).subscribe(
       (resp) => {
         this.crearFormulario();
         this.showSpinner = false;

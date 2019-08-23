@@ -17,6 +17,7 @@ import { DetallesCursadaComponent } from './componentes/inscripciones/cursadas/d
 import { DetallesFinalComponent } from './componentes/inscripciones/finales/detalles-final/detalles-final.component';
 
 const routes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: 'inicio' },
   { path: 'inicio', component: InicioComponent, canActivate: [LoginGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'carreras', component: CarrerasComponent, canActivate: [LoginGuard] },

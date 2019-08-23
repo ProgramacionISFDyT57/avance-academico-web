@@ -3,39 +3,74 @@ import { Observable } from 'rxjs';
 import { HttpService } from './http.service';
 import { Usuario } from '../modelos/usuario';
 import { Mensaje } from '../modelos/respuesta-mensaje';
+import { Profesor } from '../modelos/profesor';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuariosService {
 
+  profesores: Profesor[];
+  usuarios: Usuario[];
+
   constructor(
     private http: HttpService
   ) { }
 
-  public traerUsuarios(): Observable<Usuario[]> {
-    return this.http.get('/usuarios');
+  private eliminarCacheProfesores() {
+    this.profesores = null;
   }
 
-  public crearUsuarios(usuario1): Observable<Mensaje> {
-    const usuario = {
-      dni: usuario1.documento,
-      nombre: usuario1.nombre,
-      apellido: usuario1.apellido,
-      telefono: usuario1.telefono,
-      email: usuario1.email,
-      fecha_nacimiento: usuario1.fecha_nacimiento,
-      id_rol: usuario1.rol,
-    };
+  private eliminarCacheUsuarios() {
+    this.usuarios = null;
+  }
+
+  public crearUsuario(usuario: Usuario): Observable<Mensaje> {
+    this.eliminarCacheProfesores();
+    this.eliminarCacheUsuarios();
     return this.http.post('/usuarios', { usuario });
   }
 
-  public traerProfesores(): Observable<any> {
-    return this.http.get('/profesores');
+  public eliminarUsuario(id: number): Observable<Mensaje> {
+    this.eliminarCacheProfesores();
+    this.eliminarCacheUsuarios();
+    return this.http.delete('/usuarios/' + id);
   }
 
-  public eliminarUsuario(id: number): Observable<any> {
-    return this.http.delete('/usuarios/' + id);
+  public traerUsuarios(): Promise<Usuario[]> {
+    return new Promise( (resolve, reject) => {
+      if (this.usuarios) {
+        resolve(this.usuarios);
+      } else {
+        this.http.get('/usuarios').subscribe(
+          (res) => {
+            this.usuarios = res;
+            resolve(this.usuarios);
+          },
+          (error) => {
+            reject(error);
+          }
+        );
+      }
+    });
+  }
+
+  public traerProfesores(): Promise<Profesor[]> {
+    return new Promise( (resolve, reject) => {
+      if (this.profesores) {
+        resolve(this.profesores);
+      } else {
+        this.http.get('/profesores').subscribe(
+          (res) => {
+            this.profesores = res;
+            resolve(this.profesores);
+          },
+          (error) => {
+            reject(error);
+          }
+        );
+      }
+    });
   }
 
 }

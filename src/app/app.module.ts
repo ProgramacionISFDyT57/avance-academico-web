@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './modulos/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
+import { NgSelectModule } from '@ng-select/ng-select';
 // Notifications
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { AppRoutingModule } from './app-routing.module';
@@ -34,6 +34,7 @@ import { CargarNotasCursadaComponent } from './componentes/inscripciones/cursada
 import { CrearAlumnoComponent } from './componentes/alumnos/crear-alumno/crear-alumno.component';
 import { RealizarInscripcionCursadaComponent } from './componentes/inscripciones/cursadas/realizar-inscripcion-cursada/realizar-inscripcion-cursada.component';
 import { CargaNotasFinalComponent } from './componentes/inscripciones/finales/carga-notas-final/carga-notas-final.component';
+import { MAT_DATE_LOCALE } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -82,10 +83,12 @@ import { CargaNotasFinalComponent } from './componentes/inscripciones/finales/ca
     AppRoutingModule,
     ReactiveFormsModule,
     SimpleNotificationsModule.forRoot(),
-    FlexLayoutModule
+    FlexLayoutModule,
+    NgSelectModule
   ],
   providers: [
-    ConfirmationDialogService
+    { provide: MAT_DATE_LOCALE, useValue: 'es' },
+    ConfirmationDialogService,
   ],
   bootstrap: [AppComponent]
 })

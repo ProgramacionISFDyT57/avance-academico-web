@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { HelperService } from './servicios/helper.service';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,10 @@ export class AppComponent {
 
   rol: string;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    public helper: HelperService
+  ) {}
 
   public rutaActualInscripcion() {
     if (this.router.url.includes('inscripcion')) {

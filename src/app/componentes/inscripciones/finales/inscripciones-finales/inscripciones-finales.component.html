@@ -35,40 +35,48 @@
     </ng-container>
 
     <ng-container matColumnDef="fecha_inicio">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Inicio de Inscripcióon </th>
-        <td mat-cell *matCellDef="let element"> {{element.fecha_inicio | date: 'dd/MM/yyyy'}} </td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Inicio de Inscripcióon </th>
+      <td mat-cell *matCellDef="let element"> {{element.fecha_inicio | date: 'dd/MM/yyyy'}} </td>
     </ng-container>
 
     <ng-container matColumnDef="fecha_limite">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fin de Inscripción </th>
-        <td mat-cell *matCellDef="let element"> {{element.fecha_limite | date: 'dd/MM/yyyy'}} </td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Fin de Inscripción </th>
+      <td mat-cell *matCellDef="let element"> {{element.fecha_limite | date: 'dd/MM/yyyy'}} </td>
     </ng-container>
 
     <ng-container matColumnDef="cant_inscriptos">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Inscriptos </th>
       <td mat-cell *matCellDef="let element"> {{element.cant_inscriptos}} </td>
-  </ng-container>
+    </ng-container>
 
     <ng-container matColumnDef="fecha_examen">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Exámen </th>
-        <td mat-cell *matCellDef="let element"> {{element.fecha_examen | date: 'dd/MM/yyyy'}} </td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Exámen </th>
+      <td mat-cell *matCellDef="let element"> {{element.fecha_examen | date: 'dd/MM/yyyy'}} </td>
     </ng-container>
 
     <ng-container matColumnDef="acciones">
       <th mat-header-cell *matHeaderCellDef> Acciones </th>
       <td class="nowrap" mat-cell *matCellDef="let element">
-        <button class="mx-1" mat-mini-fab color="primary" matTooltip="Inscribirse" (click)="inscribirse(element.materia, element.fecha_examen, element.id)">
-          <mat-icon>queue</mat-icon>
-        </button>
-        <button class="mx-1" mat-mini-fab color="warn" matTooltip="Eliminar Inscripción" (click)="desinscribirse(element.id_inscripcion_mesa)">
-          <mat-icon>remove_from_queue</mat-icon>
-        </button>
-        <button class="mx-1" mat-mini-fab color="primary" matTooltip="Detalles" (click)="detalles(element.id)">
-          <mat-icon>list_alt</mat-icon>
-        </button>
-        <button class="mx-1" mat-mini-fab color="warn" matTooltip="Eliminar" (click)="eliminar(element.id)">
-          <mat-icon>delete_forever</mat-icon>
-        </button>
+
+        <ng-container *ngIf="this.helper.rolesAdmitidos(['alumno'])">
+          <button *ngIf="!element.id_inscripcion_mesa" class="mx-1" mat-mini-fab color="primary" matTooltip="Inscribirse"
+            (click)="inscribirse(element.materia, element.fecha_examen, element.id)">
+            <mat-icon>queue</mat-icon>
+          </button>
+          <button *ngIf="element.id_inscripcion_mesa" class="mx-1" mat-mini-fab color="warn" matTooltip="Eliminar Inscripción"
+            (click)="desinscribirse(element.id_inscripcion_mesa)">
+            <mat-icon>remove_from_queue</mat-icon>
+          </button>
+        </ng-container>
+
+        <ng-container *ngIf="this.helper.rolesAdmitidos(['directivo', 'preceptor'])">
+          <button class="mx-1" mat-mini-fab color="primary" matTooltip="Detalles" (click)="detalles(element.id)">
+            <mat-icon>list_alt</mat-icon>
+          </button>
+          <button *ngIf="!+element.cant_inscriptos" class="mx-1" mat-mini-fab color="warn" matTooltip="Eliminar" (click)="eliminar(element.id)">
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+        </ng-container>
       </td>
     </ng-container>
 

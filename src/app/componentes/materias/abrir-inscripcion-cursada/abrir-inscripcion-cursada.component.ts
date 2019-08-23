@@ -3,7 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MateriasService } from 'src/app/servicios/materias.service';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 import { NotificationsService } from 'angular2-notifications';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MAT_DATE_LOCALE } from '@angular/material';
+import { Profesor } from 'src/app/modelos/profesor';
 
 @Component({
   selector: 'app-abrir-inscripcion-cursada',
@@ -15,7 +16,7 @@ export class AbrirInscripcionCursadaComponent implements OnInit {
   formulario: FormGroup;
   showSpinner = true;
   materia: string;
-  profesores = [];
+  profesores: Profesor[] = [];
   public idMateria: number;
 
   constructor(
@@ -28,10 +29,13 @@ export class AbrirInscripcionCursadaComponent implements OnInit {
   ) { }
 
   private crearFormulario() {
+    const fechaActual = new Date();
+    const fechaLimite = new Date();
+    fechaLimite.setMonth(fechaLimite.getMonth() + 1);
     this.formulario = this.fb.group({
       año: [2019, [Validators.required, Validators.min(2019)]],
-      fecha_inicio: [null, Validators.required],
-      fecha_limite: [null, Validators.required],
+      fecha_inicio: [fechaActual, Validators.required],
+      fecha_limite: [fechaLimite, Validators.required],
       id_profesor: [null],
     });
   }
@@ -40,19 +44,17 @@ export class AbrirInscripcionCursadaComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  private cargarProfesores() {
-    this.usuariosService.traerProfesores().subscribe(
-      (res) => {
-        this.showSpinner = false;
-        console.log(res);
-        this.profesores = res;
-      },
-      (error) => {
-        this.showSpinner = false;
-        this.notif.error(error.error.mensaje);
-        console.error(error);
-      }
-    );
+  private async cargarProfesores() {
+    try {
+      const profesores = await this.usuariosService.traerProfesores();
+      console.log(profesores);
+      this.profesores = profesores;
+      this.showSpinner = false;
+    } catch (error) {
+      console.error(error);
+      this.notif.error(error.error.mensaje);
+      this.showSpinner = false;
+    }
   }
 
   enviar() {

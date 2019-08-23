@@ -6,6 +6,7 @@ import { NotificationsService } from 'angular2-notifications';
 import { AbrirInscripcionCursadaComponent } from './abrir-inscripcion-cursada/abrir-inscripcion-cursada.component';
 import { AbrirInscripcionFinalComponent } from './abrir-inscripcion-final/abrir-inscripcion-final.component';
 import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
+import { HelperService } from 'src/app/servicios/helper.service';
 
 @Component({
   selector: 'app-materias',
@@ -22,6 +23,7 @@ export class MateriasComponent implements OnInit {
   showSpinner = true;
 
   constructor(
+    public helper: HelperService,
     private materiasService: MateriasService,
     private notif: NotificationsService,
     public dialog: MatDialog,
@@ -46,19 +48,19 @@ export class MateriasComponent implements OnInit {
     });
   }
 
-  public ListarMaterias() {
-    this.materiasService.traerMaterias().subscribe(
-      (res) => {
-        this.dataSource = new MatTableDataSource(res);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-        this.showSpinner = false;
-        console.log(res);
-      },
-      (error) => {
-        this.notif.error(error.error.mensaje);
-        console.log(error);
-      });
+  private async listarMaterias() {
+    try {
+      const res = await this.materiasService.traerMaterias();
+      this.dataSource = new MatTableDataSource(res);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      this.showSpinner = false;
+      console.log(res);
+    } catch (error) {
+      console.error(error);
+      this.notif.error(error.error.mensaje);
+      this.showSpinner = false;
+    }
   }
 
   public async eliminar(id: number) {
@@ -67,7 +69,7 @@ export class MateriasComponent implements OnInit {
       this.showSpinner = true;
       this.materiasService.eliminarMateria(id).subscribe(
         (res) => {
-          this.ListarMaterias();
+          this.listarMaterias();
           console.log(res);
         },
         (error) => {
@@ -80,15 +82,13 @@ export class MateriasComponent implements OnInit {
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
   }
 
   ngOnInit() {
-    this.ListarMaterias();
-
+    this.listarMaterias();
   }
 
 }

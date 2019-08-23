@@ -35,7 +35,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatSortModule,
     MatDialogModule,
     MatMenuModule,
-    MatRadioModule
+    MatRadioModule,
   ], exports: [
     MatButtonModule,
     MatCheckboxModule,

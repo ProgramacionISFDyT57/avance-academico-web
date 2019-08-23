@@ -42,7 +42,7 @@
         <button class="mx-1" mat-mini-fab color="primary" matTooltip="Cargar Notas" (click)="cargarNotas(element)">
           <mat-icon>add</mat-icon>
         </button>
-        <button class="mx-1" mat-mini-fab color="warn" matTooltip="Eliminar Notas" (click)="eliminarNotas(element.id_inscripcion_mesa)">
+        <button *ngIf="element.nota" class="mx-1" mat-mini-fab color="warn" matTooltip="Eliminar Notas" (click)="eliminarNotas(element.id_inscripcion_mesa)">
           <mat-icon>remove</mat-icon>
         </button>
       </td>

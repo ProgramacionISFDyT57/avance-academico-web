@@ -1,11 +1,11 @@
-export interface Usuario {
+export interface Profesor {
   apellido: string;
+  dni: string;
   email: string;
   fecha_alta?: string;
   fecha_nacimiento: string;
   id?: number;
-  id_rol?: number;
   nombre: string;
-  dni: string;
+  nombre_completo: string;
   telefono: string;
 }

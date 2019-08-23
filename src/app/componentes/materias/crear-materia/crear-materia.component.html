@@ -13,11 +13,16 @@
         <mat-form-field>
           <input matInput placeholder="Nombre de la materia" formControlName="nombre">
         </mat-form-field>
-    
+
         <mat-form-field>
-          <input type="number" min="1" max="5" matInput placeholder="Año" formControlName="anio">
+          <mat-label>Año</mat-label>
+          <mat-select formControlName="anio" (selectionChange)="cambioAnio()">
+            <mat-option *ngFor="let anio of anios" [value]="anio">
+              {{anio}}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
-    
+
         <mat-form-field>
           <mat-label>Tipo de materia</mat-label>
           <mat-select formControlName="tipoMateria">
@@ -26,21 +31,17 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field>
-          <mat-label>Correlativas</mat-label>
-          <mat-select formControlName="correlativas" multiple>
-            <ng-container *ngFor="let materia of materias">
-              <mat-option *ngIf="formulario.value.anio > materia.anio" [value]="materia.id">
-                {{materia.nombre}}
-              </mat-option>
-            </ng-container>
-          </mat-select>
-        </mat-form-field>
+
+        <ng-select [items]="materiasFiltradas" [groupBy]="'anio'" [placeholder]="'Correlativas'" [notFoundText]="'Na hay materias de años anteriores'" [multiple]="true" [loading]="cargadoMaterias"
+          bindLabel="nombre" bindValue="id" formControlName="correlativas">
+        </ng-select>
+
       </form>
     </mat-card-content>
 
     <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit" form="form" [disabled]="!formulario.valid || showSpinner">Crear</button>
+      <button mat-raised-button color="primary" type="submit" form="form"
+        [disabled]="!formulario.valid || showSpinner">Crear</button>
       <button mat-raised-button (click)="cerrar()">Volver </button>
     </mat-card-actions>
   </mat-card>

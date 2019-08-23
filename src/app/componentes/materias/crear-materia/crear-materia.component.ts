@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MateriasService } from 'src/app/servicios/materias.service';
 import { NotificationsService } from 'angular2-notifications';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Materia } from 'src/app/modelos/materia';
 
 @Component({
   selector: 'app-crear-materia',
@@ -34,7 +35,10 @@ export class CrearMateriaComponent implements OnInit {
       nombre: 'Seminario'
     },
   ];
-  materias = [];
+  materias: Materia[] = [];
+  cargadoMaterias = true;
+  materiasFiltradas: Materia[] = [];
+  anios: number[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -47,10 +51,26 @@ export class CrearMateriaComponent implements OnInit {
   private crearFormulario() {
     this.formulario = this.fb.group({
       nombre: ['', Validators.required],
-      anio: [1, [Validators.required, Validators.max(this.duracion || 5), Validators.min(1)]],
+      anio: [null, Validators.required],
       tipoMateria: [null, Validators.required],
       correlativas: [[]]
     });
+  }
+
+  private crearArregloAños(duracion: number) {
+    for (let x = 1 ; x <= duracion ; x++) {
+      this.anios.push(x);
+    }
+  }
+
+  public cambioAnio() {
+    const año = this.formulario.value.anio;
+    this.materiasFiltradas = [];
+    for (const materia of this.materias) {
+      if (materia.anio < año) {
+        this.materiasFiltradas.push(materia);
+      }
+    }
   }
 
   private cargar_materias_por_carrera(idCarrera: number) {
@@ -58,6 +78,7 @@ export class CrearMateriaComponent implements OnInit {
       (res) => {
         console.log(res);
         this.materias = res;
+        this.cargadoMaterias = false;
         this.showSpinner = false;
       },
       (error) => {
@@ -73,9 +94,9 @@ export class CrearMateriaComponent implements OnInit {
   }
 
   enviar() {
-    const materia = {
+    const materia: Materia = {
       nombre: this.formulario.value.nombre,
-      año: this.formulario.value.anio,
+      anio: this.formulario.value.anio,
       id_carrera: this.idCarrera,
       id_tipo: this.formulario.value.tipoMateria,
       correlativas: this.formulario.value.correlativas
@@ -97,6 +118,7 @@ export class CrearMateriaComponent implements OnInit {
     this.idCarrera = this.data.idCarrera;
     this.carrera = this.data.carrera;
     this.duracion = this.data.duracion;
+    this.crearArregloAños(this.duracion);
     this.cargar_materias_por_carrera(this.idCarrera);
     this.crearFormulario();
   }
