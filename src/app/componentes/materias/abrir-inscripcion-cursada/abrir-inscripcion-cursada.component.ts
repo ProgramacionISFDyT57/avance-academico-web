@@ -4,6 +4,7 @@ import { MateriasService } from 'src/app/servicios/materias.service';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 import { NotificationsService } from 'angular2-notifications';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Profesor } from 'src/app/modelos/profesor';
 
 @Component({
   selector: 'app-abrir-inscripcion-cursada',
@@ -15,7 +16,7 @@ export class AbrirInscripcionCursadaComponent implements OnInit {
   formulario: FormGroup;
   showSpinner = true;
   materia: string;
-  profesores = [];
+  profesores: Profesor[] = [];
   public idMateria: number;
 
   constructor(

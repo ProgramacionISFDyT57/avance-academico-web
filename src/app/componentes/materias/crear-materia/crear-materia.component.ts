@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MateriasService } from 'src/app/servicios/materias.service';
 import { NotificationsService } from 'angular2-notifications';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Materia } from 'src/app/modelos/materia';
 
 @Component({
   selector: 'app-crear-materia',
@@ -73,9 +74,9 @@ export class CrearMateriaComponent implements OnInit {
   }
 
   enviar() {
-    const materia = {
+    const materia: Materia = {
       nombre: this.formulario.value.nombre,
-      año: this.formulario.value.anio,
+      anio: this.formulario.value.anio,
       id_carrera: this.idCarrera,
       id_tipo: this.formulario.value.tipoMateria,
       correlativas: this.formulario.value.correlativas

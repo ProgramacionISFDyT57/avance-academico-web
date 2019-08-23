@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpService } from './http.service';
 import { Usuario } from '../modelos/usuario';
 import { Mensaje } from '../modelos/respuesta-mensaje';
+import { Profesor } from '../modelos/profesor';
 
 @Injectable({
   providedIn: 'root'
@@ -30,11 +31,11 @@ export class UsuariosService {
     return this.http.post('/usuarios', { usuario });
   }
 
-  public traerProfesores(): Observable<any> {
+  public traerProfesores(): Observable<Profesor[]> {
     return this.http.get('/profesores');
   }
 
-  public eliminarUsuario(id: number): Observable<any> {
+  public eliminarUsuario(id: number): Observable<Mensaje> {
     return this.http.delete('/usuarios/' + id);
   }
 

@@ -18,11 +18,11 @@ export class AlumnosService {
     return this.http.get('/alumnos');
   }
 
-  public crearAlumno(usuario: Usuario, idCarreraAbierta: number): Observable<any> {
+  public crearAlumno(usuario: Usuario, idCarreraAbierta: number): Observable<Mensaje> {
     return this.http.post('/alumnos', {usuario, id_carrera_abierta: idCarreraAbierta});
   }
 
-  public eliminarAlumno(id: number): Observable<any> {
+  public eliminarAlumno(id: number): Observable<Mensaje> {
     return this.http.delete('/alumnos/' + id);
   }
 
