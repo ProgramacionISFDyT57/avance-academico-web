@@ -12,6 +12,7 @@ import { InscriptosCarrera } from '../modelos/inscriptos-carrera';
 export class CarrerasService {
 
   carreras: Carrera[];
+  carrerasAbiertasHoy: CarreraAbierta[];
 
   constructor(
     private http: HttpService
@@ -19,6 +20,9 @@ export class CarrerasService {
 
   public eliminarCacheCarreras() {
     this.carreras = null;
+  }
+  public eliminarCacheCarrerasAbiertasHoy() {
+    this.carrerasAbiertasHoy = null;
   }
 
   public traerCarreras(): Promise<Carrera[]> {
@@ -62,13 +66,30 @@ export class CarrerasService {
   public traerCarrerasAbiertas(): Observable<CarreraAbierta[]> {
     return this.http.get('/carreras_abiertas');
   }
-  public listarCarrerasAbiertasHoy(): Observable<CarreraAbierta[]> {
-    return this.http.get('/carreras_abiertas_hoy');
+  public listarCarrerasAbiertasHoy(): Promise<CarreraAbierta[]> {
+    return new Promise( (resolve, reject) => {
+      if (this.carrerasAbiertasHoy) {
+        resolve(this.carrerasAbiertasHoy);
+      } else {
+        this.http.get('/carreras_abiertas_hoy').subscribe(
+          (res) => {
+            this.carrerasAbiertasHoy = res;
+            resolve(this.carrerasAbiertasHoy);
+          },
+          (error) => {
+            reject(error);
+          }
+        );
+      }
+    });
   }
+
   public abrirInscripcionCarrera(carrerasAbiertas): Observable<Mensaje> {
+    this.eliminarCacheCarrerasAbiertasHoy();
     return this.http.post('/carreras_abiertas', { carreras_abiertas: carrerasAbiertas });
   }
   public eliminarCarreraAbierta(id: number): Observable<Mensaje> {
+    this.eliminarCacheCarrerasAbiertasHoy();
     return this.http.delete('/carreras_abiertas/' + id);
   }
 

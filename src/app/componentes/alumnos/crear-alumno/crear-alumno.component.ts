@@ -38,18 +38,17 @@ export class CrearAlumnoComponent implements OnInit {
     });
   }
 
-  private listarCarrerasAbiertas(): Promise<CarreraAbierta[]> {
-    return new Promise( (resolve, reject) => {
-      this.carrerasService.listarCarrerasAbiertasHoy().subscribe(
-        (resp) => {
-          console.log(resp);
-          resolve(resp);
-        },
-        (error) => {
-          reject(error);
-        }
-      );
-    });
+  private async listarCarrerasAbiertas() {
+    try {
+      const res = await this.carrerasService.listarCarrerasAbiertasHoy();
+      this.carreras = res;
+      this.showSpinner = false;
+      console.log(res);
+    } catch (error) {
+      console.error(error);
+      this.notif.error(error.error.mensaje);
+      this.showSpinner = false;
+    }
   }
 
   enviar() {
@@ -82,15 +81,9 @@ export class CrearAlumnoComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  async ngOnInit() {
-    try {
-      this.crearFormulario();
-      this.carreras = await this.listarCarrerasAbiertas();
-      this.showSpinner = false;
-    } catch (error) {
-      console.error(error);
-    }
-
+  ngOnInit() {
+    this.crearFormulario();
+    this.listarCarrerasAbiertas();
   }
 
 }
