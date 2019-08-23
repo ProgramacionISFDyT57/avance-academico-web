@@ -18,7 +18,7 @@ export class CarrerasService {
   constructor(
     private http: HttpService
   ) { }
-
+  // Cache
   public eliminarCacheCarreras() {
     this.carreras = null;
   }
@@ -29,6 +29,7 @@ export class CarrerasService {
     this.carrerasAbiertasHoy = null;
   }
 
+  // Carreras
   public traerCarreras(): Promise<Carrera[]> {
     return new Promise( (resolve, reject) => {
       if (this.carreras) {
@@ -46,11 +47,9 @@ export class CarrerasService {
       }
     });
   }
-
   public traerCarrera(id: number): Observable<Carrera> {
     return this.http.get('/carrera/' + id);
   }
-
   public crearCarrera(carrera1): Observable<Mensaje> {
     this.eliminarCacheCarreras();
     const carrera = {
@@ -60,7 +59,6 @@ export class CarrerasService {
     };
     return this.http.post('/carreras', { carrera });
   }
-
   public eliminarCarrera(id: number): Observable<Mensaje> {
     this.eliminarCacheCarreras();
     return this.http.delete('/carreras/' + id);
@@ -101,7 +99,6 @@ export class CarrerasService {
       }
     });
   }
-
   public abrirInscripcionCarrera(carrerasAbiertas): Observable<Mensaje> {
     this.eliminarCacheCarrerasAbiertas();
     this.eliminarCacheCarrerasAbiertasHoy();
@@ -117,7 +114,6 @@ export class CarrerasService {
   public listarInscriptosCarrera(idCarreraAbierta: number): Observable<InscriptosCarrera[]> {
     return this.http.get('/inscriptos_carrera/' + idCarreraAbierta);
   }
-
   public eliminarInscripcionCarrera(idInscripcionCarrera: number): Observable<Mensaje> {
     return this.http.delete('/inscripciones_carreras/' + idInscripcionCarrera);
   }
