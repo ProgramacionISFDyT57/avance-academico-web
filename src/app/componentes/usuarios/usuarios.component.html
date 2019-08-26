@@ -6,7 +6,7 @@
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
   </mat-form-field>
 
-  <button matTooltip="Crear Usuario" class="btn-crear" mat-fab color="primary" routerLink="crear">
+  <button matTooltip="Crear Usuario" class="btn-crear" mat-fab color="primary" (click)=crearUsuario()>
     <mat-icon>add</mat-icon>
   </button>
 

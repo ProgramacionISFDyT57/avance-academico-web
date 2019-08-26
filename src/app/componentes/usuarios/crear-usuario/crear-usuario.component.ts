@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 import { NotificationsService } from 'angular2-notifications';
 import { Usuario } from 'src/app/modelos/usuario';
+import { MatDialogRef } from '@angular/material';
 
 
 @Component({
@@ -25,7 +26,9 @@ export class CrearUsuarioComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private usuariosService: UsuariosService,
-    private notif: NotificationsService
+    private notif: NotificationsService,
+    public dialogRef: MatDialogRef<CrearUsuarioComponent>,
+
   ) { }
 
   private crearFormulario() {
@@ -64,6 +67,10 @@ export class CrearUsuarioComponent implements OnInit {
         console.error(error);
       }
     );
+  }
+
+  public cerrar() {
+    this.dialogRef.close();
   }
 
   ngOnInit() {

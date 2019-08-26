@@ -26,7 +26,7 @@
 
     <mat-card-actions>
       <button mat-raised-button color="primary" type="submit" form="form" [disabled]="!formulario.valid || showSpinner">Crear</button>
-      <button mat-raised-button routerLink="../">Volver </button>
+      <button mat-raised-button (click)="cerrar()">Volver </button>
     </mat-card-actions>
   </mat-card>
 
