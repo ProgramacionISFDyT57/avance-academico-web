@@ -15,6 +15,7 @@ import { AlumnosComponent } from './componentes/alumnos/alumnos.component';
 import { DetallesCarreraComponent } from './componentes/inscripciones/carreras/detalles-carrera/detalles-carrera.component';
 import { DetallesCursadaComponent } from './componentes/inscripciones/cursadas/detalles-cursada/detalles-cursada.component';
 import { DetallesFinalComponent } from './componentes/inscripciones/finales/detalles-final/detalles-final.component';
+import { AvanceAcademicoComponent } from './componentes/avance-academico/avance-academico.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'inicio' },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'usuarios', component: UsuariosComponent, canActivate: [LoginGuard] },
   { path: 'usuarios/crear', component: CrearUsuarioComponent, canActivate: [LoginGuard] }, // pasar a modal y eliminar
   { path: 'alumnos', component: AlumnosComponent, canActivate: [LoginGuard] },
+  { path: 'avance_academico', component: AvanceAcademicoComponent, canActivate: [LoginGuard] },
 
   { path: 'inscripcion/carreras', component: InscripcionesCarrerasComponent, canActivate: [LoginGuard] },
   { path: 'inscripcion/carreras/:id', component: DetallesCarreraComponent, canActivate: [LoginGuard] },

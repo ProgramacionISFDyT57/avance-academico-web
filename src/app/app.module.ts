@@ -35,6 +35,7 @@ import { CrearAlumnoComponent } from './componentes/alumnos/crear-alumno/crear-a
 import { RealizarInscripcionCursadaComponent } from './componentes/inscripciones/cursadas/realizar-inscripcion-cursada/realizar-inscripcion-cursada.component';
 import { CargaNotasFinalComponent } from './componentes/inscripciones/finales/carga-notas-final/carga-notas-final.component';
 import { MAT_DATE_LOCALE } from '@angular/material';
+import { AvanceAcademicoComponent } from './componentes/avance-academico/avance-academico.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { MAT_DATE_LOCALE } from '@angular/material';
     CrearAlumnoComponent,
     RealizarInscripcionCursadaComponent,
     CargaNotasFinalComponent,
+    AvanceAcademicoComponent,
   ],
   entryComponents: [
     ConfirmationDialogComponent,
