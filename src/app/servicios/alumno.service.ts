@@ -48,4 +48,8 @@ export class AlumnosService {
     return this.http.delete('/alumnos/' + id);
   }
 
+  public avanceAcademico(): Observable<Mensaje> {
+    return this.http.get('/avance_academico');
+  }
+
 }
