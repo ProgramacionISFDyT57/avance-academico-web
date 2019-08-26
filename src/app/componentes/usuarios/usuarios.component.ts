@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 import { Usuario } from '../../modelos/usuario';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
 import { NotificationsService } from 'angular2-notifications';
+import { CrearUsuarioComponent } from './crear-usuario/crear-usuario.component';
 
 @Component({
   selector: 'app-usuarios',
@@ -21,7 +22,9 @@ export class UsuariosComponent implements OnInit {
   constructor(
     private usuariosService: UsuariosService,
     private confirmation: ConfirmationDialogService,
-    private notif: NotificationsService
+    private notif: NotificationsService,
+    public dialog: MatDialog,
+
   ) { }
 
   private async listarUsuarios() {
@@ -73,6 +76,13 @@ export class UsuariosComponent implements OnInit {
     alert('por hacer');
   }
 
+
+
+  crearUsuario() {
+    this.dialog.open(CrearUsuarioComponent);
+  }
+
+  
   ngOnInit() {
     this.listarUsuarios();
   }

@@ -4,9 +4,10 @@ import { Carrera } from 'src/app/modelos/carrera';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { NotificationsService } from 'angular2-notifications';
 import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
-import { CrearMateriaComponent } from '../materias/crear-materia/crear-materia.component';
 import { AbrirInscripcionCarreraComponent } from './abrir-inscripcion-carrera/abrir-inscripcion-carrera.component';
 import { HelperService } from 'src/app/servicios/helper.service';
+import { CrearCarreraComponent } from './crear-carrera/crear-carrera.component';
+import { CrearMateriaComponent } from '../materias/crear-materia/crear-materia.component';
 
 
 @Component({
@@ -89,6 +90,11 @@ export class CarrerasComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  crearCarrera() {
+    this.dialog.open(CrearCarreraComponent);
+  }
+
 
   ngOnInit() {
     this.listarCarreras();

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CarrerasService } from 'src/app/servicios/carreras.service';
 import { NotificationsService } from 'angular2-notifications';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-crear-carrera',
@@ -15,6 +16,7 @@ export class CrearCarreraComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    public dialogRef: MatDialogRef<CrearCarreraComponent>,
     private carreraService: CarrerasService,
     private notif: NotificationsService
   ) { }
@@ -43,6 +45,10 @@ export class CrearCarreraComponent implements OnInit {
       }
     );
   }
+  public cerrar() {
+    this.dialogRef.close();
+  }
+
 
   ngOnInit() {
     this.crearFormulario();
