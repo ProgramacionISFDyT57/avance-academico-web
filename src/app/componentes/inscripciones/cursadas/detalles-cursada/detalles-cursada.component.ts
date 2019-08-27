@@ -71,9 +71,17 @@ export class DetallesCursadaComponent implements OnInit {
       nota_cuat_2: alumno.nota_cuat_2,
       nota_recuperatorio: alumno.nota_recuperatorio
     };
-    this.dialog.open(CargarNotasCursadaComponent, {
+    const modal = this.dialog.open(CargarNotasCursadaComponent, {
       data: avance
     });
+    modal.beforeClosed().subscribe(
+      (resp) => {
+        if (resp) {
+          this.showSpinner = true;
+          this.listar_inscriptos();
+        }
+      }
+    );
   }
 
   async eliminarNotas(idInscripcionCursada: number) {

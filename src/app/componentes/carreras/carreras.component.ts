@@ -66,13 +66,21 @@ export class CarrerasComponent implements OnInit {
   }
 
   public crearMateria(idCarrera: number, carrera: string, duracion: number) {
-    this.dialog.open(CrearMateriaComponent, {
+    const modal = this.dialog.open(CrearMateriaComponent, {
       data: {
         idCarrera,
         carrera,
         duracion
       }
     });
+    modal.beforeClosed().subscribe(
+      (resp) => {
+        if (resp) {
+          this.showSpinner = true;
+          this.listarCarreras();
+        }
+      }
+    );
   }
 
   public abrirInscripcionCarrera(idCarrera: number, carrera: string, duracion: number) {
@@ -92,7 +100,15 @@ export class CarrerasComponent implements OnInit {
   }
 
   crearCarrera() {
-    this.dialog.open(CrearCarreraComponent);
+    const modal = this.dialog.open(CrearCarreraComponent);
+    modal.beforeClosed().subscribe(
+      (resp) => {
+        if (resp) {
+          this.showSpinner = true;
+          this.listarCarreras();
+        }
+      }
+    );
   }
 
 

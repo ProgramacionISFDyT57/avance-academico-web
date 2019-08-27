@@ -14,6 +14,7 @@ export class CrearMateriaComponent implements OnInit {
 
   formulario: FormGroup;
   showSpinner = true;
+  actualizar = false;
   idCarrera: number;
   carrera: string;
   duracion: number;
@@ -90,7 +91,7 @@ export class CrearMateriaComponent implements OnInit {
   }
 
   public cerrar() {
-    this.dialogRef.close();
+    this.dialogRef.close(this.actualizar);
   }
 
   enviar() {
@@ -105,7 +106,8 @@ export class CrearMateriaComponent implements OnInit {
       (resp) => {
         console.log(resp);
         this.notif.success(resp.mensaje);
-        this.dialogRef.close(true);
+        this.crearFormulario();
+        this.actualizar = true;
       },
       (error) => {
         console.error(error);

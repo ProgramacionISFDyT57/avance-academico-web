@@ -55,12 +55,20 @@ export class InscripcionesCursadasComponent implements OnInit {
   }
 
   inscribirse(idCursada: number, materia: string) {
-    this.dialog.open(RealizarInscripcionCursadaComponent, {
+    const modal = this.dialog.open(RealizarInscripcionCursadaComponent, {
       data: {
         idCursada,
         materia
       }
     });
+    modal.beforeClosed().subscribe(
+      (resp) => {
+        if (resp) {
+          this.showSpinner = true;
+          this.ListarCursadas();
+        }
+      }
+    );
   }
 
   async desinscribirse(idInscripcionCursada: number) {
@@ -106,7 +114,7 @@ export class InscripcionesCursadasComponent implements OnInit {
     const rol = this.helper.rolActual();
     if (rol === 'alumno') {
       this.displayedColumns = ['anio_cursada', 'carrera', 'materia', 'anio_materia',
-        'fecha_inicio', 'fecha_limite', 'profesor', 'aprobada', 'acciones'];
+        'fecha_inicio', 'fecha_limite', 'profesor', 'acciones'];
     } else {
       this.displayedColumns = ['anio_cursada', 'carrera', 'materia', 'anio_materia',
         'fecha_inicio', 'fecha_limite', 'profesor', 'cant_inscriptos', 'acciones'];
