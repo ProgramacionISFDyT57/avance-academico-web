@@ -48,7 +48,7 @@ export class AlumnosService {
     return this.http.delete('/alumnos/' + id);
   }
 
-  public avanceAcademico(): Observable<Mensaje> {
+  public avanceAcademico(): Observable<any> {
     return this.http.get('/avance_academico');
   }
 
