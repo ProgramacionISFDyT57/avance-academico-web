@@ -18,6 +18,13 @@ export class AvanceAcademicoComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
   displayedColumns = ['anio', 'nombre_materia', 'cursada', 'final', 'tomo', 'folio'];
   showSpinner = true;
+  alumno: string;
+  carrera: string;
+  cohorte: number;
+  dni: string;
+  domicilio: string;
+  nacimiento: string;
+  telefono: string;
 
   constructor(
     public helper: HelperService,
@@ -35,6 +42,13 @@ export class AvanceAcademicoComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         this.showSpinner = false;
+        this.alumno = res[0].alumno;
+        this.carrera = res[0].carrera;
+        this.cohorte = res[0].cohorte;
+        this.dni = res[0].dni;
+        this.domicilio = res[0].domicilio;
+        this.nacimiento = res[0].nacimiento;
+        this.telefono = res[0].telefono;
         console.log(res);
       },
       (error) => {

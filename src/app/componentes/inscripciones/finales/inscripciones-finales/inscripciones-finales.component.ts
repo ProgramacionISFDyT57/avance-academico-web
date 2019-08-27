@@ -18,8 +18,7 @@ export class InscripcionesFinalesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<FinalAbierto>;
-  displayedColumns = ['fecha_examen', 'carrera', 'materia', 'anio_materia', 'profesor',
-   'fecha_inicio', 'fecha_limite', 'cant_inscriptos', 'acciones'];
+  displayedColumns;
   showSpinner = true;
 
   constructor(
@@ -112,6 +111,14 @@ export class InscripcionesFinalesComponent implements OnInit {
   }
 
   ngOnInit() {
+    const rol = this.helper.rolActual();
+    if (rol === 'alumno') {
+      this.displayedColumns = ['fecha_examen', 'carrera', 'materia', 'anio_materia', 'profesor',
+      'fecha_inicio', 'fecha_limite', 'nota', 'acciones'];
+    } else {
+      this.displayedColumns = ['fecha_examen', 'carrera', 'materia', 'anio_materia', 'profesor',
+      'fecha_inicio', 'fecha_limite', 'cant_inscriptos', 'acciones'];
+    }
     this.ListarFinales();
   }
 
