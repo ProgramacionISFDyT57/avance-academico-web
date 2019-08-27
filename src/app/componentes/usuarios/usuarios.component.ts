@@ -24,7 +24,6 @@ export class UsuariosComponent implements OnInit {
     private confirmation: ConfirmationDialogService,
     private notif: NotificationsService,
     public dialog: MatDialog,
-
   ) { }
 
   private async listarUsuarios() {
@@ -76,10 +75,16 @@ export class UsuariosComponent implements OnInit {
     alert('por hacer');
   }
 
-
-
   crearUsuario() {
-    this.dialog.open(CrearUsuarioComponent);
+    const modal = this.dialog.open(CrearUsuarioComponent);
+    modal.beforeClosed().subscribe(
+      (resp) => {
+        if (resp) {
+          this.showSpinner = true;
+          this.listarUsuarios();
+        }
+      }
+    );
   }
 
   

@@ -46,7 +46,8 @@
         <button class="mx-1" mat-mini-fab color="primary" matTooltip="Detalles" (click)="detalles(element.id)">
           <mat-icon>list_alt</mat-icon>
         </button>
-        <button class="mx-1" mat-mini-fab color="warn" matTooltip="Eliminar" (click)="eliminar(element.id)">
+        <button *ngIf="this.helper.rolesAdmitidos(['directivo']) && element.cant_inscriptos == 0" class="mx-1"
+          mat-mini-fab color="warn" matTooltip="Eliminar" (click)="eliminar(element.id)">
           <mat-icon>delete_forever</mat-icon>
         </button>
       </td>

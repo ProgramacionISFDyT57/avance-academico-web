@@ -59,9 +59,9 @@ export class InscripcionesFinalesComponent implements OnInit {
       this.showSpinner = true;
       this.materiasService.inscripcionFinal(id).subscribe(
         (resp) => {
-          this.showSpinner = false;
           console.log(resp);
           this.notif.success(resp.mensaje);
+          this.ListarFinales();
         },
         (error) => {
           this.showSpinner = false;
@@ -114,14 +114,13 @@ export class InscripcionesFinalesComponent implements OnInit {
     const rol = this.helper.rolActual();
     if (rol === 'alumno') {
       this.displayedColumns = ['fecha_examen', 'carrera', 'materia', 'anio_materia', 'profesor',
-      'fecha_inicio', 'fecha_limite', 'nota', 'acciones'];
+      'fecha_inicio', 'fecha_limite', 'acciones'];
     } else {
       this.displayedColumns = ['fecha_examen', 'carrera', 'materia', 'anio_materia', 'profesor',
       'fecha_inicio', 'fecha_limite', 'cant_inscriptos', 'acciones'];
     }
     this.ListarFinales();
   }
-
 
 
 }

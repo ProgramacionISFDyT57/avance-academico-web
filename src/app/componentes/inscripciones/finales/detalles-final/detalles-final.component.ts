@@ -69,9 +69,17 @@ export class DetallesFinalComponent implements OnInit {
       libro: alumno.libro,
       id_inscripcion_mesa: alumno.id_inscripcion_mesa
     };
-    this.dialog.open(CargaNotasFinalComponent, {
+    const modal = this.dialog.open(CargaNotasFinalComponent, {
       data: final
     });
+    modal.beforeClosed().subscribe(
+      (resp) => {
+        if (resp) {
+          this.showSpinner = true;
+          this.listar_inscriptos();
+        }
+      }
+    );
   }
 
   async eliminarNotas(idInscripcionMesa: number) {

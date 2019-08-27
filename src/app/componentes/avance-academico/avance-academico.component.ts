@@ -25,6 +25,8 @@ export class AvanceAcademicoComponent implements OnInit {
   domicilio: string;
   nacimiento: string;
   telefono: string;
+  tomo: string;
+  folio: number;
 
   constructor(
     public helper: HelperService,
@@ -49,6 +51,8 @@ export class AvanceAcademicoComponent implements OnInit {
         this.domicilio = res[0].domicilio;
         this.nacimiento = res[0].nacimiento;
         this.telefono = res[0].telefono;
+        this.tomo = res[0].tomo;
+        this.folio = res[0].folio;
         console.log(res);
       },
       (error) => {

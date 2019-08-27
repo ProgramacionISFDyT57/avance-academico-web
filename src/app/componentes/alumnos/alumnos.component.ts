@@ -53,7 +53,15 @@ export class AlumnosComponent implements OnInit {
   }
 
   crearAlumno() {
-    this.dialog.open(CrearAlumnoComponent);
+    const modal = this.dialog.open(CrearAlumnoComponent);
+    modal.beforeClosed().subscribe(
+      (resp) => {
+        if (resp) {
+          this.showSpinner = true;
+          this.listarAlumnos();
+        }
+      }
+    );
   }
 
   async eliminar(id: number) {

@@ -34,8 +34,8 @@ export class CrearCarreraComponent implements OnInit {
     this.carreraService.crearCarrera(this.formulario.value).subscribe(
       (resp) => {
         this.showSpinner = false;
-        this.crearFormulario();
         this.notif.success(resp.mensaje);
+        this.dialogRef.close(true);
         console.log(resp);
       },
       (error) => {
@@ -48,7 +48,6 @@ export class CrearCarreraComponent implements OnInit {
   public cerrar() {
     this.dialogRef.close();
   }
-
 
   ngOnInit() {
     this.crearFormulario();

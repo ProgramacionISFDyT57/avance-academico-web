@@ -64,9 +64,9 @@ export class CrearAlumnoComponent implements OnInit {
     const id_carrera_abierta = this.formulario.value.id_carrera_abierta;
     this.alumnosService.crearAlumno(usuario, id_carrera_abierta).subscribe(
       (resp) => {
-        this.crearFormulario();
         this.showSpinner = false;
         this.notif.success(resp.mensaje);
+        this.dialogRef.close(true);
         console.log(resp);
       },
       (error) => {

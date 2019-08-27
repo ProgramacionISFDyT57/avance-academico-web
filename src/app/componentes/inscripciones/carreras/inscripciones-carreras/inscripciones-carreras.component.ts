@@ -5,6 +5,7 @@ import { NotificationsService } from 'angular2-notifications';
 import { CarreraAbierta } from 'src/app/modelos/carreraabierta';
 import { Router } from '@angular/router';
 import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
+import { HelperService } from 'src/app/servicios/helper.service';
 
 
 @Component({
@@ -25,6 +26,7 @@ export class InscripcionesCarrerasComponent implements OnInit {
     private notif: NotificationsService,
     private router: Router,
     private confirmation: ConfirmationDialogService,
+    public helper: HelperService
   ) { }
 
   private async listarCateriasAbiertas() {
