@@ -18,8 +18,7 @@ export class InscripcionesCursadasComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<Cursada>;
-  displayedColumns = ['anio_cursada', 'carrera', 'materia', 'anio_materia',
-    'fecha_inicio', 'fecha_limite', 'profesor', 'cant_inscriptos', 'acciones'];
+  displayedColumns;
   showSpinner = true;
 
 
@@ -104,6 +103,14 @@ export class InscripcionesCursadasComponent implements OnInit {
   }
 
   ngOnInit() {
+    const rol = this.helper.rolActual();
+    if (rol === 'alumno') {
+      this.displayedColumns = ['anio_cursada', 'carrera', 'materia', 'anio_materia',
+        'fecha_inicio', 'fecha_limite', 'profesor', 'aprobada', 'acciones'];
+    } else {
+      this.displayedColumns = ['anio_cursada', 'carrera', 'materia', 'anio_materia',
+        'fecha_inicio', 'fecha_limite', 'profesor', 'cant_inscriptos', 'acciones'];
+    }
     this.ListarCursadas();
   }
 
