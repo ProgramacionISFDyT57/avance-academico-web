@@ -1,13 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CarrerasService } from 'src/app/servicios/carreras.service';
 import { Carrera } from 'src/app/modelos/carrera';
-import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort, MatDialog, MatDialogConfig } from '@angular/material';
 import { NotificationsService } from 'angular2-notifications';
 import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
 import { AbrirInscripcionCarreraComponent } from './abrir-inscripcion-carrera/abrir-inscripcion-carrera.component';
 import { HelperService } from 'src/app/servicios/helper.service';
 import { CrearCarreraComponent } from './crear-carrera/crear-carrera.component';
 import { CrearMateriaComponent } from '../materias/crear-materia/crear-materia.component';
+import { InfoCarreraComponent } from './info-carrera/info-carrera.component';
 
 
 @Component({
@@ -111,6 +112,16 @@ export class CarrerasComponent implements OnInit {
     );
   }
 
+  detalles(carrera: Carrera) {
+    const config: MatDialogConfig = {
+      data: {
+        idCarrera: carrera.id,
+        carrera: carrera.nombre,
+        duracion: carrera.duracion
+      }
+    };
+    this.dialog.open(InfoCarreraComponent, config);
+  }
 
   ngOnInit() {
     this.listarCarreras();
