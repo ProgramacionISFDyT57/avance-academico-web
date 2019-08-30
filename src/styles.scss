@@ -5,12 +5,15 @@
 // @import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
 // @import "~@angular/material/prebuilt-themes/purple-green.css";
 
-
 body {
   // background-color: #cfcfcf;
   background-color: #f4f6f9;
   margin: 0;
-  font-family: Roboto,"Helvetica Neue",sans-serif;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.simple-notification-wrapper {
+  z-index: 9999 !important;
 }
 
 ng-select.custom .ng-value-container {
@@ -80,6 +83,16 @@ ng-select.custom .ng-dropdown-panel {
 .py-0 {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
+}
+
+.py-1 {
+  padding-top: 0.25 !important;
+  padding-bottom: 0.25 !important;
+}
+
+.py-2 {
+  padding-top: 0.5 !important;
+  padding-bottom: 0.5 !important;
 }
 
 .p-0 {

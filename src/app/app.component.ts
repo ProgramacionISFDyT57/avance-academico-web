@@ -10,7 +10,7 @@ import { HelperService } from './servicios/helper.service';
 export class AppComponent {
 
   notifOptions = {
-    timeOut: 3000,
+    timeOut: 5000,
     showProgressBar: true,
     pauseOnHover: true,
     clickToClose: true
