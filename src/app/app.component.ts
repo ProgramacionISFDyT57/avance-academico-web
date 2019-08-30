@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HelperService } from './servicios/helper.service';
+import { MatDialog } from '@angular/material';
+import { CambioClaveComponent } from './componentes/usuarios/cambio-clave/cambio-clave.component';
+import { ConfirmationDialogService } from './servicios/confirmation-dialog/confirmation-dialog.service';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +23,9 @@ export class AppComponent {
 
   constructor(
     private router: Router,
-    public helper: HelperService
+    public helper: HelperService,
+    public dialog: MatDialog,
+    public confirm: ConfirmationDialogService
   ) {}
 
   public rutaActualInscripcion() {
@@ -40,7 +45,14 @@ export class AppComponent {
     }
   }
 
-  public salir() {
-    this.router.navigate(['/login']);
+  public cambiarClave() {
+    this.dialog.open(CambioClaveComponent);
+  }
+
+  public async salir() {
+    const confirm = await this.confirm.confirm('Confirme la acción', '¿Cerrar la sesión?');
+    if (confirm) {
+      this.router.navigate(['/login']);
+    }
   }
 }

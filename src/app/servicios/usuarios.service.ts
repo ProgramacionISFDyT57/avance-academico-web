@@ -73,4 +73,20 @@ export class UsuariosService {
     });
   }
 
+  public cambiarContraseña(claveVieja: string, claveNueva: string): Observable<Mensaje> {
+    return this.http.put('/cambio_password', {claveVieja, claveNueva});
+  }
+
+  public deshabilitar(idUsuario: number): Observable<Mensaje> {
+    this.eliminarCacheProfesores();
+    this.eliminarCacheUsuarios();
+    return this.http.put('/usuarios/deshabilitar/' + idUsuario, {});
+  }
+
+  public habilitar(idUsuario: number): Observable<Mensaje> {
+    this.eliminarCacheProfesores();
+    this.eliminarCacheUsuarios();
+    return this.http.put('/usuarios/habilitar/' + idUsuario, {});
+  }
+
 }

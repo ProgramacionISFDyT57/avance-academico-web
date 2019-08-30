@@ -38,6 +38,7 @@ import { MAT_DATE_LOCALE } from '@angular/material';
 import { AvanceAcademicoComponent } from './componentes/avance-academico/avance-academico.component';
 import { InfoCarreraComponent } from './componentes/carreras/info-carrera/info-carrera.component';
 import { InscribirAlumnoComponent } from './componentes/inscripciones/carreras/inscribir-alumno/inscribir-alumno.component';
+import { CambioClaveComponent } from './componentes/usuarios/cambio-clave/cambio-clave.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { InscribirAlumnoComponent } from './componentes/inscripciones/carreras/i
     AvanceAcademicoComponent,
     InfoCarreraComponent,
     InscribirAlumnoComponent,
+    CambioClaveComponent,
   ],
   entryComponents: [
     ConfirmationDialogComponent,
@@ -79,8 +81,9 @@ import { InscribirAlumnoComponent } from './componentes/inscripciones/carreras/i
     CargaNotasFinalComponent,
     CrearAlumnoComponent,
     RealizarInscripcionCursadaComponent,
-    InfoCarreraComponent
-    InscribirAlumnoComponent
+    InfoCarreraComponent,
+    InscribirAlumnoComponent,
+    CambioClaveComponent
   ],
   imports: [
     BrowserAnimationsModule,
