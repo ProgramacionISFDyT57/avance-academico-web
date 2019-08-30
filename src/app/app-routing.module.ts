@@ -28,6 +28,7 @@ const routes: Routes = [
   { path: 'usuarios/crear', component: CrearUsuarioComponent, canActivate: [LoginGuard] }, // pasar a modal y eliminar
   { path: 'alumnos', component: AlumnosComponent, canActivate: [LoginGuard] },
   { path: 'avance_academico', component: AvanceAcademicoComponent, canActivate: [LoginGuard] },
+  { path: 'avance_academico/:id', component: AvanceAcademicoComponent, canActivate: [LoginGuard] },
 
   { path: 'inscripcion/carreras', component: InscripcionesCarrerasComponent, canActivate: [LoginGuard] },
   { path: 'inscripcion/carreras/:id', component: DetallesCarreraComponent, canActivate: [LoginGuard] },

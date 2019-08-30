@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CarrerasService } from 'src/app/servicios/carreras.service';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { NotificationsService } from 'angular2-notifications';
 import { CarreraAbierta } from 'src/app/modelos/carreraabierta';
 import { Router } from '@angular/router';
 import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
 import { HelperService } from 'src/app/servicios/helper.service';
+import { InscribirAlumnoComponent } from '../inscribir-alumno/inscribir-alumno.component';
 
 
 @Component({
@@ -26,7 +27,8 @@ export class InscripcionesCarrerasComponent implements OnInit {
     private notif: NotificationsService,
     private router: Router,
     private confirmation: ConfirmationDialogService,
-    public helper: HelperService
+    public helper: HelperService,
+    public dialog: MatDialog,
   ) { }
 
   private async listarCateriasAbiertas() {
@@ -53,6 +55,23 @@ export class InscripcionesCarrerasComponent implements OnInit {
 
   detalles(id) {
     this.router.navigateByUrl('inscripcion/carreras/' + id);
+  }
+
+  public inscribirAlumno(idCarreraAbierta: number, carrera: string) {
+    const modal = this.dialog.open(InscribirAlumnoComponent, {
+      data: {
+        idCarreraAbierta,
+        carrera,
+      }
+    });
+    modal.beforeClosed().subscribe(
+      (resp) => {
+        if (resp) {
+          this.showSpinner = true;
+          this.listarCateriasAbiertas();
+        }
+      }
+    );
   }
 
   public async eliminar(id: number) {

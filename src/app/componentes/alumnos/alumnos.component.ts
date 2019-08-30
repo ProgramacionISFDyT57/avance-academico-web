@@ -7,6 +7,7 @@ import { UsuariosService } from 'src/app/servicios/usuarios.service';
 import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
 import { NotificationsService } from 'angular2-notifications';
 import { Alumno } from 'src/app/modelos/alumno';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-alumnos',
@@ -26,12 +27,12 @@ export class AlumnosComponent implements OnInit {
     private alumnosService: AlumnosService,
     public dialog: MatDialog,
     private confirmation: ConfirmationDialogService,
-    private notif: NotificationsService
+    private notif: NotificationsService,
+    private router: Router
   ) { }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
@@ -84,7 +85,7 @@ export class AlumnosComponent implements OnInit {
   }
 
   detalles(idAlumno: number) {
-    alert('por hacer');
+    this.router.navigateByUrl('/avance_academico/' + idAlumno);
   }
 
   ngOnInit() {
