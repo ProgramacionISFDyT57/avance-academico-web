@@ -4,6 +4,7 @@ import { HttpService } from './http.service';
 import { Alumno } from '../modelos/alumno';
 import { Mensaje } from '../modelos/respuesta-mensaje';
 import { Usuario } from '../modelos/usuario';
+import { Analitico } from '../modelos/analitico';
 
 @Injectable({
   providedIn: 'root'
@@ -48,8 +49,12 @@ export class AlumnosService {
     return this.http.delete('/alumnos/' + id);
   }
 
-  public avanceAcademico(): Observable<any> {
-    return this.http.get('/avance_academico');
+  public avanceAcademico(id?: number): Observable<Analitico[]> {
+    if (id) {
+      return this.http.get('/avance_academico/' + id);
+    } else {
+      return this.http.get('/avance_academico');
+    }
   }
 
 }

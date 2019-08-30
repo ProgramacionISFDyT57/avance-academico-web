@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { HelperService } from 'src/app/servicios/helper.service';
 import { AlumnosService } from 'src/app/servicios/alumno.service';
 import { NotificationsService } from 'angular2-notifications';
 import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { Analitico } from 'src/app/modelos/analitico';
 
 @Component({
   selector: 'app-avance-academico',
@@ -26,7 +27,10 @@ export class AvanceAcademicoComponent implements OnInit {
   nacimiento: string;
   telefono: string;
   tomo: string;
-  folio: number;
+  folio: string;
+  analiticos: Analitico[] = [];
+  carreras: any[];
+  indiceCarreraSeleccionada: number;
 
   constructor(
     public helper: HelperService,
@@ -35,25 +39,39 @@ export class AvanceAcademicoComponent implements OnInit {
     private router: Router,
     private confirm: ConfirmationDialogService,
     public dialog: MatDialog,
+    private route: ActivatedRoute
   ) { }
 
-  public avanceAcademico() {
-    this.alumnosService.avanceAcademico().subscribe(
+  cargarDatos(indice: number) {
+    this.dataSource = new MatTableDataSource(this.analiticos[indice].materias);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.showSpinner = false;
+    this.alumno = this.analiticos[indice].apellido + ', ' + this.analiticos[indice].nombre;
+    this.carrera = this.analiticos[indice].carrera;
+    this.cohorte = this.analiticos[indice].cohorte;
+    this.dni = this.analiticos[indice].dni;
+    this.domicilio = this.analiticos[indice].domicilio;
+    this.nacimiento = this.analiticos[indice].fecha_nacimiento;
+    this.telefono = this.analiticos[indice].telefono;
+    this.tomo = this.analiticos[indice].tomo;
+    this.folio = this.analiticos[indice].folio;
+  }
+
+  public avanceAcademico(id?: number) {
+    this.alumnosService.avanceAcademico(id).subscribe(
       (res) => {
-        this.dataSource = new MatTableDataSource(res);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-        this.showSpinner = false;
-        this.alumno = res[0].alumno;
-        this.carrera = res[0].carrera;
-        this.cohorte = res[0].cohorte;
-        this.dni = res[0].dni;
-        this.domicilio = res[0].domicilio;
-        this.nacimiento = res[0].nacimiento;
-        this.telefono = res[0].telefono;
-        this.tomo = res[0].tomo;
-        this.folio = res[0].folio;
         console.log(res);
+        this.analiticos = res;
+        this.carreras = [];
+        for (let i = 0; i < this.analiticos.length; i++) {
+          this.carreras.push({
+            indice: i,
+            nombre: this.analiticos[i].carrera + ' (' + this.analiticos[i].cohorte + ')'
+          });
+        }
+        this.indiceCarreraSeleccionada = 0;
+        this.cargarDatos(this.indiceCarreraSeleccionada);
       },
       (error) => {
         this.showSpinner = false;
@@ -62,8 +80,17 @@ export class AvanceAcademicoComponent implements OnInit {
       });
   }
 
+  public cambioCarrera(event) {
+    this.cargarDatos(this.indiceCarreraSeleccionada);
+  }
+
   ngOnInit() {
-    this.avanceAcademico();
+    const idAlumno = +this.route.snapshot.params.id;
+    if (idAlumno) {
+      this.avanceAcademico(idAlumno);
+    } else {
+      this.avanceAcademico();
+    }
   }
 
 }

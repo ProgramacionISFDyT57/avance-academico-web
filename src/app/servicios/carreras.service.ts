@@ -111,10 +111,15 @@ export class CarrerasService {
   }
 
   // Inscripciones carreras
+  public inscribirAlumnoACarrera(idCarreraAbierta: number, idAlumno): Observable<Mensaje> {
+    this.eliminarCacheCarrerasAbiertas();
+    return this.http.post('/inscripciones_carreras', {id_carrera_abierta: idCarreraAbierta, id_alumno: idAlumno});
+  }
   public listarInscriptosCarrera(idCarreraAbierta: number): Observable<InscriptosCarrera[]> {
     return this.http.get('/inscriptos_carrera/' + idCarreraAbierta);
   }
   public eliminarInscripcionCarrera(idInscripcionCarrera: number): Observable<Mensaje> {
+    this.eliminarCacheCarrerasAbiertas();
     return this.http.delete('/inscripciones_carreras/' + idInscripcionCarrera);
   }
 }
