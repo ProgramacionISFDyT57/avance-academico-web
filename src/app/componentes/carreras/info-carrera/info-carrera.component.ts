@@ -45,11 +45,17 @@ export class InfoCarreraComponent implements OnInit {
   }
 
   seleccionarMateria(materia: Materia) {
-    this.materiaSeleccionada = materia.nombre;
-    this.correlativas = [];
-    for (const correlativa of materia.correlativas) {
-      this.correlativas.push(correlativa);
+    if (materia.nombre === this.materiaSeleccionada) {
+      this.materiaSeleccionada = null;
+      this.correlativas = [];
+    } else {
+      this.materiaSeleccionada = materia.nombre;
+      this.correlativas = [];
+      for (const correlativa of materia.correlativas) {
+        this.correlativas.push(correlativa);
+      }
     }
+
   }
 
   ngOnInit() {
