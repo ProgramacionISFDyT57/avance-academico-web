@@ -36,6 +36,7 @@ import { RealizarInscripcionCursadaComponent } from './componentes/inscripciones
 import { CargaNotasFinalComponent } from './componentes/inscripciones/finales/carga-notas-final/carga-notas-final.component';
 import { MAT_DATE_LOCALE } from '@angular/material';
 import { AvanceAcademicoComponent } from './componentes/avance-academico/avance-academico.component';
+import { InfoCarreraComponent } from './componentes/carreras/info-carrera/info-carrera.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { AvanceAcademicoComponent } from './componentes/avance-academico/avance-
     RealizarInscripcionCursadaComponent,
     CargaNotasFinalComponent,
     AvanceAcademicoComponent,
+    InfoCarreraComponent,
   ],
   entryComponents: [
     ConfirmationDialogComponent,
@@ -74,7 +76,8 @@ import { AvanceAcademicoComponent } from './componentes/avance-academico/avance-
     CargarNotasCursadaComponent,
     CargaNotasFinalComponent,
     CrearAlumnoComponent,
-    RealizarInscripcionCursadaComponent
+    RealizarInscripcionCursadaComponent,
+    InfoCarreraComponent
   ],
   imports: [
     BrowserAnimationsModule,

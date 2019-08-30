@@ -1,0 +1,110 @@
+<mat-progress-bar mode="indeterminate" color="warn" [style.display]="showSpinner ? 'block' : 'none'"></mat-progress-bar>
+
+<h2>{{ carrera }}</h2>
+
+<div fxLayout="row" fxLayoutAlign="center stretch">
+  <div fxFlex *ngIf="duracion >= 1">
+    <mat-card class="no-shadow">
+      <mat-card-header>
+        <mat-card-title>1er Año</mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <br>
+      <mat-card-content>
+        <mat-list>
+          <ng-container *ngFor="let materia of materias">
+            <mat-list-item *ngIf="materia.anio === 1" (click)="seleccionarMateria(materia)"
+              [class.materia-seleccionada]="materiaSeleccionada === materia.nombre"
+              [class.correlativa-seleccionada]="correlativas.includes(materia.nombre)">
+              {{ materia.nombre }}
+            </mat-list-item>
+          </ng-container>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div fxFlex *ngIf="duracion >= 2">
+    <mat-card class="no-shadow">
+      <mat-card-header>
+        <mat-card-title>2do Año</mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <br>
+      <mat-card-content>
+        <mat-list>
+          <ng-container *ngFor="let materia of materias">
+            <mat-list-item *ngIf="materia.anio === 2" (click)="seleccionarMateria(materia)"
+              [class.materia-seleccionada]="materiaSeleccionada === materia.nombre"
+              [class.correlativa-seleccionada]="correlativas.includes(materia.nombre)">
+              {{ materia.nombre }}
+            </mat-list-item>
+          </ng-container>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div fxFlex *ngIf="duracion >= 3">
+    <mat-card class="no-shadow">
+      <mat-card-header>
+        <mat-card-title>3er Año</mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <br>
+      <mat-card-content>
+        <mat-list>
+          <ng-container *ngFor="let materia of materias">
+            <mat-list-item *ngIf="materia.anio === 3" (click)="seleccionarMateria(materia)"
+              [class.materia-seleccionada]="materiaSeleccionada === materia.nombre"
+              [class.correlativa-seleccionada]="correlativas.includes(materia.nombre)">
+              {{ materia.nombre }}
+            </mat-list-item>
+          </ng-container>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div fxFlex *ngIf="duracion >= 4">
+    <mat-card class="no-shadow">
+      <mat-card-header>
+        <mat-card-title>4to Año</mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <br>
+      <mat-card-content>
+        <mat-list>
+          <ng-container *ngFor="let materia of materias">
+            <mat-list-item *ngIf="materia.anio === 4" (click)="seleccionarMateria(materia)"
+              [class.materia-seleccionada]="materiaSeleccionada === materia.nombre"
+              [class.correlativa-seleccionada]="correlativas.includes(materia.nombre)">
+              {{ materia.nombre }}
+            </mat-list-item>
+          </ng-container>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div fxFlex *ngIf="duracion >= 5">
+    <mat-card class="no-shadow">
+      <mat-card-header>
+        <mat-card-title>5to Año</mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <br>
+      <mat-card-content>
+        <mat-list>
+          <ng-container *ngFor="let materia of materias">
+            <mat-list-item *ngIf="materia.anio === 5" (click)="seleccionarMateria(materia)"
+              [class.materia-seleccionada]="materiaSeleccionada === materia.nombre"
+              [class.correlativa-seleccionada]="correlativas.includes(materia.nombre)">
+              {{ materia.nombre }}
+            </mat-list-item>
+          </ng-container>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

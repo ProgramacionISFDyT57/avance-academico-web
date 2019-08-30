@@ -46,6 +46,10 @@
             (click)="abrirInscripcionCarrera(element.id, element.nombre)">
             <mat-icon>add</mat-icon>
           </button>
+          <button class="mx-1" mat-mini-fab color="primary"
+            matTooltip="Detalles" (click)="detalles(element)">
+            <mat-icon>info</mat-icon>
+          </button>
           <button *ngIf="element.materias_cargadas == 0" class="mx-1" mat-mini-fab color="warn"
             matTooltip="Eliminar Carrera" (click)="eliminar(element.id)">
             <mat-icon>delete_forever</mat-icon>
