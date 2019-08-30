@@ -67,12 +67,42 @@ export class UsuariosComponent implements OnInit {
     }
   }
 
-  deshabilitar(id: number) {
-    alert('por hacer');
+  async deshabilitar(id: number) {
+    const confirm = await this.confirmation.confirm('Confirme la acción', '¿Desea deshabilitar el usuario?');
+    if (confirm) {
+      this.showSpinner = true;
+      this.usuariosService.deshabilitar(id).subscribe(
+        (res) => {
+          this.listarUsuarios();
+          this.notif.success(res.mensaje);
+          console.log(res);
+        },
+        (error) => {
+          console.log(error);
+          this.showSpinner = false;
+          this.notif.error(error.error.mensaje);
+        }
+      );
+    }
   }
 
-  habilitar(id: number) {
-    alert('por hacer');
+  async habilitar(id: number) {
+    const confirm = await this.confirmation.confirm('Confirme la acción', '¿Desea habilitar el usuario?');
+    if (confirm) {
+      this.showSpinner = true;
+      this.usuariosService.deshabilitar(id).subscribe(
+        (res) => {
+          this.listarUsuarios();
+          this.notif.success(res.mensaje);
+          console.log(res);
+        },
+        (error) => {
+          console.log(error);
+          this.showSpinner = false;
+          this.notif.error(error.error.mensaje);
+        }
+      );
+    }
   }
 
   crearUsuario() {
@@ -87,7 +117,6 @@ export class UsuariosComponent implements OnInit {
     );
   }
 
-  
   ngOnInit() {
     this.listarUsuarios();
   }
