@@ -73,4 +73,8 @@ export class UsuariosService {
     });
   }
 
+  public cambiarContraseña(claveVieja: string, claveNueva: string): Observable<Mensaje> {
+    return this.http.put('/cambio_password', {claveVieja, claveNueva});
+  }
+
 }
