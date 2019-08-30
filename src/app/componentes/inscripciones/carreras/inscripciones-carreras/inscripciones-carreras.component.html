@@ -43,6 +43,9 @@
     <ng-container matColumnDef="acciones">
       <th mat-header-cell *matHeaderCellDef> Acciones </th>
       <td class="nowrap" mat-cell *matCellDef="let element">
+        <button class="mx-1" mat-mini-fab color="primary" matTooltip="Inscribir Alumno" (click)="inscribirAlumno(element.id, element.nombre)">
+          <mat-icon>add</mat-icon>
+        </button>
         <button class="mx-1" mat-mini-fab color="primary" matTooltip="Detalles" (click)="detalles(element.id)">
           <mat-icon>list_alt</mat-icon>
         </button>
