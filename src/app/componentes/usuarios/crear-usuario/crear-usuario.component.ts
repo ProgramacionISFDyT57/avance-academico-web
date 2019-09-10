@@ -33,13 +33,13 @@ export class CrearUsuarioComponent implements OnInit {
 
   private crearFormulario() {
     this.formulario = this.fb.group({
-      dni: ['', Validators.required],
-      nombre: ['', Validators.required],
       apellido: ['', Validators.required],
-      telefono: [''],
+      dni: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       fecha_nacimiento: [null],
-      id_rol: [null, Validators.required]
+      id_rol: [null, Validators.required],
+      nombre: ['', Validators.required],
+      telefono: [''],
     });
   }
 
@@ -47,11 +47,11 @@ export class CrearUsuarioComponent implements OnInit {
     this.showSpinner = true;
     const usuario: Usuario = {
       apellido: this.formulario.value.apellido,
-      dni: this.formulario.value.documento,
+      dni: this.formulario.value.dni,
       email: this.formulario.value.email,
       fecha_nacimiento: this.formulario.value.fecha_nacimiento,
-      nombre: this.formulario.value.nombre,
       id_rol: this.formulario.value.id_rol,
+      nombre: this.formulario.value.nombre,
       telefono: this.formulario.value.telefono
     };
     this.usuariosService.crearUsuario(usuario).subscribe(
