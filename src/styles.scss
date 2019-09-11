@@ -28,6 +28,10 @@ mat-card.no-shadow {
   box-shadow: none !important;
 }
 
+mat-form-field {
+  width: 100%;
+}
+
 .confirm-dialog .mat-dialog-container {
   padding: 0;
   width: 500px;

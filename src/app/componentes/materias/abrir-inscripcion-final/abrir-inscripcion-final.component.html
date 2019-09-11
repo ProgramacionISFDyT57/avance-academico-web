@@ -1,57 +1,47 @@
 <mat-progress-bar mode="indeterminate" color="warn" [style.display]="showSpinner ? 'block' : 'none'"></mat-progress-bar>
 
-<div class="container mt-2">
+<h2 mat-dialog-title>Abrir mesa de final de {{ materia }}</h2>
 
-  <mat-card class="example-card">
-    <mat-card-header>
-      <mat-card-title>Abrir mesa de final de {{ materia }}</mat-card-title>
-    </mat-card-header>
-    <mat-divider></mat-divider>
-    <br>
-    <mat-card-content>
-      <form id="form" [formGroup]="formulario" (ngSubmit)="enviar()">
+<mat-dialog-content>
+  <form id="form" [formGroup]="formulario" (ngSubmit)="enviar()">
 
-        <mat-form-field>
-          <input matInput [matDatepicker]="picker1" placeholder="Inicio de Inscripción" formControlName="fecha_inicio">
-          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-          <mat-datepicker #picker1></mat-datepicker>
-        </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker1" placeholder="Inicio de Inscripción" formControlName="fecha_inicio">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
 
-        <mat-form-field>
-          <input matInput [matDatepicker]="picker2" placeholder="Fin de Inscripción" formControlName="fecha_limite">
-          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-          <mat-datepicker #picker2></mat-datepicker>
-        </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker2" placeholder="Fin de Inscripción" formControlName="fecha_limite">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
 
-        <mat-form-field>
-          <input matInput [matDatepicker]="picker3" placeholder="Fecha de Examen" formControlName="fecha_examen">
-          <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-          <mat-datepicker #picker3></mat-datepicker>
-        </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker3" placeholder="Fecha de Examen" formControlName="fecha_examen">
+      <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+      <mat-datepicker #picker3></mat-datepicker>
+    </mat-form-field>
 
-        <ng-select [items]="profesores" [placeholder]="'Profesor'" bindLabel="nombre_completo" bindValue="id"
-          formControlName="id_profesor">
-        </ng-select>
+    <ng-select [items]="profesores" [placeholder]="'Profesor'" bindLabel="nombre_completo" bindValue="id"
+      formControlName="id_profesor">
+    </ng-select>
 
-        <ng-select [items]="profesores" [placeholder]="'Vocal 1'" bindLabel="nombre_completo" bindValue="id"
-          formControlName="id_vocal1">
-        </ng-select>
+    <ng-select [items]="profesores" [placeholder]="'Vocal 1'" bindLabel="nombre_completo" bindValue="id"
+      formControlName="id_vocal1">
+    </ng-select>
 
-        <ng-select [items]="profesores" [placeholder]="'Vocal 2'" bindLabel="nombre_completo" bindValue="id"
-          formControlName="id_vocal2">
-        </ng-select>
+    <ng-select [items]="profesores" [placeholder]="'Vocal 2'" bindLabel="nombre_completo" bindValue="id"
+      formControlName="id_vocal2">
+    </ng-select>
 
-        <!-- Agregar las restriccions de las fechas. Cierre de inscripcion no puede ser anterior a inicio -->
+    <!-- Agregar las restriccions de las fechas. Cierre de inscripcion no puede ser anterior a inicio -->
 
-      </form>
-    </mat-card-content>
+  </form>
+</mat-dialog-content>
 
-    <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit" form="form"
-        [disabled]="!formulario.valid || showSpinner">Crear</button>
-      <button mat-raised-button (click)="cerrar()">Volver </button>
-    </mat-card-actions>
-  </mat-card>
-
-
-</div>
+<mat-dialog-actions fxLayoutAlign="end center">
+  <button mat-raised-button color="primary" type="submit" form="form"
+    [disabled]="!formulario.valid || showSpinner">Crear</button>
+  <button mat-raised-button (click)="cerrar()">Volver </button>
+</mat-dialog-actions>

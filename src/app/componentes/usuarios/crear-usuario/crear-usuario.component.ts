@@ -18,7 +18,7 @@ export class CrearUsuarioComponent implements OnInit {
   actualizar = false;
 
   roles = [
-    { value: 1, viewValue: 'Admin' },
+    // { value: 1, viewValue: 'Admin' },
     { value: 2, viewValue: 'Directivo' },
     { value: 3, viewValue: 'Preceptor' },
     { value: 4, viewValue: 'Profesor' },

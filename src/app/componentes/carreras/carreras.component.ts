@@ -114,6 +114,7 @@ export class CarrerasComponent implements OnInit {
 
   detalles(carrera: Carrera) {
     const config: MatDialogConfig = {
+      width: '95%',
       data: {
         idCarrera: carrera.id,
         carrera: carrera.nombre,

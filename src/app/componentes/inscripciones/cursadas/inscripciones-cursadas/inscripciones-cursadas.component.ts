@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort, MatDialog, MatDialogConfig } from '@angular/material';
 import { NotificationsService } from 'angular2-notifications';
 import { MateriasService } from 'src/app/servicios/materias.service';
 import { Cursada } from 'src/app/modelos/cursadas';
@@ -55,12 +55,15 @@ export class InscripcionesCursadasComponent implements OnInit {
   }
 
   inscribirse(idCursada: number, materia: string) {
-    const modal = this.dialog.open(RealizarInscripcionCursadaComponent, {
+    const config: MatDialogConfig = {
+      width: '500px',
+      maxWidth: '90%',
       data: {
         idCursada,
         materia
       }
-    });
+    };
+    const modal = this.dialog.open(RealizarInscripcionCursadaComponent, config);
     modal.beforeClosed().subscribe(
       (resp) => {
         if (resp) {
