@@ -5,6 +5,7 @@ import { Carrera } from '../modelos/carrera';
 import { Mensaje } from '../modelos/respuesta-mensaje';
 import { CarreraAbierta } from '../modelos/carreraabierta';
 import { InscriptosCarrera } from '../modelos/inscriptos-carrera';
+import { AlumnosService } from './alumno.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class CarrerasService {
   carrerasAbiertasHoy: CarreraAbierta[];
 
   constructor(
-    private http: HttpService
+    private http: HttpService,
+    private alumnosService: AlumnosService
   ) { }
   // Cache
   public eliminarCacheCarreras() {
@@ -112,6 +114,7 @@ export class CarrerasService {
   // Inscripciones carreras
   public inscribirAlumnoACarrera(idCarreraAbierta: number, idAlumno): Observable<Mensaje> {
     this.eliminarCacheCarrerasAbiertas();
+    this.alumnosService.eliminarCacheAlumnos();
     return this.http.post('/inscripciones_carreras', {id_carrera_abierta: idCarreraAbierta, id_alumno: idAlumno});
   }
   public listarInscriptosCarrera(idCarreraAbierta: number): Observable<InscriptosCarrera[]> {
@@ -119,6 +122,7 @@ export class CarrerasService {
   }
   public eliminarInscripcionCarrera(idInscripcionCarrera: number): Observable<Mensaje> {
     this.eliminarCacheCarrerasAbiertas();
+    this.alumnosService.eliminarCacheAlumnos();
     return this.http.delete('/inscripciones_carreras/' + idInscripcionCarrera);
   }
 }

@@ -17,7 +17,7 @@ export class AlumnosService {
     private http: HttpService
   ) { }
 
-  private eliminarCacheAlumnos() {
+  public eliminarCacheAlumnos() {
     this.alumnos = null;
   }
 
