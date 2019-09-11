@@ -55,12 +55,20 @@ export class MateriasComponent implements OnInit {
   }
 
   abrirDialogoInscripcionFinal(idMateria: number, materia: string) {
-    this.dialog.open(AbrirInscripcionFinalComponent, {
+    const config: MatDialogConfig = {
       data: {
         idMateria,
         materia
       }
-    });
+    };
+    const modal = this.dialog.open(AbrirInscripcionFinalComponent, config);
+    modal.beforeClosed().subscribe(
+      (resp) => {
+        if (resp) {
+          this.listarMaterias();
+        }
+      }
+    );
   }
 
   public async listarMaterias(cache = true) {
