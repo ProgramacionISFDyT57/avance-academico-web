@@ -6,6 +6,10 @@
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
   </mat-form-field>
 
+  <button matTooltip="Actualizar" class="btn-actualizar" mat-mini-fab (click)="listarCarreras(false)">
+    <mat-icon>refresh</mat-icon>
+  </button>
+
   <button *ngIf="this.helper.rolesAdmitidos(['directivo'])" matTooltip="Crear Carrera" class="btn-crear" mat-fab color="primary" (click)="crearCarrera()">
     <mat-icon>add</mat-icon>
   </button>

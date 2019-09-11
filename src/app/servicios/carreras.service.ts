@@ -32,9 +32,9 @@ export class CarrerasService {
   }
 
   // Carreras
-  public traerCarreras(): Promise<Carrera[]> {
+  public traerCarreras(cache = true): Promise<Carrera[]> {
     return new Promise( (resolve, reject) => {
-      if (this.carreras) {
+      if (cache && this.carreras) {
         resolve(this.carreras);
       } else {
         this.http.get('/carreras').subscribe(
