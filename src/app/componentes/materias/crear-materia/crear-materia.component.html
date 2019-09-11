@@ -3,10 +3,10 @@
 
 <h2 mat-dialog-title>Crear Materia de {{ carrera }}</h2>
 
-<mat-dialog-content>
-  <form id="form" [formGroup]="formulario" (ngSubmit)="enviar()">
+<!-- <mat-dialog-content> -->
+  <form id="form" [formGroup]="formulario" (ngSubmit)="enviar()" #myNgForm="ngForm">
     <mat-form-field>
-      <input matInput placeholder="Nombre de la materia" formControlName="nombre">
+      <input matInput placeholder="Nombre de la materia" formControlName="nombre" #nombre>
     </mat-form-field>
 
     <mat-form-field>
@@ -32,7 +32,7 @@
     </ng-select>
 
   </form>
-</mat-dialog-content>
+<!-- </mat-dialog-content> -->
 
 <mat-dialog-actions fxLayoutAlign="end center">
   <button mat-raised-button color="primary" type="submit" form="form"

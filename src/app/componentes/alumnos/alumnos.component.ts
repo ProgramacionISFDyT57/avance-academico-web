@@ -55,7 +55,7 @@ export class AlumnosComponent implements OnInit {
 
   crearAlumno() {
     const config: MatDialogConfig = {
-      width: '500px',
+      width: '700px',
       maxWidth: '90%'
     };
     const modal = this.dialog.open(CrearAlumnoComponent, config);
