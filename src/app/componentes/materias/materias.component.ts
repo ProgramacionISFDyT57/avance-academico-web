@@ -72,6 +72,7 @@ export class MateriasComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       this.showSpinner = false;
+      this.filtroCarrera({nombre: this.carreraSeleccionada});
       console.log(res);
     } catch (error) {
       console.error(error);
