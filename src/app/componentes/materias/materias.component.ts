@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Materia } from '../../modelos/materia';
 import { MateriasService } from '../../servicios/materias.service';
-import { MatSort, MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
+import { MatSort, MatPaginator, MatTableDataSource, MatDialog, MatDialogConfig } from '@angular/material';
 import { NotificationsService } from 'angular2-notifications';
 import { AbrirInscripcionCursadaComponent } from './abrir-inscripcion-cursada/abrir-inscripcion-cursada.component';
 import { AbrirInscripcionFinalComponent } from './abrir-inscripcion-final/abrir-inscripcion-final.component';
@@ -21,7 +21,7 @@ export class MateriasComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<Materia>;
-  displayedColumns = ['nombre', 'carrera', 'anio', 'tipo_materia', 'correlativas', 'acciones'];
+  displayedColumns = ['nombre', 'carrera', 'anio', 'tipo_materia', 'correlativas', 'ultima_cursada', 'acciones'];
   showSpinner = true;
   filtro;
   materias: Materia[];
@@ -38,12 +38,22 @@ export class MateriasComponent implements OnInit {
   ) { }
 
   abrirDialogoInscripcion(idMateria: number, materia: string) {
-    this.dialog.open(AbrirInscripcionCursadaComponent, {
+    const config: MatDialogConfig = {
       data: {
         idMateria,
         materia
       }
-    });
+    };
+    const modal = this.dialog.open(AbrirInscripcionCursadaComponent, config);
+    modal.beforeClosed().subscribe(
+      (resp) => {
+        console.log(resp);
+        if (resp) {
+          this.showSpinner = true;
+          this.listarMaterias();
+        }
+      }
+    );
   }
 
   abrirDialogoInscripcionFinal(idMateria: number, materia: string) {

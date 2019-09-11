@@ -27,7 +27,6 @@ materias: Materia[];
   private eliminarCacheMaterias() {
     this.materias = null;
   }
-
   public traerMaterias(): Promise<Materia[]> {
     return new Promise( (resolve, reject) => {
       if (this.materias) {
@@ -45,21 +44,17 @@ materias: Materia[];
       }
     });
   }
-
   public traerMateria(id: number): Observable<Materia> {
     return this.http.get('/materia/' + id);
   }
-
   public materias_por_carrera(idCarrera: number): Observable<Materia[]> {
     return this.http.get('/materias_por_carrera/' + idCarrera);
   }
-
   public crearMateria(materia: Materia): Observable<Mensaje> {
     this.eliminarCacheMaterias();
     this.carrerasService.eliminarCacheCarreras();
     return this.http.post('/materias', { materia });
   }
-
   public eliminarMateria(idMateria: number): Observable<Mensaje> {
     this.eliminarCacheMaterias();
     this.carrerasService.eliminarCacheCarreras();
@@ -97,6 +92,7 @@ materias: Materia[];
     return this.http.get('/cursadas_abiertas');
   }
   public abrirInscripcionCursada(cursada): Observable<Mensaje> {
+    this.eliminarCacheMaterias();
     return this.http.post('/cursadas', { cursada });
   }
   public eliminarCursada(id: number): Observable<Mensaje> {
