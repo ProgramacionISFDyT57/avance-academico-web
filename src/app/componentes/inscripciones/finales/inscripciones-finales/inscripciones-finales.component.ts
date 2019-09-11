@@ -30,6 +30,7 @@ export class InscripcionesFinalesComponent implements OnInit {
   ) { }
 
   public ListarFinales() {
+    this.showSpinner = true;
     this.materiasService.listarFinales().subscribe(
       (res) => {
         this.dataSource = new MatTableDataSource(res);

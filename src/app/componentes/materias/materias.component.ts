@@ -48,7 +48,6 @@ export class MateriasComponent implements OnInit {
     modal.beforeClosed().subscribe(
       (resp) => {
         if (resp) {
-          this.showSpinner = true;
           this.listarMaterias();
         }
       }
@@ -64,9 +63,10 @@ export class MateriasComponent implements OnInit {
     });
   }
 
-  private async listarMaterias() {
+  public async listarMaterias(cache = true) {
     try {
-      const res = await this.materiasService.traerMaterias();
+      this.showSpinner = true;
+      const res = await this.materiasService.traerMaterias(cache);
       this.materias = res;
       this.dataSource = new MatTableDataSource(res);
       this.dataSource.paginator = this.paginator;

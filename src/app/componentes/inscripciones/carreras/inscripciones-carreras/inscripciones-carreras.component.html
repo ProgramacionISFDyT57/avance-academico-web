@@ -8,6 +8,9 @@
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
   </mat-form-field>
 
+  <button matTooltip="Actualizar" class="btn-actualizar2" mat-mini-fab (click)="listarCateriasAbiertas(false)">
+    <mat-icon>refresh</mat-icon>
+  </button>
 
   <table mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="nombre">

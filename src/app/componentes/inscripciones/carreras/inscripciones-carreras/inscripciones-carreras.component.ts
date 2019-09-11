@@ -31,9 +31,10 @@ export class InscripcionesCarrerasComponent implements OnInit {
     public dialog: MatDialog,
   ) { }
 
-  private async listarCateriasAbiertas() {
+  public async listarCateriasAbiertas(cache = true) {
     try {
-      const res = await this.carrerasService.listarCarrerasAbiertas();
+      this.showSpinner = true;
+      const res = await this.carrerasService.listarCarrerasAbiertas(cache);
       this.dataSource = new MatTableDataSource(res);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -67,7 +68,6 @@ export class InscripcionesCarrerasComponent implements OnInit {
     modal.beforeClosed().subscribe(
       (resp) => {
         if (resp) {
-          this.showSpinner = true;
           this.listarCateriasAbiertas();
         }
       }

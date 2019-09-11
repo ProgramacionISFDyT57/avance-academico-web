@@ -2,7 +2,7 @@
 
 <h2 class="mt-0 mb-0 mx-2" fxLayout="row" fxLayoutAlign="start center">
   <span class="mx-2">Materias de </span>
-  <ng-select class="py-0 custom" [clearable]="false" [items]="carreras" bindLabel="nombre" bindValue="nombre" fxFlex="40" [(ngModel)]="carreraSeleccionada" (change)="filtroCarrera($event)"></ng-select>
+  <ng-select class="py-0 custom" [clearable]="false" [items]="carreras" bindLabel="nombre" bindValue="nombre" fxFlex [(ngModel)]="carreraSeleccionada" (change)="filtroCarrera($event)"></ng-select>
 </h2>
 
 <div class="table-container mat-elevation-z8">
@@ -10,6 +10,10 @@
   <mat-form-field class="filtro">
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar" [(ngModel)]="filtro">
   </mat-form-field>
+
+  <button matTooltip="Actualizar" class="btn-actualizar2" mat-mini-fab (click)="listarMaterias(false)">
+    <mat-icon>refresh</mat-icon>
+  </button>
 
   <table mat-table [dataSource]="dataSource" matSort>
 
@@ -48,7 +52,7 @@
     </ng-container>
 
     <ng-container matColumnDef="acciones">
-      <th mat-header-cell *matHeaderCellDef> Acciones </th>
+      <th mat-header-cell *matHeaderCellDef > Acciones </th>
       <td class="nowrap" mat-cell *matCellDef="let element">
         <ng-container *ngIf="this.helper.rolesAdmitidos(['preceptor', 'directivo'])">
           <button class="mx-1" mat-mini-fab color="primary" matTooltip="Abrir Inscripción a Cursada"

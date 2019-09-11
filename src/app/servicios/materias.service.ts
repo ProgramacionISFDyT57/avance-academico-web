@@ -27,9 +27,9 @@ materias: Materia[];
   private eliminarCacheMaterias() {
     this.materias = null;
   }
-  public traerMaterias(): Promise<Materia[]> {
+  public traerMaterias(cache = true): Promise<Materia[]> {
     return new Promise( (resolve, reject) => {
-      if (this.materias) {
+      if (cache && this.materias) {
         resolve(this.materias);
       } else {
         this.http.get('/materias').subscribe(

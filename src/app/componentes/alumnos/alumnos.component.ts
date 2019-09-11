@@ -38,9 +38,10 @@ export class AlumnosComponent implements OnInit {
     }
   }
 
-  private async listarAlumnos() {
+  public async listarAlumnos(cache = true) {
     try {
-      const res = await this.alumnosService.traerAlumnos();
+      this.showSpinner = true;
+      const res = await this.alumnosService.traerAlumnos(cache);
       this.dataSource = new MatTableDataSource(res);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;

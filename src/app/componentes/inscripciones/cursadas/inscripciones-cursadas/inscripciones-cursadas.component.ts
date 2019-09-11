@@ -32,6 +32,7 @@ export class InscripcionesCursadasComponent implements OnInit {
   ) { }
 
   public ListarCursadas() {
+    this.showSpinner = true;
     this.materiasService.listarCursadas().subscribe(
       (res) => {
         this.dataSource = new MatTableDataSource(res);
@@ -67,7 +68,6 @@ export class InscripcionesCursadasComponent implements OnInit {
     modal.beforeClosed().subscribe(
       (resp) => {
         if (resp) {
-          this.showSpinner = true;
           this.ListarCursadas();
         }
       }

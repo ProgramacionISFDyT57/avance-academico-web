@@ -26,9 +26,10 @@ export class UsuariosComponent implements OnInit {
     public dialog: MatDialog,
   ) { }
 
-  private async listarUsuarios() {
+  public async listarUsuarios(cache = true) {
     try {
-      const res = await this.usuariosService.traerUsuarios();
+      this.showSpinner = true;
+      const res = await this.usuariosService.traerUsuarios(cache);
       this.dataSource = new MatTableDataSource(res);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -114,7 +115,6 @@ export class UsuariosComponent implements OnInit {
     modal.beforeClosed().subscribe(
       (resp) => {
         if (resp) {
-          this.showSpinner = true;
           this.listarUsuarios();
         }
       }

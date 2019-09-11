@@ -66,9 +66,9 @@ export class CarrerasService {
   }
 
   // Carreras abiertas
-  public listarCarrerasAbiertas(): Promise<CarreraAbierta[]> {
+  public listarCarrerasAbiertas(cache = true): Promise<CarreraAbierta[]> {
     return new Promise( (resolve, reject) => {
-      if (this.carrerasAbiertas) {
+      if (cache && this.carrerasAbiertas) {
         resolve(this.carrerasAbiertas);
       } else {
         this.http.get('/carreras_abiertas').subscribe(
