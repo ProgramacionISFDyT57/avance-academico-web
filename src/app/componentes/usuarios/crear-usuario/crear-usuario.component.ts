@@ -15,6 +15,7 @@ export class CrearUsuarioComponent implements OnInit {
 
   formulario: FormGroup;
   showSpinner = false;
+  actualizar = false;
 
   roles = [
     { value: 1, viewValue: 'Admin' },
@@ -58,6 +59,7 @@ export class CrearUsuarioComponent implements OnInit {
       (resp) => {
         this.crearFormulario();
         this.showSpinner = false;
+        this.actualizar = true;
         this.notif.success(resp.mensaje);
         console.log(resp);
       },
@@ -70,7 +72,7 @@ export class CrearUsuarioComponent implements OnInit {
   }
 
   public cerrar() {
-    this.dialogRef.close();
+    this.dialogRef.close(this.actualizar);
   }
 
   ngOnInit() {
