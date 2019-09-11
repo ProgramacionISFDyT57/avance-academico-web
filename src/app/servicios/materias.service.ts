@@ -63,9 +63,11 @@ materias: Materia[];
 
   // Finales
   public abrirInscripcionFinal(mesa): Observable<Mensaje> {
+    this.eliminarCacheMaterias();
     return this.http.post('/crear_mesa', { mesa });
   }
   public eliminarMesaFinal(id: number): Observable<Mensaje> {
+    this.eliminarCacheMaterias();
     return this.http.delete('/mesas/' + id);
   }
   public inscripcionFinal(idMesa: number): Observable<Mensaje> {
@@ -96,6 +98,7 @@ materias: Materia[];
     return this.http.post('/cursadas', { cursada });
   }
   public eliminarCursada(id: number): Observable<Mensaje> {
+    this.eliminarCacheMaterias();
     return this.http.delete('/cursadas/' + id);
   }
   public listarInscriptosCursadas(idCursada: number): Observable<InscriptosCursada[]> {
