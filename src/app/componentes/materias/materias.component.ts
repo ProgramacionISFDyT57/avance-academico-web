@@ -47,7 +47,6 @@ export class MateriasComponent implements OnInit {
     const modal = this.dialog.open(AbrirInscripcionCursadaComponent, config);
     modal.beforeClosed().subscribe(
       (resp) => {
-        console.log(resp);
         if (resp) {
           this.showSpinner = true;
           this.listarMaterias();
