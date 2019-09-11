@@ -112,6 +112,21 @@ export class CarrerasComponent implements OnInit {
     );
   }
 
+  modificarCarrera(carrera: Carrera) {
+    const config: MatDialogConfig = {
+      data: carrera
+    };
+    const modal = this.dialog.open(CrearCarreraComponent, config);
+    modal.beforeClosed().subscribe(
+      (resp) => {
+        if (resp) {
+          this.showSpinner = true;
+          this.listarCarreras();
+        }
+      }
+    );
+  }
+
   detalles(carrera: Carrera) {
     const config: MatDialogConfig = {
       width: '95%',

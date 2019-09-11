@@ -50,14 +50,13 @@ export class CarrerasService {
   public traerCarrera(id: number): Observable<Carrera> {
     return this.http.get('/carrera/' + id);
   }
-  public crearCarrera(carrera1): Observable<Mensaje> {
+  public crearCarrera(carrera: Carrera): Observable<Mensaje> {
     this.eliminarCacheCarreras();
-    const carrera = {
-      nombre: carrera1.nombre,
-      duracion: carrera1.duracion,
-      cantidad_materias: carrera1.materias,
-    };
     return this.http.post('/carreras', { carrera });
+  }
+  public modificarCarrera(carrera: Carrera, idCarrera: number): Observable<Mensaje> {
+    this.eliminarCacheCarreras();
+    return this.http.put('/carreras/' + idCarrera, { carrera });
   }
   public eliminarCarrera(id: number): Observable<Mensaje> {
     this.eliminarCacheCarreras();
