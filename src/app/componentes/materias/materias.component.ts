@@ -21,7 +21,7 @@ export class MateriasComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<Materia>;
-  displayedColumns = ['nombre', 'carrera', 'anio', 'tipo_materia', 'correlativas', 'ultima_cursada', 'acciones'];
+  displayedColumns = ['nombre', 'carrera', 'anio', 'tipo_materia', 'correlativas', 'ultima_cursada', 'ultima_mesa', 'acciones'];
   showSpinner = true;
   filtro;
   materias: Materia[];
