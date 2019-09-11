@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSort, MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
+import { MatSort, MatPaginator, MatTableDataSource, MatDialog, MatDialogConfig } from '@angular/material';
 import { InscriptosFinal } from 'src/app/modelos/inscriptos-final';
 import { MateriasService } from 'src/app/servicios/materias.service';
 import { NotificationsService } from 'angular2-notifications';
@@ -69,9 +69,12 @@ export class DetallesFinalComponent implements OnInit {
       libro: alumno.libro,
       id_inscripcion_mesa: alumno.id_inscripcion_mesa
     };
-    const modal = this.dialog.open(CargaNotasFinalComponent, {
+    const config: MatDialogConfig = {
+      width: '500px',
+      maxWidth: '90%',
       data: final
-    });
+    };
+    const modal = this.dialog.open(CargaNotasFinalComponent, config);
     modal.beforeClosed().subscribe(
       (resp) => {
         if (resp) {

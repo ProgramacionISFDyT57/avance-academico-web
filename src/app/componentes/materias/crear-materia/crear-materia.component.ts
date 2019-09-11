@@ -1,5 +1,5 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { MateriasService } from 'src/app/servicios/materias.service';
 import { NotificationsService } from 'angular2-notifications';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -40,6 +40,8 @@ export class CrearMateriaComponent implements OnInit {
   cargadoMaterias = true;
   materiasFiltradas: Materia[] = [];
   anios: number[] = [];
+  @ViewChild('myNgForm') myNgForm: NgForm;
+  @ViewChild('nombre') nombre: ElementRef;
 
   constructor(
     private fb: FormBuilder,
@@ -95,6 +97,7 @@ export class CrearMateriaComponent implements OnInit {
   }
 
   enviar() {
+    this.showSpinner = true;
     const materia: Materia = {
       nombre: this.formulario.value.nombre,
       anio: this.formulario.value.anio,
@@ -106,11 +109,14 @@ export class CrearMateriaComponent implements OnInit {
       (resp) => {
         console.log(resp);
         this.notif.success(resp.mensaje);
-        this.crearFormulario();
+        this.myNgForm.resetForm();
+        this.nombre.nativeElement.focus();
+        this.showSpinner = false;
         this.actualizar = true;
       },
       (error) => {
         console.error(error);
+        this.showSpinner = false;
         this.notif.error(error.error.mensaje);
       }
     );

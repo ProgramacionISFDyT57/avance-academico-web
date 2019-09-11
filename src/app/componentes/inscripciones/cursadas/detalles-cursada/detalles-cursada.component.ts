@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MateriasService } from 'src/app/servicios/materias.service';
-import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatDialog, MatDialogConfig } from '@angular/material';
 import { InscriptosCursada } from 'src/app/modelos/inscriptos-cursada';
 import { NotificationsService } from 'angular2-notifications';
 import { CargarNotasCursadaComponent } from '../cargar-notas-cursada/cargar-notas-cursada.component';
@@ -71,9 +71,12 @@ export class DetallesCursadaComponent implements OnInit {
       nota_cuat_2: alumno.nota_cuat_2,
       nota_recuperatorio: alumno.nota_recuperatorio
     };
-    const modal = this.dialog.open(CargarNotasCursadaComponent, {
+    const config: MatDialogConfig = {
+      width: '500px',
+      maxWidth: '90%',
       data: avance
-    });
+    };
+    const modal = this.dialog.open(CargarNotasCursadaComponent, config);
     modal.beforeClosed().subscribe(
       (resp) => {
         if (resp) {

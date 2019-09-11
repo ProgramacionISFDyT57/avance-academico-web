@@ -17,7 +17,7 @@ export class CrearUsuarioComponent implements OnInit {
   showSpinner = false;
 
   roles = [
-    { value: 1, viewValue: 'Admin' },
+    // { value: 1, viewValue: 'Admin' },
     { value: 2, viewValue: 'Directivo' },
     { value: 3, viewValue: 'Preceptor' },
     { value: 4, viewValue: 'Profesor' },
@@ -56,8 +56,8 @@ export class CrearUsuarioComponent implements OnInit {
     };
     this.usuariosService.crearUsuario(usuario).subscribe(
       (resp) => {
-        this.crearFormulario();
         this.showSpinner = false;
+        this.dialogRef.close(true);
         this.notif.success(resp.mensaje);
         console.log(resp);
       },

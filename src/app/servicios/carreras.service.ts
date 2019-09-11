@@ -5,6 +5,7 @@ import { Carrera } from '../modelos/carrera';
 import { Mensaje } from '../modelos/respuesta-mensaje';
 import { CarreraAbierta } from '../modelos/carreraabierta';
 import { InscriptosCarrera } from '../modelos/inscriptos-carrera';
+import { AlumnosService } from './alumno.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class CarrerasService {
   carrerasAbiertasHoy: CarreraAbierta[];
 
   constructor(
-    private http: HttpService
+    private http: HttpService,
+    private alumnosService: AlumnosService
   ) { }
   // Cache
   public eliminarCacheCarreras() {
@@ -30,9 +32,9 @@ export class CarrerasService {
   }
 
   // Carreras
-  public traerCarreras(): Promise<Carrera[]> {
+  public traerCarreras(cache = true): Promise<Carrera[]> {
     return new Promise( (resolve, reject) => {
-      if (this.carreras) {
+      if (cache && this.carreras) {
         resolve(this.carreras);
       } else {
         this.http.get('/carreras').subscribe(
@@ -50,14 +52,13 @@ export class CarrerasService {
   public traerCarrera(id: number): Observable<Carrera> {
     return this.http.get('/carrera/' + id);
   }
-  public crearCarrera(carrera1): Observable<Mensaje> {
+  public crearCarrera(carrera: Carrera): Observable<Mensaje> {
     this.eliminarCacheCarreras();
-    const carrera = {
-      nombre: carrera1.nombre,
-      duracion: carrera1.duracion,
-      cantidad_materias: carrera1.materias,
-    };
     return this.http.post('/carreras', { carrera });
+  }
+  public modificarCarrera(carrera: Carrera, idCarrera: number): Observable<Mensaje> {
+    this.eliminarCacheCarreras();
+    return this.http.put('/carreras/' + idCarrera, { carrera });
   }
   public eliminarCarrera(id: number): Observable<Mensaje> {
     this.eliminarCacheCarreras();
@@ -65,9 +66,9 @@ export class CarrerasService {
   }
 
   // Carreras abiertas
-  public listarCarrerasAbiertas(): Promise<CarreraAbierta[]> {
+  public listarCarrerasAbiertas(cache = true): Promise<CarreraAbierta[]> {
     return new Promise( (resolve, reject) => {
-      if (this.carrerasAbiertas) {
+      if (cache && this.carrerasAbiertas) {
         resolve(this.carrerasAbiertas);
       } else {
         this.http.get('/carreras_abiertas').subscribe(
@@ -113,6 +114,7 @@ export class CarrerasService {
   // Inscripciones carreras
   public inscribirAlumnoACarrera(idCarreraAbierta: number, idAlumno): Observable<Mensaje> {
     this.eliminarCacheCarrerasAbiertas();
+    this.alumnosService.eliminarCacheAlumnos();
     return this.http.post('/inscripciones_carreras', {id_carrera_abierta: idCarreraAbierta, id_alumno: idAlumno});
   }
   public listarInscriptosCarrera(idCarreraAbierta: number): Observable<InscriptosCarrera[]> {
@@ -120,6 +122,7 @@ export class CarrerasService {
   }
   public eliminarInscripcionCarrera(idInscripcionCarrera: number): Observable<Mensaje> {
     this.eliminarCacheCarrerasAbiertas();
+    this.alumnosService.eliminarCacheAlumnos();
     return this.http.delete('/inscripciones_carreras/' + idInscripcionCarrera);
   }
 }

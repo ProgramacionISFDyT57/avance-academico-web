@@ -7,4 +7,5 @@ export interface Materia {
   anio: number;
   tipo_materia?: string;
   correlativas: string[];
+  ultima_cursada?: number;
 }

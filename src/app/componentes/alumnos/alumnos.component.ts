@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlumnosService } from 'src/app/servicios/alumno.service';
 import { Usuario } from '../../modelos/usuario';
-import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatDialog, MatDialogConfig } from '@angular/material';
 import { CrearAlumnoComponent } from './crear-alumno/crear-alumno.component';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
@@ -38,9 +38,10 @@ export class AlumnosComponent implements OnInit {
     }
   }
 
-  private async listarAlumnos() {
+  public async listarAlumnos(cache = true) {
     try {
-      const res = await this.alumnosService.traerAlumnos();
+      this.showSpinner = true;
+      const res = await this.alumnosService.traerAlumnos(cache);
       this.dataSource = new MatTableDataSource(res);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -54,7 +55,11 @@ export class AlumnosComponent implements OnInit {
   }
 
   crearAlumno() {
-    const modal = this.dialog.open(CrearAlumnoComponent);
+    const config: MatDialogConfig = {
+      width: '700px',
+      maxWidth: '90%'
+    };
+    const modal = this.dialog.open(CrearAlumnoComponent, config);
     modal.beforeClosed().subscribe(
       (resp) => {
         if (resp) {

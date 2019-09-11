@@ -6,6 +6,10 @@
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
   </mat-form-field>
 
+  <button matTooltip="Actualizar" class="btn-actualizar" mat-mini-fab (click)="listarAlumnos(false)">
+    <mat-icon>refresh</mat-icon>
+  </button>
+
   <button matTooltip="Crear Alumno" class="btn-crear" mat-fab color="primary" (click)="crearAlumno()">
     <mat-icon>add</mat-icon>
   </button>

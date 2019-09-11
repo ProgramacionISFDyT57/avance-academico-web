@@ -8,6 +8,10 @@
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
   </mat-form-field>
 
+  <button matTooltip="Actualizar" class="btn-actualizar2" mat-mini-fab (click)="ListarFinales()">
+    <mat-icon>refresh</mat-icon>
+  </button>
+
   <!-- <button matTooltip="Crear Inscripcion a Final" class="btn-crear" mat-fab color="primary" routerLink="crear">
     <mat-icon>add</mat-icon>
   </button> -->

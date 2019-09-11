@@ -17,13 +17,13 @@ export class AlumnosService {
     private http: HttpService
   ) { }
 
-  private eliminarCacheAlumnos() {
+  public eliminarCacheAlumnos() {
     this.alumnos = null;
   }
 
-  public traerAlumnos(): Promise<Alumno[]> {
+  public traerAlumnos(cache = true): Promise<Alumno[]> {
     return new Promise( (resolve, reject) => {
-      if (this.alumnos) {
+      if (cache && this.alumnos) {
         resolve(this.alumnos);
       } else {
         this.http.get('/alumnos').subscribe(

@@ -32,9 +32,10 @@ export class CarrerasComponent implements OnInit {
     public dialog: MatDialog,
   ) { }
 
-  private async listarCarreras() {
+  public async listarCarreras(cache = true) {
     try {
-      const res = await this.carrerasService.traerCarreras();
+      this.showSpinner = true;
+      const res = await this.carrerasService.traerCarreras(cache);
       this.dataSource = new MatTableDataSource(res);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -77,7 +78,6 @@ export class CarrerasComponent implements OnInit {
     modal.beforeClosed().subscribe(
       (resp) => {
         if (resp) {
-          this.showSpinner = true;
           this.listarCarreras();
         }
       }
@@ -112,8 +112,24 @@ export class CarrerasComponent implements OnInit {
     );
   }
 
+  modificarCarrera(carrera: Carrera) {
+    const config: MatDialogConfig = {
+      data: carrera
+    };
+    const modal = this.dialog.open(CrearCarreraComponent, config);
+    modal.beforeClosed().subscribe(
+      (resp) => {
+        if (resp) {
+          this.showSpinner = true;
+          this.listarCarreras();
+        }
+      }
+    );
+  }
+
   detalles(carrera: Carrera) {
     const config: MatDialogConfig = {
+      width: '95%',
       data: {
         idCarrera: carrera.id,
         carrera: carrera.nombre,

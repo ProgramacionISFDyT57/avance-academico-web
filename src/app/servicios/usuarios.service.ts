@@ -37,9 +37,9 @@ export class UsuariosService {
     return this.http.delete('/usuarios/' + id);
   }
 
-  public traerUsuarios(): Promise<Usuario[]> {
+  public traerUsuarios(cache = true): Promise<Usuario[]> {
     return new Promise( (resolve, reject) => {
-      if (this.usuarios) {
+      if (cache && this.usuarios) {
         resolve(this.usuarios);
       } else {
         this.http.get('/usuarios').subscribe(

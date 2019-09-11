@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { AlumnosService } from 'src/app/servicios/alumno.service';
 import { NotificationsService } from 'angular2-notifications';
 import { Usuario } from 'src/app/modelos/usuario';
@@ -17,6 +17,8 @@ export class CrearAlumnoComponent implements OnInit {
   formulario: FormGroup;
   showSpinner = true;
   carreras: CarreraAbierta[] = [];
+  actualizar = false;
+  @ViewChild('myNgForm') myNgForm: NgForm;
 
   constructor(
     public dialogRef: MatDialogRef<CrearAlumnoComponent>,
@@ -64,10 +66,11 @@ export class CrearAlumnoComponent implements OnInit {
     const id_carrera_abierta = this.formulario.value.id_carrera_abierta;
     this.alumnosService.crearAlumno(usuario, id_carrera_abierta).subscribe(
       (resp) => {
-        this.showSpinner = false;
-        this.notif.success(resp.mensaje);
-        this.dialogRef.close(true);
         console.log(resp);
+        this.notif.success(resp.mensaje);
+        this.myNgForm.resetForm();
+        this.showSpinner = false;
+        this.actualizar = true;
       },
       (error) => {
         this.showSpinner = false;
@@ -78,7 +81,7 @@ export class CrearAlumnoComponent implements OnInit {
   }
 
   public cerrar() {
-    this.dialogRef.close();
+    this.dialogRef.close(this.actualizar);
   }
 
   ngOnInit() {

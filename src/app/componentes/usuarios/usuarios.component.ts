@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 import { Usuario } from '../../modelos/usuario';
-import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatDialog, MatDialogConfig } from '@angular/material';
 import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
 import { NotificationsService } from 'angular2-notifications';
 import { CrearUsuarioComponent } from './crear-usuario/crear-usuario.component';
@@ -26,9 +26,10 @@ export class UsuariosComponent implements OnInit {
     public dialog: MatDialog,
   ) { }
 
-  private async listarUsuarios() {
+  public async listarUsuarios(cache = true) {
     try {
-      const res = await this.usuariosService.traerUsuarios();
+      this.showSpinner = true;
+      const res = await this.usuariosService.traerUsuarios(cache);
       this.dataSource = new MatTableDataSource(res);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -106,11 +107,14 @@ export class UsuariosComponent implements OnInit {
   }
 
   crearUsuario() {
-    const modal = this.dialog.open(CrearUsuarioComponent);
+    const config: MatDialogConfig = {
+      width: '500px',
+      maxWidth: '90%'
+    };
+    const modal = this.dialog.open(CrearUsuarioComponent, config);
     modal.beforeClosed().subscribe(
       (resp) => {
         if (resp) {
-          this.showSpinner = true;
           this.listarUsuarios();
         }
       }

@@ -8,6 +8,10 @@
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
   </mat-form-field>
 
+  <button matTooltip="Actualizar" class="btn-actualizar2" mat-mini-fab (click)="ListarCursadas()">
+    <mat-icon>refresh</mat-icon>
+  </button>
+
   <!-- <button matTooltip="Crear Carrera" class="btn-crear" mat-fab color="primary" routerLink="crear">
     <mat-icon>add</mat-icon>
   </button> -->

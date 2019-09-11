@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Materia } from '../../modelos/materia';
 import { MateriasService } from '../../servicios/materias.service';
-import { MatSort, MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
+import { MatSort, MatPaginator, MatTableDataSource, MatDialog, MatDialogConfig } from '@angular/material';
 import { NotificationsService } from 'angular2-notifications';
 import { AbrirInscripcionCursadaComponent } from './abrir-inscripcion-cursada/abrir-inscripcion-cursada.component';
 import { AbrirInscripcionFinalComponent } from './abrir-inscripcion-final/abrir-inscripcion-final.component';
@@ -21,7 +21,7 @@ export class MateriasComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<Materia>;
-  displayedColumns = ['nombre', 'carrera', 'anio', 'tipo_materia', 'correlativas', 'acciones'];
+  displayedColumns = ['nombre', 'carrera', 'anio', 'tipo_materia', 'correlativas', 'ultima_cursada', 'ultima_mesa', 'acciones'];
   showSpinner = true;
   filtro;
   materias: Materia[];
@@ -38,31 +38,49 @@ export class MateriasComponent implements OnInit {
   ) { }
 
   abrirDialogoInscripcion(idMateria: number, materia: string) {
-    this.dialog.open(AbrirInscripcionCursadaComponent, {
+    const config: MatDialogConfig = {
       data: {
         idMateria,
         materia
       }
-    });
+    };
+    const modal = this.dialog.open(AbrirInscripcionCursadaComponent, config);
+    modal.beforeClosed().subscribe(
+      (resp) => {
+        if (resp) {
+          this.listarMaterias();
+        }
+      }
+    );
   }
 
   abrirDialogoInscripcionFinal(idMateria: number, materia: string) {
-    this.dialog.open(AbrirInscripcionFinalComponent, {
+    const config: MatDialogConfig = {
       data: {
         idMateria,
         materia
       }
-    });
+    };
+    const modal = this.dialog.open(AbrirInscripcionFinalComponent, config);
+    modal.beforeClosed().subscribe(
+      (resp) => {
+        if (resp) {
+          this.listarMaterias();
+        }
+      }
+    );
   }
 
-  private async listarMaterias() {
+  public async listarMaterias(cache = true) {
     try {
-      const res = await this.materiasService.traerMaterias();
+      this.showSpinner = true;
+      const res = await this.materiasService.traerMaterias(cache);
       this.materias = res;
       this.dataSource = new MatTableDataSource(res);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       this.showSpinner = false;
+      this.filtroCarrera({nombre: this.carreraSeleccionada});
       console.log(res);
     } catch (error) {
       console.error(error);
