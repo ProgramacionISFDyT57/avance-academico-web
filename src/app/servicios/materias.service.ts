@@ -73,6 +73,9 @@ materias: Materia[];
   public inscripcionFinal(idMesa: number): Observable<Mensaje> {
     return this.http.post('/inscripciones_mesas', { id_mesa: idMesa });
   }
+  public inscribirAlumnoFinal(idAlumno: number, idMesa: number): Observable<Mensaje> {
+    return this.http.post('/inscribir_alumno_final', { id_alumno: idAlumno, id_mesa: idMesa });
+  }
   public eliminarInscripcionFinal(idInscripcionMesa: number): Observable<Mensaje> {
     return this.http.delete('/inscripciones_mesas/' + idInscripcionMesa);
   }
@@ -109,6 +112,9 @@ materias: Materia[];
   }
   public eliminarNotasCursada(id: number): Observable<Mensaje> {
     return this.http.delete('/notas_cursada/' + id);
+  }
+  public inscribirAlumnoCursada(idAlumno: number, idCursada: number, cursa: boolean, equivalencia: boolean): Observable<Mensaje> {
+    return this.http.post('/inscribir_alumno_cursada/', { id_alumno: idAlumno, id_cursada: idCursada, cursa, equivalencia});
   }
   public realizarInscripcionCursada(idCursada: number, cursa: boolean, equivalencia: boolean): Observable<Mensaje> {
     return this.http.post('/inscripcion_cursada/', { id_cursada: idCursada, cursa, equivalencia});
