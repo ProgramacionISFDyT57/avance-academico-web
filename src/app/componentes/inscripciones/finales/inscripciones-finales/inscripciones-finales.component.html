@@ -79,6 +79,10 @@
         </ng-container>
 
         <ng-container *ngIf="this.helper.rolesAdmitidos(['directivo', 'preceptor'])">
+          <button class="mx-1" mat-mini-fab color="primary"
+            matTooltip="Inscribir Alumno" (click)="inscribirAlumnoFinal(element.materia, element.fecha_examen, element.id)">
+            <mat-icon>queue</mat-icon>
+          </button>
           <button class="mx-1" mat-mini-fab color="primary" matTooltip="Detalles" (click)="detalles(element.id)">
             <mat-icon>list_alt</mat-icon>
           </button>

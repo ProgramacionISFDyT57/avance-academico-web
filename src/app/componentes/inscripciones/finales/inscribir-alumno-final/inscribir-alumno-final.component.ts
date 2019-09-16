@@ -1,28 +1,29 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { NotificationsService } from 'angular2-notifications';
-import { AlumnosService } from 'src/app/servicios/alumno.service';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { CarrerasService } from 'src/app/servicios/carreras.service';
 import { Alumno } from 'src/app/modelos/alumno';
+import { NotificationsService } from 'angular2-notifications';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { AlumnosService } from 'src/app/servicios/alumno.service';
+import { MateriasService } from 'src/app/servicios/materias.service';
 
 @Component({
-  selector: 'app-inscribir-alumno',
-  templateUrl: './inscribir-alumno.component.html',
-  styleUrls: ['./inscribir-alumno.component.scss']
+  selector: 'app-inscribir-alumno-final',
+  templateUrl: './inscribir-alumno-final.component.html',
+  styleUrls: ['./inscribir-alumno-final.component.scss']
 })
-export class InscribirAlumnoComponent implements OnInit {
+export class InscribirAlumnoFinalComponent implements OnInit {
 
   showSpinner = true;
   alumnos: Alumno[];
   idAlumno: number;
-  carrera: string;
-  idCarreraAbierta: number;
+  materia: string;
+  idMesa: number;
+  fecha: string;
 
   constructor(
     private notif: NotificationsService,
     private alumnosService: AlumnosService,
-    private carrerasService: CarrerasService,
-    public dialogRef: MatDialogRef<InscribirAlumnoComponent>,
+    private materiasService: MateriasService,
+    public dialogRef: MatDialogRef<InscribirAlumnoFinalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 
@@ -33,7 +34,7 @@ export class InscribirAlumnoComponent implements OnInit {
 
   enviar() {
     this.showSpinner = true;
-    this.carrerasService.inscribirAlumnoACarrera(this.idCarreraAbierta, this.idAlumno).subscribe(
+    this.materiasService.inscribirAlumnoFinal(this.idAlumno, this.idMesa).subscribe(
       (resp) => {
         this.showSpinner = false;
         this.notif.success(resp.mensaje);
@@ -55,8 +56,9 @@ export class InscribirAlumnoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.idCarreraAbierta = this.data.idCarreraAbierta;
-    this.carrera = this.data.carrera;
+    this.idMesa = this.data.idMesa;
+    this.materia = this.data.materia;
+    this.fecha = this.data.fechaExamen;
     this.listarAlumnos();
   }
 

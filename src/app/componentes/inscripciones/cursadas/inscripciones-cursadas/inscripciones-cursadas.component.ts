@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
 import { RealizarInscripcionCursadaComponent } from '../realizar-inscripcion-cursada/realizar-inscripcion-cursada.component';
 import { HelperService } from 'src/app/servicios/helper.service';
+import { InscribirAlumnoCursadaComponent } from '../inscribir-alumno-cursada/inscribir-alumno-cursada.component';
 
 @Component({
   selector: 'app-inscripciones-cursadas',
@@ -65,6 +66,25 @@ export class InscripcionesCursadasComponent implements OnInit {
       }
     };
     const modal = this.dialog.open(RealizarInscripcionCursadaComponent, config);
+    modal.beforeClosed().subscribe(
+      (resp) => {
+        if (resp) {
+          this.ListarCursadas();
+        }
+      }
+    );
+  }
+
+  inscribirAlumno(idCursada: number, materia: string) {
+    const config: MatDialogConfig = {
+      width: '500px',
+      maxWidth: '90%',
+      data: {
+        idCursada,
+        materia
+      }
+    };
+    const modal = this.dialog.open(InscribirAlumnoCursadaComponent, config);
     modal.beforeClosed().subscribe(
       (resp) => {
         if (resp) {
