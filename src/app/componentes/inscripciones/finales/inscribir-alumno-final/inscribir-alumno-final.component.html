@@ -1,6 +1,7 @@
 <mat-progress-bar mode="indeterminate" color="warn" [style.display]="showSpinner ? 'block' : 'none'"></mat-progress-bar>
 
 <h2 mat-dialog-title>Inscribir alumno a final de {{ materia }}</h2>
+<h3 mat-dialog-title>Fecha {{ fecha | date: 'dd/MM/yyyy' }}</h3>
 
 <!-- <mat-dialog-content> -->
   <form id="form" (ngSubmit)="enviar()">
