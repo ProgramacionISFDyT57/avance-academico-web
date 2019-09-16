@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MateriasService } from 'src/app/servicios/materias.service';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort, MatDialogConfig, MatDialog } from '@angular/material';
 import { NotificationsService } from 'angular2-notifications';
 import { Carrera } from 'src/app/modelos/carrera';
 import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
 import { Router } from '@angular/router';
 import { HelperService } from 'src/app/servicios/helper.service';
 import { FinalAbierto } from 'src/app/modelos/final-abierto';
+import { InscribirAlumnoFinalComponent } from '../inscribir-alumno-final/inscribir-alumno-final.component';
 
 @Component({
   selector: 'app-inscripciones-finales',
@@ -27,6 +28,7 @@ export class InscripcionesFinalesComponent implements OnInit {
     private notif: NotificationsService,
     private router: Router,
     private confirmation: ConfirmationDialogService,
+    public dialog: MatDialog,
   ) { }
 
   public ListarFinales() {
@@ -71,6 +73,26 @@ export class InscripcionesFinalesComponent implements OnInit {
         }
       );
     }
+  }
+
+  inscribirAlumnoFinal(materia: string, fechaExamen: string, idMesa: number) {
+    const config: MatDialogConfig = {
+      width: '500px',
+      maxWidth: '90%',
+      data: {
+        materia,
+        fechaExamen,
+        idMesa
+      }
+    };
+    const modal = this.dialog.open(InscribirAlumnoFinalComponent, config);
+    modal.beforeClosed().subscribe(
+      (resp) => {
+        if (resp) {
+          this.ListarFinales();
+        }
+      }
+    );
   }
 
   async desinscribirse(idInscripcionCursada: number) {

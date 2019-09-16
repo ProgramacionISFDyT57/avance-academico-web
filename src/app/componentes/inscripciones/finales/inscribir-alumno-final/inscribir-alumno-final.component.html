@@ -1,0 +1,17 @@
+<mat-progress-bar mode="indeterminate" color="warn" [style.display]="showSpinner ? 'block' : 'none'"></mat-progress-bar>
+
+<h2 mat-dialog-title>Inscribir alumno a final de {{ materia }}</h2>
+
+<!-- <mat-dialog-content> -->
+  <form id="form" (ngSubmit)="enviar()">
+
+    <ng-select [clearable]="false" [items]="alumnos" bindLabel="nombre_completo" bindValue="id_alumno" name="idAlumno" [(ngModel)]="idAlumno">
+    </ng-select>
+
+  </form>
+<!-- </mat-dialog-content> -->
+
+<mat-dialog-actions fxLayoutAlign="end center">
+  <button mat-raised-button color="primary" type="submit" form="form" [disabled]="!idAlumno || showSpinner">Crear</button>
+  <button mat-raised-button (click)="cerrar()">Volver </button>
+</mat-dialog-actions>
