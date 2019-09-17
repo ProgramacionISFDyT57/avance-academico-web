@@ -17,7 +17,6 @@ import { CarrerasService } from 'src/app/servicios/carreras.service';
 })
 export class MateriasComponent implements OnInit {
 
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<Materia>;
@@ -137,11 +136,13 @@ export class MateriasComponent implements OnInit {
   public filtroCarrera(event) {
     this.filtro = '';
     if (event.nombre === 'Todas las carreras') {
+      this.displayedColumns = ['nombre', 'carrera', 'anio', 'tipo_materia', 'correlativas', 'ultima_cursada', 'ultima_mesa', 'acciones'];
       this.dataSource = new MatTableDataSource(this.materias);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     } else {
       const materias = [];
+      this.displayedColumns = ['nombre', 'anio', 'tipo_materia', 'correlativas', 'ultima_cursada', 'ultima_mesa', 'acciones'];
       for (const materia of this.materias) {
         if (materia.carrera === event.nombre) {
           materias.push(materia);

@@ -111,6 +111,7 @@ export class CrearMateriaComponent implements OnInit {
         this.notif.success(resp.mensaje);
         this.myNgForm.resetForm();
         this.nombre.nativeElement.focus();
+        this.cargar_materias_por_carrera(this.idCarrera);
         this.showSpinner = false;
         this.actualizar = true;
       },

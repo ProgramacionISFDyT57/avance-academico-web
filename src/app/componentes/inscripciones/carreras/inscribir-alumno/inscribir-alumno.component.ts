@@ -54,10 +54,6 @@ export class InscribirAlumnoComponent implements OnInit {
     this.showSpinner = false;
   }
 
-  test() {
-    console.log(this.idAlumno);
-  }
-
   ngOnInit() {
     this.idCarreraAbierta = this.data.idCarreraAbierta;
     this.carrera = this.data.carrera;

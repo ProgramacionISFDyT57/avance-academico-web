@@ -39,6 +39,7 @@ import { AvanceAcademicoComponent } from './componentes/avance-academico/avance-
 import { InfoCarreraComponent } from './componentes/carreras/info-carrera/info-carrera.component';
 import { InscribirAlumnoComponent } from './componentes/inscripciones/carreras/inscribir-alumno/inscribir-alumno.component';
 import { CambioClaveComponent } from './componentes/usuarios/cambio-clave/cambio-clave.component';
+import { InscribirAlumnoCursadaComponent } from './componentes/inscripciones/cursadas/inscribir-alumno-cursada/inscribir-alumno-cursada.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { CambioClaveComponent } from './componentes/usuarios/cambio-clave/cambio
     InfoCarreraComponent,
     InscribirAlumnoComponent,
     CambioClaveComponent,
+    InscribirAlumnoCursadaComponent,
   ],
   entryComponents: [
     ConfirmationDialogComponent,
@@ -83,7 +85,8 @@ import { CambioClaveComponent } from './componentes/usuarios/cambio-clave/cambio
     RealizarInscripcionCursadaComponent,
     InfoCarreraComponent,
     InscribirAlumnoComponent,
-    CambioClaveComponent
+    CambioClaveComponent,
+    InscribirAlumnoCursadaComponent
   ],
   imports: [
     BrowserAnimationsModule,
