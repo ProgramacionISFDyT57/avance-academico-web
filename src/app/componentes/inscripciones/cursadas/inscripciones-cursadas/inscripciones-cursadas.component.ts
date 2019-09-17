@@ -75,13 +75,14 @@ export class InscripcionesCursadasComponent implements OnInit {
     );
   }
 
-  inscribirAlumno(idCursada: number, materia: string) {
+  inscribirAlumno(idCursada: number, materia: string, idCarrera: number) {
     const config: MatDialogConfig = {
       width: '500px',
       maxWidth: '90%',
       data: {
         idCursada,
-        materia
+        materia,
+        idCarrera
       }
     };
     const modal = this.dialog.open(InscribirAlumnoCursadaComponent, config);

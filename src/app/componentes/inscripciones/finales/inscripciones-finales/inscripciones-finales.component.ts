@@ -75,14 +75,15 @@ export class InscripcionesFinalesComponent implements OnInit {
     }
   }
 
-  inscribirAlumnoFinal(materia: string, fechaExamen: string, idMesa: number) {
+  inscribirAlumnoFinal(materia: string, fechaExamen: string, idMesa: number, idCarrera: number) {
     const config: MatDialogConfig = {
       width: '500px',
       maxWidth: '90%',
       data: {
         materia,
         fechaExamen,
-        idMesa
+        idMesa,
+        idCarrera
       }
     };
     const modal = this.dialog.open(InscribirAlumnoFinalComponent, config);

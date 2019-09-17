@@ -4,7 +4,7 @@ import { NotificationsService } from 'angular2-notifications';
 import { AlumnosService } from 'src/app/servicios/alumno.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { MateriasService } from 'src/app/servicios/materias.service';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-inscribir-alumno-cursada',
@@ -16,11 +16,11 @@ export class InscribirAlumnoCursadaComponent implements OnInit {
   showSpinner = true;
   formulario: FormGroup;
   alumnos: Alumno[];
-  idAlumno: number;
   materia: string;
   cursa = true;
   libre = false;
   idCursada: number;
+  idCarrera: number;
 
   constructor(
     private fb: FormBuilder,
@@ -33,6 +33,7 @@ export class InscribirAlumnoCursadaComponent implements OnInit {
 
   private crearFormulario() {
     this.formulario = this.fb.group({
+      idAlumno: [null, Validators.required],
       cursa: [true],
       equivalencia: [false]
     });
@@ -46,7 +47,8 @@ export class InscribirAlumnoCursadaComponent implements OnInit {
     this.showSpinner = true;
     const cursa = this.formulario.value.cursa;
     const equivalencia = this.formulario.value.equivalencia;
-    this.materiasService.inscribirAlumnoCursada(this.idAlumno, this.idCursada, cursa, equivalencia).subscribe(
+    const idAlumno = this.formulario.value.idAlumno;
+    this.materiasService.inscribirAlumnoCursada(idAlumno, this.idCursada, cursa, equivalencia).subscribe(
       (resp) => {
         this.showSpinner = false;
         this.notif.success(resp.mensaje);
@@ -62,12 +64,21 @@ export class InscribirAlumnoCursadaComponent implements OnInit {
   }
 
   async listarAlumnos() {
-    this.alumnos = await this.alumnosService.traerAlumnos();
-    console.log(this.alumnos);
-    this.showSpinner = false;
+    this.alumnosService.listarAlumnosPorCarrera(this.idCarrera).subscribe(
+      (alumnos) => {
+        this.alumnos = alumnos;
+        console.log(this.alumnos);
+        this.showSpinner = false;
+      },
+      (error) => {
+        console.error(error);
+        this.showSpinner = false;
+      }
+    );
   }
 
   ngOnInit() {
+    this.idCarrera = this.data.idCarrera;
     this.idCursada = this.data.idCursada;
     this.materia = this.data.materia;
     this.listarAlumnos();

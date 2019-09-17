@@ -13,6 +13,7 @@ import { MateriasService } from 'src/app/servicios/materias.service';
 export class InscribirAlumnoFinalComponent implements OnInit {
 
   showSpinner = true;
+  idCarrera: number;
   alumnos: Alumno[];
   idAlumno: number;
   materia: string;
@@ -50,12 +51,21 @@ export class InscribirAlumnoFinalComponent implements OnInit {
   }
 
   async listarAlumnos() {
-    this.alumnos = await this.alumnosService.traerAlumnos();
-    console.log(this.alumnos);
-    this.showSpinner = false;
+    this.alumnosService.listarAlumnosPorCarrera(this.idCarrera).subscribe(
+      (alumnos) => {
+        this.alumnos = alumnos;
+        console.log(this.alumnos);
+        this.showSpinner = false;
+      },
+      (error) => {
+        console.error(error);
+        this.showSpinner = false;
+      }
+    );
   }
 
   ngOnInit() {
+    this.idCarrera = this.data.idCarrera;
     this.idMesa = this.data.idMesa;
     this.materia = this.data.materia;
     this.fecha = this.data.fechaExamen;
