@@ -39,6 +39,10 @@ export class AlumnosService {
     });
   }
 
+  public listarAlumnosPorCarrera(idCarrera): Observable<Alumno[]> {
+    return this.http.get('/alumnos_por_carrera/' + idCarrera);
+  }
+
   public crearAlumno(usuario: Usuario, idCarreraAbierta: number): Observable<Mensaje> {
     this.eliminarCacheAlumnos();
     return this.http.post('/alumnos', {usuario, id_carrera_abierta: idCarreraAbierta});
