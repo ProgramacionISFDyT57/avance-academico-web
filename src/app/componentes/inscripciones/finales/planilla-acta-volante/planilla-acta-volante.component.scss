@@ -1,3 +1,11 @@
+.container {
+    margin: 0 20px;
+}
+
+.logo {
+    width: 300px;
+}
+
 .A3a {
     border-style: solid;
     border-color: black; 
@@ -9,7 +17,27 @@
     border-style: solid;
     border-color: black; 
     border-width: 0.5px;
-    margin-left: 10px;
-    margin-right: 10px;
     padding: 5px;
+}
+
+.table-container {
+    margin: 20px 0;
+}
+
+p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 0.5px solid black;
+    padding: 5px;
+}
+
+.firmas {
+    margin-top: 130px;
 }
