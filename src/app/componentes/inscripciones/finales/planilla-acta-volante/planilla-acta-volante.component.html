@@ -1,82 +1,86 @@
-<div class="container">
+<div class="container" *ngIf="actaVolante">
+  <ng-container *ngFor="let pagina of paginas">
 
     <div fxLayout="row" fxLayoutAlign="space-between center">
-        <div>
-          <p><small>PROVINCIA DE BUENOS AIRES</small></p>
-          <p><small>DIRECCION DE EDUCACION SUPERIOR</small></p>
-          <p><small>INSTITUTO SUPERIOR DE FORMACION DOCENTE Y TECNICA Nº 57</small></p>
-        </div>
-        <div>
-          <img class="logo" src="assets/logo_gba.png" alt="">
-        </div>
+      <div class="alto" fxLayout="column" fxLayoutAlign="end start" >
+        <p><small>PROVINCIA DE BUENOS AIRES</small></p>
+        <p><small>DIRECCION DE EDUCACION SUPERIOR</small></p>
+        <p><small>INSTITUTO SUPERIOR DE FORMACION DOCENTE Y TECNICA Nº 57</small></p>
       </div>
-
-  <div fxLayout="row" fxLayoutAlign="space-between center">
-    <p class="A3a">A3a</p>
-    <h3>ACTA VOLANTE - ALUMNOS REGULARES</h3>
-    <div fxLayout="column" fxLayoutAlign="center end">
-      <P>TOMO: ________ </P>
-      <P>FOLIO: ________ </P>
+      <div class="alto">
+        <img class="logo" src="assets/logo_gba.png" alt="">
+      </div>
     </div>
-  </div>
 
-  <div class="cuadro">
-    <p>CARRERA: Año:</p>
-    <p>Asignatura: </p>
-    <p>Fecha de la Mesa: <span> </span> Hora: 17:30</p>
-    <p>Presidente de Mesa: <span> </span> Vocal: <span> </span></p>
-  </div>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <p class="A3a">A3a</p>
+      <h3>ACTA VOLANTE - ALUMNOS REGULARES</h3>
+      <div fxLayout="column" fxLayoutAlign="center end">
+        <P>TOMO: ________ </P>
+        <P>FOLIO: ________ </P>
+      </div>
+    </div>
 
-  <div class="table-container">
-    <table>
-      <thead>
-        <tr>
-          <th rowspan="2">Nº</th>
-          <th rowspan="2">Apellido y Nombres</th>
-          <th rowspan="2">DNI</th>
-          <th rowspan="2">Cohorte</th>
-          <th colspan="3">Calificaciones</th>
-        </tr>
-        <tr>
-          <th>Escrito</th>
-          <th>Oral</th>
-          <th>Total</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let inscripto of inscriptos; let i = index">
-          <td class="text-center">{{ i+1 }}</td>
-          <td>
-            <ng-container *ngIf="inscripto.apellido">
-              {{inscripto.apellido}}, {{inscripto.nombre}}
-            </ng-container>
-          </td>
-          <td class="text-center">{{inscripto.dni}}</td>
-          <td class="text-center"></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    <div class="cuadro">
+      <p>CARRERA: {{ actaVolante.carrera }} / Año: </p>
+      <p>Asignatura: {{ actaVolante.materia }} </p>
+      <p>Fecha de la Mesa: {{ actaVolante.fecha_examen | date:'dd/MM/yyyy' }} Hora: 17:30</p>
+      <p>Presidente de Mesa: {{ actaVolante.profesor }} Vocal: {{ actaVolante.vocal1 }} <ng-container *ngIf="actaVolante.vocal2">/ {{ actaVolante.vocal2 }}</ng-container> 
+      </p>
+    </div>
 
-  <div class="firmas" fxLayout="row" fxLayoutAlign="space-around center">
-    <div class="text-center">
-      <span>........................................</span>
-      <p>Vocal 1</p>
-      <p>(Firma y Aclaración)</p>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th rowspan="2">Nº</th>
+            <th rowspan="2">Apellido y Nombres</th>
+            <th rowspan="2">DNI</th>
+            <th rowspan="2">Cohorte</th>
+            <th colspan="3">Calificaciones</th>
+          </tr>
+          <tr>
+            <th>Escrito</th>
+            <th>Oral</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let inscripto of inscriptos[pagina]; let i = index">
+            <td class="text-center">{{ i + 1 + (25*pagina) }}</td>
+            <td>
+              <ng-container *ngIf="inscripto.apellido">
+                {{inscripto.apellido}}, {{inscripto.nombre}}
+              </ng-container>
+            </td>
+            <td class="text-center">{{inscripto.dni}}</td>
+            <td class="text-center">{{inscripto.cohorte}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="text-center">
-      <span>........................................</span>
-      <p>Presidente</p>
-      <p>(Firma y Aclaración)</p>
+
+    <div class="firmas" fxLayout="row" fxLayoutAlign="space-around center">
+      <div class="text-center">
+        <span>........................................</span>
+        <p>Vocal 1</p>
+        <p>(Firma y Aclaración)</p>
+      </div>
+      <div class="text-center">
+        <span>........................................</span>
+        <p>Presidente</p>
+        <p>(Firma y Aclaración)</p>
+      </div>
+      <div class="text-center">
+        <span>........................................</span>
+        <p>Vocal 2</p>
+        <p>(Firma y Aclaración)</p>
+      </div>
     </div>
-    <div class="text-center">
-      <span>........................................</span>
-      <p>Vocal 2</p>
-      <p>(Firma y Aclaración)</p>
-    </div>
-  </div>
+
+  </ng-container>
 
 </div>
