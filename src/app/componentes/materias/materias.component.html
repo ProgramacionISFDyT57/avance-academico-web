@@ -69,7 +69,7 @@
             <mat-icon>add</mat-icon>
           </button>
         </ng-container>
-        <ng-container *ngIf="this.helper.rolesAdmitidos(['directivo'])">
+        <ng-container *ngIf="this.helper.rolesAdmitidos(['directivo']) && !element.ultima_mesa && !element.ultima_cursada">
           <button class="mx-1" mat-mini-fab color="warn" matTooltip="Eliminar Materia" (click)="eliminar(element.id)">
             <mat-icon>delete_forever</mat-icon>
           </button>

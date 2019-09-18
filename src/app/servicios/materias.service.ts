@@ -10,6 +10,7 @@ import { AvanceAcademico } from '../modelos/avance-academico';
 import { Final } from '../modelos/final';
 import { FinalAbierto } from '../modelos/final-abierto';
 import { CarrerasService } from './carreras.service';
+import { ActaVolante } from '../modelos/acta-volante';
 
 @Injectable({
   providedIn: 'root'
@@ -90,6 +91,9 @@ materias: Materia[];
   }
   public eliminarNotasFinal(idInscripcionMesa: number): Observable<Mensaje> {
     return this.http.delete('/notas_final/' + idInscripcionMesa);
+  }
+  public actaVolante(idFinal: number): Observable<ActaVolante> {
+    return this.http.get('/acta_volante/' + idFinal);
   }
 
   // Cursadas

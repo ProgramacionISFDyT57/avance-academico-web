@@ -134,6 +134,10 @@ export class InscripcionesFinalesComponent implements OnInit {
     }
   }
 
+  public async actaVolante(idMesa: number) {
+    this.router.navigateByUrl('acta_volante/' + idMesa);
+  }
+
   ngOnInit() {
     const rol = this.helper.rolActual();
     if (rol === 'alumno') {
