@@ -1,33 +1,41 @@
-<mat-toolbar *ngIf="mostrar_barra()" color="primary">
-        <button mat-flat-button color="primary" routerLink="/inicio" routerLinkActive="mat-accent">Inicio</button>
-        <button mat-flat-button color="primary" routerLink="/carreras" routerLinkActive="mat-accent">Carreras</button>
-        <button mat-flat-button color="primary" routerLink="/materias" routerLinkActive="mat-accent">Materias</button>
-        <button mat-flat-button color="primary" [class.mat-accent]="this.rutaActualInscripcion()"
-                [matMenuTriggerFor]="menu">Inscripciones</button>
-        <mat-menu #menu="matMenu">
-                <button *ngIf="this.helper.rolesAdmitidos(['directivo', 'preceptor'])" mat-menu-item
-                        routerLink="inscripcion/carreras">Carreras</button>
-                <button mat-menu-item routerLink="inscripcion/cursadas">Cursadas</button>
-                <button mat-menu-item routerLink="inscripcion/mesas">Finales</button>
-        </mat-menu>
-        <button *ngIf="this.helper.rolesAdmitidos(['directivo', 'preceptor'])" mat-flat-button color="primary"
-                routerLink="/alumnos" routerLinkActive="mat-accent">Alumnos</button>
-        <button *ngIf="this.helper.rolesAdmitidos(['directivo'])" mat-flat-button color="primary" routerLink="/usuarios"
-                routerLinkActive="mat-accent">Usuarios</button>
-        <button *ngIf="this.helper.rolesAdmitidos(['alumno'])" mat-flat-button color="primary"
-                routerLink="/avance_academico" routerLinkActive="mat-accent">Avance Académico</button>
+<div class="no-print">
+        <mat-toolbar *ngIf="mostrar_barra()" color="primary">
+                <button mat-flat-button color="primary" routerLink="/inicio"
+                        routerLinkActive="mat-accent">Inicio</button>
+                <button mat-flat-button color="primary" routerLink="/carreras"
+                        routerLinkActive="mat-accent">Carreras</button>
+                <button mat-flat-button color="primary" routerLink="/materias"
+                        routerLinkActive="mat-accent">Materias</button>
+                <button mat-flat-button color="primary" [class.mat-accent]="this.rutaActualInscripcion()"
+                        [matMenuTriggerFor]="menu">Inscripciones</button>
+                <mat-menu #menu="matMenu">
+                        <button *ngIf="this.helper.rolesAdmitidos(['directivo', 'preceptor'])" mat-menu-item
+                                routerLink="inscripcion/carreras">Carreras</button>
+                        <button mat-menu-item routerLink="inscripcion/cursadas">Cursadas</button>
+                        <button mat-menu-item routerLink="inscripcion/mesas">Finales</button>
+                </mat-menu>
+                <button *ngIf="this.helper.rolesAdmitidos(['directivo', 'preceptor'])" mat-flat-button color="primary"
+                        routerLink="/alumnos" routerLinkActive="mat-accent">Alumnos</button>
+                <button *ngIf="this.helper.rolesAdmitidos(['directivo'])" mat-flat-button color="primary"
+                        routerLink="/usuarios" routerLinkActive="mat-accent">Usuarios</button>
+                <button *ngIf="this.helper.rolesAdmitidos(['alumno'])" mat-flat-button color="primary"
+                        routerLink="/avance_academico" routerLinkActive="mat-accent">Avance Académico</button>
 
 
-        <span class="example-spacer"></span>
-        <span>{{ rol }}</span>
+                <span class="example-spacer"></span>
+                <span>{{ rol }}</span>
 
-        <button mat-flat-button color="primary" [matMenuTriggerFor]="menu2">
-                <mat-icon class="example-icon">settings</mat-icon>
-        </button>
-        <mat-menu #menu2="matMenu">
-                <mat-icon class="example-icon" (click)="cambiarClave()" matTooltip="Cambiar Contraseña">lock</mat-icon>
-                <mat-icon class="example-icon" (click)="salir()" matTooltip="Salir">exit_to_app</mat-icon>
-        </mat-menu>
-</mat-toolbar>
+                <button mat-flat-button color="primary" [matMenuTriggerFor]="menu2">
+                        <mat-icon class="example-icon">settings</mat-icon>
+                </button>
+                <mat-menu #menu2="matMenu">
+                        <mat-icon class="example-icon" (click)="cambiarClave()" matTooltip="Cambiar Contraseña">lock
+                        </mat-icon>
+                        <mat-icon class="example-icon" (click)="salir()" matTooltip="Salir">exit_to_app</mat-icon>
+                </mat-menu>
+        </mat-toolbar>
+</div>
+
 <router-outlet></router-outlet>
+
 <simple-notifications [options]="notifOptions"></simple-notifications>

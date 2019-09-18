@@ -5,6 +5,16 @@
 // @import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
 // @import "~@angular/material/prebuilt-themes/purple-green.css";
 
+@page { size: auto;  margin: 0mm; }
+
+@media print
+{    
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+}
+
 body {
   // background-color: #cfcfcf;
   background-color: #f4f6f9;
