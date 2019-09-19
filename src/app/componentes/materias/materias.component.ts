@@ -20,9 +20,10 @@ export class MateriasComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<Materia>;
-  displayedColumns = ['nombre', 'carrera', 'anio', 'tipo_materia', 'correlativas', 'ultima_cursada', 'ultima_mesa', 'acciones'];
+  displayedColumns;
   showSpinner = true;
   filtro;
+  rol;
   materias: Materia[];
   carreras: Carrera[] = [];
   carreraSeleccionada = 'Todas las carreras';
@@ -136,13 +137,21 @@ export class MateriasComponent implements OnInit {
   public filtroCarrera(event) {
     this.filtro = '';
     if (event.nombre === 'Todas las carreras') {
-      this.displayedColumns = ['nombre', 'carrera', 'anio', 'tipo_materia', 'correlativas', 'ultima_cursada', 'ultima_mesa', 'acciones'];
+      if (this.rol === 'alumno') {
+        this.displayedColumns = ['nombre', 'carrera', 'anio', 'tipo_materia', 'correlativas', 'ultima_cursada', 'ultima_mesa'];
+      } else {
+        this.displayedColumns = ['nombre', 'carrera', 'anio', 'tipo_materia', 'correlativas', 'ultima_cursada', 'ultima_mesa', 'acciones'];
+      }
       this.dataSource = new MatTableDataSource(this.materias);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     } else {
       const materias = [];
-      this.displayedColumns = ['nombre', 'anio', 'tipo_materia', 'correlativas', 'ultima_cursada', 'ultima_mesa', 'acciones'];
+      if (this.rol === 'alumno') {
+        this.displayedColumns = ['nombre', 'carrera', 'anio', 'tipo_materia', 'correlativas', 'ultima_cursada', 'ultima_mesa'];
+      } else {
+        this.displayedColumns = ['nombre', 'anio', 'tipo_materia', 'correlativas', 'ultima_cursada', 'ultima_mesa', 'acciones'];
+      }
       for (const materia of this.materias) {
         if (materia.carrera === event.nombre) {
           materias.push(materia);
@@ -155,6 +164,7 @@ export class MateriasComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.rol = this.helper.rolActual();
     this.listarCarreras();
     this.listarMaterias();
   }
