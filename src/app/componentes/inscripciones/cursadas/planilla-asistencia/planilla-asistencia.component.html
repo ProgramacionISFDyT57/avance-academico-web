@@ -1,4 +1,7 @@
-<div class="container" *ngIf="planilla">
+<div class="container horizontal" *ngIf="planilla">
+  <button class="mx-1 btn-imprimir no-print" mat-mini-fab color="accent" matTooltip="Imprimir" (click)="imprimir()">
+    <mat-icon>print</mat-icon>
+  </button>
   <ng-container *ngFor="let pagina of paginas; let last = last">
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <div fxLayout="column" fxLayoutAlign="end start">
