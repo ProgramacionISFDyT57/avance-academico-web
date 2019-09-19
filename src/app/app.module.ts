@@ -43,6 +43,7 @@ import { InscribirAlumnoCursadaComponent } from './componentes/inscripciones/cur
 import { InscribirAlumnoFinalComponent } from './componentes/inscripciones/finales/inscribir-alumno-final/inscribir-alumno-final.component';
 import { PlanillaActaVolanteComponent } from './componentes/inscripciones/finales/planilla-acta-volante/planilla-acta-volante.component';
 import { PlanillaInscriptosCursadaComponent } from './componentes/inscripciones/cursadas/planilla-inscriptos-cursada/planilla-inscriptos-cursada.component';
+import { PlanillaAsistenciaComponent } from './componentes/inscripciones/cursadas/planilla-asistencia/planilla-asistencia.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { PlanillaInscriptosCursadaComponent } from './componentes/inscripciones/
     InscribirAlumnoFinalComponent,
     PlanillaActaVolanteComponent,
     PlanillaInscriptosCursadaComponent,
+    PlanillaAsistenciaComponent,
   ],
   entryComponents: [
     ConfirmationDialogComponent,

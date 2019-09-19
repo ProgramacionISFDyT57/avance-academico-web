@@ -18,6 +18,7 @@ import { DetallesFinalComponent } from './componentes/inscripciones/finales/deta
 import { AvanceAcademicoComponent } from './componentes/avance-academico/avance-academico.component';
 import { PlanillaActaVolanteComponent } from './componentes/inscripciones/finales/planilla-acta-volante/planilla-acta-volante.component';
 import { PlanillaInscriptosCursadaComponent } from './componentes/inscripciones/cursadas/planilla-inscriptos-cursada/planilla-inscriptos-cursada.component';
+import { PlanillaAsistenciaComponent } from './componentes/inscripciones/cursadas/planilla-asistencia/planilla-asistencia.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'inicio' },
@@ -41,6 +42,7 @@ const routes: Routes = [
 
   { path: 'acta_volante/:idMesa', component: PlanillaActaVolanteComponent, canActivate: [LoginGuard] },
   { path: 'planilla_inscriptos_cursada/:idCursada', component: PlanillaInscriptosCursadaComponent, canActivate: [LoginGuard] },
+  { path: 'planilla_asistencia/:idCursada', component: PlanillaAsistenciaComponent, canActivate: [LoginGuard] },
 ];
 
 @NgModule({

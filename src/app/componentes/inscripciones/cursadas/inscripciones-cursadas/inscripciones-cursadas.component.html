@@ -89,6 +89,9 @@
           <button *ngIf="+element.cant_inscriptos" class="mx-1" mat-mini-fab color="accent" matTooltip="Planilla Inscriptos Cursada" (click)="inscriptosCursada(element.id)">
             <mat-icon>print</mat-icon>
           </button>
+          <button *ngIf="+element.cant_inscriptos" class="mx-1" mat-mini-fab color="warn" matTooltip="Planilla Asistencia" (click)="planillaAsistencia(element.id)">
+              <mat-icon>print</mat-icon>
+            </button>
           <button *ngIf="!+element.cant_inscriptos" class="mx-1" mat-mini-fab color="warn" matTooltip="Eliminar"
             (click)="eliminar(element.id)">
             <mat-icon>delete_forever</mat-icon>

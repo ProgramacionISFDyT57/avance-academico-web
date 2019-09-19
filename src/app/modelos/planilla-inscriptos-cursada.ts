@@ -11,5 +11,6 @@ export interface PlanillaInscriptosCursada {
   materia: string;
   anio_cursada: number;
   anio_materia: number;
+  profesor: string;
   inscriptos: InscriptoCursada[]
 }
