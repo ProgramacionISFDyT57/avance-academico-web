@@ -1,0 +1,64 @@
+<div class="container vertical" *ngIf="planilla">
+  <button class="mx-1 btn-imprimir no-print" mat-mini-fab color="accent" matTooltip="Imprimir" (click)="imprimir()">
+    <mat-icon>print</mat-icon>
+  </button>
+  <ng-container *ngFor="let pagina of paginas; let last = last">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxLayout="column" fxLayoutAlign="end start">
+        <p><u>CARRERA:</u> {{ planilla.carrera | uppercase }}</p>
+        <p><u>AÑO:</u> {{ planilla.anio_materia }}</p>
+        <p><u>ESPACIO:</u> {{ planilla.materia | uppercase }}</p>
+      </div>
+      <div>
+        <p><u>CICLO LECTIVO:</u> {{ planilla.anio_cursada }}</p>
+      </div>
+    </div>
+
+    <div class="table-container">
+      <table width="100%">
+        <thead>
+          <tr>
+            <th rowspan="2">Nº</th>
+            <th rowspan="2">Apellido y Nombres</th>
+            <th colspan="3">Situación Académica</th>
+            <th colspan="2">Cursada</th>
+            <th rowspan="2">Firma del Alumno</th>
+            <th rowspan="2">Fecha</th>
+            <th rowspan="2">Observaciones</th>
+          </tr>
+          <tr>
+            <th class="ancho"><span>Cohorte</span></th>
+            <th class="ancho"><span>Atraso Académico</span></th>
+            <th class="ancho"><span>Recursante</span></th>
+            <th class="ancho"><span>Presencial</span></th>
+            <th class="ancho"><span>Libre</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let inscripto of inscriptos[pagina]; let i = index">
+            <td class="text-center">{{ i + 1 + (35*pagina) }}</td>
+            <td class="nowrap">
+              <ng-container *ngIf="inscripto.apellido">
+                {{inscripto.apellido}}, {{inscripto.nombre}}
+              </ng-container>
+            </td>
+            <td class="text-center">{{inscripto.cohorte}}</td>
+            <td class="text-center"></td>
+            <td class="text-center"></td>
+            <td class="text-center">
+              <ng-container *ngIf="inscripto.cursa">X</ng-container>
+            </td>
+            <td class="text-center">
+              <ng-container *ngIf="inscripto.cursa === false">X</ng-container>
+            </td>
+            <td></td>
+            <td class="nowrap text-center">{{inscripto.fecha_inscripcion | date:'dd/MM/yy' }}</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p *ngIf="!last" style="page-break-after: always;">&nbsp;</p>
+    <p *ngIf="!last" style="page-break-before: always;">&nbsp;</p>
+  </ng-container>
+</div>

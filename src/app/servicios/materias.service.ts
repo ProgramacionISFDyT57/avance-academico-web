@@ -11,6 +11,7 @@ import { Final } from '../modelos/final';
 import { FinalAbierto } from '../modelos/final-abierto';
 import { CarrerasService } from './carreras.service';
 import { ActaVolante } from '../modelos/acta-volante';
+import { PlanillaInscriptosCursada } from '../modelos/planilla-inscriptos-cursada';
 
 @Injectable({
   providedIn: 'root'
@@ -110,6 +111,9 @@ materias: Materia[];
   }
   public listarInscriptosCursadas(idCursada: number): Observable<InscriptosCursada[]> {
     return this.http.get('/inscriptos_cursada/' + idCursada);
+  }
+  public planillaInscriptosCursadas(idCursada: number): Observable<PlanillaInscriptosCursada> {
+    return this.http.get('/planilla_inscriptos_cursada/' + idCursada);
   }
   public cargarNotasCursada(avanceAcademico: AvanceAcademico): Observable<Mensaje> {
     return this.http.post('/notas_cursada', { avance_academico: avanceAcademico });

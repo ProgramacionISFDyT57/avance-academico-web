@@ -19,8 +19,8 @@
   <table mat-table [dataSource]="dataSource" matSort>
 
     <ng-container matColumnDef="anio_cursada">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Año de Cursada </th>
-      <td mat-cell *matCellDef="let element"> {{ element.anio_cursada }} </td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Año </th>
+      <td mat-cell *matCellDef="let element" class="text-center"> {{ element.anio_cursada }} </td>
     </ng-container>
 
     <ng-container matColumnDef="carrera">
@@ -35,7 +35,7 @@
 
     <ng-container matColumnDef="anio_materia">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Año </th>
-      <td mat-cell *matCellDef="let element"> {{ element.anio_materia }} </td>
+      <td mat-cell *matCellDef="let element" class="text-center"> {{ element.anio_materia }} </td>
     </ng-container>
 
     <ng-container matColumnDef="fecha_inicio">
@@ -55,7 +55,7 @@
 
     <ng-container matColumnDef="cant_inscriptos">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Inscriptos </th>
-      <td mat-cell *matCellDef="let element"> {{ element.cant_inscriptos }} </td>
+      <td mat-cell *matCellDef="let element" class="text-center"> {{ element.cant_inscriptos }} </td>
     </ng-container>
 
     <ng-container matColumnDef="acciones">
@@ -86,6 +86,12 @@
           <button class="mx-1" mat-mini-fab color="primary" matTooltip="Detalles" (click)="detalles(element.id)">
             <mat-icon>list_alt</mat-icon>
           </button>
+          <button *ngIf="+element.cant_inscriptos" class="mx-1" mat-mini-fab color="accent" matTooltip="Planilla Inscriptos Cursada" (click)="inscriptosCursada(element.id)">
+            <mat-icon>print</mat-icon>
+          </button>
+          <button *ngIf="+element.cant_inscriptos" class="mx-1" mat-mini-fab color="warn" matTooltip="Planilla Asistencia" (click)="planillaAsistencia(element.id)">
+              <mat-icon>print</mat-icon>
+            </button>
           <button *ngIf="!+element.cant_inscriptos" class="mx-1" mat-mini-fab color="warn" matTooltip="Eliminar"
             (click)="eliminar(element.id)">
             <mat-icon>delete_forever</mat-icon>

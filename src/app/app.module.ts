@@ -42,6 +42,8 @@ import { CambioClaveComponent } from './componentes/usuarios/cambio-clave/cambio
 import { InscribirAlumnoCursadaComponent } from './componentes/inscripciones/cursadas/inscribir-alumno-cursada/inscribir-alumno-cursada.component';
 import { InscribirAlumnoFinalComponent } from './componentes/inscripciones/finales/inscribir-alumno-final/inscribir-alumno-final.component';
 import { PlanillaActaVolanteComponent } from './componentes/inscripciones/finales/planilla-acta-volante/planilla-acta-volante.component';
+import { PlanillaInscriptosCursadaComponent } from './componentes/inscripciones/cursadas/planilla-inscriptos-cursada/planilla-inscriptos-cursada.component';
+import { PlanillaAsistenciaComponent } from './componentes/inscripciones/cursadas/planilla-asistencia/planilla-asistencia.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +78,8 @@ import { PlanillaActaVolanteComponent } from './componentes/inscripciones/finale
     InscribirAlumnoCursadaComponent,
     InscribirAlumnoFinalComponent,
     PlanillaActaVolanteComponent,
+    PlanillaInscriptosCursadaComponent,
+    PlanillaAsistenciaComponent,
   ],
   entryComponents: [
     ConfirmationDialogComponent,

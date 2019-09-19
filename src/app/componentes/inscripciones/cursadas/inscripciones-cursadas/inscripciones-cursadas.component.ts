@@ -134,6 +134,14 @@ export class InscripcionesCursadasComponent implements OnInit {
     }
   }
 
+  inscriptosCursada(idCursada: number) {
+    this.router.navigateByUrl('planilla_inscriptos_cursada/' + idCursada);
+  }
+
+  planillaAsistencia(idCursada: number) {
+    this.router.navigateByUrl('planilla_asistencia/' + idCursada);
+  }
+
   ngOnInit() {
     const rol = this.helper.rolActual();
     if (rol === 'alumno') {

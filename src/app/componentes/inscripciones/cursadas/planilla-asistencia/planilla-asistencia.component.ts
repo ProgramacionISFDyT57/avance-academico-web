@@ -1,19 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { MateriasService } from 'src/app/servicios/materias.service';
+import { PlanillaInscriptosCursada, InscriptoCursada } from 'src/app/modelos/planilla-inscriptos-cursada';
 import { ActivatedRoute } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
-import { ActaVolante, Inscriptos } from 'src/app/modelos/acta-volante';
+import { MateriasService } from 'src/app/servicios/materias.service';
 
 @Component({
-  selector: 'app-planilla-acta-volante',
-  templateUrl: './planilla-acta-volante.component.html',
-  styleUrls: ['./planilla-acta-volante.component.scss']
+  selector: 'app-planilla-asistencia',
+  templateUrl: './planilla-asistencia.component.html',
+  styleUrls: ['./planilla-asistencia.component.scss']
 })
-export class PlanillaActaVolanteComponent implements OnInit {
+export class PlanillaAsistenciaComponent implements OnInit {
 
-  public actaVolante: ActaVolante;
-  public inscriptos: Inscriptos[][] = [];
+  public planilla: PlanillaInscriptosCursada;
+  public inscriptos: InscriptoCursada[][] = [];
   public paginas: number[] = [];
+  public columnas = [];
   showSpinner = true;
 
   constructor(
@@ -23,29 +24,30 @@ export class PlanillaActaVolanteComponent implements OnInit {
   ) { }
 
   listar_inscriptos() {
-    const idFinal = this.route.snapshot.params.idMesa;
-    this.materiasService.actaVolante(idFinal).subscribe(
+    const idCursada = this.route.snapshot.params.idCursada;
+    this.materiasService.planillaInscriptosCursadas(idCursada).subscribe(
       (res) => {
         console.log(res);
 
-        const x: Inscriptos = {
+        const x: InscriptoCursada = {
           apellido: null,
           nombre: null,
-          dni: null,
           cohorte: null,
+          fecha_inscripcion: null,
+          cursa: null
         };
-        while (res.inscriptos.length % 25 !== 0) {
+        while (res.inscriptos.length % 20 !== 0) {
           res.inscriptos.push(x);
         }
-        // for (let i = 0 ; i < 25 ; i++) {
+        // for (let i = 0 ; i < 20 ; i++) {
         //   res.inscriptos.push(x);
         // }
-        this.actaVolante = res;
-        const paginas = res.inscriptos.length / 25;
+        this.planilla = res;
+        const paginas = res.inscriptos.length / 20;
         for (let i = 0; i < paginas; i++) {
           this.paginas.push(i);
           this.inscriptos[i] = [];
-          for (let j = i * 25; j < (i + 1) * 25; j++) {
+          for (let j = i * 20; j < (i + 1) * 20; j++) {
             this.inscriptos[i].push(res.inscriptos[j]);
           }
         }
@@ -67,6 +69,7 @@ export class PlanillaActaVolanteComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.columnas.length = 30;
     this.listar_inscriptos();
   }
 

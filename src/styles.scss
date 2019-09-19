@@ -5,15 +5,23 @@
 // @import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
 // @import "~@angular/material/prebuilt-themes/purple-green.css";
 
-@page { size: auto;  margin: 0mm; }
-
-@media print
-{    
-    .no-print, .no-print *
-    {
-        display: none !important;
-    }
+@page {
+  size: auto;
+  margin: 0mm;
 }
+
+@media print {
+  .no-print,
+  .no-print * {
+    display: none !important;
+  }
+}
+
+// @media print {
+//   @page {
+//       size: landscape;
+//   }
+// }
 
 body {
   // background-color: #cfcfcf;
@@ -56,6 +64,13 @@ mat-form-field {
   white-space: nowrap;
 }
 
+.btn-imprimir {
+  position: fixed !important;
+  bottom: 15px;
+  right: 15px;
+  z-index: 100;
+}
+
 // .mat-row:nth-child(odd) {
 //   background-color: white;
 // }
@@ -65,7 +80,7 @@ mat-form-field {
 // }
 
 .mat-row:hover {
-    background-color: #f4f6f9;
+  background-color: #f4f6f9;
 }
 
 // Helpers

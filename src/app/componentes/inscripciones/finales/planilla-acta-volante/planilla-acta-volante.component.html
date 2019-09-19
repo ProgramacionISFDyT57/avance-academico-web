@@ -1,8 +1,11 @@
-<div class="container" *ngIf="actaVolante">
-  <ng-container *ngFor="let pagina of paginas">
+<div class="container vertical" *ngIf="actaVolante">
+  <button class="mx-1 btn-imprimir no-print" mat-mini-fab color="accent" matTooltip="Imprimir" (click)="imprimir()">
+    <mat-icon>print</mat-icon>
+  </button>
+  <ng-container *ngFor="let pagina of paginas; let last = last">
 
     <div fxLayout="row" fxLayoutAlign="space-between center">
-      <div class="alto" fxLayout="column" fxLayoutAlign="end start" >
+      <div class="alto" fxLayout="column" fxLayoutAlign="end start">
         <p><small>PROVINCIA DE BUENOS AIRES</small></p>
         <p><small>DIRECCION DE EDUCACION SUPERIOR</small></p>
         <p><small>INSTITUTO SUPERIOR DE FORMACION DOCENTE Y TECNICA Nº 57</small></p>
@@ -25,7 +28,8 @@
       <p>CARRERA: {{ actaVolante.carrera }} / Año: </p>
       <p>Asignatura: {{ actaVolante.materia }} </p>
       <p>Fecha de la Mesa: {{ actaVolante.fecha_examen | date:'dd/MM/yyyy' }} Hora: 17:30</p>
-      <p>Presidente de Mesa: {{ actaVolante.profesor }} Vocal: {{ actaVolante.vocal1 }} <ng-container *ngIf="actaVolante.vocal2">/ {{ actaVolante.vocal2 }}</ng-container> 
+      <p>Presidente de Mesa: {{ actaVolante.profesor }} Vocal: {{ actaVolante.vocal1 }} <ng-container
+          *ngIf="actaVolante.vocal2">/ {{ actaVolante.vocal2 }}</ng-container>
       </p>
     </div>
 
@@ -80,6 +84,9 @@
         <p>(Firma y Aclaración)</p>
       </div>
     </div>
+
+    <!-- <p *ngIf="!last" style="page-break-after: always;">&nbsp;</p> -->
+    <!-- <p *ngIf="!last" style="page-break-before: always;">&nbsp;</p> -->
 
   </ng-container>
 

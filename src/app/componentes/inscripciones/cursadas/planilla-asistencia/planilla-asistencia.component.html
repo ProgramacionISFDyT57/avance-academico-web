@@ -1,0 +1,48 @@
+<div class="container horizontal" *ngIf="planilla">
+  <button class="mx-1 btn-imprimir no-print" mat-mini-fab color="accent" matTooltip="Imprimir" (click)="imprimir()">
+    <mat-icon>print</mat-icon>
+  </button>
+  <ng-container *ngFor="let pagina of paginas; let last = last">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxLayout="column" fxLayoutAlign="end start">
+        <p><u>PLANILLA DE ASISTENCIA</u></p>
+        <p>{{ planilla.carrera | uppercase }}</p>
+        <p>{{ planilla.anio_cursada }}</p>
+      </div>
+      <div>
+        <P>ISFDyT Nº 57</P>
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <p>Profesor: {{ planilla.profesor }}</p>
+      <p>Curso: {{ planilla.anio_materia }}</p>
+      <p>Espacio: {{ planilla.materia }}</p>
+    </div>
+
+    <div class="table-container">
+      <table width="100%">
+        <thead>
+          <tr>
+            <th>Nº</th>
+            <th>Apellido y Nombres</th>
+            <th *ngFor="let columna of columnas"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let inscripto of inscriptos[pagina]; let i = index">
+            <td class="text-center">{{ i + 1 + (20*pagina) }}</td>
+            <td class="nowrap">
+              <ng-container *ngIf="inscripto.apellido">
+                {{inscripto.apellido}}, {{inscripto.nombre}}
+              </ng-container>
+            </td>
+            <td *ngFor="let columna of columnas"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p *ngIf="!last" style="page-break-after: always;">&nbsp;</p>
+    <p *ngIf="!last" style="page-break-before: always;">&nbsp;</p>
+  </ng-container>
+</div>
