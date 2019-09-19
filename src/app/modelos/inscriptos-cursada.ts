@@ -1,10 +1,8 @@
-export interface InscriptosCursada {
+export interface InscriptoCursada {
   apellido: string;
   nombre: string;
   dni: string;
   fecha_inscripcion: string;
-  materia: string;
-  anio_cursada: number;
   nota_cuat_1: number;
   nota_cuat_2: number;
   nota_recuperatorio: number;
@@ -12,5 +10,12 @@ export interface InscriptosCursada {
   id_inscripcion_cursada: number;
   cursa: boolean;
   equivalencia: boolean;
+}
+
+export interface InscriptosCursada {
+  materia: string;
+  anio_cursada: number;
   carrera: string;
+  id_carrera: number;
+  inscriptos: InscriptoCursada[];
 }

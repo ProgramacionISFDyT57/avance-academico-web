@@ -1,14 +1,18 @@
 <mat-progress-bar mode="indeterminate" color="warn" [style.display]="showSpinner ? 'block' : 'none'"></mat-progress-bar>
 
-<h1 *ngIf="!materia && !showSpinner" class="mt-3 mb-0 mx-3">Aun no hay alumnos inscriptos</h1>
-<h1 *ngIf="materia && !showSpinner" class="mt-3 mb-0 mx-3">Inscriptos a <strong><i> {{ materia }} ({{ anioCursada }})
-    </i></strong> - {{ carrera }}</h1>
+<h2 *ngIf="!materia && !showSpinner" class="mt-3 mb-0 mx-3 nowrap">Aun no hay alumnos inscriptos</h2>
+<h2 *ngIf="materia && !showSpinner" class="mt-3 mb-0 mx-3 nowrap">Inscriptos a <i> {{ materia }} ({{ anioCursada }})</i></h2> 
+<h3 *ngIf="materia && !showSpinner" class="mt-3 mb-0 mx-3 nowrap">{{ carrera }}</h3>
 
 <div class="table-container mat-elevation-z8">
 
   <mat-form-field class="filtro">
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
   </mat-form-field>
+
+  <button matTooltip="Inscribir Alumno" class="btn-crear2" mat-fab color="primary" (click)="inscribirAlumno()">
+    <mat-icon>queue</mat-icon>
+  </button>
 
   <table mat-table [dataSource]="dataSource" matSort>
 

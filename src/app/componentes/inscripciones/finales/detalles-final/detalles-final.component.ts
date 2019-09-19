@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort, MatPaginator, MatTableDataSource, MatDialog, MatDialogConfig } from '@angular/material';
-import { InscriptosFinal } from 'src/app/modelos/inscriptos-final';
+import { InscriptoFinal } from 'src/app/modelos/inscriptos-final';
 import { MateriasService } from 'src/app/servicios/materias.service';
 import { NotificationsService } from 'angular2-notifications';
 import { ActivatedRoute } from '@angular/router';
 import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
 import { Final } from 'src/app/modelos/final';
 import { CargaNotasFinalComponent } from '../carga-notas-final/carga-notas-final.component';
+import { InscribirAlumnoFinalComponent } from '../inscribir-alumno-final/inscribir-alumno-final.component';
 
 @Component({
   selector: 'app-detalles-final',
@@ -17,11 +18,13 @@ export class DetallesFinalComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  dataSource: MatTableDataSource<InscriptosFinal>;
+  dataSource: MatTableDataSource<InscriptoFinal>;
   displayedColumns = ['alumno', 'dni', 'nota', 'libro', 'folio', 'acciones'];
   showSpinner = true;
   carrera: string;
   materia: string;
+  idMesa: string;
+  idCarrera: string;
   fechaExamen: string;
 
   constructor(
@@ -32,19 +35,40 @@ export class DetallesFinalComponent implements OnInit {
     public dialog: MatDialog,
   ) { }
 
+  inscribirAlumnoFinal(materia: string, fechaExamen: string, idMesa: number, idCarrera: number) {
+    const config: MatDialogConfig = {
+      width: '500px',
+      maxWidth: '90%',
+      data: {
+        materia: this.materia,
+        fechaExamen: this.fechaExamen,
+        idMesa: this.idMesa,
+        idCarrera: this.idCarrera
+      }
+    };
+    const modal = this.dialog.open(InscribirAlumnoFinalComponent, config);
+    modal.beforeClosed().subscribe(
+      (resp) => {
+        if (resp) {
+          this.listar_inscriptos();
+        }
+      }
+    );
+  }
+
   listar_inscriptos() {
-    const idFinal = this.route.snapshot.params.id;
-    this.materiasService.listarInscriptosFinal(idFinal).subscribe(
+    const idMesa = this.route.snapshot.params.id;
+    this.materiasService.listarInscriptosMesa(idMesa).subscribe(
       (res) => {
-        this.dataSource = new MatTableDataSource(res);
+        console.log(res);
+        this.dataSource = new MatTableDataSource(res.inscriptos);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        console.log(res);
-        if (res.length) {
-          this.carrera = res[0].carrera;
-          this.materia = res[0].materia;
-          this.fechaExamen = res[0].fecha_examen;
-        }
+        this.carrera = res.carrera;
+        this.materia = res.materia;
+        this.idMesa = res.id_mesa;
+        this.idCarrera = res.id_carrera;
+        this.fechaExamen = res.fecha_examen;
         this.showSpinner = false;
       },
       (error) => {
@@ -62,7 +86,7 @@ export class DetallesFinalComponent implements OnInit {
     }
   }
 
-  cargarNotas(alumno: InscriptosFinal) {
+  cargarNotas(alumno: InscriptoFinal) {
     const final: Final = {
       nota: alumno.nota,
       folio: alumno.folio,
