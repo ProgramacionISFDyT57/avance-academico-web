@@ -19,7 +19,7 @@ export class DetallesCursadaComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<InscriptoCursada>;
-  displayedColumns = ['alumno', 'dni', 'nota_cuat_1', 'nota_cuat_2',
+  displayedColumns = ['nro', 'alumno', 'dni', 'nota_cuat_1', 'nota_cuat_2',
     'nota_recuperatorio', 'asistencia', 'cursa', 'equivalencia', 'acciones'];
   showSpinner = false;
   materia: string;

@@ -16,7 +16,7 @@ export class DetallesCarreraComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<InscriptosCarrera>;
-  displayedColumns = ['alumno', 'dni', 'acciones'];
+  displayedColumns = ['nro', 'alumno', 'dni', 'acciones'];
   showSpinner = true;
   carrera: string;
   cohorte: number;

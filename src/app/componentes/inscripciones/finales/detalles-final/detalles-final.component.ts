@@ -19,7 +19,7 @@ export class DetallesFinalComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<InscriptoFinal>;
-  displayedColumns = ['alumno', 'dni', 'nota', 'libro', 'folio', 'acciones'];
+  displayedColumns = ['nro', 'alumno', 'dni', 'nota', 'libro', 'folio', 'acciones'];
   showSpinner = true;
   carrera: string;
   materia: string;
