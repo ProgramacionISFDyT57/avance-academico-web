@@ -5,4 +5,7 @@ export interface InscriptosCarrera {
   fecha_inscripcion: string;
   carrera: string;
   cohorte: number;
+  libro?: number;
+  folio?: number;
+  id_inscripcion_carrera?: number;
 }

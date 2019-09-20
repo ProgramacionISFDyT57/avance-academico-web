@@ -46,6 +46,16 @@
       <td mat-cell *matCellDef="let element"> {{element.carrera | titlecase }} </td>
     </ng-container>
 
+    <ng-container matColumnDef="libro">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Libro </th>
+      <td mat-cell *matCellDef="let element"> {{element.libro }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="folio">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Folio </th>
+      <td mat-cell *matCellDef="let element"> {{element.folio }} </td>
+    </ng-container>
+
     <ng-container matColumnDef="cohorte">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Cohorte </th>
       <td mat-cell *matCellDef="let element"> {{element.cohorte }} </td>

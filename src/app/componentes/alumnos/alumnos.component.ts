@@ -1,9 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlumnosService } from 'src/app/servicios/alumno.service';
-import { Usuario } from '../../modelos/usuario';
 import { MatPaginator, MatSort, MatTableDataSource, MatDialog, MatDialogConfig } from '@angular/material';
 import { CrearAlumnoComponent } from './crear-alumno/crear-alumno.component';
-import { UsuariosService } from 'src/app/servicios/usuarios.service';
 import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
 import { NotificationsService } from 'angular2-notifications';
 import { Alumno } from 'src/app/modelos/alumno';
@@ -20,7 +18,7 @@ export class AlumnosComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<Alumno>;
-  displayedColumns = ['apellido', 'nombre', 'dni', 'email', 'telefono', 'carrera', 'cohorte', 'acciones'];
+  displayedColumns = ['apellido', 'nombre', 'dni', 'email', 'telefono', 'carrera', 'libro', 'folio', 'cohorte', 'acciones'];
   showSpinner = true;
 
 
