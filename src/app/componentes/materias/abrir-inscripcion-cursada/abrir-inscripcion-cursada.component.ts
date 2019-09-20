@@ -29,11 +29,12 @@ export class AbrirInscripcionCursadaComponent implements OnInit {
   ) { }
 
   private crearFormulario() {
+    const añoActual = new Date().getFullYear();
     const fechaActual = new Date();
     const fechaLimite = new Date();
     fechaLimite.setMonth(fechaLimite.getMonth() + 1);
     this.formulario = this.fb.group({
-      año: [2019, [Validators.required, Validators.min(2019)]],
+      año: [añoActual, [Validators.required, Validators.min(añoActual - 6)]],
       fecha_inicio: [fechaActual, Validators.required],
       fecha_limite: [fechaLimite, Validators.required],
       id_profesor: [null],
