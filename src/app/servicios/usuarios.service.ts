@@ -31,6 +31,11 @@ export class UsuariosService {
     return this.http.post('/usuarios', { usuario });
   }
 
+  public editarUsuario(usuario: Usuario): Observable<Mensaje> {
+    this.eliminarCacheUsuarios();
+    return this.http.put('/usuarios/' + usuario.id, {usuario});
+  }
+
   public eliminarUsuario(id: number): Observable<Mensaje> {
     this.eliminarCacheProfesores();
     this.eliminarCacheUsuarios();
