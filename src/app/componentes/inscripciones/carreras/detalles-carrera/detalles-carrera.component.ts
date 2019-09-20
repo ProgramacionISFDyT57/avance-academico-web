@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatDialogConfig, MatDialog } from '@angular/material';
 import { InscriptosCarrera } from 'src/app/modelos/inscriptos-carrera';
 import { ActivatedRoute } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
 import { CarrerasService } from 'src/app/servicios/carreras.service';
 import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
+import { AsignarLibroComponent } from '../asignar-libro/asignar-libro.component';
 
 @Component({
   selector: 'app-detalles-carrera',
@@ -16,7 +17,7 @@ export class DetallesCarreraComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<InscriptosCarrera>;
-  displayedColumns = ['alumno', 'dni', 'acciones'];
+  displayedColumns = ['nro', 'alumno', 'dni', 'libro', 'folio', 'acciones'];
   showSpinner = true;
   carrera: string;
   cohorte: number;
@@ -25,7 +26,8 @@ export class DetallesCarreraComponent implements OnInit {
     private route: ActivatedRoute,
     private carrerasService: CarrerasService,
     private notif: NotificationsService,
-    public confirmation: ConfirmationDialogService
+    public confirmation: ConfirmationDialogService,
+    public dialog: MatDialog,
   ) { }
 
   listar_inscriptos() {
@@ -55,6 +57,26 @@ export class DetallesCarreraComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  async asignarLibro(idInscripcionCarrera: number, libro: number, folio: number) {
+    const config: MatDialogConfig = {
+      width: '500px',
+      maxWidth: '90%',
+      data: {
+        idInscripcionCarrera,
+        libro,
+        folio
+      }
+    };
+    const modal = this.dialog.open(AsignarLibroComponent, config);
+    modal.beforeClosed().subscribe(
+      (resp) => {
+        if (resp) {
+          this.listar_inscriptos();
+        }
+      }
+    );
   }
 
   async eliminarInscripcion(idInscripcionCarrera: number) {

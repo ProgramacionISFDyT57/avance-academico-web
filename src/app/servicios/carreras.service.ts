@@ -125,4 +125,7 @@ export class CarrerasService {
     this.alumnosService.eliminarCacheAlumnos();
     return this.http.delete('/inscripciones_carreras/' + idInscripcionCarrera);
   }
+  public asignarLibroFolio(idInscripcionCarrera: number, libro: number, folio: number): Observable<Mensaje> {
+    return this.http.put('/libro_folio', {id_inscripcion_carrera: idInscripcionCarrera, libro, folio});
+  }
 }

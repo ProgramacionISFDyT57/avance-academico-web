@@ -81,11 +81,14 @@ materias: Materia[];
   public eliminarInscripcionFinal(idInscripcionMesa: number): Observable<Mensaje> {
     return this.http.delete('/inscripciones_mesas/' + idInscripcionMesa);
   }
+  public eliminarInscripcionFinalAlumno(idInscripcionMesa: number): Observable<Mensaje> {
+    return this.http.delete('/inscripcion_mesa_alumno/' + idInscripcionMesa);
+  }
   public listarFinales(): Observable<FinalAbierto[]> {
     return this.http.get('/lista_mesas');
   }
-  public listarInscriptosFinal(idFinal: number): Observable<InscriptosFinal[]> {
-    return this.http.get('/inscriptos_mesa/' + idFinal);
+  public listarInscriptosMesa(idMesa: number): Observable<InscriptosFinal> {
+    return this.http.get('/inscriptos_mesa2/' + idMesa);
   }
   public cargarNotasFinal(final: Final): Observable<Mensaje> {
     return this.http.post('/notas_final', { final });
@@ -109,8 +112,8 @@ materias: Materia[];
     this.eliminarCacheMaterias();
     return this.http.delete('/cursadas/' + id);
   }
-  public listarInscriptosCursadas(idCursada: number): Observable<InscriptosCursada[]> {
-    return this.http.get('/inscriptos_cursada/' + idCursada);
+  public listarInscriptosCursada(idCursada: number): Observable<InscriptosCursada> {
+    return this.http.get('/inscriptos_cursada2/' + idCursada);
   }
   public planillaInscriptosCursadas(idCursada: number): Observable<PlanillaInscriptosCursada> {
     return this.http.get('/planilla_inscriptos_cursada/' + idCursada);
@@ -129,6 +132,9 @@ materias: Materia[];
   }
   public eliminarInscripcionCursada(idInscripcionCursada: number): Observable<Mensaje> {
     return this.http.delete('/inscripcion_cursada/' + idInscripcionCursada);
+  }
+  public eliminarInscripcionCursadaAlumno(idInscripcionCursada: number): Observable<Mensaje> {
+    return this.http.delete('/inscripcion_cursada_alumno/' + idInscripcionCursada);
   }
 
 }

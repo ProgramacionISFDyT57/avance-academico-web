@@ -8,6 +8,8 @@ import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog
 import { RealizarInscripcionCursadaComponent } from '../realizar-inscripcion-cursada/realizar-inscripcion-cursada.component';
 import { HelperService } from 'src/app/servicios/helper.service';
 import { InscribirAlumnoCursadaComponent } from '../inscribir-alumno-cursada/inscribir-alumno-cursada.component';
+import { Carrera } from 'src/app/modelos/carrera';
+import { CarrerasService } from 'src/app/servicios/carreras.service';
 
 @Component({
   selector: 'app-inscripciones-cursadas',
@@ -19,26 +21,88 @@ export class InscripcionesCursadasComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<Cursada>;
+  rol;
   displayedColumns;
+  cursadas: Cursada[];
+  filtro;
+  carreras: Carrera[] = [];
+  carreraSeleccionada = 'Todas las carreras';
   showSpinner = true;
 
 
   constructor(
     public helper: HelperService,
     private materiasService: MateriasService,
+    private carrerasService: CarrerasService,
     private notif: NotificationsService,
     private router: Router,
     private confirm: ConfirmationDialogService,
     public dialog: MatDialog,
   ) { }
 
+  private async listarCarreras() {
+    try {
+      const res = await this.carrerasService.traerCarreras();
+      this.carreras = JSON.parse(JSON.stringify(res));
+      const todas: Carrera = {
+        nombre: 'Todas las carreras',
+        cantidad_materias: 0,
+        duracion: 0,
+        id: 0,
+        materias_cargadas: '0',
+      };
+      this.carreras.unshift(todas);
+      this.showSpinner = false;
+      console.log(res);
+    } catch (error) {
+      console.error(error);
+      this.notif.error(error.error.mensaje);
+      this.showSpinner = false;
+    }
+  }
+
+  public filtroCarrera(event) {
+    this.filtro = '';
+    if (event.nombre === 'Todas las carreras') {
+      if (this.rol === 'alumno') {
+        this.displayedColumns = ['anio_cursada', 'carrera', 'materia', 'anio_materia',
+          'fecha_inicio', 'fecha_limite', 'profesor', 'acciones'];
+      } else {
+        this.displayedColumns = ['anio_cursada', 'carrera', 'materia', 'anio_materia',
+          'fecha_inicio', 'fecha_limite', 'profesor', 'cant_inscriptos', 'acciones'];
+      }
+      this.dataSource = new MatTableDataSource(this.cursadas);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    } else {
+      const materias = [];
+      if (this.rol === 'alumno') {
+        this.displayedColumns = ['anio_cursada', 'carrera', 'materia', 'anio_materia',
+          'fecha_inicio', 'fecha_limite', 'profesor', 'acciones'];
+      } else {
+        this.displayedColumns = ['anio_cursada', 'materia', 'anio_materia',
+          'fecha_inicio', 'fecha_limite', 'profesor', 'cant_inscriptos', 'acciones'];
+      }
+      for (const materia of this.cursadas) {
+        if (materia.carrera === event.nombre) {
+          materias.push(materia);
+        }
+      }
+      this.dataSource = new MatTableDataSource(materias);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
+  }
+
   public ListarCursadas() {
     this.showSpinner = true;
     this.materiasService.listarCursadas().subscribe(
       (res) => {
+        this.cursadas = res;
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        this.filtroCarrera({ nombre: this.carreraSeleccionada });
         this.showSpinner = false;
         console.log(res);
       },
@@ -112,7 +176,6 @@ export class InscripcionesCursadasComponent implements OnInit {
     }
   }
 
-
   detalles(id) {
     this.router.navigateByUrl('inscripcion/cursadas/' + id);
   }
@@ -143,14 +206,8 @@ export class InscripcionesCursadasComponent implements OnInit {
   }
 
   ngOnInit() {
-    const rol = this.helper.rolActual();
-    if (rol === 'alumno') {
-      this.displayedColumns = ['anio_cursada', 'carrera', 'materia', 'anio_materia',
-        'fecha_inicio', 'fecha_limite', 'profesor', 'acciones'];
-    } else {
-      this.displayedColumns = ['anio_cursada', 'carrera', 'materia', 'anio_materia',
-        'fecha_inicio', 'fecha_limite', 'profesor', 'cant_inscriptos', 'acciones'];
-    }
+    this.rol = this.helper.rolActual();
+    this.listarCarreras();
     this.ListarCursadas();
   }
 

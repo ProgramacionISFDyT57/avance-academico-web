@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { HelperService } from 'src/app/servicios/helper.service';
 import { FinalAbierto } from 'src/app/modelos/final-abierto';
 import { InscribirAlumnoFinalComponent } from '../inscribir-alumno-final/inscribir-alumno-final.component';
+import { CarrerasService } from 'src/app/servicios/carreras.service';
 
 @Component({
   selector: 'app-inscripciones-finales',
@@ -19,26 +20,88 @@ export class InscripcionesFinalesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<FinalAbierto>;
+  rol;
   displayedColumns;
   showSpinner = true;
+  mesas: FinalAbierto[];
+  filtro;
+  carreras: Carrera[] = [];
+  carreraSeleccionada = 'Todas las carreras';
 
   constructor(
     public helper: HelperService,
     private materiasService: MateriasService,
+    private carrerasService: CarrerasService,
     private notif: NotificationsService,
     private router: Router,
     private confirmation: ConfirmationDialogService,
     public dialog: MatDialog,
   ) { }
 
+  private async listarCarreras() {
+    try {
+      const res = await this.carrerasService.traerCarreras();
+      this.carreras = JSON.parse(JSON.stringify(res));
+      const todas: Carrera = {
+        nombre: 'Todas las carreras',
+        cantidad_materias: 0,
+        duracion: 0,
+        id: 0,
+        materias_cargadas: '0',
+      };
+      this.carreras.unshift(todas);
+      this.showSpinner = false;
+      console.log(res);
+    } catch (error) {
+      console.error(error);
+      this.notif.error(error.error.mensaje);
+      this.showSpinner = false;
+    }
+  }
+
+  public filtroCarrera(event) {
+    this.filtro = '';
+    if (event.nombre === 'Todas las carreras') {
+      if (this.rol === 'alumno') {
+        this.displayedColumns = ['fecha_examen', 'carrera', 'materia', 'anio_materia', 'profesor',
+          'fecha_inicio', 'fecha_limite', 'acciones'];
+      } else {
+        this.displayedColumns = ['fecha_examen', 'carrera', 'materia', 'anio_materia', 'profesor',
+          'fecha_inicio', 'fecha_limite', 'cant_inscriptos', 'acciones'];
+      }
+      this.dataSource = new MatTableDataSource(this.mesas);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    } else {
+      const materias = [];
+      if (this.rol === 'alumno') {
+        this.displayedColumns = ['fecha_examen', 'carrera', 'materia', 'anio_materia', 'profesor',
+          'fecha_inicio', 'fecha_limite', 'acciones'];
+      } else {
+        this.displayedColumns = ['fecha_examen', 'materia', 'anio_materia', 'profesor',
+          'fecha_inicio', 'fecha_limite', 'cant_inscriptos', 'acciones'];
+      }
+      for (const materia of this.mesas) {
+        if (materia.carrera === event.nombre) {
+          materias.push(materia);
+        }
+      }
+      this.dataSource = new MatTableDataSource(materias);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
+  }
+
   public ListarFinales() {
     this.showSpinner = true;
     this.materiasService.listarFinales().subscribe(
       (res) => {
+        this.mesas = res;
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         this.showSpinner = false;
+        this.filtroCarrera({ nombre: this.carreraSeleccionada });
         console.log(res);
       },
       (error) => {
@@ -139,14 +202,8 @@ export class InscripcionesFinalesComponent implements OnInit {
   }
 
   ngOnInit() {
-    const rol = this.helper.rolActual();
-    if (rol === 'alumno') {
-      this.displayedColumns = ['fecha_examen', 'carrera', 'materia', 'anio_materia', 'profesor',
-      'fecha_inicio', 'fecha_limite', 'acciones'];
-    } else {
-      this.displayedColumns = ['fecha_examen', 'carrera', 'materia', 'anio_materia', 'profesor',
-      'fecha_inicio', 'fecha_limite', 'cant_inscriptos', 'acciones'];
-    }
+    this.rol = this.helper.rolActual();
+    this.listarCarreras();
     this.ListarFinales();
   }
 

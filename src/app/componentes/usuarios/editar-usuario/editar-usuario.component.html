@@ -1,18 +1,9 @@
 <mat-progress-bar mode="indeterminate" color="warn" [style.display]="showSpinner ? 'block' : 'none'"></mat-progress-bar>
 
-<h2 mat-dialog-title>Crear Usuario</h2>
+<h2 mat-dialog-title>Editar Usuario</h2>
 
 <mat-dialog-content>
-  <form id="form" [formGroup]="formulario" (ngSubmit)="enviar()">
-
-    <mat-form-field>
-      <mat-label>Rol</mat-label>
-      <mat-select formControlName="id_rol">
-        <mat-option *ngFor="let rol of roles" [value]="rol.value">
-          {{rol.viewValue}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+  <form id="form" [formGroup]="formulario" (ngSubmit)="enviar()" #myNgForm="ngForm">
 
     <mat-form-field>
       <input matInput placeholder="Nombre" formControlName="nombre">
@@ -45,6 +36,6 @@
 
 <mat-dialog-actions fxLayoutAlign="end center">
   <button mat-raised-button color="primary" type="submit" form="form"
-    [disabled]="!formulario.valid || showSpinner">Crear</button>
-  <button mat-raised-button (click)='cerrar()'>Volver </button>
+    [disabled]="!formulario.valid || showSpinner">Guardar</button>
+  <button mat-raised-button (click)="cerrar()">Volver </button>
 </mat-dialog-actions>

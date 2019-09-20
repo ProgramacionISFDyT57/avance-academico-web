@@ -2,11 +2,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MateriasService } from 'src/app/servicios/materias.service';
 import { MatPaginator, MatSort, MatTableDataSource, MatDialog, MatDialogConfig } from '@angular/material';
-import { InscriptosCursada } from 'src/app/modelos/inscriptos-cursada';
+import { InscriptosCursada, InscriptoCursada } from 'src/app/modelos/inscriptos-cursada';
 import { NotificationsService } from 'angular2-notifications';
 import { CargarNotasCursadaComponent } from '../cargar-notas-cursada/cargar-notas-cursada.component';
 import { AvanceAcademico } from 'src/app/modelos/avance-academico';
 import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
+import { InscribirAlumnoCursadaComponent } from '../inscribir-alumno-cursada/inscribir-alumno-cursada.component';
+import { HelperService } from 'src/app/servicios/helper.service';
 
 @Component({
   selector: 'app-detalles-cursada',
@@ -17,15 +19,18 @@ export class DetallesCursadaComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  dataSource: MatTableDataSource<InscriptosCursada>;
-  displayedColumns = ['alumno', 'dni', 'nota_cuat_1', 'nota_cuat_2',
+  dataSource: MatTableDataSource<InscriptoCursada>;
+  displayedColumns = ['nro', 'alumno', 'dni', 'nota_cuat_1', 'nota_cuat_2',
     'nota_recuperatorio', 'asistencia', 'cursa', 'equivalencia', 'acciones'];
   showSpinner = false;
   materia: string;
   anioCursada: number;
+  idCursada: number;
   carrera: string;
+  idCarrera: number;
 
   constructor(
+    public helper: HelperService,
     private route: ActivatedRoute,
     private materiasService: MateriasService,
     private notif: NotificationsService,
@@ -34,18 +39,17 @@ export class DetallesCursadaComponent implements OnInit {
   ) { }
 
   listar_inscriptos() {
-    const idCursada = this.route.snapshot.params.id;
-    this.materiasService.listarInscriptosCursadas(idCursada).subscribe(
+    this.idCursada = this.route.snapshot.params.id;
+    this.materiasService.listarInscriptosCursada(this.idCursada).subscribe(
       (res) => {
-        this.dataSource = new MatTableDataSource(res);
+        this.dataSource = new MatTableDataSource(res.inscriptos);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         this.showSpinner = false;
-        if (res.length) {
-          this.materia = res[0].materia;
-          this.carrera = res[0].carrera;
-          this.anioCursada = res[0].anio_cursada;
-        }
+        this.materia = res.materia;
+        this.carrera = res.carrera;
+        this.idCarrera = res.id_carrera;
+        this.anioCursada = res.anio_cursada;
         console.log(res);
       },
       (error) => {
@@ -63,7 +67,7 @@ export class DetallesCursadaComponent implements OnInit {
     }
   }
 
-  cargarNotas(alumno: InscriptosCursada) {
+  cargarNotas(alumno: InscriptoCursada) {
     const avance: AvanceAcademico = {
       asistencia: alumno.asistencia,
       id_inscripcion_cursada: alumno.id_inscripcion_cursada,
@@ -81,6 +85,43 @@ export class DetallesCursadaComponent implements OnInit {
       (resp) => {
         if (resp) {
           this.showSpinner = true;
+          this.listar_inscriptos();
+        }
+      }
+    );
+  }
+
+  async eliminarInscripcion(idInscripcionCursada: number) {
+    const confirm = await this.confirmation.confirm('Confirme la acción', '¿Desea eliminar la inscripción de la cursada?');
+    if (confirm) {
+      this.showSpinner = true;
+      this.materiasService.eliminarInscripcionCursadaAlumno(idInscripcionCursada).subscribe(
+        (res) => {
+          this.listar_inscriptos();
+          console.log(res);
+        },
+        (error) => {
+          this.showSpinner = false;
+          this.notif.error(error.error.mensaje);
+          console.log(error);
+        });
+    }
+  }
+
+  inscribirAlumno() {
+    const config: MatDialogConfig = {
+      width: '500px',
+      maxWidth: '90%',
+      data: {
+        idCursada: this.idCursada,
+        materia: this.materia,
+        idCarrera: this.idCarrera
+      }
+    };
+    const modal = this.dialog.open(InscribirAlumnoCursadaComponent, config);
+    modal.beforeClosed().subscribe(
+      (resp) => {
+        if (resp) {
           this.listar_inscriptos();
         }
       }

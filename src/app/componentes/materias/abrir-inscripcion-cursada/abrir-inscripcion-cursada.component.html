@@ -6,7 +6,7 @@
   <form id="form" [formGroup]="formulario" (ngSubmit)="enviar()">
 
     <mat-form-field>
-      <input type="number" min="2019" maxlength="4" matInput placeholder="Año" formControlName="año">
+      <input type="number" maxlength="4" matInput placeholder="Año" formControlName="año">
     </mat-form-field>
 
     <ng-select [items]="profesores" [placeholder]="'Profesor'" bindLabel="nombre_completo" bindValue="id" formControlName="id_profesor">

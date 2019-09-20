@@ -5,6 +5,7 @@ import { MatPaginator, MatSort, MatTableDataSource, MatDialog, MatDialogConfig }
 import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
 import { NotificationsService } from 'angular2-notifications';
 import { CrearUsuarioComponent } from './crear-usuario/crear-usuario.component';
+import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.component';
 
 @Component({
   selector: 'app-usuarios',
@@ -104,6 +105,23 @@ export class UsuariosComponent implements OnInit {
         }
       );
     }
+  }
+
+  editarUsuario(usuario: Usuario) {
+    const config: MatDialogConfig = {
+      width: '500px',
+      maxWidth: '90%',
+      data: usuario
+    };
+    const modal = this.dialog.open(EditarUsuarioComponent, config);
+    modal.beforeClosed().subscribe(
+      (resp) => {
+        if (resp) {
+          this.showSpinner = true;
+          this.listarUsuarios();
+        }
+      }
+    );
   }
 
   crearUsuario() {

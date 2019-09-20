@@ -48,6 +48,11 @@ export class AlumnosService {
     return this.http.post('/alumnos', {usuario, id_carrera_abierta: idCarreraAbierta});
   }
 
+  public editarAlumno(alumno: Alumno): Observable<Mensaje> {
+    this.eliminarCacheAlumnos();
+    return this.http.put('/alumnos/' + alumno.id_alumno, {alumno});
+  }
+
   public eliminarAlumno(id: number): Observable<Mensaje> {
     this.eliminarCacheAlumnos();
     return this.http.delete('/alumnos/' + id);
