@@ -44,6 +44,7 @@ import { InscribirAlumnoFinalComponent } from './componentes/inscripciones/final
 import { PlanillaActaVolanteComponent } from './componentes/inscripciones/finales/planilla-acta-volante/planilla-acta-volante.component';
 import { PlanillaInscriptosCursadaComponent } from './componentes/inscripciones/cursadas/planilla-inscriptos-cursada/planilla-inscriptos-cursada.component';
 import { PlanillaAsistenciaComponent } from './componentes/inscripciones/cursadas/planilla-asistencia/planilla-asistencia.component';
+import { EditarAlumnoComponent } from './componentes/alumnos/editar-alumno/editar-alumno.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { PlanillaAsistenciaComponent } from './componentes/inscripciones/cursada
     PlanillaActaVolanteComponent,
     PlanillaInscriptosCursadaComponent,
     PlanillaAsistenciaComponent,
+    EditarAlumnoComponent,
   ],
   entryComponents: [
     ConfirmationDialogComponent,
@@ -95,7 +97,8 @@ import { PlanillaAsistenciaComponent } from './componentes/inscripciones/cursada
     InscribirAlumnoComponent,
     CambioClaveComponent,
     InscribirAlumnoCursadaComponent,
-    InscribirAlumnoFinalComponent
+    InscribirAlumnoFinalComponent,
+    EditarAlumnoComponent
   ],
   imports: [
     BrowserAnimationsModule,

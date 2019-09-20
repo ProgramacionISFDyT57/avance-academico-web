@@ -8,6 +8,7 @@ import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog
 import { NotificationsService } from 'angular2-notifications';
 import { Alumno } from 'src/app/modelos/alumno';
 import { Router } from '@angular/router';
+import { EditarAlumnoComponent } from './editar-alumno/editar-alumno.component';
 
 @Component({
   selector: 'app-alumnos',
@@ -60,6 +61,23 @@ export class AlumnosComponent implements OnInit {
       maxWidth: '90%'
     };
     const modal = this.dialog.open(CrearAlumnoComponent, config);
+    modal.beforeClosed().subscribe(
+      (resp) => {
+        if (resp) {
+          this.showSpinner = true;
+          this.listarAlumnos();
+        }
+      }
+    );
+  }
+
+  editarAlumno(alumno: Alumno) {
+    const config: MatDialogConfig = {
+      width: '700px',
+      maxWidth: '90%',
+      data: alumno
+    };
+    const modal = this.dialog.open(EditarAlumnoComponent, config);
     modal.beforeClosed().subscribe(
       (resp) => {
         if (resp) {
