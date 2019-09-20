@@ -8,6 +8,7 @@ import { CargarNotasCursadaComponent } from '../cargar-notas-cursada/cargar-nota
 import { AvanceAcademico } from 'src/app/modelos/avance-academico';
 import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
 import { InscribirAlumnoCursadaComponent } from '../inscribir-alumno-cursada/inscribir-alumno-cursada.component';
+import { HelperService } from 'src/app/servicios/helper.service';
 
 @Component({
   selector: 'app-detalles-cursada',
@@ -29,6 +30,7 @@ export class DetallesCursadaComponent implements OnInit {
   idCarrera: number;
 
   constructor(
+    public helper: HelperService,
     private route: ActivatedRoute,
     private materiasService: MateriasService,
     private notif: NotificationsService,
@@ -87,6 +89,23 @@ export class DetallesCursadaComponent implements OnInit {
         }
       }
     );
+  }
+
+  async eliminarInscripcion(idInscripcionCursada: number) {
+    const confirm = await this.confirmation.confirm('Confirme la acción', '¿Desea eliminar la inscripción de la cursada?');
+    if (confirm) {
+      this.showSpinner = true;
+      this.materiasService.eliminarInscripcionCursadaAlumno(idInscripcionCursada).subscribe(
+        (res) => {
+          this.listar_inscriptos();
+          console.log(res);
+        },
+        (error) => {
+          this.showSpinner = false;
+          this.notif.error(error.error.mensaje);
+          console.log(error);
+        });
+    }
   }
 
   inscribirAlumno() {

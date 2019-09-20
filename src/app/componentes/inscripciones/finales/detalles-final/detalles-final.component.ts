@@ -8,6 +8,7 @@ import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog
 import { Final } from 'src/app/modelos/final';
 import { CargaNotasFinalComponent } from '../carga-notas-final/carga-notas-final.component';
 import { InscribirAlumnoFinalComponent } from '../inscribir-alumno-final/inscribir-alumno-final.component';
+import { HelperService } from 'src/app/servicios/helper.service';
 
 @Component({
   selector: 'app-detalles-final',
@@ -28,6 +29,7 @@ export class DetallesFinalComponent implements OnInit {
   fechaExamen: string;
 
   constructor(
+    public helper: HelperService,
     private route: ActivatedRoute,
     private materiasService: MateriasService,
     private notif: NotificationsService,
@@ -54,6 +56,23 @@ export class DetallesFinalComponent implements OnInit {
         }
       }
     );
+  }
+
+  async eliminarInscripcion(idInscripcionFinal: number) {
+    const confirm = await this.confirmation.confirm('Confirme la acción', '¿Desea eliminar la inscripción de la mesa de final?');
+    if (confirm) {
+      this.showSpinner = true;
+      this.materiasService.eliminarInscripcionFinalAlumno(idInscripcionFinal).subscribe(
+        (res) => {
+          this.listar_inscriptos();
+          console.log(res);
+        },
+        (error) => {
+          this.showSpinner = false;
+          this.notif.error(error.error.mensaje);
+          console.log(error);
+        });
+    }
   }
 
   listar_inscriptos() {

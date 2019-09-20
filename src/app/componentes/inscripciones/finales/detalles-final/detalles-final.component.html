@@ -57,6 +57,10 @@
             (click)="eliminarNotas(element.id_inscripcion_mesa)">
             <mat-icon>remove</mat-icon>
           </button>
+          <button *ngIf="this.helper.rolesAdmitidos(['admin'])" class="mx-1" mat-mini-fab color="warn" matTooltip="Eliminar Inscripción"
+            (click)="eliminarInscripcion(element.id_inscripcion_mesa)">
+            <mat-icon>delete_forever</mat-icon>
+          </button>
         </td>
       </ng-container>
 

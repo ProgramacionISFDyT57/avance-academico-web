@@ -81,6 +81,9 @@ materias: Materia[];
   public eliminarInscripcionFinal(idInscripcionMesa: number): Observable<Mensaje> {
     return this.http.delete('/inscripciones_mesas/' + idInscripcionMesa);
   }
+  public eliminarInscripcionFinalAlumno(idInscripcionMesa: number): Observable<Mensaje> {
+    return this.http.delete('/inscripcion_mesa_alumno/' + idInscripcionMesa);
+  }
   public listarFinales(): Observable<FinalAbierto[]> {
     return this.http.get('/lista_mesas');
   }
@@ -129,6 +132,9 @@ materias: Materia[];
   }
   public eliminarInscripcionCursada(idInscripcionCursada: number): Observable<Mensaje> {
     return this.http.delete('/inscripcion_cursada/' + idInscripcionCursada);
+  }
+  public eliminarInscripcionCursadaAlumno(idInscripcionCursada: number): Observable<Mensaje> {
+    return this.http.delete('/inscripcion_cursada_alumno/' + idInscripcionCursada);
   }
 
 }
