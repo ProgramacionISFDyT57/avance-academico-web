@@ -33,8 +33,9 @@
     <ng-container matColumnDef="cursada">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Cursada </th>
       <td mat-cell *matCellDef="let element">
+        <ng-container *ngIf="element.final && !element.nota_cuat_1">Libre</ng-container>
         <ng-container *ngIf="element.nota_cuat_1">Aprobada</ng-container>
-        <ng-container *ngIf="!element.nota_cuat_1"> -- </ng-container>
+        <ng-container *ngIf="!element.final! && element.nota_cuat_1"> -- </ng-container>
       </td>
     </ng-container>
 

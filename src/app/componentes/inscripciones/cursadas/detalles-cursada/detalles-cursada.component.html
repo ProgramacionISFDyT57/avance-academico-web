@@ -11,7 +11,8 @@
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
     </mat-form-field>
 
-    <button matTooltip="Inscribir Alumno" class="btn-crear2 no-print" mat-fab color="primary" (click)="inscribirAlumno()">
+    <button matTooltip="Inscribir Alumno" class="btn-crear2 no-print" mat-fab color="primary"
+      (click)="inscribirAlumno()">
       <mat-icon>queue</mat-icon>
     </button>
 
@@ -34,22 +35,51 @@
 
       <ng-container matColumnDef="nota_cuat_1">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Nota 1er Cuat. </th>
-        <td mat-cell *matCellDef="let element"> {{ element.nota_cuat_1 }} </td>
+        <td mat-cell *matCellDef="let element">
+          <ng-container *ngIf="element.cursa">
+            {{ element.nota_cuat_1 }}
+          </ng-container>
+          <ng-container *ngIf="!element.cursa">
+            --
+          </ng-container>
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="nota_cuat_2">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Nota 2do Cuat. </th>
-        <td mat-cell *matCellDef="let element"> {{ element.nota_cuat_2 }} </td>
+        <td mat-cell *matCellDef="let element">
+          <ng-container *ngIf="element.cursa">
+            {{ element.nota_cuat_2 }}
+          </ng-container>
+          <ng-container *ngIf="!element.cursa">
+            --
+          </ng-container>
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="nota_recuperatorio">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Nota Recuperatorio </th>
-        <td mat-cell *matCellDef="let element"> {{ element.nota_recuperatorio }} </td>
+        <td mat-cell *matCellDef="let element">
+          <ng-container *ngIf="element.cursa">
+            {{ element.nota_recuperatorio }}
+          </ng-container>
+          <ng-container *ngIf="!element.cursa">
+            --
+          </ng-container>
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="asistencia">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> % Asistencia </th>
-        <td mat-cell *matCellDef="let element"> {{ element.asistencia }} </td>
+        <td mat-cell *matCellDef="let element">
+          <ng-container *ngIf="element.cursa">
+            {{ element.asistencia }}
+          </ng-container>
+          <ng-container *ngIf="!element.cursa">
+            --
+          </ng-container>
+
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="cursa">
@@ -71,15 +101,16 @@
       <ng-container matColumnDef="acciones">
         <th mat-header-cell *matHeaderCellDef class="no-print"> Acciones </th>
         <td class="nowrap no-print" mat-cell *matCellDef="let element">
-          <button class="mx-1" mat-mini-fab color="primary" matTooltip="Cargar Notas" (click)="cargarNotas(element)">
+          <button *ngIf="element.cursa" class="mx-1" mat-mini-fab color="primary" matTooltip="Cargar Notas"
+            (click)="cargarNotas(element)">
             <mat-icon>add</mat-icon>
           </button>
           <button *ngIf="element.nota_cuat_1" class="mx-1" mat-mini-fab color="warn" matTooltip="Eliminar Notas"
             (click)="eliminarNotas(element.id_inscripcion_cursada)">
             <mat-icon>remove</mat-icon>
           </button>
-          <button *ngIf="this.helper.rolesAdmitidos(['admin'])" class="mx-1" mat-mini-fab color="warn" matTooltip="Eliminar Inscripción"
-            (click)="eliminarInscripcion(element.id_inscripcion_cursada)">
+          <button *ngIf="this.helper.rolesAdmitidos(['admin'])" class="mx-1" mat-mini-fab color="warn"
+            matTooltip="Eliminar Inscripción" (click)="eliminarInscripcion(element.id_inscripcion_cursada)">
             <mat-icon>delete_forever</mat-icon>
           </button>
         </td>
