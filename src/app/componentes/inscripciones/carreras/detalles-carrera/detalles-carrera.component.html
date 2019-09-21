@@ -41,7 +41,7 @@
       <th mat-header-cell *matHeaderCellDef class="no-print"> Acciones </th>
       <td class="nowrap no-print" mat-cell *matCellDef="let element">
           <button class="mx-1" mat-mini-fab color="accent" matTooltip="Libro / Folio"
-          (click)="asignarLibro(element.id_inscripcion_carrera)">
+          (click)="asignarLibro(element.id_inscripcion_carrera, element.libro, element.folio)">
           <mat-icon>edit</mat-icon>
         </button>
         <button *ngIf="!element.libro" class="mx-1" mat-mini-fab color="warn" matTooltip="Eliminar Inscripción"

@@ -55,6 +55,7 @@ export class AsignarLibroComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.data);
     this.crearFormulario();
   }
 

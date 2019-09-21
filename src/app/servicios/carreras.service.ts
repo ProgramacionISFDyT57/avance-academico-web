@@ -126,6 +126,6 @@ export class CarrerasService {
     return this.http.delete('/inscripciones_carreras/' + idInscripcionCarrera);
   }
   public asignarLibroFolio(idInscripcionCarrera: number, libro: number, folio: number): Observable<Mensaje> {
-    return this.http.put('/libro_folio', {id_inscripcion_carrera: idInscripcionCarrera, libro, folio});
+    return this.http.put('/inscripciones_carreras/' + idInscripcionCarrera, {libro, folio});
   }
 }
