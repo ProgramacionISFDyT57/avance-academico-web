@@ -5,7 +5,7 @@
 <!-- <mat-dialog-content> -->
 <form id="form" [formGroup]="formulario" (ngSubmit)="enviar()">
 
-  <ng-select [clearable]="false" [items]="alumnos" bindLabel="nombre_completo" bindValue="id_alumno" name="idAlumno"
+  <ng-select [clearable]="false" [items]="alumnos" bindLabel="nombre_completo" bindValue="id_alumno" name="idAlumno" [notFoundText]="'No hay alumnos inscriptos a la carrera'"
     formControlName="idAlumno">
   </ng-select>
 

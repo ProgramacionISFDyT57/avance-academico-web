@@ -31,7 +31,7 @@
       <input type="number" min="1" matInput placeholder="Horas Totales" formControlName="horas">
     </mat-form-field>
 
-    <ng-select [items]="materiasFiltradas" [groupBy]="'anio'" [placeholder]="'Correlativas'" [notFoundText]="'Na hay materias de años anteriores'" [multiple]="true" [loading]="cargadoMaterias"
+    <ng-select [items]="materiasFiltradas" [groupBy]="'anio'" [placeholder]="'Correlativas'" [notFoundText]="'No hay materias de años anteriores'" [multiple]="true" [loading]="cargadoMaterias"
       bindLabel="nombre" bindValue="id" formControlName="correlativas">
     </ng-select>
 

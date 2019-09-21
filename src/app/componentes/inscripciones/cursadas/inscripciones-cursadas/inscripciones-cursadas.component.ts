@@ -28,7 +28,8 @@ export class InscripcionesCursadasComponent implements OnInit {
   carreras: Carrera[] = [];
   carreraSeleccionada = 'Todas las carreras';
   showSpinner = true;
-
+  dias = ['', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'];
+  // dias = ['', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'];
 
   constructor(
     public helper: HelperService,
@@ -66,10 +67,10 @@ export class InscripcionesCursadasComponent implements OnInit {
     if (event.nombre === 'Todas las carreras') {
       if (this.rol === 'alumno') {
         this.displayedColumns = ['anio_cursada', 'carrera', 'materia', 'anio_materia',
-          'fecha_inicio', 'fecha_limite', 'profesor', 'acciones'];
+          'fecha_inicio', 'fecha_limite', 'profesor', 'horarios', 'acciones'];
       } else {
         this.displayedColumns = ['anio_cursada', 'carrera', 'materia', 'anio_materia',
-          'fecha_inicio', 'fecha_limite', 'profesor', 'cant_inscriptos', 'acciones'];
+          'fecha_inicio', 'fecha_limite', 'profesor', 'horarios', 'cant_inscriptos', 'acciones'];
       }
       this.dataSource = new MatTableDataSource(this.cursadas);
       this.dataSource.paginator = this.paginator;
@@ -78,10 +79,10 @@ export class InscripcionesCursadasComponent implements OnInit {
       const materias = [];
       if (this.rol === 'alumno') {
         this.displayedColumns = ['anio_cursada', 'carrera', 'materia', 'anio_materia',
-          'fecha_inicio', 'fecha_limite', 'profesor', 'acciones'];
+          'fecha_inicio', 'fecha_limite', 'profesor', 'horarios', 'acciones'];
       } else {
         this.displayedColumns = ['anio_cursada', 'materia', 'anio_materia',
-          'fecha_inicio', 'fecha_limite', 'profesor', 'cant_inscriptos', 'acciones'];
+          'fecha_inicio', 'fecha_limite', 'profesor', 'horarios', 'cant_inscriptos', 'acciones'];
       }
       for (const materia of this.cursadas) {
         if (materia.carrera === event.nombre) {
