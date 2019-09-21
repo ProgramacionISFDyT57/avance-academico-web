@@ -73,6 +73,10 @@ materias: Materia[];
     this.eliminarCacheMaterias();
     return this.http.post('/crear_mesa', { mesa });
   }
+  public editarMesa(mesa): Observable<Mensaje> {
+    this.eliminarCacheMaterias();
+    return this.http.put('/mesas/' + mesa.id_mesa, { mesa });
+  }
   public eliminarMesaFinal(id: number): Observable<Mensaje> {
     this.eliminarCacheMaterias();
     return this.http.delete('/mesas/' + id);

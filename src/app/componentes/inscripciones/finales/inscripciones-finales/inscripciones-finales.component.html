@@ -46,7 +46,7 @@
 
     <ng-container matColumnDef="profesor">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Profesor </th>
-      <td mat-cell *matCellDef="let element"> {{element.profesor}} </td>
+      <td mat-cell *matCellDef="let element" matTooltip="Vocales: {{ element.vocal1 }} / {{ element.vocal2 }}"> {{element.profesor}} </td>
     </ng-container>
 
     <ng-container matColumnDef="fecha_inicio">
@@ -92,11 +92,14 @@
           <button class="mx-1" mat-mini-fab color="primary" matTooltip="Detalles" (click)="detalles(element.id)">
             <mat-icon>list_alt</mat-icon>
           </button>
-          <button *ngIf="+element.cant_inscriptos" class="mx-1" mat-mini-fab color="accent" matTooltip="Acta Volante Regulares"
+          <button class="mx-1" mat-mini-fab color="accent" matTooltip="Editar" (click)="editar(element)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button *ngIf="+element.cant_inscriptos" class="mx-1" mat-mini-fab color="warn" matTooltip="Acta Volante Regulares"
             (click)="actaVolante(element.id, false)">
             <mat-icon>print</mat-icon>
           </button>
-          <button *ngIf="+element.cant_inscriptos" class="mx-1" mat-mini-fab color="accent" matTooltip="Acta Volante Libres"
+          <button *ngIf="+element.cant_inscriptos" class="mx-1" mat-mini-fab color="warn" matTooltip="Acta Volante Libres"
             (click)="actaVolante(element.id, true)">
             <mat-icon>print</mat-icon>
           </button>

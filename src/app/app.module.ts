@@ -49,6 +49,7 @@ import { EditarUsuarioComponent } from './componentes/usuarios/editar-usuario/ed
 import { AsignarLibroComponent } from './componentes/inscripciones/carreras/asignar-libro/asignar-libro.component';
 import { EditarMateriaComponent } from './componentes/materias/editar-materia/editar-materia.component';
 import { EditarCursadaComponent } from './componentes/inscripciones/cursadas/editar-cursada/editar-cursada.component';
+import { EditarMesaComponent } from './componentes/inscripciones/finales/editar-mesa/editar-mesa.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { EditarCursadaComponent } from './componentes/inscripciones/cursadas/edi
     AsignarLibroComponent,
     EditarMateriaComponent,
     EditarCursadaComponent,
+    EditarMesaComponent,
   ],
   entryComponents: [
     ConfirmationDialogComponent,
@@ -110,7 +112,8 @@ import { EditarCursadaComponent } from './componentes/inscripciones/cursadas/edi
     EditarUsuarioComponent,
     AsignarLibroComponent,
     EditarMateriaComponent,
-    EditarCursadaComponent
+    EditarCursadaComponent,
+    EditarMesaComponent
   ],
   imports: [
     BrowserAnimationsModule,

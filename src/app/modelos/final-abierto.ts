@@ -10,4 +10,7 @@ export interface FinalAbierto {
   profesor: string;
   vocal1: string;
   vocal2: string;
+  id_profesor?: number;
+  id_vocal1?: number;
+  id_vocal2?: number;
 }
