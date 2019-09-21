@@ -6,6 +6,8 @@ export interface Materia {
   carrera?: string;
   anio: number;
   tipo_materia?: string;
-  correlativas: string[];
+  correlativas?: string[];
   ultima_cursada?: number;
+  horas?: number;
+  duracion_carrera?: number;
 }

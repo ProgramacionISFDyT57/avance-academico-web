@@ -56,6 +56,7 @@ export class CrearMateriaComponent implements OnInit {
       nombre: ['', Validators.required],
       anio: [null, Validators.required],
       tipoMateria: [null, Validators.required],
+      horas: [null],
       correlativas: [[]]
     });
   }
@@ -103,7 +104,8 @@ export class CrearMateriaComponent implements OnInit {
       anio: this.formulario.value.anio,
       id_carrera: this.idCarrera,
       id_tipo: this.formulario.value.tipoMateria,
-      correlativas: this.formulario.value.correlativas
+      correlativas: this.formulario.value.correlativas,
+      horas: this.formulario.value.horas
     };
     this.materiasService.crearMateria(materia).subscribe(
       (resp) => {

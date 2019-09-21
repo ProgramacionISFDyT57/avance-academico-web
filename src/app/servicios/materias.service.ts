@@ -57,6 +57,10 @@ materias: Materia[];
     this.carrerasService.eliminarCacheCarreras();
     return this.http.post('/materias', { materia });
   }
+  public editarMateria(materia: Materia): Observable<Mensaje> {
+    this.eliminarCacheMaterias();
+    return this.http.put('/materias/' + materia.id, { materia });
+  }
   public eliminarMateria(idMateria: number): Observable<Mensaje> {
     this.eliminarCacheMaterias();
     this.carrerasService.eliminarCacheCarreras();
