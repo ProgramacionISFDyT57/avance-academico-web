@@ -82,6 +82,10 @@ export class UsuariosService {
     return this.http.put('/cambio_password', {claveVieja, claveNueva});
   }
 
+  public resetContraseña(idUsuario: number): Observable<Mensaje> {
+    return this.http.put('/reset_password/' + idUsuario, {});
+  }
+
   public deshabilitar(idUsuario: number): Observable<Mensaje> {
     this.eliminarCacheProfesores();
     this.eliminarCacheUsuarios();

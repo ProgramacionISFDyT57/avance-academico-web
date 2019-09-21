@@ -63,6 +63,9 @@
         <button class="mx-1" mat-mini-fab color="accent" matTooltip="Editar" (click)="editarUsuario(element)">
           <mat-icon>edit</mat-icon>
         </button>
+        <button *ngIf="this.helper.rolesAdmitidos(['admin'])" class="mx-1" mat-mini-fab color="warn" matTooltip="Resetear Contraseña" (click)="resetearPassword(element.id)">
+            <mat-icon>lock</mat-icon>
+          </button>
         <button class="mx-1" mat-mini-fab color="warn" matTooltip="Eliminar" (click)="eliminar(element.id)">
           <mat-icon>delete_forever</mat-icon>
         </button>

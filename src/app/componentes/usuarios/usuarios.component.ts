@@ -6,6 +6,7 @@ import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog
 import { NotificationsService } from 'angular2-notifications';
 import { CrearUsuarioComponent } from './crear-usuario/crear-usuario.component';
 import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.component';
+import { HelperService } from 'src/app/servicios/helper.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -25,6 +26,7 @@ export class UsuariosComponent implements OnInit {
     private confirmation: ConfirmationDialogService,
     private notif: NotificationsService,
     public dialog: MatDialog,
+    public helper: HelperService,
   ) { }
 
   public async listarUsuarios(cache = true) {
@@ -78,6 +80,25 @@ export class UsuariosComponent implements OnInit {
           this.listarUsuarios();
           this.notif.success(res.mensaje);
           console.log(res);
+        },
+        (error) => {
+          console.log(error);
+          this.showSpinner = false;
+          this.notif.error(error.error.mensaje);
+        }
+      );
+    }
+  }
+
+  async resetearPassword(id: number) {
+    const confirm = await this.confirmation.confirm('Confirme la acción', '¿Desea resetear la contraseña del usuario a su numero de DNI?');
+    if (confirm) {
+      this.showSpinner = true;
+      this.usuariosService.resetContraseña(id).subscribe(
+        (res) => {
+          this.notif.success(res.mensaje);
+          console.log(res);
+          this.showSpinner = false;
         },
         (error) => {
           console.log(error);
