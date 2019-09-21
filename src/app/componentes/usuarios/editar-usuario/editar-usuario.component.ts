@@ -48,7 +48,6 @@ export class EditarUsuarioComponent implements OnInit {
       fecha_nacimiento: this.formulario.value.fecha_nacimiento,
       domicilio: this.formulario.value.domicilio,
     };
-    console.log(usuario);
     this.usuariosService.editarUsuario(usuario).subscribe(
       (resp) => {
         console.log(resp);

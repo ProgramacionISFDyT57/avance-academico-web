@@ -21,7 +21,7 @@ export class UsuariosService {
     this.profesores = null;
   }
 
-  private eliminarCacheUsuarios() {
+  public eliminarCacheUsuarios() {
     this.usuarios = null;
   }
 

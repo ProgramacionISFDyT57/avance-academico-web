@@ -31,7 +31,8 @@ export class EditarAlumnoComponent implements OnInit {
       dni: [this.data.dni, Validators.required],
       email: [this.data.email, [Validators.required, Validators.email]],
       telefono: [this.data.telefono],
-      fecha_nacimiento: [this.data.fecha_nacimiento]
+      fecha_nacimiento: [this.data.fecha_nacimiento],
+      domicilio: [this.data.domicilio],
     });
   }
 
@@ -45,8 +46,8 @@ export class EditarAlumnoComponent implements OnInit {
       email: this.formulario.value.email,
       telefono: this.formulario.value.telefono,
       fecha_nacimiento: this.formulario.value.fecha_nacimiento,
+      domicilio: this.formulario.value.domicilio
     };
-    console.log(alumno);
     this.alumnosService.editarAlumno(alumno).subscribe(
       (resp) => {
         console.log(resp);
