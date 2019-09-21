@@ -10,6 +10,7 @@ import { HelperService } from 'src/app/servicios/helper.service';
 import { InscribirAlumnoCursadaComponent } from '../inscribir-alumno-cursada/inscribir-alumno-cursada.component';
 import { Carrera } from 'src/app/modelos/carrera';
 import { CarrerasService } from 'src/app/servicios/carreras.service';
+import { EditarCursadaComponent } from '../editar-cursada/editar-cursada.component';
 
 @Component({
   selector: 'app-inscripciones-cursadas',
@@ -179,6 +180,22 @@ export class InscripcionesCursadasComponent implements OnInit {
 
   detalles(id) {
     this.router.navigateByUrl('inscripcion/cursadas/' + id);
+  }
+
+  editar(cursada: Cursada) {
+    const config: MatDialogConfig = {
+      width: '500px',
+      maxWidth: '90%',
+      data: cursada
+    };
+    const modal = this.dialog.open(EditarCursadaComponent, config);
+    modal.beforeClosed().subscribe(
+      (resp) => {
+        if (resp) {
+          this.ListarCursadas();
+        }
+      }
+    );
   }
 
   public async eliminar(id: number) {

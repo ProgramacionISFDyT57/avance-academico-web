@@ -113,6 +113,9 @@ materias: Materia[];
     this.eliminarCacheMaterias();
     return this.http.post('/cursadas', { cursada, horarios });
   }
+  public editarCursada(cursada, horarios: Horario[]): Observable<Mensaje> {
+    return this.http.put('/cursadas/' + cursada.id_cursada, { cursada, horarios });
+  }
   public eliminarCursada(id: number): Observable<Mensaje> {
     this.eliminarCacheMaterias();
     return this.http.delete('/cursadas/' + id);

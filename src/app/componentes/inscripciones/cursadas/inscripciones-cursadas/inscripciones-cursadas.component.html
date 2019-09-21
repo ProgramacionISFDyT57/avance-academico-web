@@ -100,6 +100,9 @@
           <button class="mx-1" mat-mini-fab color="primary" matTooltip="Detalles" (click)="detalles(element.id)">
             <mat-icon>list_alt</mat-icon>
           </button>
+          <button class="mx-1" mat-mini-fab color="accent" matTooltip="Detalles" (click)="editar(element)">
+            <mat-icon>edit</mat-icon>
+          </button>
           <button *ngIf="+element.cant_inscriptos" class="mx-1" mat-mini-fab color="accent"
             matTooltip="Planilla Inscriptos Cursada" (click)="inscriptosCursada(element.id)">
             <mat-icon>print</mat-icon>

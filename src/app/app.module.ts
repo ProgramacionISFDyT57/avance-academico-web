@@ -48,6 +48,7 @@ import { EditarAlumnoComponent } from './componentes/alumnos/editar-alumno/edita
 import { EditarUsuarioComponent } from './componentes/usuarios/editar-usuario/editar-usuario.component';
 import { AsignarLibroComponent } from './componentes/inscripciones/carreras/asignar-libro/asignar-libro.component';
 import { EditarMateriaComponent } from './componentes/materias/editar-materia/editar-materia.component';
+import { EditarCursadaComponent } from './componentes/inscripciones/cursadas/editar-cursada/editar-cursada.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { EditarMateriaComponent } from './componentes/materias/editar-materia/ed
     EditarUsuarioComponent,
     AsignarLibroComponent,
     EditarMateriaComponent,
+    EditarCursadaComponent,
   ],
   entryComponents: [
     ConfirmationDialogComponent,
@@ -107,7 +109,8 @@ import { EditarMateriaComponent } from './componentes/materias/editar-materia/ed
     EditarAlumnoComponent,
     EditarUsuarioComponent,
     AsignarLibroComponent,
-    EditarMateriaComponent
+    EditarMateriaComponent,
+    EditarCursadaComponent
   ],
   imports: [
     BrowserAnimationsModule,

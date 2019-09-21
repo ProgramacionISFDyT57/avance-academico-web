@@ -1,0 +1,96 @@
+<mat-progress-bar mode="indeterminate" color="warn" [style.display]="showSpinner ? 'block' : 'none'"></mat-progress-bar>
+
+<h2 mat-dialog-title>Abrir inscripción a {{ materia }}</h2>
+
+<mat-dialog-content>
+  <form id="form" [formGroup]="formulario" (ngSubmit)="enviar()">
+
+    <mat-form-field>
+      <input type="number" maxlength="4" matInput placeholder="Año" formControlName="año">
+    </mat-form-field>
+
+    <ng-select [items]="profesores" [placeholder]="'Profesor'" bindLabel="nombre_completo" bindValue="id"
+      formControlName="id_profesor">
+    </ng-select>
+
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker1" placeholder="Inicio de Inscripción" formControlName="fecha_inicio">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker2" placeholder="Fin de Inscripción" formControlName="fecha_limite">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+    <!-- Agregar las restriccions de las fechas. Cierre de inscripcion no puede ser anterior a inicio -->
+
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <p fxFlex="20">Lunes</p>
+      <mat-form-field fxFlex="30" fxFlexOffset="10">
+        <input matInput type="time" placeholder="Hora inicio" formControlName="hora_inicio_lunes">
+      </mat-form-field>
+      <mat-form-field fxFlex="30" fxFlexOffset="10">
+        <input type="number" min="1" matInput placeholder="Módulos" formControlName="modulos_lunes">
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <p fxFlex="20">Martes</p>
+      <mat-form-field fxFlex="30" fxFlexOffset="10">
+        <input matInput type="time" placeholder="Hora inicio" formControlName="hora_inicio_martes">
+      </mat-form-field>
+      <mat-form-field fxFlex="30" fxFlexOffset="10">
+        <input type="number" min="1" matInput placeholder="Módulos" formControlName="modulos_martes">
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <p fxFlex="20">Miercoles</p>
+      <mat-form-field fxFlex="30" fxFlexOffset="10">
+        <input matInput type="time" placeholder="Hora inicio" formControlName="hora_inicio_miercoles">
+      </mat-form-field>
+      <mat-form-field fxFlex="30" fxFlexOffset="10">
+        <input type="number" min="1" matInput placeholder="Módulos" formControlName="modulos_miercoles">
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <p fxFlex="20">Jueves</p>
+      <mat-form-field fxFlex="30" fxFlexOffset="10">
+        <input matInput type="time" placeholder="Hora inicio" formControlName="hora_inicio_jueves">
+      </mat-form-field>
+      <mat-form-field fxFlex="30" fxFlexOffset="10">
+        <input type="number" min="1" matInput placeholder="Módulos" formControlName="modulos_jueves">
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <p fxFlex="20">Viernes</p>
+      <mat-form-field fxFlex="30" fxFlexOffset="10">
+        <input matInput type="time" placeholder="Hora inicio" formControlName="hora_inicio_viernes">
+      </mat-form-field>
+      <mat-form-field fxFlex="30" fxFlexOffset="10">
+        <input type="number" min="1" matInput placeholder="Módulos" formControlName="modulos_viernes">
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <p fxFlex="20">Sabado</p>
+      <mat-form-field fxFlex="30" fxFlexOffset="10">
+        <input matInput type="time" placeholder="Hora inicio" formControlName="hora_inicio_sabado">
+      </mat-form-field>
+      <mat-form-field fxFlex="30" fxFlexOffset="10">
+        <input type="number" min="1" matInput placeholder="Módulos" formControlName="modulos_sabado">
+      </mat-form-field>
+    </div>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions fxLayoutAlign="end center">
+  <button mat-raised-button color="primary" type="submit" form="form"
+    [disabled]="!formulario.valid || showSpinner">Crear</button>
+  <button mat-raised-button (click)="cerrar()">Volver </button>
+</mat-dialog-actions>
