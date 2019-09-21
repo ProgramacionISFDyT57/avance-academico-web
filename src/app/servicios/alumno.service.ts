@@ -5,6 +5,7 @@ import { Alumno } from '../modelos/alumno';
 import { Mensaje } from '../modelos/respuesta-mensaje';
 import { Usuario } from '../modelos/usuario';
 import { Analitico } from '../modelos/analitico';
+import { UsuariosService } from './usuarios.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class AlumnosService {
   alumnos: Alumno[];
 
   constructor(
+    private usuariosService: UsuariosService,
     private http: HttpService
   ) { }
 
@@ -44,16 +46,19 @@ export class AlumnosService {
   }
 
   public crearAlumno(usuario: Usuario, idCarreraAbierta: number): Observable<Mensaje> {
+    this.usuariosService.eliminarCacheUsuarios();
     this.eliminarCacheAlumnos();
     return this.http.post('/alumnos', {usuario, id_carrera_abierta: idCarreraAbierta});
   }
 
   public editarAlumno(alumno: Alumno): Observable<Mensaje> {
+    this.usuariosService.eliminarCacheUsuarios();
     this.eliminarCacheAlumnos();
     return this.http.put('/alumnos/' + alumno.id_alumno, {alumno});
   }
 
   public eliminarAlumno(id: number): Observable<Mensaje> {
+    this.usuariosService.eliminarCacheUsuarios();
     this.eliminarCacheAlumnos();
     return this.http.delete('/alumnos/' + id);
   }

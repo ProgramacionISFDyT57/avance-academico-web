@@ -9,6 +9,7 @@ import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog
 import { HelperService } from 'src/app/servicios/helper.service';
 import { Carrera } from 'src/app/modelos/carrera';
 import { CarrerasService } from 'src/app/servicios/carreras.service';
+import { EditarMateriaComponent } from './editar-materia/editar-materia.component';
 
 @Component({
   selector: 'app-materias',
@@ -127,6 +128,21 @@ export class MateriasComponent implements OnInit {
     }
   }
 
+  public editar(materia: Materia) {
+    const config: MatDialogConfig = {
+      data: materia
+    };
+    const modal = this.dialog.open(EditarMateriaComponent, config);
+    modal.beforeClosed().subscribe(
+      (resp) => {
+        if (resp) {
+          this.showSpinner = true;
+          this.listarMaterias();
+        }
+      }
+    );
+  }
+
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
     if (this.dataSource.paginator) {
@@ -138,9 +154,9 @@ export class MateriasComponent implements OnInit {
     this.filtro = '';
     if (event.nombre === 'Todas las carreras') {
       if (this.rol === 'alumno') {
-        this.displayedColumns = ['nombre', 'carrera', 'anio', 'tipo_materia', 'correlativas', 'ultima_cursada', 'ultima_mesa'];
+        this.displayedColumns = ['nombre', 'carrera', 'anio', 'horas', 'tipo_materia', 'correlativas', 'ultima_cursada', 'ultima_mesa'];
       } else {
-        this.displayedColumns = ['nombre', 'carrera', 'anio', 'tipo_materia', 'correlativas', 'ultima_cursada', 'ultima_mesa', 'acciones'];
+        this.displayedColumns = ['nombre', 'carrera', 'anio', 'horas', 'tipo_materia', 'correlativas', 'ultima_cursada', 'ultima_mesa', 'acciones'];
       }
       this.dataSource = new MatTableDataSource(this.materias);
       this.dataSource.paginator = this.paginator;
@@ -148,9 +164,9 @@ export class MateriasComponent implements OnInit {
     } else {
       const materias = [];
       if (this.rol === 'alumno') {
-        this.displayedColumns = ['nombre', 'carrera', 'anio', 'tipo_materia', 'correlativas', 'ultima_cursada', 'ultima_mesa'];
+        this.displayedColumns = ['nombre', 'carrera', 'anio', 'horas', 'tipo_materia', 'correlativas', 'ultima_cursada', 'ultima_mesa'];
       } else {
-        this.displayedColumns = ['nombre', 'anio', 'tipo_materia', 'correlativas', 'ultima_cursada', 'ultima_mesa', 'acciones'];
+        this.displayedColumns = ['nombre', 'anio', 'horas', 'tipo_materia', 'correlativas', 'ultima_cursada', 'ultima_mesa', 'acciones'];
       }
       for (const materia of this.materias) {
         if (materia.carrera === event.nombre) {

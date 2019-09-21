@@ -34,12 +34,14 @@ export class CrearCarreraComponent implements OnInit {
     if (this.data) {
       this.formulario = this.fb.group({
         nombre: [this.data.nombre, Validators.required],
+        resolucion: [this.data.resolucion],
         duracion: [this.data.duracion, [Validators.required, Validators.max(5), Validators.min(1)]],
         cantidad_materias: [this.data.cantidad_materias, [Validators.required, Validators.min(1)]],
       });
     } else {
       this.formulario = this.fb.group({
         nombre: ['', Validators.required],
+        resolucion: [''],
         duracion: [1, [Validators.required, Validators.max(5), Validators.min(1)]],
         cantidad_materias: [1, [Validators.required, Validators.min(1)]],
       });
@@ -49,6 +51,7 @@ export class CrearCarreraComponent implements OnInit {
   enviar() {
     const carrera: Carrera = {
       nombre: this.formulario.value.nombre,
+      resolucion: this.formulario.value.resolucion,
       duracion: this.formulario.value.duracion,
       cantidad_materias: this.formulario.value.cantidad_materias
     };

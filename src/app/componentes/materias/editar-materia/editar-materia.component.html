@@ -1,7 +1,7 @@
 <mat-progress-bar mode="indeterminate" color="warn" [style.display]="showSpinner ? 'block' : 'none'"></mat-progress-bar>
 
 
-<h2 mat-dialog-title>Crear Materia de {{ carrera }}</h2>
+<h2 mat-dialog-title>Editar Materia</h2>
 
 <!-- <mat-dialog-content> -->
   <form id="form" [formGroup]="formulario" (ngSubmit)="enviar()" #myNgForm="ngForm">
@@ -11,7 +11,7 @@
 
     <mat-form-field>
       <mat-label>Año</mat-label>
-      <mat-select formControlName="anio" (selectionChange)="cambioAnio()">
+      <mat-select formControlName="anio">
         <mat-option *ngFor="let anio of anios" [value]="anio">
           {{anio}}
         </mat-option>
@@ -19,21 +19,8 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Tipo de materia</mat-label>
-      <mat-select formControlName="tipoMateria">
-        <mat-option *ngFor="let tipoMateria of tiposMaterias" [value]="tipoMateria.id">
-          {{tipoMateria.nombre}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field>
       <input type="number" min="1" matInput placeholder="Horas Totales" formControlName="horas">
     </mat-form-field>
-
-    <ng-select [items]="materiasFiltradas" [groupBy]="'anio'" [placeholder]="'Correlativas'" [notFoundText]="'No hay materias de años anteriores'" [multiple]="true" [loading]="cargadoMaterias"
-      bindLabel="nombre" bindValue="id" formControlName="correlativas">
-    </ng-select>
 
   </form>
 <!-- </mat-dialog-content> -->

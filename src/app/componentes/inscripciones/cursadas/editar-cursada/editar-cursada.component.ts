@@ -1,18 +1,18 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Profesor } from 'src/app/modelos/profesor';
+import { NotificationsService } from 'angular2-notifications';
 import { MateriasService } from 'src/app/servicios/materias.service';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
-import { NotificationsService } from 'angular2-notifications';
-import { MatDialogRef, MAT_DIALOG_DATA, MAT_DATE_LOCALE } from '@angular/material';
-import { Profesor } from 'src/app/modelos/profesor';
-import { Horario } from 'src/app/modelos/horario';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Cursada, Horario } from 'src/app/modelos/cursadas';
 
 @Component({
-  selector: 'app-abrir-inscripcion-cursada',
-  templateUrl: './abrir-inscripcion-cursada.component.html',
-  styleUrls: ['./abrir-inscripcion-cursada.component.scss']
+  selector: 'app-editar-cursada',
+  templateUrl: './editar-cursada.component.html',
+  styleUrls: ['./editar-cursada.component.scss']
 })
-export class AbrirInscripcionCursadaComponent implements OnInit {
+export class EditarCursadaComponent implements OnInit {
 
   formulario: FormGroup;
   showSpinner = true;
@@ -25,32 +25,43 @@ export class AbrirInscripcionCursadaComponent implements OnInit {
     private notif: NotificationsService,
     private materiasService: MateriasService,
     private usuariosService: UsuariosService,
-    public dialogRef: MatDialogRef<AbrirInscripcionCursadaComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<EditarCursadaComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Cursada,
   ) { }
+
 
   private crearFormulario() {
     const añoActual = new Date().getFullYear();
-    const fechaActual = new Date();
-    const fechaLimite = new Date();
-    fechaLimite.setMonth(fechaLimite.getMonth() + 1);
+    const horarios = [
+      {},
+      {hora_inicio: null, modulos: null},
+      {hora_inicio: null, modulos: null},
+      {hora_inicio: null, modulos: null},
+      {hora_inicio: null, modulos: null},
+      {hora_inicio: null, modulos: null},
+      {hora_inicio: null, modulos: null},
+    ];
+    for (const horario of this.data.horarios) {
+      horarios[horario.dia].hora_inicio = horario.hora_inicio;
+      horarios[horario.dia].modulos = horario.modulos;
+    }
     this.formulario = this.fb.group({
-      año: [añoActual, [Validators.required, Validators.min(añoActual - 6)]],
-      fecha_inicio: [fechaActual, Validators.required],
-      fecha_limite: [fechaLimite, Validators.required],
-      id_profesor: [null],
-      hora_inicio_lunes: [null],
-      hora_inicio_martes: [null],
-      hora_inicio_miercoles: [null],
-      hora_inicio_jueves: [null],
-      hora_inicio_viernes: [null],
-      hora_inicio_sabado: [null],
-      modulos_lunes: [null],
-      modulos_martes: [null],
-      modulos_miercoles: [null],
-      modulos_jueves: [null],
-      modulos_viernes: [null],
-      modulos_sabado: [null]
+      año: [this.data.anio_cursada, [Validators.required, Validators.min(añoActual - 6)]],
+      fecha_inicio: [this.data.fecha_inicio, Validators.required],
+      fecha_limite: [this.data.fecha_limite, Validators.required],
+      id_profesor: [this.data.id_profesor],
+      hora_inicio_lunes: [horarios[1].hora_inicio],
+      hora_inicio_martes: [horarios[2].hora_inicio],
+      hora_inicio_miercoles: [horarios[3].hora_inicio],
+      hora_inicio_jueves: [horarios[4].hora_inicio],
+      hora_inicio_viernes: [horarios[5].hora_inicio],
+      hora_inicio_sabado: [horarios[6].hora_inicio],
+      modulos_lunes: [horarios[1].modulos],
+      modulos_martes: [horarios[2].modulos],
+      modulos_miercoles: [horarios[3].modulos],
+      modulos_jueves: [horarios[4].modulos],
+      modulos_viernes: [horarios[5].modulos],
+      modulos_sabado: [horarios[6].modulos]
     });
   }
 
@@ -126,17 +137,15 @@ export class AbrirInscripcionCursadaComponent implements OnInit {
 
   enviar() {
     this.showSpinner = true;
-    const idMateria = this.idMateria;
     const cursada = {
+      id_cursada: this.data.id,
       id_profesor: this.formulario.value.id_profesor,
       año: this.formulario.value.año,
-      id_materia: idMateria,
       fecha_inicio: this.formulario.value.fecha_inicio,
       fecha_limite: this.formulario.value.fecha_limite,
     };
     const horarios = this.crearHorarios();
-    console.log(horarios);
-    this.materiasService.abrirInscripcionCursada(cursada, horarios).subscribe(
+    this.materiasService.editarCursada(cursada, horarios).subscribe(
       (resp) => {
         this.showSpinner = false;
         this.notif.success(resp.mensaje);
@@ -152,10 +161,9 @@ export class AbrirInscripcionCursadaComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.idMateria = this.data.idMateria;
     this.materia = this.data.materia;
-    this.crearFormulario();
     this.cargarProfesores();
+    this.crearFormulario();
   }
-}
 
+}

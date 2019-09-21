@@ -36,7 +36,8 @@ export class CrearAlumnoComponent implements OnInit {
       telefono: [''],
       email: ['', [Validators.required, Validators.email]],
       fecha_nacimiento: [null],
-      id_carrera_abierta: [null, Validators.required]
+      id_carrera_abierta: [null, Validators.required],
+      domicilio: ['']
     });
   }
 
@@ -62,6 +63,7 @@ export class CrearAlumnoComponent implements OnInit {
       telefono: this.formulario.value.telefono,
       email: this.formulario.value.email,
       fecha_nacimiento: this.formulario.value.fecha_nacimiento,
+      domicilio: this.formulario.value.domicilio
     };
     const id_carrera_abierta = this.formulario.value.id_carrera_abierta;
     this.alumnosService.crearAlumno(usuario, id_carrera_abierta).subscribe(

@@ -17,7 +17,7 @@ export class UsuariosComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<Usuario>;
-  displayedColumns = ['apellido', 'nombre', 'dni', 'email', 'telefono', 'rol', 'acciones'];
+  displayedColumns = ['apellido', 'nombre', 'dni', 'email', 'telefono', 'domicilio', 'rol', 'acciones'];
   showSpinner = true;
 
   constructor(
@@ -92,7 +92,7 @@ export class UsuariosComponent implements OnInit {
     const confirm = await this.confirmation.confirm('Confirme la acción', '¿Desea habilitar el usuario?');
     if (confirm) {
       this.showSpinner = true;
-      this.usuariosService.deshabilitar(id).subscribe(
+      this.usuariosService.habilitar(id).subscribe(
         (res) => {
           this.listarUsuarios();
           this.notif.success(res.mensaje);

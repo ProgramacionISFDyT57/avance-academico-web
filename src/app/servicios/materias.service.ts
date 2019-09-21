@@ -12,6 +12,7 @@ import { FinalAbierto } from '../modelos/final-abierto';
 import { CarrerasService } from './carreras.service';
 import { ActaVolante } from '../modelos/acta-volante';
 import { PlanillaInscriptosCursada } from '../modelos/planilla-inscriptos-cursada';
+import { Horario } from '../modelos/horario';
 
 @Injectable({
   providedIn: 'root'
@@ -57,6 +58,10 @@ materias: Materia[];
     this.carrerasService.eliminarCacheCarreras();
     return this.http.post('/materias', { materia });
   }
+  public editarMateria(materia: Materia): Observable<Mensaje> {
+    this.eliminarCacheMaterias();
+    return this.http.put('/materias/' + materia.id, { materia });
+  }
   public eliminarMateria(idMateria: number): Observable<Mensaje> {
     this.eliminarCacheMaterias();
     this.carrerasService.eliminarCacheCarreras();
@@ -67,6 +72,10 @@ materias: Materia[];
   public abrirInscripcionFinal(mesa): Observable<Mensaje> {
     this.eliminarCacheMaterias();
     return this.http.post('/crear_mesa', { mesa });
+  }
+  public editarMesa(mesa): Observable<Mensaje> {
+    this.eliminarCacheMaterias();
+    return this.http.put('/mesas/' + mesa.id_mesa, { mesa });
   }
   public eliminarMesaFinal(id: number): Observable<Mensaje> {
     this.eliminarCacheMaterias();
@@ -96,17 +105,24 @@ materias: Materia[];
   public eliminarNotasFinal(idInscripcionMesa: number): Observable<Mensaje> {
     return this.http.delete('/notas_final/' + idInscripcionMesa);
   }
-  public actaVolante(idFinal: number): Observable<ActaVolante> {
-    return this.http.get('/acta_volante/' + idFinal);
+  public actaVolante(idFinal: number, libres: boolean): Observable<ActaVolante> {
+    if (libres) {
+      return this.http.get('/acta_volante/' + idFinal + '/libres');
+    } else {
+      return this.http.get('/acta_volante/' + idFinal);
+    }
   }
 
   // Cursadas
   public listarCursadas(): Observable<Cursada[]> {
     return this.http.get('/cursadas_abiertas');
   }
-  public abrirInscripcionCursada(cursada): Observable<Mensaje> {
+  public abrirInscripcionCursada(cursada, horarios: Horario[]): Observable<Mensaje> {
     this.eliminarCacheMaterias();
-    return this.http.post('/cursadas', { cursada });
+    return this.http.post('/cursadas', { cursada, horarios });
+  }
+  public editarCursada(cursada, horarios: Horario[]): Observable<Mensaje> {
+    return this.http.put('/cursadas/' + cursada.id_cursada, { cursada, horarios });
   }
   public eliminarCursada(id: number): Observable<Mensaje> {
     this.eliminarCacheMaterias();

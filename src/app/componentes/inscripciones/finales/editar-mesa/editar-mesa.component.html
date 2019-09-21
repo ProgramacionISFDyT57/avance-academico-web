@@ -1,8 +1,8 @@
 <mat-progress-bar mode="indeterminate" color="warn" [style.display]="showSpinner ? 'block' : 'none'"></mat-progress-bar>
 
-<h2 mat-dialog-title>Abrir mesa de final de {{ materia }}</h2>
+<h2 mat-dialog-title>Editar mesa de final</h2>
 
-<mat-dialog-content>
+<!-- <mat-dialog-content> -->
   <form id="form" [formGroup]="formulario" (ngSubmit)="enviar()">
 
     <ng-select [items]="profesores" [placeholder]="'Profesor'" bindLabel="nombre_completo" bindValue="id"
@@ -38,7 +38,7 @@
     <!-- Agregar las restriccions de las fechas. Cierre de inscripcion no puede ser anterior a inicio -->
 
   </form>
-</mat-dialog-content>
+<!-- </mat-dialog-content> -->
 
 <mat-dialog-actions fxLayoutAlign="end center">
   <button mat-raised-button color="primary" type="submit" form="form"

@@ -2,7 +2,8 @@
 
 <h2 class="mt-0 mb-0 mx-2" fxLayout="row" fxLayoutAlign="start center">
   <span class="mx-2">Materias de </span>
-  <ng-select class="py-0 custom" [clearable]="false" [items]="carreras" bindLabel="nombre" bindValue="nombre" fxFlex [(ngModel)]="carreraSeleccionada" (change)="filtroCarrera($event)"></ng-select>
+  <ng-select class="py-0 custom" [clearable]="false" [items]="carreras" bindLabel="nombre" bindValue="nombre" fxFlex
+    [(ngModel)]="carreraSeleccionada" (change)="filtroCarrera($event)"></ng-select>
 </h2>
 
 <div class="table-container mat-elevation-z8">
@@ -30,6 +31,11 @@
     <ng-container matColumnDef="anio">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Año </th>
       <td mat-cell *matCellDef="let element"> {{element.anio}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="horas">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Horas </th>
+      <td mat-cell *matCellDef="let element"> {{element.horas}} </td>
     </ng-container>
 
     <ng-container matColumnDef="tipo_materia">
@@ -69,8 +75,12 @@
             <mat-icon>add</mat-icon>
           </button>
         </ng-container>
-        <ng-container *ngIf="this.helper.rolesAdmitidos(['directivo']) && !element.ultima_mesa && !element.ultima_cursada">
-          <button class="mx-1" mat-mini-fab color="warn" matTooltip="Eliminar Materia" (click)="eliminar(element.id)">
+        <ng-container *ngIf="this.helper.rolesAdmitidos(['directivo'])">
+          <button class="mx-1" mat-mini-fab color="accent" matTooltip="Editar Materia" (click)="editar(element)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button *ngIf="!element.ultima_mesa && !element.ultima_cursada" class="mx-1" mat-mini-fab color="warn"
+            matTooltip="Eliminar Materia" (click)="eliminar(element.id)">
             <mat-icon>delete_forever</mat-icon>
           </button>
         </ng-container>

@@ -26,7 +26,7 @@ export class AvanceAcademicoComponent implements OnInit {
   domicilio: string;
   nacimiento: string;
   telefono: string;
-  tomo: string;
+  libro: string;
   folio: string;
   analiticos: Analitico[] = [];
   carreras: any[];
@@ -54,7 +54,7 @@ export class AvanceAcademicoComponent implements OnInit {
     this.domicilio = this.analiticos[indice].domicilio;
     this.nacimiento = this.analiticos[indice].fecha_nacimiento;
     this.telefono = this.analiticos[indice].telefono;
-    this.tomo = this.analiticos[indice].tomo;
+    this.libro = this.analiticos[indice].libro;
     this.folio = this.analiticos[indice].folio;
   }
 

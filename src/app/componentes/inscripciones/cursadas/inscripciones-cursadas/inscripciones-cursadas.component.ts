@@ -10,6 +10,7 @@ import { HelperService } from 'src/app/servicios/helper.service';
 import { InscribirAlumnoCursadaComponent } from '../inscribir-alumno-cursada/inscribir-alumno-cursada.component';
 import { Carrera } from 'src/app/modelos/carrera';
 import { CarrerasService } from 'src/app/servicios/carreras.service';
+import { EditarCursadaComponent } from '../editar-cursada/editar-cursada.component';
 
 @Component({
   selector: 'app-inscripciones-cursadas',
@@ -28,7 +29,8 @@ export class InscripcionesCursadasComponent implements OnInit {
   carreras: Carrera[] = [];
   carreraSeleccionada = 'Todas las carreras';
   showSpinner = true;
-
+  dias = ['', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'];
+  // dias = ['', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'];
 
   constructor(
     public helper: HelperService,
@@ -66,10 +68,10 @@ export class InscripcionesCursadasComponent implements OnInit {
     if (event.nombre === 'Todas las carreras') {
       if (this.rol === 'alumno') {
         this.displayedColumns = ['anio_cursada', 'carrera', 'materia', 'anio_materia',
-          'fecha_inicio', 'fecha_limite', 'profesor', 'acciones'];
+          'fecha_inicio', 'fecha_limite', 'profesor', 'horarios', 'acciones'];
       } else {
         this.displayedColumns = ['anio_cursada', 'carrera', 'materia', 'anio_materia',
-          'fecha_inicio', 'fecha_limite', 'profesor', 'cant_inscriptos', 'acciones'];
+          'fecha_inicio', 'fecha_limite', 'profesor', 'horarios', 'cant_inscriptos', 'acciones'];
       }
       this.dataSource = new MatTableDataSource(this.cursadas);
       this.dataSource.paginator = this.paginator;
@@ -78,10 +80,10 @@ export class InscripcionesCursadasComponent implements OnInit {
       const materias = [];
       if (this.rol === 'alumno') {
         this.displayedColumns = ['anio_cursada', 'carrera', 'materia', 'anio_materia',
-          'fecha_inicio', 'fecha_limite', 'profesor', 'acciones'];
+          'fecha_inicio', 'fecha_limite', 'profesor', 'horarios', 'acciones'];
       } else {
         this.displayedColumns = ['anio_cursada', 'materia', 'anio_materia',
-          'fecha_inicio', 'fecha_limite', 'profesor', 'cant_inscriptos', 'acciones'];
+          'fecha_inicio', 'fecha_limite', 'profesor', 'horarios', 'cant_inscriptos', 'acciones'];
       }
       for (const materia of this.cursadas) {
         if (materia.carrera === event.nombre) {
@@ -178,6 +180,22 @@ export class InscripcionesCursadasComponent implements OnInit {
 
   detalles(id) {
     this.router.navigateByUrl('inscripcion/cursadas/' + id);
+  }
+
+  editar(cursada: Cursada) {
+    const config: MatDialogConfig = {
+      width: '500px',
+      maxWidth: '90%',
+      data: cursada
+    };
+    const modal = this.dialog.open(EditarCursadaComponent, config);
+    modal.beforeClosed().subscribe(
+      (resp) => {
+        if (resp) {
+          this.ListarCursadas();
+        }
+      }
+    );
   }
 
   public async eliminar(id: number) {

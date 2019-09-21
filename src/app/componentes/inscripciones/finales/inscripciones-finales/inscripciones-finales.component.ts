@@ -9,6 +9,7 @@ import { HelperService } from 'src/app/servicios/helper.service';
 import { FinalAbierto } from 'src/app/modelos/final-abierto';
 import { InscribirAlumnoFinalComponent } from '../inscribir-alumno-final/inscribir-alumno-final.component';
 import { CarrerasService } from 'src/app/servicios/carreras.service';
+import { EditarMesaComponent } from '../editar-mesa/editar-mesa.component';
 
 @Component({
   selector: 'app-inscripciones-finales',
@@ -176,6 +177,22 @@ export class InscripcionesFinalesComponent implements OnInit {
     }
   }
 
+  editar(mesa: FinalAbierto) {
+    const config: MatDialogConfig = {
+      width: '500px',
+      maxWidth: '90%',
+      data: mesa
+    };
+    const modal = this.dialog.open(EditarMesaComponent, config);
+    modal.beforeClosed().subscribe(
+      (resp) => {
+        if (resp) {
+          this.ListarFinales();
+        }
+      }
+    );
+  }
+
   detalles(id) {
     this.router.navigateByUrl('inscripcion/mesas/' + id);
   }
@@ -197,8 +214,12 @@ export class InscripcionesFinalesComponent implements OnInit {
     }
   }
 
-  public async actaVolante(idMesa: number) {
-    this.router.navigateByUrl('acta_volante/' + idMesa);
+  public async actaVolante(idMesa: number, libres: boolean) {
+    if (libres) {
+      this.router.navigateByUrl('acta_volante/' + idMesa + '/libres');
+    } else {
+      this.router.navigateByUrl('acta_volante/' + idMesa);
+    }
   }
 
   ngOnInit() {

@@ -21,7 +21,7 @@ export class UsuariosService {
     this.profesores = null;
   }
 
-  private eliminarCacheUsuarios() {
+  public eliminarCacheUsuarios() {
     this.usuarios = null;
   }
 
@@ -85,13 +85,13 @@ export class UsuariosService {
   public deshabilitar(idUsuario: number): Observable<Mensaje> {
     this.eliminarCacheProfesores();
     this.eliminarCacheUsuarios();
-    return this.http.put('/usuarios/deshabilitar/' + idUsuario, {});
+    return this.http.put('/usuarios/desactivar/' + idUsuario, {});
   }
 
   public habilitar(idUsuario: number): Observable<Mensaje> {
     this.eliminarCacheProfesores();
     this.eliminarCacheUsuarios();
-    return this.http.put('/usuarios/habilitar/' + idUsuario, {});
+    return this.http.put('/usuarios/activar/' + idUsuario, {});
   }
 
 }

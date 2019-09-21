@@ -35,6 +35,10 @@
     </mat-form-field>
 
     <mat-form-field>
+      <input matInput placeholder="Domicilio" formControlName="domicilio">
+    </mat-form-field>
+
+    <mat-form-field>
       <input matInput [matDatepicker]="picker" placeholder="Fecha de Nacimiento" formControlName="fecha_nacimiento">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
@@ -45,6 +49,6 @@
 
 <mat-dialog-actions fxLayoutAlign="end center">
   <button mat-raised-button color="primary" type="submit" form="form"
-    [disabled]="!formulario.valid || showSpinner">Crear</button>
+    [disabled]="!formulario.valid || showSpinner">Guardar</button>
   <button mat-raised-button (click)='cerrar()'>Volver </button>
 </mat-dialog-actions>

@@ -1,3 +1,10 @@
+export interface Horario {
+    id_cursada?: number;
+    dia: number;
+    hora_inicio: string;
+    modulos: number;
+}
+
 export interface Cursada {
     id: number;
     anio_cursada: number;
@@ -14,4 +21,6 @@ export interface Cursada {
     nota_recuperatorio?: number;
     asistencia: number;
     aprobada?: boolean;
+    horarios: Horario[];
+    id_profesor?: number;
 }

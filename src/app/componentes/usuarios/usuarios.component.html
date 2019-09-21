@@ -41,6 +41,11 @@
       <td mat-cell *matCellDef="let element"> {{element.telefono}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="domicilio">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Domicilio </th>
+      <td mat-cell *matCellDef="let element"> {{element.domicilio}} </td>
+    </ng-container>
+
     <ng-container matColumnDef="rol">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Rol </th>
       <td mat-cell *matCellDef="let element"> {{element.rol | titlecase }} </td>
