@@ -92,8 +92,12 @@
           <button class="mx-1" mat-mini-fab color="primary" matTooltip="Detalles" (click)="detalles(element.id)">
             <mat-icon>list_alt</mat-icon>
           </button>
-          <button *ngIf="+element.cant_inscriptos" class="mx-1" mat-mini-fab color="accent" matTooltip="Acta Volante"
-            (click)="actaVolante(element.id)">
+          <button *ngIf="+element.cant_inscriptos" class="mx-1" mat-mini-fab color="accent" matTooltip="Acta Volante Regulares"
+            (click)="actaVolante(element.id, false)">
+            <mat-icon>print</mat-icon>
+          </button>
+          <button *ngIf="+element.cant_inscriptos" class="mx-1" mat-mini-fab color="accent" matTooltip="Acta Volante Libres"
+            (click)="actaVolante(element.id, true)">
             <mat-icon>print</mat-icon>
           </button>
           <button *ngIf="!+element.cant_inscriptos" class="mx-1" mat-mini-fab color="warn" matTooltip="Eliminar"

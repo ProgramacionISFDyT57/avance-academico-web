@@ -41,6 +41,7 @@ const routes: Routes = [
   { path: 'inscripcion/mesas/:id', component: DetallesFinalComponent, canActivate: [LoginGuard] },
 
   { path: 'acta_volante/:idMesa', component: PlanillaActaVolanteComponent, canActivate: [LoginGuard] },
+  { path: 'acta_volante/:idMesa/:libres', component: PlanillaActaVolanteComponent, canActivate: [LoginGuard] },
   { path: 'planilla_inscriptos_cursada/:idCursada', component: PlanillaInscriptosCursadaComponent, canActivate: [LoginGuard] },
   { path: 'planilla_asistencia/:idCursada', component: PlanillaAsistenciaComponent, canActivate: [LoginGuard] },
 ];

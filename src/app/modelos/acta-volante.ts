@@ -8,6 +8,7 @@ export interface Inscriptos {
 export interface ActaVolante {
   carrera: string;
   materia: string;
+  anio_materia: number;
   profesor: string;
   vocal1: string;
   vocal2: string;

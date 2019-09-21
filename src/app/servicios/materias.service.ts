@@ -101,8 +101,12 @@ materias: Materia[];
   public eliminarNotasFinal(idInscripcionMesa: number): Observable<Mensaje> {
     return this.http.delete('/notas_final/' + idInscripcionMesa);
   }
-  public actaVolante(idFinal: number): Observable<ActaVolante> {
-    return this.http.get('/acta_volante/' + idFinal);
+  public actaVolante(idFinal: number, libres: boolean): Observable<ActaVolante> {
+    if (libres) {
+      return this.http.get('/acta_volante/' + idFinal + '/libres');
+    } else {
+      return this.http.get('/acta_volante/' + idFinal);
+    }
   }
 
   // Cursadas

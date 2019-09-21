@@ -197,8 +197,12 @@ export class InscripcionesFinalesComponent implements OnInit {
     }
   }
 
-  public async actaVolante(idMesa: number) {
-    this.router.navigateByUrl('acta_volante/' + idMesa);
+  public async actaVolante(idMesa: number, libres: boolean) {
+    if (libres) {
+      this.router.navigateByUrl('acta_volante/' + idMesa + '/libres');
+    } else {
+      this.router.navigateByUrl('acta_volante/' + idMesa);
+    }
   }
 
   ngOnInit() {
