@@ -40,6 +40,7 @@ export class CrearUsuarioComponent implements OnInit {
       id_rol: [null, Validators.required],
       nombre: ['', Validators.required],
       telefono: [''],
+      domicilio: ['']
     });
   }
 
@@ -52,7 +53,8 @@ export class CrearUsuarioComponent implements OnInit {
       fecha_nacimiento: this.formulario.value.fecha_nacimiento,
       id_rol: this.formulario.value.id_rol,
       nombre: this.formulario.value.nombre,
-      telefono: this.formulario.value.telefono
+      telefono: this.formulario.value.telefono,
+      domicilio: this.formulario.value.domicilio
     };
     this.usuariosService.crearUsuario(usuario).subscribe(
       (resp) => {
