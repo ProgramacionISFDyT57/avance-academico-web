@@ -1,4 +1,7 @@
 <mat-progress-bar mode="indeterminate" color="warn" [style.display]="showSpinner ? 'block' : 'none'"></mat-progress-bar>
+
+<h2 *ngIf="sinInscriptos" class="mt-3 mb-0 mx-3">No hay alumnos {{ tipo }} inscriptos</h2>
+
 <div class="container vertical" *ngIf="actaVolante">
   <button class="mx-1 btn-imprimir no-print" mat-mini-fab color="accent" matTooltip="Imprimir" (click)="imprimir()">
     <mat-icon>print</mat-icon>
@@ -18,7 +21,7 @@
 
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <p class="A3a">A3a</p>
-      <h3>ACTA VOLANTE - ALUMNOS REGULARES</h3>
+      <h3>ACTA VOLANTE - ALUMNOS {{ tipo | uppercase}}</h3>
       <div fxLayout="column" fxLayoutAlign="center end">
         <P>TOMO: ________ </P>
         <P>FOLIO: ________ </P>
@@ -26,7 +29,7 @@
     </div>
 
     <div class="cuadro">
-      <p>CARRERA: {{ actaVolante.carrera }} / Año: </p>
+      <p>CARRERA: {{ actaVolante.carrera }} / Año: {{ actaVolante.anio_materia }} </p>
       <p>Asignatura: {{ actaVolante.materia }} </p>
       <p>Fecha de la Mesa: {{ actaVolante.fecha_examen | date:'dd/MM/yyyy' }} Hora: 17:30</p>
       <p>Presidente de Mesa: {{ actaVolante.profesor }} Vocal: {{ actaVolante.vocal1 }} <ng-container
