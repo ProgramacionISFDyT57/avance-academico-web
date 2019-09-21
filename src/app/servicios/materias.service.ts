@@ -12,6 +12,7 @@ import { FinalAbierto } from '../modelos/final-abierto';
 import { CarrerasService } from './carreras.service';
 import { ActaVolante } from '../modelos/acta-volante';
 import { PlanillaInscriptosCursada } from '../modelos/planilla-inscriptos-cursada';
+import { Horario } from '../modelos/horario';
 
 @Injectable({
   providedIn: 'root'
@@ -108,9 +109,9 @@ materias: Materia[];
   public listarCursadas(): Observable<Cursada[]> {
     return this.http.get('/cursadas_abiertas');
   }
-  public abrirInscripcionCursada(cursada): Observable<Mensaje> {
+  public abrirInscripcionCursada(cursada, horarios: Horario[]): Observable<Mensaje> {
     this.eliminarCacheMaterias();
-    return this.http.post('/cursadas', { cursada });
+    return this.http.post('/cursadas', { cursada, horarios });
   }
   public eliminarCursada(id: number): Observable<Mensaje> {
     this.eliminarCacheMaterias();

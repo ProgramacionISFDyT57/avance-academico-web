@@ -5,6 +5,7 @@ import { UsuariosService } from 'src/app/servicios/usuarios.service';
 import { NotificationsService } from 'angular2-notifications';
 import { MatDialogRef, MAT_DIALOG_DATA, MAT_DATE_LOCALE } from '@angular/material';
 import { Profesor } from 'src/app/modelos/profesor';
+import { Horario } from 'src/app/modelos/horario';
 
 @Component({
   selector: 'app-abrir-inscripcion-cursada',
@@ -38,6 +39,18 @@ export class AbrirInscripcionCursadaComponent implements OnInit {
       fecha_inicio: [fechaActual, Validators.required],
       fecha_limite: [fechaLimite, Validators.required],
       id_profesor: [null],
+      hora_inicio_lunes: [null],
+      hora_inicio_martes: [null],
+      hora_inicio_miercoles: [null],
+      hora_inicio_jueves: [null],
+      hora_inicio_viernes: [null],
+      hora_inicio_sabado: [null],
+      modulos_lunes: [null],
+      modulos_martes: [null],
+      modulos_miercoles: [null],
+      modulos_jueves: [null],
+      modulos_viernes: [null],
+      modulos_sabado: [null]
     });
   }
 
@@ -58,6 +71,59 @@ export class AbrirInscripcionCursadaComponent implements OnInit {
     }
   }
 
+  private crearHorarios(): Horario[] {
+    const horarios = [];
+    if (this.formulario.value.hora_inicio_lunes && this.formulario.value.modulos_lunes) {
+      const horario: Horario = {
+        dia: 1,
+        hora_inicio: this.formulario.value.hora_inicio_lunes,
+        modulos: this.formulario.value.modulos_lunes,
+      };
+      horarios.push(horario);
+    }
+    if (this.formulario.value.hora_inicio_martes && this.formulario.value.modulos_martes) {
+      const horario: Horario = {
+        dia: 2,
+        hora_inicio: this.formulario.value.hora_inicio_martes,
+        modulos: this.formulario.value.modulos_martes,
+      };
+      horarios.push(horario);
+    }
+    if (this.formulario.value.hora_inicio_miercoles && this.formulario.value.modulos_miercoles) {
+      const horario: Horario = {
+        dia: 3,
+        hora_inicio: this.formulario.value.hora_inicio_miercoles,
+        modulos: this.formulario.value.modulos_miercoles,
+      };
+      horarios.push(horario);
+    }
+    if (this.formulario.value.hora_inicio_jueves && this.formulario.value.modulos_jueves) {
+      const horario: Horario = {
+        dia: 4,
+        hora_inicio: this.formulario.value.hora_inicio_jueves,
+        modulos: this.formulario.value.modulos_jueves,
+      };
+      horarios.push(horario);
+    }
+    if (this.formulario.value.hora_inicio_viernes && this.formulario.value.modulos_viernes) {
+      const horario: Horario = {
+        dia: 5,
+        hora_inicio: this.formulario.value.hora_inicio_viernes,
+        modulos: this.formulario.value.modulos_viernes,
+      };
+      horarios.push(horario);
+    }
+    if (this.formulario.value.hora_inicio_sabado && this.formulario.value.modulos_sabado) {
+      const horario: Horario = {
+        dia: 6,
+        hora_inicio: this.formulario.value.hora_inicio_sabado,
+        modulos: this.formulario.value.modulos_sabado,
+      };
+      horarios.push(horario);
+    }
+    return horarios;
+  }
+
   enviar() {
     this.showSpinner = true;
     const idMateria = this.idMateria;
@@ -68,7 +134,9 @@ export class AbrirInscripcionCursadaComponent implements OnInit {
       fecha_inicio: this.formulario.value.fecha_inicio,
       fecha_limite: this.formulario.value.fecha_limite,
     };
-    this.materiasService.abrirInscripcionCursada(cursada).subscribe(
+    const horarios = this.crearHorarios();
+    console.log(horarios);
+    this.materiasService.abrirInscripcionCursada(cursada, horarios).subscribe(
       (resp) => {
         this.showSpinner = false;
         this.notif.success(resp.mensaje);
