@@ -5,7 +5,7 @@ export interface Analitico {
     telefono: string;
     fecha_nacimiento?: string;
     domicilio?: string;
-    tomo?: string;
+    libro?: string;
     folio?: string;
     carrera: string;
     cohorte: number;
