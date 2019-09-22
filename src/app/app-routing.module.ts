@@ -19,6 +19,8 @@ import { AvanceAcademicoComponent } from './componentes/avance-academico/avance-
 import { PlanillaActaVolanteComponent } from './componentes/inscripciones/finales/planilla-acta-volante/planilla-acta-volante.component';
 import { PlanillaInscriptosCursadaComponent } from './componentes/inscripciones/cursadas/planilla-inscriptos-cursada/planilla-inscriptos-cursada.component';
 import { PlanillaAsistenciaComponent } from './componentes/inscripciones/cursadas/planilla-asistencia/planilla-asistencia.component';
+import { HorariosComponent } from './componentes/planillas/horarios/horarios.component';
+import { PlanillaProfesoresComponent } from './componentes/planillas/planilla-profesores/planilla-profesores.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'inicio' },
@@ -44,6 +46,8 @@ const routes: Routes = [
   { path: 'acta_volante/:idMesa/:libres', component: PlanillaActaVolanteComponent, canActivate: [LoginGuard] },
   { path: 'planilla_inscriptos_cursada/:idCursada', component: PlanillaInscriptosCursadaComponent, canActivate: [LoginGuard] },
   { path: 'planilla_asistencia/:idCursada', component: PlanillaAsistenciaComponent, canActivate: [LoginGuard] },
+  { path: 'horarios', component: HorariosComponent, canActivate: [LoginGuard] },
+  { path: 'planilla_profesores', component: PlanillaProfesoresComponent, canActivate: [LoginGuard] },
 ];
 
 @NgModule({

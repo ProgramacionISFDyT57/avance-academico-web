@@ -1,0 +1,87 @@
+<mat-progress-bar mode="indeterminate" color="warn" [style.display]="showSpinner ? 'block' : 'none'"></mat-progress-bar>
+
+<button class="mx-1 btn-imprimir no-print" mat-mini-fab color="accent" matTooltip="Imprimir" (click)="imprimir()">
+  <mat-icon>print</mat-icon>
+</button>
+
+<div class="container no-print">
+  <form id="form" [formGroup]="formulario" (ngSubmit)="enviar()" fxLayout="row" fxLayoutAlign="space-between center">
+
+    <div fxFlex="10">
+      <mat-form-field>
+        <input type="number" matInput placeholder="Año" formControlName="anio">
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="20" fxFlexOffset="5">
+      <ng-select [items]="dias" [placeholder]="'Día'" bindLabel="nombre" bindValue="id" formControlName="dia"
+        (change)="cambioDia($event)">
+      </ng-select>
+    </div>
+
+    <div fxFlex fxFlexOffset="5">
+      <button mat-raised-button color="primary" type="submit" form="form"
+        [disabled]="!formulario.valid || showSpinner">Buscar</button>
+    </div>
+
+  </form>
+</div>
+
+<div class="container">
+  <p>
+    PROFESORES - AÑO {{ formulario.value.anio }} 
+    <span *ngIf="formulario.value.dia && formulario.value.dia !== 7">- DIA {{ diasTextoCompleto[formulario.value.dia] }} </span>
+  </p>
+</div>
+
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Profesor</th>
+        <th>Carrera</th>
+        <th>Año</th>
+        <th>Materia</th>
+        <th>Día</th>
+        <th>Hora Inicio</th>
+        <th>Módulos</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let profesor of profesores; let i = index">
+        <td>{{ profesor.nombre_completo }}</td>
+        <td>
+          <ng-container *ngFor="let detalle of profesor.detalle">
+            <p>{{ detalle.carrera }}</p>
+          </ng-container>
+        </td>
+        <td class="text-center">
+          <ng-container *ngFor="let detalle of profesor.detalle">
+            <p>{{ detalle.anio }}</p>
+          </ng-container>
+        </td>
+        <td>
+          <ng-container *ngFor="let detalle of profesor.detalle">
+            <p>{{ detalle.materia }}</p>
+          </ng-container>
+        </td>
+
+        <td class="text-center">
+          <ng-container *ngFor="let detalle of profesor.detalle">
+            <p>{{ diasTexto[detalle.dia] }}</p>
+          </ng-container>
+        </td>
+        <td class="text-center">
+          <ng-container *ngFor="let detalle of profesor.detalle">
+            <p>{{ detalle.hora_inicio }}</p>
+          </ng-container>
+        </td>
+        <td class="text-center">
+          <ng-container *ngFor="let detalle of profesor.detalle">
+            <p>{{ detalle.modulos }}</p>
+          </ng-container>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

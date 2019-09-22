@@ -4,6 +4,7 @@ import { HttpService } from './http.service';
 import { Usuario } from '../modelos/usuario';
 import { Mensaje } from '../modelos/respuesta-mensaje';
 import { Profesor } from '../modelos/profesor';
+import { PlanillaProfesores } from '../modelos/planilla-profesores';
 
 @Injectable({
   providedIn: 'root'
@@ -82,6 +83,10 @@ export class UsuariosService {
     return this.http.put('/cambio_password', {claveVieja, claveNueva});
   }
 
+  public resetContraseña(idUsuario: number): Observable<Mensaje> {
+    return this.http.put('/reset_password/' + idUsuario, {});
+  }
+
   public deshabilitar(idUsuario: number): Observable<Mensaje> {
     this.eliminarCacheProfesores();
     this.eliminarCacheUsuarios();
@@ -92,6 +97,14 @@ export class UsuariosService {
     this.eliminarCacheProfesores();
     this.eliminarCacheUsuarios();
     return this.http.put('/usuarios/activar/' + idUsuario, {});
+  }
+
+  public listarProfesoresPorDia(anio: number, dia: number): Observable<PlanillaProfesores[]> {
+    if (dia === 7) {
+      return this.http.get('/profesores/' + anio);
+    } else {
+      return this.http.get('/profesores/' + anio + '/' + dia);
+    }
   }
 
 }
