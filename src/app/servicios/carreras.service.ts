@@ -6,6 +6,7 @@ import { Mensaje } from '../modelos/respuesta-mensaje';
 import { CarreraAbierta } from '../modelos/carreraabierta';
 import { InscriptosCarrera } from '../modelos/inscriptos-carrera';
 import { AlumnosService } from './alumno.service';
+import { HorarioCarrera } from '../modelos/horario-carrera';
 
 @Injectable({
   providedIn: 'root'
@@ -128,4 +129,9 @@ export class CarrerasService {
   public asignarLibroFolio(idInscripcionCarrera: number, libro: number, folio: number): Observable<Mensaje> {
     return this.http.put('/inscripciones_carreras/' + idInscripcionCarrera, {libro, folio});
   }
+
+  public horarios(anio: number, idCarrera: number, curso: number): Observable<HorarioCarrera[]> {
+    return this.http.get('/horarios/' + anio + '/' + idCarrera + '/' + curso);
+  }
+
 }
