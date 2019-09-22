@@ -14,8 +14,8 @@
     </div>
 
     <div fxFlex="20" fxFlexOffset="5">
-      <ng-select [items]="dias" [placeholder]="'Día'" bindLabel="nombre" bindValue="id"
-        formControlName="dia" (change)="cambioDia($event)">
+      <ng-select [items]="dias" [placeholder]="'Día'" bindLabel="nombre" bindValue="id" formControlName="dia"
+        (change)="cambioDia($event)">
       </ng-select>
     </div>
 
@@ -25,4 +25,19 @@
     </div>
 
   </form>
+</div>
+
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Profesor</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let profesor of profesores; let i = index">
+        <td>{{ profesor.nombre_completo }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
