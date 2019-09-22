@@ -98,4 +98,12 @@ export class UsuariosService {
     return this.http.put('/usuarios/activar/' + idUsuario, {});
   }
 
+  public listarProfesoresPorDia(anio: number, dia: number): Observable<[]> {
+    if (dia === 7) {
+      return this.http.get('/profesores/' + anio);
+    } else {
+      return this.http.get('/profesores/' + anio + '/' + dia);
+    }
+  }
+
 }

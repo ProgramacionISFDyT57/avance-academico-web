@@ -20,7 +20,7 @@
                         [matMenuTriggerFor]="menu2">Planillas</button>
                 <mat-menu #menu2="matMenu">
                         <button mat-menu-item routerLink="horarios">Horarios</button>
-                        <button mat-menu-item routerLink="profesores">Profesores</button>
+                        <button mat-menu-item routerLink="planilla_profesores">Profesores</button>
                 </mat-menu>
                 <button *ngIf="this.helper.rolesAdmitidos(['directivo', 'preceptor'])" mat-flat-button color="primary"
                         routerLink="/alumnos" routerLinkActive="mat-accent">Alumnos</button>
