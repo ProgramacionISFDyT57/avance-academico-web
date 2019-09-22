@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 import { NotificationsService } from 'angular2-notifications';
+import { PlanillaProfesores } from 'src/app/modelos/planilla-profesores';
 
 @Component({
   selector: 'app-planilla-profesores',
@@ -43,7 +44,9 @@ export class PlanillaProfesoresComponent implements OnInit {
     },
   ];
   dia: string;
-  profesores;
+  profesores: PlanillaProfesores[];
+  diasTexto = ['', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'];
+  diasTextoCompleto = ['', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'];
 
   constructor(
     private usuariosService: UsuariosService,

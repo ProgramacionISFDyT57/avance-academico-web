@@ -4,6 +4,7 @@ import { HttpService } from './http.service';
 import { Usuario } from '../modelos/usuario';
 import { Mensaje } from '../modelos/respuesta-mensaje';
 import { Profesor } from '../modelos/profesor';
+import { PlanillaProfesores } from '../modelos/planilla-profesores';
 
 @Injectable({
   providedIn: 'root'
@@ -98,7 +99,7 @@ export class UsuariosService {
     return this.http.put('/usuarios/activar/' + idUsuario, {});
   }
 
-  public listarProfesoresPorDia(anio: number, dia: number): Observable<[]> {
+  public listarProfesoresPorDia(anio: number, dia: number): Observable<PlanillaProfesores[]> {
     if (dia === 7) {
       return this.http.get('/profesores/' + anio);
     } else {
