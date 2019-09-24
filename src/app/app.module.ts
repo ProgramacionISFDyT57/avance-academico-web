@@ -122,7 +122,8 @@ import { CrearTipoComponent } from './componentes/tipos-materias/crear-tipo/crea
     EditarMateriaComponent,
     EditarCursadaComponent,
     EditarMesaComponent,
-    CrearTipoComponent
+    CrearTipoComponent,
+    CrearCarreraComponent
   ],
   imports: [
     BrowserAnimationsModule,

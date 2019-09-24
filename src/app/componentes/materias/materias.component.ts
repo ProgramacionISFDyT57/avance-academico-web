@@ -130,6 +130,8 @@ export class MateriasComponent implements OnInit {
 
   public editar(materia: Materia) {
     const config: MatDialogConfig = {
+      width: '500px',
+      maxWidth: '90%',
       data: materia
     };
     const modal = this.dialog.open(EditarMateriaComponent, config);

@@ -68,13 +68,16 @@ export class CarrerasComponent implements OnInit {
   }
 
   public crearMateria(idCarrera: number, carrera: string, duracion: number) {
-    const modal = this.dialog.open(CrearMateriaComponent, {
+    const config: MatDialogConfig = {
+      width: '500px',
+      maxWidth: '90%',
       data: {
         idCarrera,
         carrera,
         duracion
       }
-    });
+    };
+    const modal = this.dialog.open(CrearMateriaComponent, config);
     modal.beforeClosed().subscribe(
       (resp) => {
         if (resp) {

@@ -4,29 +4,38 @@
 <h2 mat-dialog-title>Editar Materia</h2>
 
 <!-- <mat-dialog-content> -->
-  <form id="form" [formGroup]="formulario" (ngSubmit)="enviar()" #myNgForm="ngForm">
-    <mat-form-field>
-      <input matInput placeholder="Nombre de la materia" formControlName="nombre" #nombre>
-    </mat-form-field>
+<form id="form" [formGroup]="formulario" (ngSubmit)="enviar()" #myNgForm="ngForm">
+  <mat-form-field>
+    <input matInput placeholder="Nombre de la materia" formControlName="nombre" #nombre>
+  </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Año</mat-label>
-      <mat-select formControlName="anio">
-        <mat-option *ngFor="let anio of anios" [value]="anio">
-          {{anio}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+  <mat-form-field>
+    <mat-label>Año</mat-label>
+    <mat-select formControlName="anio">
+      <mat-option *ngFor="let anio of anios" [value]="anio">
+        {{anio}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
-    <mat-form-field>
-      <input type="number" min="1" matInput placeholder="Horas Totales" formControlName="horas">
-    </mat-form-field>
+  <mat-form-field>
+    <mat-label>Tipo de materia</mat-label>
+    <mat-select formControlName="id_tipo">
+      <mat-option *ngFor="let tipoMateria of tiposMaterias" [value]="tipoMateria.id">
+        {{tipoMateria.nombre}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
-  </form>
+  <mat-form-field>
+    <input type="number" min="1" matInput placeholder="Horas Anuales" formControlName="horas">
+  </mat-form-field>
+
+</form>
 <!-- </mat-dialog-content> -->
 
 <mat-dialog-actions fxLayoutAlign="end center">
   <button mat-raised-button color="primary" type="submit" form="form"
-  [disabled]="!formulario.valid || showSpinner">Guardar</button>
-<button mat-raised-button (click)="cerrar()">Volver </button>
+    [disabled]="!formulario.valid || showSpinner">Guardar</button>
+  <button mat-raised-button (click)="cerrar()">Volver </button>
 </mat-dialog-actions>
