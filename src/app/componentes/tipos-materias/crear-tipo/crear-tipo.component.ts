@@ -1,16 +1,16 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { CarrerasService } from 'src/app/servicios/carreras.service';
-import { NotificationsService } from 'angular2-notifications';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Carrera } from 'src/app/modelos/carrera';
+import { MateriasService } from 'src/app/servicios/materias.service';
+import { NotificationsService } from 'angular2-notifications';
+import { TiposMateria } from 'src/app/modelos/tipos-materia';
 
 @Component({
-  selector: 'app-crear-carrera',
-  templateUrl: './crear-carrera.component.html',
-  styleUrls: ['./crear-carrera.component.scss']
+  selector: 'app-crear-tipo',
+  templateUrl: './crear-tipo.component.html',
+  styleUrls: ['./crear-tipo.component.scss']
 })
-export class CrearCarreraComponent implements OnInit {
+export class CrearTipoComponent implements OnInit {
 
   formulario: FormGroup;
   showSpinner = false;
@@ -18,49 +18,45 @@ export class CrearCarreraComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    public dialogRef: MatDialogRef<CrearCarreraComponent>,
-    private carreraService: CarrerasService,
+    public dialogRef: MatDialogRef<CrearTipoComponent>,
+    private materiasService: MateriasService,
     private notif: NotificationsService,
-    @Inject(MAT_DIALOG_DATA) public data: Carrera,
+    @Inject(MAT_DIALOG_DATA) public data: TiposMateria,
   ) {
     if (this.data) {
-      this.titulo = 'Modificar Carrera';
+      this.titulo = 'Modificar Tipo de Materia';
     } else {
-      this.titulo = 'Crear Carrera';
+      this.titulo = 'Crear Tipo de Materia';
     }
   }
 
   private crearFormulario() {
     if (this.data) {
       this.formulario = this.fb.group({
+        id: [this.data.id],
         nombre: [this.data.nombre, Validators.required],
-        nombre_corto: [this.data.nombre_corto],
-        resolucion: [this.data.resolucion],
-        duracion: [this.data.duracion, [Validators.required, Validators.max(5), Validators.min(1)]],
-        cantidad_materias: [this.data.cantidad_materias, [Validators.required, Validators.min(1)]],
+        asistencia: [this.data.asistencia, [Validators.required, Validators.max(100), Validators.min(0)]],
+        libre: [this.data.libre, [Validators.required]]
       });
     } else {
       this.formulario = this.fb.group({
         nombre: ['', Validators.required],
-        nombre_corto: [''],
-        resolucion: [''],
-        duracion: [1, [Validators.required, Validators.max(5), Validators.min(1)]],
-        cantidad_materias: [1, [Validators.required, Validators.min(1)]],
+        asistencia: [60, [Validators.required, Validators.max(100), Validators.min(0)]],
+        libre: [true, [Validators.required]]
       });
     }
   }
 
   enviar() {
-    const carrera: Carrera = {
+    const tm: TiposMateria = {
+      id: this.formulario.value.id,
       nombre: this.formulario.value.nombre,
-      nombre_corto: this.formulario.value.nombre_corto,
-      resolucion: this.formulario.value.resolucion,
-      duracion: this.formulario.value.duracion,
-      cantidad_materias: this.formulario.value.cantidad_materias
+      asistencia: this.formulario.value.asistencia,
+      libre: this.formulario.value.libre,
     };
     this.showSpinner = true;
     if (this.data) {
-      this.carreraService.modificarCarrera(carrera, this.data.id).subscribe(
+      this.materiasService.editarTipoMateria(tm).subscribe(
         (resp) => {
           this.showSpinner = false;
           this.notif.success(resp.mensaje);
@@ -74,7 +70,7 @@ export class CrearCarreraComponent implements OnInit {
         }
       );
     } else {
-      this.carreraService.crearCarrera(carrera).subscribe(
+      this.materiasService.crearTipoMateria(tm).subscribe(
         (resp) => {
           this.showSpinner = false;
           this.notif.success(resp.mensaje);

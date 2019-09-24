@@ -26,6 +26,8 @@
                         routerLink="/alumnos" routerLinkActive="mat-accent">Alumnos</button>
                 <button *ngIf="this.helper.rolesAdmitidos(['directivo'])" mat-flat-button color="primary"
                         routerLink="/usuarios" routerLinkActive="mat-accent">Usuarios</button>
+                <button *ngIf="this.helper.rolesAdmitidos(['directivo'])" mat-flat-button color="primary"
+                        routerLink="/tipos_materias" routerLinkActive="mat-accent">Tipos de Materias</button>
                 <button *ngIf="this.helper.rolesAdmitidos(['alumno'])" mat-flat-button color="primary"
                         routerLink="/avance_academico" routerLinkActive="mat-accent">Avance Académico</button>
 

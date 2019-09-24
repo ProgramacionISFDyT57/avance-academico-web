@@ -48,6 +48,7 @@ export class InscripcionesCursadasComponent implements OnInit {
       this.carreras = JSON.parse(JSON.stringify(res));
       const todas: Carrera = {
         nombre: 'Todas las carreras',
+        nombre_corto: '',
         cantidad_materias: 0,
         duracion: 0,
         id: 0,
@@ -68,7 +69,7 @@ export class InscripcionesCursadasComponent implements OnInit {
     if (event.nombre === 'Todas las carreras') {
       if (this.rol === 'alumno') {
         this.displayedColumns = ['anio_cursada', 'carrera', 'materia', 'anio_materia',
-          'fecha_inicio', 'fecha_limite', 'profesor', 'horarios', 'acciones'];
+          'fecha_inicio', 'fecha_limite', 'profesor', 'horarios', 'inscripcion', 'acciones'];
       } else {
         this.displayedColumns = ['anio_cursada', 'carrera', 'materia', 'anio_materia',
           'fecha_inicio', 'fecha_limite', 'profesor', 'horarios', 'cant_inscriptos', 'acciones'];
@@ -80,7 +81,7 @@ export class InscripcionesCursadasComponent implements OnInit {
       const materias = [];
       if (this.rol === 'alumno') {
         this.displayedColumns = ['anio_cursada', 'carrera', 'materia', 'anio_materia',
-          'fecha_inicio', 'fecha_limite', 'profesor', 'horarios', 'acciones'];
+          'fecha_inicio', 'fecha_limite', 'profesor', 'horarios', 'inscripcion', 'acciones'];
       } else {
         this.displayedColumns = ['anio_cursada', 'materia', 'anio_materia',
           'fecha_inicio', 'fecha_limite', 'profesor', 'horarios', 'cant_inscriptos', 'acciones'];

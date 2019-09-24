@@ -4,6 +4,7 @@ import { MateriasService } from 'src/app/servicios/materias.service';
 import { NotificationsService } from 'angular2-notifications';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Materia } from 'src/app/modelos/materia';
+import { TiposMateria } from 'src/app/modelos/tipos-materia';
 
 @Component({
   selector: 'app-crear-materia',
@@ -18,24 +19,7 @@ export class CrearMateriaComponent implements OnInit {
   idCarrera: number;
   carrera: string;
   duracion: number;
-  tiposMaterias = [
-    {
-      id: 1,
-      nombre: 'Curricular'
-    },
-    {
-      id: 2,
-      nombre: 'Práctica'
-    },
-    {
-      id: 3,
-      nombre: 'Taller'
-    },
-    {
-      id: 4,
-      nombre: 'Seminario'
-    },
-  ];
+  tiposMaterias: TiposMateria[];
   materias: Materia[] = [];
   cargadoMaterias = true;
   materiasFiltradas: Materia[] = [];
@@ -55,14 +39,14 @@ export class CrearMateriaComponent implements OnInit {
     this.formulario = this.fb.group({
       nombre: ['', Validators.required],
       anio: [null, Validators.required],
-      tipoMateria: [null, Validators.required],
+      id_tipo: [null, Validators.required],
       horas: [null],
       correlativas: [[]]
     });
   }
 
   private crearArregloAños(duracion: number) {
-    for (let x = 1 ; x <= duracion ; x++) {
+    for (let x = 1; x <= duracion; x++) {
       this.anios.push(x);
     }
   }
@@ -103,7 +87,7 @@ export class CrearMateriaComponent implements OnInit {
       nombre: this.formulario.value.nombre,
       anio: this.formulario.value.anio,
       id_carrera: this.idCarrera,
-      id_tipo: this.formulario.value.tipoMateria,
+      id_tipo: this.formulario.value.id_tipo,
       correlativas: this.formulario.value.correlativas,
       horas: this.formulario.value.horas
     };
@@ -125,10 +109,21 @@ export class CrearMateriaComponent implements OnInit {
     );
   }
 
+  private async listarTiposMaterias() {
+    try {
+      this.tiposMaterias = await this.materiasService.listarTiposMaterias();
+    } catch (error) {
+      this.notif.error(error.error.mensaje);
+      console.error(error);
+      this.showSpinner = false;
+    }
+  }
+
   ngOnInit() {
     this.idCarrera = this.data.idCarrera;
     this.carrera = this.data.carrera;
     this.duracion = this.data.duracion;
+    this.listarTiposMaterias();
     this.crearArregloAños(this.duracion);
     this.cargar_materias_por_carrera(this.idCarrera);
     this.crearFormulario();

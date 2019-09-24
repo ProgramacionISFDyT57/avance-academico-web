@@ -21,7 +21,7 @@ export class CarrerasComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<Carrera>;
-  displayedColumns = ['nombre', 'resolucion', 'duracion', 'cantidad_materias', 'acciones'];
+  displayedColumns = ['nombre', 'nombre_corto', 'resolucion', 'duracion', 'cantidad_materias', 'acciones'];
   showSpinner = true;
 
   constructor(
@@ -68,13 +68,16 @@ export class CarrerasComponent implements OnInit {
   }
 
   public crearMateria(idCarrera: number, carrera: string, duracion: number) {
-    const modal = this.dialog.open(CrearMateriaComponent, {
+    const config: MatDialogConfig = {
+      width: '500px',
+      maxWidth: '90%',
       data: {
         idCarrera,
         carrera,
         duracion
       }
-    });
+    };
+    const modal = this.dialog.open(CrearMateriaComponent, config);
     modal.beforeClosed().subscribe(
       (resp) => {
         if (resp) {

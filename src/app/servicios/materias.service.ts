@@ -13,6 +13,7 @@ import { CarrerasService } from './carreras.service';
 import { ActaVolante } from '../modelos/acta-volante';
 import { PlanillaInscriptosCursada } from '../modelos/planilla-inscriptos-cursada';
 import { Horario } from '../modelos/horario';
+import { TiposMateria } from '../modelos/tipos-materia';
 
 @Injectable({
   providedIn: 'root'
@@ -21,12 +22,46 @@ import { Horario } from '../modelos/horario';
 export class MateriasService {
 
 materias: Materia[];
-
+tiposMaterias: TiposMateria[];
   constructor(
     private http: HttpService,
     private carrerasService: CarrerasService
   ) { }
 
+  // Tipos Materias
+  private eliminarCacheTiposMaterias() {
+    this.tiposMaterias = null;
+  }
+  public listarTiposMaterias(cache = true): Promise<TiposMateria[]> {
+    return new Promise( (resolve, reject) => {
+      if (cache && this.tiposMaterias) {
+        resolve(this.tiposMaterias);
+      } else {
+        this.http.get('/tipos_materia').subscribe(
+          (res) => {
+            this.tiposMaterias = res;
+            resolve(this.tiposMaterias);
+          },
+          (error) => {
+            reject(error);
+          }
+        );
+      }
+    });
+  }
+  public crearTipoMateria(tipoMateria: TiposMateria): Observable<Mensaje> {
+    this.eliminarCacheTiposMaterias();
+    return this.http.post('/tipos_materia', { tipo_materia: tipoMateria });
+  }
+  public editarTipoMateria(tipoMateria: TiposMateria): Observable<Mensaje> {
+    this.eliminarCacheTiposMaterias();
+    return this.http.put('/tipos_materia/' + tipoMateria.id, { tipo_materia: tipoMateria });
+  }
+  public eliminarTipoMateria(idTipoMateria: number): Observable<Mensaje> {
+    this.eliminarCacheTiposMaterias();
+    return this.http.delete('/tipos_materia/' + idTipoMateria);
+  }
+  // Materias
   private eliminarCacheMaterias() {
     this.materias = null;
   }

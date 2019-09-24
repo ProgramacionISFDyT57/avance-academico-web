@@ -96,6 +96,7 @@ export class MateriasComponent implements OnInit {
       this.carreras = JSON.parse(JSON.stringify(res));
       const todas: Carrera = {
         nombre: 'Todas las carreras',
+        nombre_corto: '',
         cantidad_materias: 0,
         duracion: 0,
         id: 0,
@@ -130,6 +131,8 @@ export class MateriasComponent implements OnInit {
 
   public editar(materia: Materia) {
     const config: MatDialogConfig = {
+      width: '500px',
+      maxWidth: '90%',
       data: materia
     };
     const modal = this.dialog.open(EditarMateriaComponent, config);

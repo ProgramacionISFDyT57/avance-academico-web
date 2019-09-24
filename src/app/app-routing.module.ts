@@ -21,17 +21,18 @@ import { PlanillaInscriptosCursadaComponent } from './componentes/inscripciones/
 import { PlanillaAsistenciaComponent } from './componentes/inscripciones/cursadas/planilla-asistencia/planilla-asistencia.component';
 import { HorariosComponent } from './componentes/planillas/horarios/horarios.component';
 import { PlanillaProfesoresComponent } from './componentes/planillas/planilla-profesores/planilla-profesores.component';
+import { TiposMateriasComponent } from './componentes/tipos-materias/tipos-materias/tipos-materias.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'inicio' },
   { path: 'inicio', component: InicioComponent, canActivate: [LoginGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'carreras', component: CarrerasComponent, canActivate: [LoginGuard] },
-  { path: 'carreras/crear', component: CrearCarreraComponent, canActivate: [LoginGuard] }, // pasar a modal y eliminar
   { path: 'materias', component: MateriasComponent, canActivate: [LoginGuard] },
   { path: 'usuarios', component: UsuariosComponent, canActivate: [LoginGuard] },
-  { path: 'usuarios/crear', component: CrearUsuarioComponent, canActivate: [LoginGuard] }, // pasar a modal y eliminar
   { path: 'alumnos', component: AlumnosComponent, canActivate: [LoginGuard] },
+  { path: 'tipos_materias', component: TiposMateriasComponent, canActivate: [LoginGuard] },
+
   { path: 'avance_academico', component: AvanceAcademicoComponent, canActivate: [LoginGuard] },
   { path: 'avance_academico/:id', component: AvanceAcademicoComponent, canActivate: [LoginGuard] },
 
