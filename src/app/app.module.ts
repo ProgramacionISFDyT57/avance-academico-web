@@ -52,6 +52,7 @@ import { EditarCursadaComponent } from './componentes/inscripciones/cursadas/edi
 import { EditarMesaComponent } from './componentes/inscripciones/finales/editar-mesa/editar-mesa.component';
 import { HorariosComponent } from './componentes/planillas/horarios/horarios.component';
 import { PlanillaProfesoresComponent } from './componentes/planillas/planilla-profesores/planilla-profesores.component';
+import { TiposMateriasComponent } from './componentes/tipos-materias/tipos-materias/tipos-materias.component';
 
 @NgModule({
   declarations: [
@@ -96,6 +97,7 @@ import { PlanillaProfesoresComponent } from './componentes/planillas/planilla-pr
     EditarMesaComponent,
     HorariosComponent,
     PlanillaProfesoresComponent,
+    TiposMateriasComponent,
   ],
   entryComponents: [
     ConfirmationDialogComponent,
