@@ -53,6 +53,7 @@ import { EditarMesaComponent } from './componentes/inscripciones/finales/editar-
 import { HorariosComponent } from './componentes/planillas/horarios/horarios.component';
 import { PlanillaProfesoresComponent } from './componentes/planillas/planilla-profesores/planilla-profesores.component';
 import { TiposMateriasComponent } from './componentes/tipos-materias/tipos-materias/tipos-materias.component';
+import { CrearTipoComponent } from './componentes/tipos-materias/crear-tipo/crear-tipo.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +99,7 @@ import { TiposMateriasComponent } from './componentes/tipos-materias/tipos-mater
     HorariosComponent,
     PlanillaProfesoresComponent,
     TiposMateriasComponent,
+    CrearTipoComponent,
   ],
   entryComponents: [
     ConfirmationDialogComponent,
@@ -119,7 +121,8 @@ import { TiposMateriasComponent } from './componentes/tipos-materias/tipos-mater
     AsignarLibroComponent,
     EditarMateriaComponent,
     EditarCursadaComponent,
-    EditarMesaComponent
+    EditarMesaComponent,
+    CrearTipoComponent
   ],
   imports: [
     BrowserAnimationsModule,

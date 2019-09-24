@@ -49,11 +49,11 @@ tiposMaterias: TiposMateria[];
       }
     });
   }
-  public crearTipoMateria(tipoMateria: Materia): Observable<Mensaje> {
+  public crearTipoMateria(tipoMateria: TiposMateria): Observable<Mensaje> {
     this.eliminarCacheTiposMaterias();
     return this.http.post('/tipos_materia', { tipo_materia: tipoMateria });
   }
-  public editarTipoMateria(tipoMateria: Materia): Observable<Mensaje> {
+  public editarTipoMateria(tipoMateria: TiposMateria): Observable<Mensaje> {
     this.eliminarCacheTiposMaterias();
     return this.http.put('/tipos_materia/' + tipoMateria.id, { tipo_materia: tipoMateria });
   }

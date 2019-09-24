@@ -4,6 +4,7 @@ import { TiposMateria } from 'src/app/modelos/tipos-materia';
 import { MateriasService } from 'src/app/servicios/materias.service';
 import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
 import { NotificationsService } from 'angular2-notifications';
+import { CrearTipoComponent } from '../crear-tipo/crear-tipo.component';
 
 @Component({
   selector: 'app-tipos-materias',
@@ -52,35 +53,35 @@ export class TiposMateriasComponent implements OnInit {
 
   crear() {
     const config: MatDialogConfig = {
-      width: '700px',
+      width: '500px',
       maxWidth: '90%'
     };
-    // const modal = this.dialog.open(CrearAlumnoComponent, config);
-    // modal.beforeClosed().subscribe(
-    //   (resp) => {
-    //     if (resp) {
-    //       this.showSpinner = true;
-    //       this.listar();
-    //     }
-    //   }
-    // );
+    const modal = this.dialog.open(CrearTipoComponent, config);
+    modal.beforeClosed().subscribe(
+      (resp) => {
+        if (resp) {
+          this.showSpinner = true;
+          this.listar();
+        }
+      }
+    );
   }
 
   editar(tipoMateria: TiposMateria) {
     const config: MatDialogConfig = {
-      width: '700px',
+      width: '500px',
       maxWidth: '90%',
       data: tipoMateria
     };
-    // const modal = this.dialog.open(EditarAlumnoComponent, config);
-    // modal.beforeClosed().subscribe(
-    //   (resp) => {
-    //     if (resp) {
-    //       this.showSpinner = true;
-    //       this.listar();
-    //     }
-    //   }
-    // );
+    const modal = this.dialog.open(CrearTipoComponent, config);
+    modal.beforeClosed().subscribe(
+      (resp) => {
+        if (resp) {
+          this.showSpinner = true;
+          this.listar();
+        }
+      }
+    );
   }
 
   async eliminar(id: number) {
