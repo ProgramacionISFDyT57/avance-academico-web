@@ -44,8 +44,14 @@
               </ng-container>
             </td>
             <td class="text-center">{{inscripto.cohorte}}</td>
-            <td class="text-center"></td>
-            <td class="text-center"></td>
+            <td class="text-center">
+              <ng-container *ngIf="inscripto.nombre">
+                <ng-container *ngIf="(planilla.anio_cursada - inscripto.cohorte + 1) > planilla.anio_materia">X</ng-container>
+              </ng-container>
+            </td>
+            <td class="text-center">
+              <ng-container *ngIf="inscripto.recursa">X</ng-container>
+            </td>
             <td class="text-center">
               <ng-container *ngIf="inscripto.cursa">X</ng-container>
             </td>

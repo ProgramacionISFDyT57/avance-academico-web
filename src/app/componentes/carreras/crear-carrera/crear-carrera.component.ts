@@ -34,6 +34,7 @@ export class CrearCarreraComponent implements OnInit {
     if (this.data) {
       this.formulario = this.fb.group({
         nombre: [this.data.nombre, Validators.required],
+        nombre_corto: [this.data.nombre_corto],
         resolucion: [this.data.resolucion],
         duracion: [this.data.duracion, [Validators.required, Validators.max(5), Validators.min(1)]],
         cantidad_materias: [this.data.cantidad_materias, [Validators.required, Validators.min(1)]],
@@ -41,6 +42,7 @@ export class CrearCarreraComponent implements OnInit {
     } else {
       this.formulario = this.fb.group({
         nombre: ['', Validators.required],
+        nombre_corto: [''],
         resolucion: [''],
         duracion: [1, [Validators.required, Validators.max(5), Validators.min(1)]],
         cantidad_materias: [1, [Validators.required, Validators.min(1)]],
@@ -51,6 +53,7 @@ export class CrearCarreraComponent implements OnInit {
   enviar() {
     const carrera: Carrera = {
       nombre: this.formulario.value.nombre,
+      nombre_corto: this.formulario.value.nombre_corto,
       resolucion: this.formulario.value.resolucion,
       duracion: this.formulario.value.duracion,
       cantidad_materias: this.formulario.value.cantidad_materias

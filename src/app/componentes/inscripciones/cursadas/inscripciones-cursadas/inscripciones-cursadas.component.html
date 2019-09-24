@@ -1,6 +1,7 @@
 <mat-progress-bar mode="indeterminate" color="warn" [style.display]="showSpinner ? 'block' : 'none'"></mat-progress-bar>
 
-<h2 *ngIf="this.helper.rolesAdmitidos(['directivo', 'preceptor'])" class="mt-0 mb-0 mx-2" fxLayout="row" fxLayoutAlign="start center">
+<h2 *ngIf="this.helper.rolesAdmitidos(['directivo', 'preceptor'])" class="mt-0 mb-0 mx-2" fxLayout="row"
+  fxLayoutAlign="start center">
   <span class="mx-2">Cursadas de </span>
   <ng-select class="py-0 custom" [clearable]="false" [items]="carreras" bindLabel="nombre" bindValue="nombre" fxFlex
     [(ngModel)]="carreraSeleccionada" (change)="filtroCarrera($event)"></ng-select>
@@ -30,7 +31,8 @@
 
     <ng-container matColumnDef="carrera">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Carrera </th>
-      <td mat-cell *matCellDef="let element"> {{ element.carrera }} </td>
+      <td mat-cell *matCellDef="let element" matTooltip="{{element.carrera}} ({{element.resolucion}})">
+        {{element.nombre_corto}} </td>
     </ng-container>
 
     <ng-container matColumnDef="materia">
@@ -64,6 +66,14 @@
         <ng-container *ngFor="let horario of  element.horarios">
           <p class="nowrap">{{ dias[horario.dia] }} - {{ horario.hora_inicio }} ({{horario.modulos}}M) </p>
         </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="inscripcion">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Inscripción </th>
+      <td mat-cell *matCellDef="let element" class="text-center">
+        <ng-container *ngIf="element.cursa">Regular</ng-container>
+        <ng-container *ngIf="!element.cursa">Libre</ng-container>
       </td>
     </ng-container>
 

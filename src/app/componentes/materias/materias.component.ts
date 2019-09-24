@@ -96,6 +96,7 @@ export class MateriasComponent implements OnInit {
       this.carreras = JSON.parse(JSON.stringify(res));
       const todas: Carrera = {
         nombre: 'Todas las carreras',
+        nombre_corto: '',
         cantidad_materias: 0,
         duracion: 0,
         id: 0,

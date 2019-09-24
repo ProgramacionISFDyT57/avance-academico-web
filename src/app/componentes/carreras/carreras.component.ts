@@ -21,7 +21,7 @@ export class CarrerasComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<Carrera>;
-  displayedColumns = ['nombre', 'resolucion', 'duracion', 'cantidad_materias', 'acciones'];
+  displayedColumns = ['nombre', 'nombre_corto', 'resolucion', 'duracion', 'cantidad_materias', 'acciones'];
   showSpinner = true;
 
   constructor(
