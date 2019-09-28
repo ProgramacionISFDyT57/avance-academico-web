@@ -20,22 +20,20 @@
     <mat-form-field>
       <input matInput [matDatepicker]="picker3" placeholder="Fecha de Examen" formControlName="fecha_examen">
       <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-      <mat-datepicker #picker3></mat-datepicker>
+      <mat-datepicker #picker3 disabled="false" startView="year"></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput [matDatepicker]="picker1" placeholder="Inicio de Inscripción" formControlName="fecha_inicio">
+      <input matInput [matDatepicker]="picker1" placeholder="Inicio de Inscripción" formControlName="fecha_inicio" [min]="minDateInicio" (dateChange)="cambioFechaInicio()">
       <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-      <mat-datepicker #picker1></mat-datepicker>
+      <mat-datepicker #picker1 disabled="false"></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput [matDatepicker]="picker2" placeholder="Fin de Inscripción" formControlName="fecha_limite">
+      <input matInput [matDatepicker]="picker2" placeholder="Fin de Inscripción" formControlName="fecha_limite" [min]="minDateFin">
       <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-      <mat-datepicker #picker2></mat-datepicker>
+      <mat-datepicker #picker2 disabled="false"></mat-datepicker>
     </mat-form-field>
-
-    <!-- Agregar las restriccions de las fechas. Cierre de inscripción no puede ser anterior a inicio -->
 
   </form>
 </mat-dialog-content>

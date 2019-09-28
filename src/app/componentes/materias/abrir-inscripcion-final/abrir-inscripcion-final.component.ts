@@ -18,6 +18,9 @@ export class AbrirInscripcionFinalComponent implements OnInit {
   materia: string;
   profesores: Profesor[] = [];
   public idMateria: number;
+  añoActual = new Date().getFullYear();
+  minDateInicio = new Date(this.añoActual - 100, 0, 1);
+  minDateFin = new Date();
 
   constructor(
     private fb: FormBuilder,
@@ -28,14 +31,28 @@ export class AbrirInscripcionFinalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 
+  public cambioFechaInicio() {
+    this.formulario.get('fecha_limite').enable();
+    this.formulario.get('fecha_inicio').enable();
+    this.minDateFin = new Date(this.formulario.value.fecha_inicio);
+    const fechaLimite = new Date(this.formulario.value.fecha_inicio);
+    fechaLimite.setMonth(fechaLimite.getMonth() + 1);
+    this.formulario.patchValue({fecha_limite: fechaLimite});
+    this.formulario.get('fecha_limite').disable();
+    this.formulario.get('fecha_inicio').disable();
+  }
+
   private crearFormulario() {
     const fechaActual = new Date();
     const fechaLimite = new Date();
     fechaLimite.setMonth(fechaLimite.getMonth() + 1);
     this.formulario = this.fb.group({
-      fecha_inicio: [fechaActual, Validators.required],
-      fecha_limite: [fechaLimite, Validators.required],
-      fecha_examen: [null, Validators.required],
+      // fecha_inicio: [fechaActual, Validators.required],
+      // fecha_limite: [fechaLimite, Validators.required],
+      // fecha_examen: [null, Validators.required],
+      fecha_inicio: [{value: fechaActual, disabled: true}, Validators.required],
+      fecha_limite: [{value: fechaLimite, disabled: true}, Validators.required],
+      fecha_examen: [{value: null, disabled: true}, Validators.required],
       id_profesor: [null],
       id_vocal1: [null],
       id_vocal2: [null],
