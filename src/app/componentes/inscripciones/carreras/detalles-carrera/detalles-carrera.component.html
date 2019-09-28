@@ -10,6 +10,10 @@
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
   </mat-form-field>
 
+  <button matTooltip="Inscribir Alumno" class="btn-crear3 no-print" mat-fab color="primary" (click)="inscribirAlumno()">
+    <mat-icon>queue</mat-icon>
+  </button>
+
   <table mat-table [dataSource]="dataSource" matSort>
 
     <ng-container matColumnDef="nro">
@@ -33,14 +37,14 @@
     </ng-container>
 
     <ng-container matColumnDef="folio">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Folio </th>
-        <td mat-cell *matCellDef="let element"> {{ element.folio }} </td>
-      </ng-container>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Folio </th>
+      <td mat-cell *matCellDef="let element"> {{ element.folio }} </td>
+    </ng-container>
 
     <ng-container matColumnDef="acciones">
       <th mat-header-cell *matHeaderCellDef class="no-print"> Acciones </th>
       <td class="nowrap no-print" mat-cell *matCellDef="let element">
-          <button class="mx-1" mat-mini-fab color="accent" matTooltip="Libro / Folio"
+        <button class="mx-1" mat-mini-fab color="accent" matTooltip="Libro / Folio"
           (click)="asignarLibro(element.id_inscripcion_carrera, element.libro, element.folio)">
           <mat-icon>edit</mat-icon>
         </button>
