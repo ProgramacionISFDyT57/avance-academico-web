@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { CarrerasService } from 'src/app/servicios/carreras.service';
 import { NotificationsService } from 'angular2-notifications';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -16,6 +15,9 @@ export class AbrirInscripcionCarreraComponent implements OnInit {
   idCarrera: number;
   carrera: string;
   showSpinner = false;
+  añoActual = new Date().getFullYear();
+  minDateInicio = new Date(this.añoActual - 100, 0, 1);
+  minDateFin = new Date();
 
   constructor(
     private fb: FormBuilder,
@@ -25,6 +27,17 @@ export class AbrirInscripcionCarreraComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 
+  public cambioFechaInicio() {
+    this.formulario.get('fecha_limite').enable();
+    this.formulario.get('fecha_inicio').enable();
+    this.minDateFin = new Date(this.formulario.value.fecha_inicio);
+    const fechaLimite = new Date(this.formulario.value.fecha_inicio);
+    fechaLimite.setMonth(fechaLimite.getMonth() + 1);
+    this.formulario.patchValue({fecha_limite: fechaLimite});
+    this.formulario.get('fecha_limite').disable();
+    this.formulario.get('fecha_inicio').disable();
+  }
+
   private crearFormulario() {
     const añoActual = new Date().getFullYear();
     const fechaActual = new Date();
@@ -32,8 +45,10 @@ export class AbrirInscripcionCarreraComponent implements OnInit {
     fechaLimite.setMonth(fechaLimite.getMonth() + 1);
     this.formulario = this.fb.group({
       cohorte: [añoActual, [Validators.required, Validators.min(añoActual - 6)]],
-      fecha_inicio: [fechaActual, Validators.required],
-      fecha_limite: [fechaLimite, Validators.required]
+      // fecha_inicio: [fechaActual, Validators.required],
+      // fecha_limite: [fechaLimite, Validators.required],
+      fecha_inicio: [{value: fechaActual, disabled: true}, Validators.required],
+      fecha_limite: [{value: fechaLimite, disabled: true}, Validators.required],
     });
   }
 

@@ -39,9 +39,9 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput [matDatepicker]="picker" placeholder="Fecha de Nacimiento" formControlName="fecha_nacimiento">
+      <input matInput [matDatepicker]="picker" placeholder="Fecha de Nacimiento" formControlName="fecha_nacimiento" [min]="minDate" [max]="maxDate">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
+      <mat-datepicker #picker startView="multi-year" [startAt]="startDate" disabled="false"></mat-datepicker>
     </mat-form-field>
 
   </form>

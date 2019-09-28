@@ -16,6 +16,11 @@ export class CrearUsuarioComponent implements OnInit {
   formulario: FormGroup;
   showSpinner = false;
 
+  añoActual = new Date().getFullYear();
+  startDate = new Date(this.añoActual - 30, 0, 1);
+  minDate = new Date(this.añoActual - 100, 0, 1);
+  maxDate = new Date(this.añoActual - 15, 11, 31);
+
   roles = [
     // { value: 1, viewValue: 'Admin' },
     { value: 2, viewValue: 'Directivo' },
@@ -36,7 +41,8 @@ export class CrearUsuarioComponent implements OnInit {
       apellido: ['', Validators.required],
       dni: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      fecha_nacimiento: [null],
+      // fecha_nacimiento: [null],
+      fecha_nacimiento: [{value: null, disabled: true}],
       id_rol: [null, Validators.required],
       nombre: ['', Validators.required],
       telefono: [''],
