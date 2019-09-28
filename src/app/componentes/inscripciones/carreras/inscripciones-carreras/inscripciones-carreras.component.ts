@@ -60,6 +60,8 @@ export class InscripcionesCarrerasComponent implements OnInit {
 
   public inscribirAlumno(idCarreraAbierta: number, carrera: string) {
     const modal = this.dialog.open(InscribirAlumnoComponent, {
+      width: '500px',
+      maxWidth: '90%',
       data: {
         idCarreraAbierta,
         carrera,
