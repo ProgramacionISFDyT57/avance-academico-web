@@ -31,6 +31,8 @@ export class AvanceAcademicoComponent implements OnInit {
   analiticos: Analitico[] = [];
   carreras: any[];
   indiceCarreraSeleccionada: number;
+  promedio: number;
+  porcentajeCarrera: number;
 
   constructor(
     public helper: HelperService,
@@ -43,6 +45,7 @@ export class AvanceAcademicoComponent implements OnInit {
   ) { }
 
   cargarDatos(indice: number) {
+    this.estadisticas(this.analiticos[indice]);
     this.dataSource = new MatTableDataSource(this.analiticos[indice].materias);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -56,6 +59,22 @@ export class AvanceAcademicoComponent implements OnInit {
     this.telefono = this.analiticos[indice].telefono;
     this.libro = this.analiticos[indice].libro;
     this.folio = this.analiticos[indice].folio;
+  }
+
+  private estadisticas(analitico: Analitico) {
+    const materiasTotales = analitico.materias.length;
+    let materiasAprobadas = 0;
+    let sumaNotas = 0;
+    for (const materia of analitico.materias) {
+      if (materia.final) {
+        sumaNotas += materia.final;
+        materiasAprobadas++;
+      }
+    }
+    if (materiasAprobadas) {
+      this.promedio = +(sumaNotas / materiasAprobadas).toFixed(2);
+    }
+    this.porcentajeCarrera = Math.trunc(materiasAprobadas * 100 / materiasTotales);
   }
 
   public avanceAcademico(id?: number) {
