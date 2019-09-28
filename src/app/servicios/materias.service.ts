@@ -128,8 +128,8 @@ tiposMaterias: TiposMateria[];
   public eliminarInscripcionFinalAlumno(idInscripcionMesa: number): Observable<Mensaje> {
     return this.http.delete('/inscripcion_mesa_alumno/' + idInscripcionMesa);
   }
-  public listarFinales(): Observable<FinalAbierto[]> {
-    return this.http.get('/lista_mesas');
+  public listarFinales(anio: number): Observable<FinalAbierto[]> {
+    return this.http.get('/lista_mesas/' + anio);
   }
   public listarInscriptosMesa(idMesa: number): Observable<InscriptosFinal> {
     return this.http.get('/inscriptos_mesa2/' + idMesa);
@@ -149,8 +149,8 @@ tiposMaterias: TiposMateria[];
   }
 
   // Cursadas
-  public listarCursadas(): Observable<Cursada[]> {
-    return this.http.get('/cursadas_abiertas');
+  public listarCursadas(anio: number): Observable<Cursada[]> {
+    return this.http.get('/cursadas_abiertas/' + anio);
   }
   public abrirInscripcionCursada(cursada, horarios: Horario[]): Observable<Mensaje> {
     this.eliminarCacheMaterias();
