@@ -17,7 +17,7 @@ export class AvanceAcademicoComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<any>;
-  displayedColumns = ['anio', 'nombre_materia', 'cursada', 'final', 'tomo', 'folio'];
+  displayedColumns = ['anio', 'nombre_materia', 'cursada', 'final', 'fecha_examen', 'tomo', 'folio'];
   showSpinner = true;
   alumno: string;
   carrera: string;

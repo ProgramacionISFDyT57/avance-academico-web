@@ -44,6 +44,11 @@
       <td mat-cell *matCellDef="let element"> {{element.final}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="fecha_examen">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Acreditacion </th>
+      <td mat-cell *matCellDef="let element"> {{element.fecha_examen | date: 'dd/MM/yyyy' }} </td>
+    </ng-container>
+
     <ng-container matColumnDef="tomo">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Libro </th>
       <td mat-cell *matCellDef="let element"> {{element.libro}} </td>
