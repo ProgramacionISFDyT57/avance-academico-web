@@ -28,7 +28,7 @@ export class AlumnosService {
   }
 
   public traerAlumnos(cache = true): Promise<Alumno[]> {
-    return new Promise( (resolve, reject) => {
+    return new Promise((resolve, reject) => {
       if (cache && this.alumnos) {
         resolve(this.alumnos);
       } else {
@@ -45,6 +45,19 @@ export class AlumnosService {
     });
   }
 
+  public listarAlumnosInscripcion(): Promise<Alumno[]> {
+    return new Promise((resolve, reject) => {
+      this.http.get('/alumnos_inscripcion').subscribe(
+        (res) => {
+          resolve(res);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  }
+
   public listarAlumnosPorCarrera(idCarrera): Observable<Alumno[]> {
     return this.http.get('/alumnos_por_carrera/' + idCarrera);
   }
@@ -52,13 +65,13 @@ export class AlumnosService {
   public crearAlumno(usuario: Usuario, idCarreraAbierta: number): Observable<Mensaje> {
     this.usuariosService.eliminarCacheUsuarios();
     this.eliminarCacheAlumnos();
-    return this.http.post('/alumnos', {usuario, id_carrera_abierta: idCarreraAbierta});
+    return this.http.post('/alumnos', { usuario, id_carrera_abierta: idCarreraAbierta });
   }
 
   public editarAlumno(alumno: Alumno): Observable<Mensaje> {
     this.usuariosService.eliminarCacheUsuarios();
     this.eliminarCacheAlumnos();
-    return this.http.put('/alumnos/' + alumno.id_alumno, {alumno});
+    return this.http.put('/alumnos/' + alumno.id_alumno, { alumno });
   }
 
   public eliminarAlumno(id: number): Observable<Mensaje> {

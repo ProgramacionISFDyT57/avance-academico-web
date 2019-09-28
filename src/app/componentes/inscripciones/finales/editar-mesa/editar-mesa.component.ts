@@ -39,8 +39,8 @@ export class EditarMesaComponent implements OnInit {
     const fechaLimite = new Date(this.formulario.value.fecha_inicio);
     fechaLimite.setMonth(fechaLimite.getMonth() + 1);
     this.formulario.patchValue({fecha_limite: fechaLimite});
-    this.formulario.get('fecha_limite').disable();
-    this.formulario.get('fecha_inicio').disable();
+    // this.formulario.get('fecha_limite').disable();
+    // this.formulario.get('fecha_inicio').disable();
   }
 
   private crearFormulario() {
@@ -49,12 +49,12 @@ export class EditarMesaComponent implements OnInit {
     fechaLimite.setMonth(fechaLimite.getMonth() + 1);
     this.formulario = this.fb.group({
       id_mesa: [this.data.id],
-      // fecha_inicio: [this.data.fecha_inicio, Validators.required],
-      // fecha_limite: [this.data.fecha_limite, Validators.required],
-      // fecha_examen: [this.data.fecha_examen, Validators.required],
-      fecha_inicio: [{value: this.data.fecha_inicio, disabled: true}, Validators.required],
-      fecha_limite: [{value: this.data.fecha_limite, disabled: true}, Validators.required],
-      fecha_examen: [{value: this.data.fecha_examen, disabled: true}, Validators.required],
+      fecha_inicio: [this.data.fecha_inicio, Validators.required],
+      fecha_limite: [this.data.fecha_limite, Validators.required],
+      fecha_examen: [this.data.fecha_examen, Validators.required],
+      // fecha_inicio: [{value: this.data.fecha_inicio, disabled: true}, Validators.required],
+      // fecha_limite: [{value: this.data.fecha_limite, disabled: true}, Validators.required],
+      // fecha_examen: [{value: this.data.fecha_examen, disabled: true}, Validators.required],
       id_profesor: [this.data.id_profesor],
       id_vocal1: [this.data.id_vocal1],
       id_vocal2: [this.data.id_vocal2],

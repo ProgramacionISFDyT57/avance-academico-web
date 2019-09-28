@@ -42,8 +42,8 @@ export class CrearAlumnoComponent implements OnInit {
       apellido: ['', Validators.required],
       telefono: [''],
       email: ['', [Validators.required, Validators.email]],
-      fecha_nacimiento: [{value: null, disabled: true}],
-      // fecha_nacimiento: [true],
+      // fecha_nacimiento: [{value: null, disabled: true}],
+      fecha_nacimiento: [true],
       id_carrera_abierta: [null, Validators.required],
       domicilio: ['']
     });
