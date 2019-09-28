@@ -28,60 +28,63 @@
 </div>
 
 <div class="container">
-  <p>
-    PROFESORES - AÑO {{ formulario.value.anio }} 
-    <span *ngIf="formulario.value.dia && formulario.value.dia !== 7">- DIA {{ diasTextoCompleto[formulario.value.dia] }} </span>
-  </p>
+
 </div>
 
 <div class="table-container">
   <table>
     <thead>
       <tr>
+        <th colspan="8">
+          <p>
+            ASISTENCIA PROFESORES - AÑO {{ formulario.value.anio }}
+            <span *ngIf="formulario.value.dia && formulario.value.dia !== 7">- DIA
+              {{ diasTextoCompleto[formulario.value.dia] }}
+            </span>
+          </p>
+        </th>
+      </tr>
+      <tr>
+        <th class="indice">#</th>
+        <th class="carrera">
+          <p>Carrera</p>
+          <p>y Curso</p>
+        </th>
         <th>Profesor</th>
-        <th>Carrera</th>
-        <th>Año</th>
-        <th>Materia</th>
-        <th>Día</th>
-        <th>Hora Inicio</th>
-        <th>Módulos</th>
+        <th class="modulos">Mód</th>
+        <th class="hora">
+          <p>Hora</p>
+          <p>Entrada</p>
+        </th>
+        <th class="firma">Firma</th>
+        <th class="hora">
+          <p>Hora</p>
+          <p>Salida</p>
+        </th>
+        <th class="firma">Firma</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let profesor of profesores; let i = index">
-        <td>{{ profesor.nombre_completo }}</td>
-        <td>
-          <ng-container *ngFor="let detalle of profesor.detalle">
-            <p>{{ detalle.carrera }}</p>
-          </ng-container>
-        </td>
-        <td class="text-center">
-          <ng-container *ngFor="let detalle of profesor.detalle">
-            <p>{{ detalle.anio }}</p>
-          </ng-container>
-        </td>
-        <td>
-          <ng-container *ngFor="let detalle of profesor.detalle">
-            <p>{{ detalle.materia }}</p>
-          </ng-container>
-        </td>
-
-        <td class="text-center">
-          <ng-container *ngFor="let detalle of profesor.detalle">
-            <p>{{ diasTexto[detalle.dia] }}</p>
-          </ng-container>
-        </td>
-        <td class="text-center">
-          <ng-container *ngFor="let detalle of profesor.detalle">
-            <p>{{ detalle.hora_inicio }}</p>
-          </ng-container>
-        </td>
-        <td class="text-center">
-          <ng-container *ngFor="let detalle of profesor.detalle">
-            <p>{{ detalle.modulos }}</p>
-          </ng-container>
-        </td>
-      </tr>
+      <ng-container *ngFor="let profesor of profesores; let i = index">
+        <ng-container *ngFor="let detalle of profesor.detalle">
+          <tr>
+            <td class="indice">{{ i+1 }}</td>
+            <td class="carrera">
+              <ng-container *ngIf="detalle.anio">
+                <div class="texto-carrera">
+                  {{ detalle.carrera_nombre_corto }} {{ detalle.anio }}º - {{ detalle.materia }}
+                </div>
+              </ng-container>
+            </td>
+            <td class="profesor">{{ profesor.nombre_completo }}</td>
+            <td class="modulos">{{ detalle.modulos }}</td>
+            <td class="hora"></td>
+            <td class="firma"></td>
+            <td class="hora"></td>
+            <td class="firma"></td>
+          </tr>
+        </ng-container>
+      </ng-container>
     </tbody>
   </table>
 </div>
