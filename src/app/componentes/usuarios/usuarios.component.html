@@ -15,7 +15,7 @@
   </button>
 
   <table mat-table [dataSource]="dataSource" matSort>
-    
+
     <ng-container matColumnDef="apellido">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </th>
       <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
@@ -54,18 +54,21 @@
     <ng-container matColumnDef="acciones">
       <th mat-header-cell *matHeaderCellDef class="no-print"> Acciones </th>
       <td class="nowrap no-print" mat-cell *matCellDef="let element">
-        <button *ngIf="element.activo === false" class="mx-1" mat-mini-fab color="primary" matTooltip="Habilitar" (click)="habilitar(element.id)">
+        <button *ngIf="element.activo === false" class="mx-1" mat-mini-fab color="primary" matTooltip="Habilitar"
+          (click)="habilitar(element.id)">
           <mat-icon>check</mat-icon>
         </button>
-        <button *ngIf="element.activo === true" class="mx-1" mat-mini-fab color="warn" matTooltip="Deshabilitar" (click)="deshabilitar(element.id)">
+        <button *ngIf="element.activo === true" class="mx-1" mat-mini-fab color="warn" matTooltip="Deshabilitar"
+          (click)="deshabilitar(element.id)">
           <mat-icon>clear</mat-icon>
         </button>
         <button class="mx-1" mat-mini-fab color="accent" matTooltip="Editar" (click)="editarUsuario(element)">
           <mat-icon>edit</mat-icon>
         </button>
-        <button *ngIf="this.helper.rolesAdmitidos(['admin'])" class="mx-1" mat-mini-fab color="warn" matTooltip="Resetear Contraseña" (click)="resetearPassword(element.id)">
-            <mat-icon>lock</mat-icon>
-          </button>
+        <button class="mx-1" mat-mini-fab color="warn" matTooltip="Resetear Contraseña"
+          (click)="resetearPassword(element.id)">
+          <mat-icon>lock</mat-icon>
+        </button>
         <button class="mx-1" mat-mini-fab color="warn" matTooltip="Eliminar" (click)="eliminar(element.id)">
           <mat-icon>delete_forever</mat-icon>
         </button>

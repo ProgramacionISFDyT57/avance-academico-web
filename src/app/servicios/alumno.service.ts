@@ -19,6 +19,10 @@ export class AlumnosService {
     private http: HttpService
   ) { }
 
+  public resetContraseñaAlumno(idAlumno: number): Observable<Mensaje> {
+    return this.http.put('/reset_password_alumno/' + idAlumno, {});
+  }
+
   public eliminarCacheAlumnos() {
     this.alumnos = null;
   }

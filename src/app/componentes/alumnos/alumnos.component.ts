@@ -69,6 +69,25 @@ export class AlumnosComponent implements OnInit {
     );
   }
 
+  async resetearPassword(idAlumno: number) {
+    const confirm = await this.confirmation.confirm('Confirme la acción', '¿Desea resetear la contraseña del alumno a su numero de DNI?');
+    if (confirm) {
+      this.showSpinner = true;
+      this.alumnosService.resetContraseñaAlumno(idAlumno).subscribe(
+        (res) => {
+          this.notif.success(res.mensaje);
+          console.log(res);
+          this.showSpinner = false;
+        },
+        (error) => {
+          console.log(error);
+          this.showSpinner = false;
+          this.notif.error(error.error.mensaje);
+        }
+      );
+    }
+  }
+
   editarAlumno(alumno: Alumno) {
     const config: MatDialogConfig = {
       width: '700px',

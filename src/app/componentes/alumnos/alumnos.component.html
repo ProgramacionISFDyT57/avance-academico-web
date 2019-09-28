@@ -70,6 +70,10 @@
         <button class="mx-1" mat-mini-fab color="accent" matTooltip="Editar" (click)="editarAlumno(element)">
           <mat-icon>edit</mat-icon>
         </button>
+        <button class="mx-1" mat-mini-fab color="warn" matTooltip="Resetear Contraseña"
+          (click)="resetearPassword(element.id_alumno)">
+          <mat-icon>lock</mat-icon>
+        </button>
         <button *ngIf="!element.carrera" class="mx-1" mat-mini-fab color="warn" matTooltip="Eliminar"
           (click)="eliminar(element.id_alumno)">
           <mat-icon>delete_forever</mat-icon>
