@@ -27,6 +27,7 @@ export class InscripcionesFinalesComponent implements OnInit {
   mesas: FinalAbierto[];
   filtro;
   carreras: Carrera[] = [];
+  anio = new Date().getFullYear();
   carreraSeleccionada = 'Todas las carreras';
 
   constructor(
@@ -96,7 +97,7 @@ export class InscripcionesFinalesComponent implements OnInit {
 
   public ListarFinales() {
     this.showSpinner = true;
-    this.materiasService.listarFinales().subscribe(
+    this.materiasService.listarFinales(this.anio).subscribe(
       (res) => {
         this.mesas = res;
         this.dataSource = new MatTableDataSource(res);

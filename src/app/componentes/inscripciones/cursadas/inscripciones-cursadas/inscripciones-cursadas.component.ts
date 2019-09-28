@@ -29,6 +29,7 @@ export class InscripcionesCursadasComponent implements OnInit {
   carreras: Carrera[] = [];
   carreraSeleccionada = 'Todas las carreras';
   showSpinner = true;
+  anio = new Date().getFullYear();
   dias = ['', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'];
   // dias = ['', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'];
 
@@ -99,7 +100,7 @@ export class InscripcionesCursadasComponent implements OnInit {
 
   public ListarCursadas() {
     this.showSpinner = true;
-    this.materiasService.listarCursadas().subscribe(
+    this.materiasService.listarCursadas(this.anio).subscribe(
       (res) => {
         this.cursadas = res;
         this.dataSource = new MatTableDataSource(res);

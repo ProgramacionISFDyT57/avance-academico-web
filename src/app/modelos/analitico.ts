@@ -19,5 +19,6 @@ export interface Analitico {
         final: number;
         libro: number;
         folio: number;
+        fecha_examen: string;
     }[];
 }
