@@ -55,7 +55,7 @@ export class AlumnosComponent implements OnInit {
 
   crearAlumno() {
     const config: MatDialogConfig = {
-      width: '700px',
+      width: '500px',
       maxWidth: '90%'
     };
     const modal = this.dialog.open(CrearAlumnoComponent, config);
@@ -90,7 +90,7 @@ export class AlumnosComponent implements OnInit {
 
   editarAlumno(alumno: Alumno) {
     const config: MatDialogConfig = {
-      width: '700px',
+      width: '500px',
       maxWidth: '90%',
       data: alumno
     };

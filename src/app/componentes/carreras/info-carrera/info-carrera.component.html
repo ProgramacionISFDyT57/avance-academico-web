@@ -1,6 +1,11 @@
-<mat-progress-bar mode="indeterminate" color="warn" [style.display]="showSpinner ? 'block' : 'none'"></mat-progress-bar>
+<h2 mat-dialog-title class="modal-header" fxLayout="row" fxLayoutAlign="space-between center">
+  {{ carrera }}
+  <button mat-icon-button (click)="dialogRef.close(false)" aria-label="Close dialog">
+    <mat-icon>close</mat-icon>
+  </button>
+</h2>
 
-<h2 mat-dialog-title>{{ carrera }}</h2>
+<mat-progress-bar mode="indeterminate" color="warn" [style.display]="showSpinner ? 'block' : 'none'"></mat-progress-bar>
 
 <mat-dialog-content>
   <div fxLayout="row" fxLayoutAlign="center stretch">
@@ -24,7 +29,7 @@
         </mat-card-content>
       </mat-card>
     </div>
-  
+
     <div fxFlex *ngIf="duracion >= 2">
       <mat-card class="no-shadow">
         <mat-card-header>
@@ -45,7 +50,7 @@
         </mat-card-content>
       </mat-card>
     </div>
-  
+
     <div fxFlex *ngIf="duracion >= 3">
       <mat-card class="no-shadow">
         <mat-card-header>
@@ -66,7 +71,7 @@
         </mat-card-content>
       </mat-card>
     </div>
-  
+
     <div fxFlex *ngIf="duracion >= 4">
       <mat-card class="no-shadow">
         <mat-card-header>
@@ -87,7 +92,7 @@
         </mat-card-content>
       </mat-card>
     </div>
-  
+
     <div fxFlex *ngIf="duracion >= 5">
       <mat-card class="no-shadow">
         <mat-card-header>

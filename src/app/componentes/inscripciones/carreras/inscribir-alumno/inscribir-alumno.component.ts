@@ -49,7 +49,7 @@ export class InscribirAlumnoComponent implements OnInit {
   }
 
   async listarAlumnos() {
-    this.alumnos = await this.alumnosService.traerAlumnos();
+    this.alumnos = await this.alumnosService.listarAlumnosInscripcion();
     console.log(this.alumnos);
     this.showSpinner = false;
   }

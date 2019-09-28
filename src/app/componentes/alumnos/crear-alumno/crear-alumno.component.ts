@@ -4,13 +4,16 @@ import { AlumnosService } from 'src/app/servicios/alumno.service';
 import { NotificationsService } from 'angular2-notifications';
 import { Usuario } from 'src/app/modelos/usuario';
 import { CarrerasService } from 'src/app/servicios/carreras.service';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MAT_DATE_LOCALE } from '@angular/material';
 import { CarreraAbierta } from 'src/app/modelos/carreraabierta';
 
 @Component({
   selector: 'app-crear-alumno',
   templateUrl: './crear-alumno.component.html',
-  styleUrls: ['./crear-alumno.component.scss']
+  styleUrls: ['./crear-alumno.component.scss'],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
+  ],
 })
 export class CrearAlumnoComponent implements OnInit {
 
@@ -18,6 +21,10 @@ export class CrearAlumnoComponent implements OnInit {
   showSpinner = true;
   carreras: CarreraAbierta[] = [];
   actualizar = false;
+  añoActual = new Date().getFullYear();
+  startDate = new Date(this.añoActual - 18, 0, 1);
+  minDate = new Date(this.añoActual - 100, 0, 1);
+  maxDate = new Date(this.añoActual - 15, 11, 31);
   @ViewChild('myNgForm') myNgForm: NgForm;
 
   constructor(
@@ -35,6 +42,7 @@ export class CrearAlumnoComponent implements OnInit {
       apellido: ['', Validators.required],
       telefono: [''],
       email: ['', [Validators.required, Validators.email]],
+      // fecha_nacimiento: [{value: null, disabled: true}],
       fecha_nacimiento: [null],
       id_carrera_abierta: [null, Validators.required],
       domicilio: ['']

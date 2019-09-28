@@ -1,6 +1,6 @@
-<mat-progress-bar mode="indeterminate" color="warn" [style.display]="showSpinner ? 'block' : 'none'"></mat-progress-bar>
+<h2 mat-dialog-title class="modal-header">Abrir inscripción a {{ materia }}</h2>
 
-<h2 mat-dialog-title>Abrir inscripción a {{ materia }}</h2>
+<mat-progress-bar mode="indeterminate" color="warn" [style.display]="showSpinner ? 'block' : 'none'"></mat-progress-bar>
 
 <mat-dialog-content>
   <form id="form" [formGroup]="formulario" (ngSubmit)="enviar()">
@@ -14,17 +14,16 @@
     </ng-select>
 
     <mat-form-field>
-      <input matInput [matDatepicker]="picker1" placeholder="Inicio de Inscripción" formControlName="fecha_inicio">
+      <input matInput [matDatepicker]="picker1" placeholder="Inicio de Inscripción" formControlName="fecha_inicio" [min]="minDateInicio" (dateChange)="cambioFechaInicio()">
       <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-      <mat-datepicker #picker1></mat-datepicker>
+      <mat-datepicker #picker1 disabled="false"></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput [matDatepicker]="picker2" placeholder="Fin de Inscripción" formControlName="fecha_limite">
+      <input matInput [matDatepicker]="picker2" placeholder="Fin de Inscripción" formControlName="fecha_limite" [min]="minDateFin">
       <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-      <mat-datepicker #picker2></mat-datepicker>
+      <mat-datepicker #picker2 disabled="false"></mat-datepicker>
     </mat-form-field>
-    <!-- Agregar las restriccions de las fechas. Cierre de inscripción no puede ser anterior a inicio -->
 
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <p fxFlex="20">Lunes</p>

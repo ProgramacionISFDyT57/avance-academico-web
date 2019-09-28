@@ -40,6 +40,8 @@ export class MateriasComponent implements OnInit {
 
   abrirDialogoInscripcion(idMateria: number, materia: string) {
     const config: MatDialogConfig = {
+      width: '500px',
+      maxWidth: '90%',
       data: {
         idMateria,
         materia
@@ -57,6 +59,8 @@ export class MateriasComponent implements OnInit {
 
   abrirDialogoInscripcionFinal(idMateria: number, materia: string) {
     const config: MatDialogConfig = {
+      width: '500px',
+      maxWidth: '90%',
       data: {
         idMateria,
         materia
@@ -81,7 +85,7 @@ export class MateriasComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       this.showSpinner = false;
-      this.filtroCarrera({nombre: this.carreraSeleccionada});
+      this.filtroCarrera({ nombre: this.carreraSeleccionada });
       console.log(res);
     } catch (error) {
       console.error(error);

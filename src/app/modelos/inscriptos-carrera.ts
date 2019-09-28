@@ -8,4 +8,5 @@ export interface InscriptosCarrera {
   libro?: number;
   folio?: number;
   id_inscripcion_carrera?: number;
+  id_carrera_abierta?: number;
 }

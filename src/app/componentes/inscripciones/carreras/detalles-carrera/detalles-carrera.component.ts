@@ -6,6 +6,7 @@ import { NotificationsService } from 'angular2-notifications';
 import { CarrerasService } from 'src/app/servicios/carreras.service';
 import { ConfirmationDialogService } from 'src/app/servicios/confirmation-dialog/confirmation-dialog.service';
 import { AsignarLibroComponent } from '../asignar-libro/asignar-libro.component';
+import { InscribirAlumnoComponent } from '../inscribir-alumno/inscribir-alumno.component';
 
 @Component({
   selector: 'app-detalles-carrera',
@@ -19,6 +20,7 @@ export class DetallesCarreraComponent implements OnInit {
   dataSource: MatTableDataSource<InscriptosCarrera>;
   displayedColumns = ['nro', 'alumno', 'dni', 'libro', 'folio', 'acciones'];
   showSpinner = true;
+  idCarreraAbierta: number;
   carrera: string;
   cohorte: number;
 
@@ -41,6 +43,7 @@ export class DetallesCarreraComponent implements OnInit {
         if (res.length) {
           this.carrera = res[0].carrera;
           this.cohorte = res[0].cohorte;
+          this.idCarreraAbierta = res[0].id_carrera_abierta;
         }
         this.showSpinner = false;
       },
@@ -57,6 +60,24 @@ export class DetallesCarreraComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  public inscribirAlumno() {
+    const modal = this.dialog.open(InscribirAlumnoComponent, {
+      width: '500px',
+      maxWidth: '90%',
+      data: {
+        idCarreraAbierta: this.idCarreraAbierta,
+        carrera: this.carrera,
+      }
+    });
+    modal.beforeClosed().subscribe(
+      (resp) => {
+        if (resp) {
+          this.listar_inscriptos();
+        }
+      }
+    );
   }
 
   async asignarLibro(idInscripcionCarrera: number, libro: number, folio: number) {

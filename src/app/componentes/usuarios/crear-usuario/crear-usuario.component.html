@@ -1,6 +1,6 @@
-<mat-progress-bar mode="indeterminate" color="warn" [style.display]="showSpinner ? 'block' : 'none'"></mat-progress-bar>
+<h2 mat-dialog-title class="modal-header">Crear Usuario</h2>
 
-<h2 mat-dialog-title>Crear Usuario</h2>
+<mat-progress-bar mode="indeterminate" color="warn" [style.display]="showSpinner ? 'block' : 'none'"></mat-progress-bar>
 
 <mat-dialog-content>
   <form id="form" [formGroup]="formulario" (ngSubmit)="enviar()">
@@ -39,9 +39,9 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput [matDatepicker]="picker" placeholder="Fecha de Nacimiento" formControlName="fecha_nacimiento">
+      <input matInput [matDatepicker]="picker" placeholder="Fecha de Nacimiento" formControlName="fecha_nacimiento" [min]="minDate" [max]="maxDate">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
+      <mat-datepicker #picker startView="multi-year" [startAt]="startDate" disabled="false"></mat-datepicker>
     </mat-form-field>
 
   </form>

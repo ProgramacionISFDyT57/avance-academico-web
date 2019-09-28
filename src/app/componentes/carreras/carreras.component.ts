@@ -88,12 +88,15 @@ export class CarrerasComponent implements OnInit {
   }
 
   public abrirInscripcionCarrera(idCarrera: number, carrera: string, duracion: number) {
-    this.dialog.open(AbrirInscripcionCarreraComponent, {
+    const config: MatDialogConfig = {
+      width: '500px',
+      maxWidth: '90%',
       data: {
         idCarrera,
         carrera
       }
-    });
+    };
+    this.dialog.open(AbrirInscripcionCarreraComponent, config);
   }
 
   applyFilter(filterValue: string) {
@@ -104,7 +107,11 @@ export class CarrerasComponent implements OnInit {
   }
 
   crearCarrera() {
-    const modal = this.dialog.open(CrearCarreraComponent);
+    const config: MatDialogConfig = {
+      width: '500px',
+      maxWidth: '90%',
+    };
+    const modal = this.dialog.open(CrearCarreraComponent, config);
     modal.beforeClosed().subscribe(
       (resp) => {
         if (resp) {
@@ -117,6 +124,8 @@ export class CarrerasComponent implements OnInit {
 
   modificarCarrera(carrera: Carrera) {
     const config: MatDialogConfig = {
+      width: '500px',
+      maxWidth: '90%',
       data: carrera
     };
     const modal = this.dialog.open(CrearCarreraComponent, config);
