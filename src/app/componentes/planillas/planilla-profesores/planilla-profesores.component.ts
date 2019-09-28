@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 import { NotificationsService } from 'angular2-notifications';
-import { PlanillaProfesores } from 'src/app/modelos/planilla-profesores';
+import { PlanillaProfesores, DetalleHorario } from 'src/app/modelos/planilla-profesores';
 
 @Component({
   selector: 'app-planilla-profesores',
@@ -59,10 +59,30 @@ export class PlanillaProfesoresComponent implements OnInit {
     const anio = this.formulario.value.anio;
     const dia = this.formulario.value.dia;
     this.usuariosService.listarProfesoresPorDia(anio, dia).subscribe(
-      (resp) => {
+      (res) => {
+        const detalle: DetalleHorario = {
+          anio: null,
+          modulos: null,
+          carrera: null,
+          dia: null,
+          hora_inicio: null,
+          materia: null,
+        };
+        const x: PlanillaProfesores = {
+          id: null,
+          apellido: null,
+          nombre: null,
+          dni: null,
+          detalle: [detalle],
+          email: null,
+          nombre_completo: null
+        };
+        while (res.length % 36 !== 0) {
+          res.push(x);
+        }
         this.showSpinner = false;
-        this.profesores = resp;
-        console.log(resp);
+        this.profesores = res;
+        console.log(res);
       },
       (error) => {
         this.showSpinner = false;
