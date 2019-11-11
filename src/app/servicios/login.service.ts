@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class LoginService {
 
-  private apiUrl = 'https://backend-isfdyt57.herokuapp.com/';
+  private apiUrl = 'https://backend-isfdyt57.herokuapp.com';
 
   constructor(
     private http: HttpClient
