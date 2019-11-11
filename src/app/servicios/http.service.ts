@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class HttpService {
 
-  private apiUrl = 'https://avance-academico-backend.herokuapp.com';
+  private apiUrl = 'https://backend-isfdyt57.herokuapp.com/';
 
   constructor(
     private http: HttpClient,
